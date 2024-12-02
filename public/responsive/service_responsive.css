@@ -1,0 +1,26 @@
+@media (max-width: 767px) {
+  .my-search-bar {
+    position: sticky;
+    top: 50px;
+    z-index: 10;
+    .my-search-bar2 {
+      height: fit-content !important;
+      padding: 15px !important;
+
+      .my-select {
+        margin: 0 !important;
+      }
+
+      .my-search-button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 395px){
+    .my-search-bar{
+        top: 20px !important;
+    }
+}

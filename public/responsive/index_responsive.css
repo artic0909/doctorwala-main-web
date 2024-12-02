@@ -1,0 +1,48 @@
+@media (max-width: 759px) {
+  .footer-content-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-partner {
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 545px) {
+  .off-texts {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media (max-width: 475px) {
+  .searchBanner {
+    height: auto !important;
+    padding: 10px !important;
+    margin-bottom: 5px;
+  }
+  .searchBanner1 {
+    margin-top: 10px !important;
+  }
+  .testi-text {
+    font-size: 1rem !important;
+  }
+  .testi-logo {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .nav-bar-logo {
+    width: 180px !important;
+  }
+  .off-texts {
+    font-size: 1.3rem !important;
+  }
+}
+
+@media (max-width: 398px) {
+  .partner-login {
+    display: none;
+  }
+}

@@ -1,0 +1,33 @@
+@media (max-width: 1143px) {
+  .my-tab-lists {
+    position: sticky;
+    top: 90px;
+  }
+}
+
+
+
+@media (max-width: 992px) {
+    .my-tab-lists{
+        background: rgb(255, 255, 255) !important;
+        width: fit-content;
+        top: 100px !important;
+        left: -10px !important;
+    }
+  #myTab{
+    display: grid !important;
+    align-items: center;
+    justify-content: center;
+    list-style-type: disc;
+    li{
+        width: fit-content;
+        margin-bottom: 10px;
+        a{
+            font-size: 1rem;
+            padding: 0;
+            background: transparent !important;
+            border: none;
+        }
+    }
+  }
+}

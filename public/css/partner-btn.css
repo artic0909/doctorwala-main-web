@@ -1,0 +1,68 @@
+.partner-login {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  width: 50px;
+  /* Initial width for only the icon */
+  transition: width 0.4s ease;
+  /* Smooth width transition */
+  padding: 10px;
+  /* Ensure padding for the icon */
+}
+
+.partner-login:hover {
+  width: 200px;
+  /* Full width when hovered */
+}
+
+.btn-dark2 {
+  color: #fff !important;
+  background-color: #de2c26;
+  border-color: #de2c26;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* Align items at the start */
+  white-space: nowrap;
+  overflow: hidden;
+  /* Hide overflowing text */
+  padding: 0 10px;
+  /* Add horizontal padding for alignment */
+}
+
+.btn-dark2 i {
+  flex-shrink: 0;
+  /* Prevent icon from shrinking */
+  font-size: 20px;
+  /* Set a visible size for the icon */
+  margin-right: 5px;
+  /* Space between icon and text */
+  transition: margin-right 0.4s ease;
+  /* Smooth text reveal */
+}
+
+.btn-dark2:hover {
+  color: white;
+  background-color: #07a1cf;
+  border-color: #07a1cf;
+}
+
+.showing-text {
+  opacity: 0;
+  /* Initially hidden */
+  margin-left: 0;
+  transition: opacity 0.4s ease, margin-left 0.4s ease;
+  /* Smooth reveal */
+}
+
+.partner-login:hover .showing-text {
+  opacity: 1;
+  /* Fully visible on hover */
+  margin-left: 5px;
+  /* Adds slight spacing between icon and text */
+}
