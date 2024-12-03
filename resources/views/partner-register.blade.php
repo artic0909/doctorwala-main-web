@@ -340,7 +340,7 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Partner Registration</h1>
-                        <form action="{{ route('partner_register') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('partnerRegForm')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
 
@@ -354,18 +354,11 @@
 
 
 
-
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0"
                                         placeholder="Contact Person *" style="height: 55px;" name="partner_contact_person_name"
                                         id="partner_contact_person_name">
                                 </div>
-
-
-
-
-
-
 
 
 
@@ -435,11 +428,7 @@
 
 
                                 <div class="col-12 col-sm-6">
-                                    <select class="form-select bg-light border-0" style="height: 55px;" name="partner_city"
-                                        id="partner_city">
-                                        <option selected>Select City</option>
-                                        <option value="City 1">City 1</option>
-                                    </select>
+                                    <input type="text" class="form-control bg-light border-0" placeholder="City *" style="height: 55px;" name="partner_city" id="partner_city">
                                 </div>
 
 
@@ -472,19 +461,12 @@
 
 
 
-                                <div class="col-12 col-sm-6">
+                                <div class="col-12">
                                     <input type="password" class="form-control bg-light border-0"
                                         placeholder="Password *" style="height: 55px;" name="partner_password"
                                         id="partner_password">
                                 </div>
 
-
-
-
-                                <div class="col-12 col-sm-6">
-                                    <input type="password" class="form-control bg-light border-0"
-                                        placeholder="Confirm Password *" style="height: 55px;" name="" id="">
-                                </div>
 
 
 

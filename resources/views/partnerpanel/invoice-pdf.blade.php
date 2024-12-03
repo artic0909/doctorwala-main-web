@@ -10,7 +10,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 
-    <link href="../img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
@@ -39,7 +39,7 @@
             color: #000000;
         }
 
-        .bg-secondaryy{
+        .bg-secondaryy {
             background-color: #f0f0f0;
         }
 
@@ -51,13 +51,14 @@
         a {
             text-decoration: none !important;
         }
-        
-        #print-btn{
+
+        #print-btn {
             position: fixed;
             bottom: 20px;
             right: 15px;
             transition: all 150ms ease-in-out;
-            &:hover{
+
+            &:hover {
                 color: white;
                 background: rgb(235, 62, 62);
                 scale: 1.1;
@@ -83,14 +84,14 @@
 
 
                 <div class="upper-left" style="margin-top: -10px;">
-                    
+
                     <p style="font-weight: 700; font-size: 1.5rem;" class="text-primaryy">Sumatra Sales Private Limited</p>
                     <p style="font-weight: 700; font-size: 0.7rem;" class="text-dark">ADD : Ranihati, Joynagar, Panchla, Howrah, W.B-711302</p>
                     <p style="font-weight: 700; font-size: 0.7rem;" class="text-dark">GSTIN : 19ABDCS8853N1ZG</p>
                 </div>
 
                 <div class="upper-right d-flex flex-column align-items-center" style="margin-top: -10px;">
-                    
+
                     <img src="../img/logo.png" width="50" alt="">
                     <p style="font-weight: 700; font-size: 0.8rem;" class="text-dark">Brand Under this Company</p>
                 </div>
@@ -103,7 +104,7 @@
 
 
                 <table class="table table-striped table-bordered">
-                    
+
                     <thead>
                         <tr>
                             <th>Customer Details</th>
@@ -114,28 +115,28 @@
                     <tbody>
                         <tr>
                             <td class="" style="font-size: 0.8rem;">
-                                <p class="d-flex justify-content-between"><span>Billing Name &nbsp;:</span>  <span>John Doe</span></p>
-                                <p class="d-flex justify-content-between"><span>Contact Person &nbsp;:</span>  <span>John Doe</span></p>
-                                <p class="d-flex justify-content-between"><span>Billing Address &nbsp;:</span>  <span>Uluberiya, Howrah, 700000</span></p>
-                                <p class="d-flex justify-content-between"><span>State &nbsp;:</span>  <span>West Bengal</span></p>
-                                <p class="d-flex justify-content-between"><span>Email &nbsp;:</span>  <span>sm@gmail.com</span></p>
-                                <p class="d-flex justify-content-between"><span>Contact &nbsp;:</span>  <span>+91 9945850001</span></p>
-                                <p class="d-flex justify-content-between"><span>GSTIN &nbsp;:</span>  <span>GSTHY9945850001</span></p>
+                                <p class="d-flex justify-content-between"><span>Billing Name &nbsp;:</span> <span>John Doe</span></p>
+                                <p class="d-flex justify-content-between"><span>Contact Person &nbsp;:</span> <span>John Doe</span></p>
+                                <p class="d-flex justify-content-between"><span>Billing Address &nbsp;:</span> <span>Uluberiya, Howrah, 700000</span></p>
+                                <p class="d-flex justify-content-between"><span>State &nbsp;:</span> <span>West Bengal</span></p>
+                                <p class="d-flex justify-content-between"><span>Email &nbsp;:</span> <span>sm@gmail.com</span></p>
+                                <p class="d-flex justify-content-between"><span>Contact &nbsp;:</span> <span>+91 9945850001</span></p>
+                                <p class="d-flex justify-content-between"><span>GSTIN &nbsp;:</span> <span>GSTHY9945850001</span></p>
                             </td>
 
                             <td class="" style="font-size: 0.8rem;">
-                                <p class="d-flex justify-content-between"><span>Date &nbsp;:</span>  <span>28-11-2024</span></p>
-                                <p class="d-flex justify-content-between"><span>Invoice No &nbsp;:</span>  <span>INVC3535</span></p>
-                                <p class="d-flex justify-content-between"><span>Address &nbsp;:</span>  <span>Ranihati, Howrah, 700000</span></p>
-                                <p class="d-flex justify-content-between"><span>State &nbsp;:</span>  <span>West Bengal</span></p>
-                                <p class="d-flex justify-content-between"><span>Email &nbsp;:</span>  <span>sm@gmail.com</span></p>
-                                <p class="d-flex justify-content-between"><span>Contact &nbsp;:</span>  <span>+91 9945850001</span></p>
-                                <p class="d-flex justify-content-between"><span>GSTIN &nbsp;:</span>  <span>GSTHY9945850001</span></p> 
-                                <p class="d-flex justify-content-between"><span>HSN &nbsp;:</span>  <span>998361</span></p> 
+                                <p class="d-flex justify-content-between"><span>Date &nbsp;:</span> <span>28-11-2024</span></p>
+                                <p class="d-flex justify-content-between"><span>Invoice No &nbsp;:</span> <span>INVC3535</span></p>
+                                <p class="d-flex justify-content-between"><span>Address &nbsp;:</span> <span>Ranihati, Howrah, 700000</span></p>
+                                <p class="d-flex justify-content-between"><span>State &nbsp;:</span> <span>West Bengal</span></p>
+                                <p class="d-flex justify-content-between"><span>Email &nbsp;:</span> <span>sm@gmail.com</span></p>
+                                <p class="d-flex justify-content-between"><span>Contact &nbsp;:</span> <span>+91 9945850001</span></p>
+                                <p class="d-flex justify-content-between"><span>GSTIN &nbsp;:</span> <span>GSTHY9945850001</span></p>
+                                <p class="d-flex justify-content-between"><span>HSN &nbsp;:</span> <span>998361</span></p>
                             </td>
-                            
+
                         </tr>
-                        
+
                     </tbody>
 
                 </table>
@@ -146,13 +147,13 @@
 
 
             <!-- billings part -->
-             <div class="billings text-center p-1">
+            <div class="billings text-center p-1">
                 <p style="font-weight: 700;">Being Amount paid for on Doctorwala info</p>
 
 
 
                 <div class="billings-inner text-start d-flex gap-3 mt-3">
-                    
+
                     <div class="b-left w-50">
                         <p class="bg-secondaryy p-1" style="font-size: 0.9rem; font-weight: 600;">
                             Subscription Name
@@ -245,11 +246,11 @@
 
                     </div>
                 </div>
-             </div>
+            </div>
 
 
-             <!-- acts part -->
-              <div class="acts text-start mt-2 d-flex gap-3">
+            <!-- acts part -->
+            <div class="acts text-start mt-2 d-flex gap-3">
                 <ul class="w-50">
                     <li><span style="font-size: 0.8rem;">For all TDS deductions, form 16A should be sent at info@doctorwala.info.</span></li>
                     <li><span style="font-size: 0.8rem;">For privacy policy via advertiser visit privacy-policy.</span></li>
@@ -269,7 +270,7 @@
 
                     <img src="../img/sig.jpg" width="150" alt="" class="mt-2">
                 </div>
-              </div>
+            </div>
 
 
 
@@ -295,18 +296,18 @@
 
     <script>
         document.getElementById('print-btn').addEventListener('click', function() {
-          // Hide the button
-          this.style.display = 'none';
-      
-          // Trigger the print dialog
-          window.print();
-      
-          // Optional: Restore the button visibility after printing
-          window.onafterprint = () => {
-            this.style.display = 'block';
-          };
+            // Hide the button
+            this.style.display = 'none';
+
+            // Trigger the print dialog
+            window.print();
+
+            // Optional: Restore the button visibility after printing
+            window.onafterprint = () => {
+                this.style.display = 'block';
+            };
         });
-      </script>
+    </script>
 </body>
 
 </html>

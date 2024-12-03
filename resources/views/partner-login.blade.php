@@ -326,15 +326,16 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Partner Login</h1>
-                        <form>
+                        <form action="{{route('partner-login')}}" method="POST">
+                            @csrf
                             <div class="row g-3">
 
 
 
                                 <div class="col-12">
                                     <input type="email" class="form-control bg-light border-0"
-                                        placeholder="Enter Registered Email *" style="height: 55px;" name="email"
-                                        id="email">
+                                        placeholder="Enter Registered Email *" style="height: 55px;" name="partner_email"
+                                        id="partner_email">
                                 </div>
 
 
@@ -342,13 +343,12 @@
 
                                 <div class="col-12">
                                     <input type="password" class="form-control bg-light border-0"
-                                        placeholder="Enter Password *" style="height: 55px;" name="password"
-                                        id="password">
+                                        placeholder="Enter Password *" style="height: 55px;" name="partner_password"
+                                        id="partner_password">
                                 </div>
 
                                 <div class="col-12">
-                                    <a href="./partner-panel/partner-dashboard.html" class="btn btn-dark w-100 py-3"
-                                        type="submit">LOGIN</a>
+                                    <button class="btn btn-dark w-100 py-3" type="submit">LOGIN</button>
                                 </div>
 
 

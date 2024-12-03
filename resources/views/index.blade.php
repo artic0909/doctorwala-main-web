@@ -253,6 +253,28 @@
                     </form>
 
 
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <form method="POST" action="{{ route('user.logout') }}">
+                                @csrf
+                                <a class="btn btn-danger py-3 col-md-12" :href="route('user.logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    Logout
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
+                        </div>
+                    </div> -->
+
+
 
                 </div>
 

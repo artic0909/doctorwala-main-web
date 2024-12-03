@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'partner' => [
+            'driver' => 'session',
+            'provider' => 'partners',
+        ],
+
+        'dwuser' => [
+            'driver' => 'session',
+            'provider' => 'dwusers',
+        ],
     ],
 
     /*
@@ -63,6 +73,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
+        ],
+
+        'partners' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\DwPartnerModel::class),
+        ],
+
+        'dwusers' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\DwUserModel::class),
         ],
 
         // 'users' => [

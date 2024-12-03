@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="../partner-assets/css/vertical-layout-light/style.css">
     <!-- endinject -->
 
-    <link href="../img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
@@ -37,9 +37,9 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="partner-dashboard.html" style="font-weight: 900;"><img
-                        src="../img/logo3.png" alt="logo"></a>
-                <a class="navbar-brand brand-logo-mini" href="partner-dashboard.html"><img src="../img/fav5.png"
+                <a class="navbar-brand brand-logo mr-5" href="/partnerpanel/partner-dashboard" style="font-weight: 900;"><img
+                        src="{{asset('../img/logo3.png')}}" alt="logo"></a>
+                <a class="navbar-brand brand-logo-mini" href="/partnerpanel/partner-dashboard"><img src="{{asset('fav5.png')}}"
                         alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -51,7 +51,7 @@
 
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="../IMG/empty.jpg" alt="profile" />
+                            <img src="{{asset('fav5.png')}}" alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
@@ -59,16 +59,23 @@
                                 <i class="ti-settings text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i>
-                                Logout
-                            </a>
+
+
+                            <form method="POST" action="{{ route('partner.logout') }}">
+                                @csrf
+                                <a class="dropdown-item" :href="route('partner.logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    <i class="ti-power-off text-primary"></i>
+                                    Logout
+                                </a>
+                            </form>
+
                         </div>
                     </li>
                 </ul>
             </div>
         </nav>
-
 
 
 
@@ -96,7 +103,7 @@
 
                     <!-- dasboard -->
                     <li class="nav-item">
-                        <a class="nav-link" href="partner-dashboard.html">
+                        <a class="nav-link" href="/partnerpanel/partner-dashboard">
                             <i class="fa-solid fa-chart-pie"></i>&nbsp; <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
@@ -112,14 +119,14 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="partner-profile.html">Partner
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-opd-contact.html">OPD
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
 
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="partner-pathology-contact.html">Pathology Contact</a></li>
+                                        href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
                             </ul>
                         </div>
                     </li>
@@ -129,7 +136,7 @@
 
                     <!-- partner about clinic -->
                     <li class="nav-item">
-                        <a class="nav-link" href="partner-about-clinic.html">
+                        <a class="nav-link" href="/partnerpanel/partner-about-clinic">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp; <span class="menu-title">About
                                 Clinic</span>
                         </a>
@@ -141,7 +148,7 @@
 
                     <!-- partner service lists -->
                     <li class="nav-item">
-                        <a class="nav-link" href="partner-service-lists.html">
+                        <a class="nav-link" href="/partnerpanel/partner-service-lists">
                             <i class="fa fa-ambulance" aria-hidden="true"></i>&nbsp; <span class="menu-title">Service
                                 Lists</span>
                         </a>
@@ -152,7 +159,7 @@
 
                     <!-- gallery -->
                     <li class="nav-item">
-                        <a class="nav-link" href="partner-gallery.html">
+                        <a class="nav-link" href="/partnerpanel/partner-gallery">
                             <i class="fa-solid fa-image"></i>&nbsp; <span class="menu-title">Gallery</span>
                         </a>
                     </li>
@@ -172,9 +179,9 @@
                         <div class="collapse" id="ui-basic12">
                             <ul class="nav flex-column sub-menu">
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-opd.html">Upload OPD</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd">Upload OPD</a></li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-opd-show.html">Show OPD</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-show">Show OPD</a></li>
 
                             </ul>
                         </div>
@@ -195,10 +202,10 @@
                         <div class="collapse" id="ui-basic123">
                             <ul class="nav flex-column sub-menu">
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-pathology.html">Upload Path</a>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-pathology">Upload Path</a>
                                 </li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-pathology-show.html">Show
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-pathology-show">Show
                                         Path</a></li>
 
                             </ul>
@@ -219,10 +226,10 @@
                         <div class="collapse" id="ui-basic1234">
                             <ul class="nav flex-column sub-menu">
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-doctors.html">Upload Doctor</a>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors">Upload Doctor</a>
                                 </li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-doctors-show.html">Show
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors-show">Show
                                         Doctor</a></li>
 
                             </ul>
@@ -235,7 +242,7 @@
 
                     <!-- Inquiry from patients/user -->
                     <li class="nav-item">
-                        <a class="nav-link" href="partner-inquiry-from-patients.html">
+                        <a class="nav-link" href="/partnerpanel/partner-inquiry-from-patients">
                             <i class="fa-solid fa-hand-holding-medical"></i>&nbsp; <span
                                 class="menu-title">Inquiries</span>
                         </a>
@@ -258,10 +265,10 @@
                         <div class="collapse" id="ui-basic11">
                             <ul class="nav flex-column sub-menu">
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-get-subscription.html">Get
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-get-subscription">Get
                                         Subsription</a></li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-show-invoice.html">Invoice</a>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-show-invoice">Invoice</a>
                                 </li>
 
                             </ul>
@@ -283,10 +290,10 @@
                         <div class="collapse" id="ui-basic111">
                             <ul class="nav flex-column sub-menu">
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-get-ticket.html">Get
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-get-ticket">Get
                                         Ticket</a></li>
 
-                                <li class="nav-item"> <a class="nav-link" href="partner-show-ticket.html">My Tickets</a>
+                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-show-ticket">My Tickets</a>
                                 </li>
 
                             </ul>

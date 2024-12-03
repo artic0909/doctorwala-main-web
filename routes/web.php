@@ -1,11 +1,12 @@
 <?php
 
+// use App\Http\Controllers\DwPartnerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
 
 
@@ -16,6 +17,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/partner-auth.php';
+require __DIR__ . '/user-auth.php';
 
 
 
@@ -155,6 +158,21 @@ Route::get('/superadmin/super-ticket-replies', function () {
 
 
 
+// ===========================================================================================================
+// ========================================== Parter Routes End ==============================================
+// ===========================================================================================================
+
+
+
+// ===========================================================================================================
+// ========================================== Partner Routes End =============================================
+// ===========================================================================================================
+
+
+
+
+
+
 
 
 
@@ -185,10 +203,6 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });
 
-
-Route::get('/user-login', function () {
-    return view('authentication');
-});
 
 // ===========================================================================================================
 // ========================================== Front Routes End ===============================================

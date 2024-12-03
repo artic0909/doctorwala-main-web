@@ -326,7 +326,8 @@
         @media only screen and (max-width: 425px) {
 
 
-            .container.sign-in , .container.sign-up {
+            .container.sign-in,
+            .container.sign-up {
                 margin-top: -33px;
             }
 
@@ -440,7 +441,8 @@
             <!-- SIGN UP -->
             <div class="col align-items-center flex-col sign-up signup-form" style="margin-top: -10px;">
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-up">
+                    <form class="form sign-up" action="{{ route('user-register') }}" method="POST">
+                        @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
                                 style="color: red; font-weight: 1000;">+</span> JOIN US NOW <span
                                 style="color: red; font-weight: 1000;">+</span></h1>
@@ -458,10 +460,7 @@
 
                         <div class="input-group">
                             <i class="fa-solid fa-building"></i>
-                            <select name="user_city" id="user_city">
-                                <option value="" selected>Select City</option>
-                                <option value="City1">City1</option>
-                            </select>
+                            <input type="text" name="user_city" id="user_city">
                         </div>
 
 
@@ -498,7 +497,7 @@
 
                         <div class="input-group">
                             <i class="fa-solid fa-circle-check"></i>
-                            <input type="text" placeholder="Enter Captcha" id="signupCaptchaInput">
+                            <input type="text" placeholder="Enter Captcha" id="signupCaptchaInput" name="signupCaptchaInput">
                         </div>
 
 
@@ -529,8 +528,10 @@
 
             <!-- Login -->
             <div class="col align-items-center flex-col sign-in">
+
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-in login-form">
+                    <form class="form sign-in login-form" action="{{ route('user-login') }}" method="POST">
+                        @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
                                 style="color: red; font-weight: 1000;">+</span> HELLO USER <span
                                 style="color: red; font-weight: 1000;">+</span></h1>
@@ -542,7 +543,7 @@
                             <i class="fa-regular fa-eye login-eye-icon"></i>
                             <input type="password" placeholder="Password" name="user_password" id="user_password">
                         </div>
-                        <div class="input-group"
+                        <!-- <div class="input-group"
                             style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
                             <canvas id="loginCaptchaCanvas" width="200" height="40" style="cursor: pointer;"></canvas>
                         </div>
@@ -550,7 +551,7 @@
                         <div class="input-group">
                             <i class="fa-solid fa-circle-check"></i>
                             <input type="text" placeholder="Enter Captcha" id="loginCaptchaInput">
-                        </div>
+                        </div> -->
                         <button type="submit" style="font-weight: 700;">
                             LOGIN
                         </button>
@@ -664,7 +665,7 @@
 
 
 
-    <script src="js/captcha.js"></script>
+    <!-- <script src="js/captcha.js"></script> -->
 
 
     <script>
