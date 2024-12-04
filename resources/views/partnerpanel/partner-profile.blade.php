@@ -459,14 +459,9 @@
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
 
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select City</option>
-                                                    <option value="">City 1</option>
-                                                    <option value="">City 2</option>
-                                                    <option value="">City 3</option>
-                                                    <option value="">City 4</option>
-                                                    <option value="">City 5</option>
-                                                </select>
+
+
+                                                <input type="text" class="form-control" id="name" name="name" style="height: 55px;" value="city">
                                             </div>
 
 

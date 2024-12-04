@@ -96,7 +96,7 @@ class DwPartnerController extends Controller
 
         $dwuser->save();
 
-        return redirect()->route('partner-login')->with('success', 'Registration successful! Please log in.');
+        return redirect()->route('partnerpanel.partner-login')->with('success', 'Registration successful! Please log in.');
     }
 
 

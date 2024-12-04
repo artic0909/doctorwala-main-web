@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth as Auth;
 class DwUserController extends Controller
 {
     protected $guard = 'dwuser';
-    
+
 
 
 
@@ -34,7 +34,7 @@ class DwUserController extends Controller
 
 
 
-        
+
 
         $dwuser = new DwUserModel($validated);
         $dwuser->user_password = bcrypt($request->user_password);
@@ -43,6 +43,29 @@ class DwUserController extends Controller
 
         return redirect()->route('dw.user-auth')->with('success', 'Registration successful! Please log in.');
     }
+
+    public function currentUserDetailsEdit(Request $request)
+    {
+        // Get the authenticated user
+        $user = Auth::guard($this->guard)->user();
+
+        if (!$user) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        // Validate the request data
+        $validated = $request->validate([
+            'user_name' => 'required|string|max:255',
+            'user_email' => 'required|email|max:255|unique:dw_user_models,user_email,' . $user->id,
+            'user_mobile' => 'required|string|max:15',
+        ]);
+
+        // Update the user details
+        $user->update($validated);
+
+        return response()->json(['success' => 'Profile updated successfully!']);
+    }
+
 
 
 
