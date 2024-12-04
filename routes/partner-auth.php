@@ -9,14 +9,17 @@ Route::middleware('guest:partner')->group(function () {
     Route::get('/partner-login', [DwPartnerController::class, 'partnerLoginFormView']);
     Route::post('/partner-register', [DwPartnerController::class, 'partnerRegForm'])->name('partnerRegForm');
     Route::post('/partner-login', [DwPartnerController::class, 'partnerLogin'])->name('partnerpanel.partner-login');
-
-
 });
 
 
 Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
+
+
+    // ===========================================================================================================
+    // ========================================== Parter Restricted Routes End ===================================
+    // ===========================================================================================================
     Route::get('/partnerpanel/partner-dashboard', function () {
         return view('partnerpanel.partner-dashboard');
     })->name('partnerpanel.partner-dashboard');
@@ -92,8 +95,9 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::get('/partnerpanel/partner-feedbacks', function () {
         return view('partnerpanel.partner-feedbacks');
     })->name('partnerpanel.partner-feedbacks');
-
-
+    // ===========================================================================================================
+    // ========================================== Partner Restricted Routes End ==================================
+    // ===========================================================================================================
 
 
 
