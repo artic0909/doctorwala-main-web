@@ -89,23 +89,19 @@
 
 
 
-
-
-
-
-
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
                 <a href="/about" class="nav-item nav-link active">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
@@ -123,12 +119,64 @@
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
+
+
             <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/dw" class="nav-item nav-link ">Home</a>
+                <a href="/dw/about" class="nav-item nav-link active">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
 
 
 
@@ -253,6 +301,28 @@
                     </form>
 
 
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <form method="POST" action="{{ route('user.logout') }}">
+                                @csrf
+                                <a class="btn btn-danger py-3 col-md-12" :href="route('user.logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    Logout
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
+                        </div>
+                    </div> -->
+
+
 
                 </div>
 
@@ -276,12 +346,19 @@
 
 
 
+
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">About DoctorWala.info</h1>
+                @guest
                 <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                @endguest
+
+                @auth
+                <a href="/dw" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                @endauth
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">About Us</a>
             </div>
@@ -339,17 +416,34 @@
                     </div>
 
 
+                    @guest
                     <a href="/partner-register" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
                         data-wow-delay="0.6s">Join As Partners</a>
-
-
 
                     <a href="/contact" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
                         data-wow-delay="0.6s">Contact Us</a>
 
-
                     <a href="/privacy-policy" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
                         data-wow-delay="0.6s">Privacy Policy</a>
+                    @endguest
+
+                    @auth
+                    <a href="/dw/contact" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
+                        data-wow-delay="0.6s">Contact Us</a>
+
+                    <a href="/dw/blog" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
+                        data-wow-delay="0.6s">Blogs</a>
+
+                    <a href="/dw/privacy-policy" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
+                        data-wow-delay="0.6s">Privacy Policy</a>
+                    @endauth
+
+
+
+
+
+
+
 
 
 
@@ -358,7 +452,7 @@
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="img/about1.png" style="object-fit: cover;">
+                            src="{{asset('img/about1.png')}}" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -377,8 +471,8 @@
             <div class="row g-5 mb-5">
                 <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s" style="min-height: 400px;">
                     <div class="twentytwenty-container position-relative h-100 rounded overflow-hidden">
-                        <img class="position-absolute w-100 h-100" src="img/af.jpg" style="object-fit: cover;">
-                        <img class="position-absolute w-100 h-100" src="img/be.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{{asset('img/af.jpg')}}" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{{asset('img/be.jpg')}}" style="object-fit: cover;">
                     </div>
                 </div>
 
@@ -396,7 +490,7 @@
                     <div class="row g-5">
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/himatology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/himatology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Hematology Tests</h5>
@@ -404,7 +498,7 @@
                         </div>
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/biochemic.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/biochemic.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Biochemistry Tests</h5>
@@ -418,7 +512,7 @@
                     <div class="row g-5">
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.3s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/microbiology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/microbiology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Microbiology Tests</h5>
@@ -426,7 +520,7 @@
                         </div>
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/cytology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/cytology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Cytology and More...</h5>
@@ -436,7 +530,7 @@
                 </div>
                 <div class="col-lg-5 service-item wow zoomIn" data-wow-delay="0.9s">
                     <div class="position-relative rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                        style="background: url(img/eyee.jpeg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+                        style="background: url({{asset('img/eyee.jpeg')}}); background-position: center; background-repeat: no-repeat; background-size: cover;">
                         <div class="textss" style="background-color: rgba(48, 46, 46, 0.26); padding: 5px;">
                             <h3 class="text-white mb-3">We Offer</h3>
                             <p class="text-white mb-3" style="font-weight: 700;">Our search engine features a wide range
@@ -519,7 +613,20 @@
 
 
                 <div class="login-partner">
+                    @guest
                     <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @endguest
+
+                    @auth
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <a class="btn btn-dark btn-lg rounded me-2" :href="route('user.logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+                    @endauth
                 </div>
 
 
@@ -536,10 +643,15 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
+    @guest
     <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
+    @endguest
+    @auth
+    @endauth
+
 
 
 

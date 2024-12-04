@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,19 +25,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="{{asset('../lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('../lib/twentytwenty/twentytwenty.css')}}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('../css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
+    <link href="{{asset('../css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/cards-css.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/partner-btn.css')}}" rel="stylesheet">
+    <link href="{{asset('../responsive/index_responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('responsive/service_responsive.css')}}" rel="stylesheet">
 
 </head>
 
@@ -92,11 +93,12 @@
 
 
 
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -121,12 +123,64 @@
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
+
+
             <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="" class="nav-item nav-link active">Home</a>
+                <a href="/dw/about" class="nav-item nav-link ">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
 
 
 
@@ -330,7 +384,7 @@
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="Image">
+                    <img class="w-100" src="{{asset('img/carousel-1.jpg')}}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
@@ -343,7 +397,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="img/carousel-2.jpg" alt="Image">
+                    <img class="w-100" src="{{asset('img/carousel-2.jpg')}}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
                             <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
@@ -452,13 +506,20 @@
                             <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Fair Prices</h5>
                         </div>
                     </div>
+                    @guest
                     <a href="/partner-register" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
                         data-wow-delay="0.6s">Join As Partners</a>
+                    @endguest
+
+                    @auth
+                    <a href="/dw/about" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn"
+                        data-wow-delay="0.6s">About Doctorwala</a>
+                    @endauth
                 </div>
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="img/about1.png" style="object-fit: cover;">
+                            src="{{asset('img/about1.png')}}" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -506,7 +567,7 @@
                         <!-- Card 1 -->
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h3 class="card-title">Title 1</h3>
@@ -518,7 +579,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -530,7 +591,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -542,7 +603,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -554,7 +615,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -566,7 +627,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/lifeline.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -609,8 +670,8 @@
             <div class="row g-5 mb-5">
                 <div class="col-lg-5 wow zoomIn" data-wow-delay="0.3s" style="min-height: 400px;">
                     <div class="twentytwenty-container position-relative h-100 rounded overflow-hidden">
-                        <img class="position-absolute w-100 h-100" src="img/af.jpg" style="object-fit: cover;">
-                        <img class="position-absolute w-100 h-100" src="img/be.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{{asset('img/af.jpg')}}" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="{{asset('img/be.jpg')}}" style="object-fit: cover;">
                     </div>
                 </div>
 
@@ -628,7 +689,7 @@
                     <div class="row g-5">
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/himatology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/himatology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Hematology Tests</h5>
@@ -636,7 +697,7 @@
                         </div>
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/biochemic.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/biochemic.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Biochemistry Tests</h5>
@@ -650,7 +711,7 @@
                     <div class="row g-5">
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.3s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/microbiology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/microbiology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Microbiology Tests</h5>
@@ -658,7 +719,7 @@
                         </div>
                         <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                             <div class="rounded-top overflow-hidden">
-                                <img class="img-fluid" src="img/cytology.jpg" alt="">
+                                <img class="img-fluid" src="{{asset('img/cytology.jpg')}}" alt="">
                             </div>
                             <div class="position-relative bg-light rounded-bottom text-center p-4">
                                 <h5 class="m-0">Cytology and More...</h5>
@@ -668,7 +729,7 @@
                 </div>
                 <div class="col-lg-5 service-item wow zoomIn" data-wow-delay="0.9s">
                     <div class="position-relative rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-4"
-                        style="background: url(img/eyee.jpeg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+                        style="background: url({{asset('img/eyee.jpeg')}}); background-position: center; background-repeat: no-repeat; background-size: cover;">
                         <div class="textss" style="background-color: rgba(48, 46, 46, 0.26); padding: 5px;">
                             <h3 class="text-white mb-3">We Offer</h3>
                             <p class="text-white mb-3" style="font-weight: 700;">Our search engine features a wide range
@@ -717,7 +778,7 @@
                     <div class="scrolling-wrapper2 d-flex">
                         <!-- Card 1 -->
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -728,19 +789,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -752,17 +801,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -773,11 +812,18 @@
 
 
 
-
-
+                        <div class="card mx-2" style="min-width: 300px;">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
+                            <div class="card-body">
+                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                    <h5 class="card-title">Title 1</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -790,8 +836,23 @@
 
 
 
+
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
+                            <div class="card-body">
+                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                    <h5 class="card-title">Title 1</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
+                                </a>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="card mx-2" style="min-width: 300px;">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -803,7 +864,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/newlife.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -832,7 +893,7 @@
 
 
 
-
+    @guest
     <!-- Join As Partner Start -->
     <div class="container-fluid bg-offer my-4 py-4 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -852,7 +913,27 @@
         </div>
     </div>
     <!-- Join As Partner End -->
+    @endguest
 
+    @auth
+    <!-- Join As Partner Start -->
+    <div class="container-fluid bg-offer my-4 py-4 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 wow zoomIn" data-wow-delay="0.6s">
+                    <div class="offer-text text-center rounded p-5">
+                        <h1 class="display-5 text-white off-texts">Learn About Our Privacy Policy or Contact Us for Inquiries</h1>
+                        <div class="d-flex g-3 flex-wrap justify-content-center ">
+                            <a href="/dw/privacy-policy" class="btn btn-dark py-3 px-5 me-3 mb-2">Privacy Policy</a>
+                            <a href="/dw/contact" class="btn btn-light py-3 px-5 mb-2">Inquiry Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Join As Partner End -->
+    @endauth
 
 
 
@@ -889,7 +970,7 @@
                     <div class="scrolling-wrapper3 d-flex">
                         <!-- Card 1 -->
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -901,7 +982,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -913,7 +994,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -925,7 +1006,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -937,7 +1018,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -949,7 +1030,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -961,7 +1042,7 @@
 
 
                         <div class="card mx-2" style="min-width: 300px;">
-                            <img src="img/Global.png" class="card-img-top" alt="Service">
+                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
                                 <a href="all-doctor-details.html" class="text-decoration-none my-dd">
                                     <h5 class="card-title">Title 1</h5>
@@ -1014,7 +1095,7 @@
 
 
                         <div class="testimonial-item text-center text-white">
-                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="img/testilogo.png" alt="">
+                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="{{asset('img/testilogo.png')}}" alt="">
 
                             <p class="testi-text"
                                 style="color: white; opacity: 1; font-weight: 700; font-size: 1.3rem;">
@@ -1030,7 +1111,7 @@
                         </div>
 
                         <div class="testimonial-item text-center text-white">
-                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="img/testilogo.png" alt="">
+                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="{{asset('img/testilogo.png')}}" alt="">
 
                             <p class="testi-text"
                                 style="color: white; opacity: 1; font-weight: 700; font-size: 1.3rem;">
@@ -1136,7 +1217,20 @@
 
 
                 <div class="login-partner">
+                    @guest
                     <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @endguest
+
+                    @auth
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <a class="btn btn-dark btn-lg rounded me-2" :href="route('user.logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+                    @endauth
                 </div>
 
 
@@ -1153,10 +1247,14 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
+    @guest
     <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
+    @endguest
+    @auth
+    @endauth
 
 
 
@@ -1180,20 +1278,20 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="{{asset('../lib/wow/wow.min.js')}}"></script>
+    <script src="{{asset('../lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('../lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{asset('../lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.event.move.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.twentytwenty.js')}}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/password-update-captcha.js"></script>
+    <script src="{{asset('../js/main.js')}}"></script>
+    <script src="{{asset('../js/cards-scroll.js')}}"></script>
+    <script src="{{asset('js/password-update-captcha.js')}}"></script>
 </body>
 
 </html>

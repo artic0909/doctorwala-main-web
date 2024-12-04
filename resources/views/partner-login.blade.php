@@ -92,21 +92,19 @@
 
 
 
-
-
-
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
                 <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
@@ -117,19 +115,72 @@
                         <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="/blog" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/contact" class="nav-item nav-link ">Contact</a>
                 <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
+
+
             <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/dw" class="nav-item nav-link">Home</a>
+                <a href="/dw/about" class="nav-item nav-link ">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
+
 
 
 
@@ -358,7 +409,7 @@
                                 <p style="margin-bottom: 0; padding-bottom: 0;">
                                     <a href="#" class="text-white fw-bold" style="text-decoration: none;">Create New
                                         account ?</a>
-                                    <span><a href="partner-register.html" class="text-white "
+                                    <span><a href="/partner-register" class="text-white "
                                             style="text-decoration: underline;">Sign Up</a></span>
                                 </p>
 

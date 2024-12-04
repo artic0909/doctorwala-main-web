@@ -101,12 +101,7 @@
 
 
 
-
-
-
-
-
-
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
@@ -118,7 +113,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
                 <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Search</a>
@@ -129,19 +124,71 @@
                         <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="/blog" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/contact" class="nav-item nav-link ">Contact</a>
                 <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
+
+
             <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/dw" class="nav-item nav-link">Home</a>
+                <a href="/dw/about" class="nav-item nav-link ">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
 
 
 
@@ -237,8 +284,10 @@
 
 
                             <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="150" height="40"></canvas>
+                                <div class="form-floating mb-3"
+                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
+                                        style="cursor: pointer;"></canvas>
                                 </div>
                             </div>
 
@@ -266,6 +315,28 @@
 
                         </div>
                     </form>
+
+
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <form method="POST" action="{{ route('user.logout') }}">
+                                @csrf
+                                <a class="btn btn-danger py-3 col-md-12" :href="route('user.logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    Logout
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
+                        </div>
+                    </div> -->
 
 
 
@@ -298,7 +369,13 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Doctor Details</h1>
+                @guest
                 <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                @endguest
+
+                @auth
+                <a href="/dw" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                @endauth
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">Doctor</a>
             </div>
@@ -712,7 +789,20 @@
 
 
                 <div class="login-partner">
+                    @guest
                     <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @endguest
+
+                    @auth
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <a class="btn btn-dark btn-lg rounded me-2" :href="route('user.logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+                    @endauth
                 </div>
 
 
@@ -729,11 +819,14 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
+    @guest
     <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
-
+    @endguest
+    @auth
+    @endauth
 
 
 
