@@ -108,10 +108,10 @@
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="/opd" class="dropdown-item">OPD Details</a>
-                        <a href="/doctor" class="dropdown-item">Doctor Details</a>
-                        <a href="/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupon" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/partnerpanel/coupon" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
                 <a href="/blog" class="nav-item nav-link">Blogs</a>

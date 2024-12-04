@@ -77,12 +77,12 @@ return [
 
         'partners' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\DwPartnerModel::class),
+            'model' => App\Models\DwPartnerModel::class,
         ],
 
         'dwusers' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\DwUserModel::class),
+            'model' => App\Models\DwUserModel::class,
         ],
 
         // 'users' => [
@@ -113,6 +113,19 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'partners' => [
+            'provider' => 'partners',
+            'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'dwusers' => [
+            'provider' => 'dwusers',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,

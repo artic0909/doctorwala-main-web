@@ -530,7 +530,7 @@
             <div class="col align-items-center flex-col sign-in">
 
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-in login-form" action="{{ route('user-login') }}" method="POST">
+                    <form class="form sign-in login-form" action="{{ route('dw.user-login') }}" method="POST">
                         @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
                                 style="color: red; font-weight: 1000;">+</span> HELLO USER <span

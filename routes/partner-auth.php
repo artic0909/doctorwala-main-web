@@ -8,12 +8,9 @@ Route::middleware('guest:partner')->group(function () {
     Route::get('/partner-register', [DwPartnerController::class, 'viewPartnerRegForm']);
     Route::get('/partner-login', [DwPartnerController::class, 'partnerLoginFormView']);
     Route::post('/partner-register', [DwPartnerController::class, 'partnerRegForm'])->name('partnerRegForm');
-    Route::post('/partner-login', [DwPartnerController::class, 'partnerLogin'])->name('partner-login');
+    Route::post('/partner-login', [DwPartnerController::class, 'partnerLogin'])->name('partnerpanel.partner-login');
 
-    // Dashboard Route (Protected by Partner Auth Middleware)
-    Route::get('/partnerpanel/partner-dashboard', function () {
-        return view('partnerpanel.partner-dashboard');
-    })->middleware(['auth:partner', 'verified'])->name('partnerpanel.partner-dashboard');
+
 });
 
 

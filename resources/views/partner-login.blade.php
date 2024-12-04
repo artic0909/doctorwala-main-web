@@ -326,7 +326,7 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Partner Login</h1>
-                        <form action="{{route('partner-login')}}" method="POST">
+                        <form action="{{route('partnerpanel.partner-login')}}" method="POST">
                             @csrf
                             <div class="row g-3">
 

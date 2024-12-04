@@ -80,7 +80,7 @@ class DwUserController extends Controller
     public function userlogout(Request $request)
     {
         Auth::guard('dwuser')->logout();
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
     }

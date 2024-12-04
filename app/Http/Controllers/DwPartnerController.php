@@ -133,7 +133,7 @@ class DwPartnerController extends Controller
     public function partnerlogout(Request $request)
     {
         Auth::guard('partner')->logout();
-        $request->session()->invalidate();
+        // $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/partner-login');
     }
