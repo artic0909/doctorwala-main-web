@@ -41,7 +41,7 @@ class DwUserController extends Controller
 
         $dwuser->save();
 
-        return redirect()->route('user-auth')->with('success', 'Registration successful! Please log in.');
+        return redirect()->route('dw.user-auth')->with('success', 'Registration successful! Please log in.');
     }
 
 

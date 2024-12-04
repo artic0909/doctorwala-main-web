@@ -95,7 +95,7 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
+        <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
             <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
         </a>
@@ -104,7 +104,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
+                <a href="/" class="nav-item nav-link">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
@@ -271,7 +271,7 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Make Payment For Activation</h1>
-                <a href="index.html" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">Activation</a>
             </div>

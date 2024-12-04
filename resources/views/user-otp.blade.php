@@ -502,7 +502,7 @@
                             <b onclick="toggle()" class="pointer" style="text-decoration: underline;">
                                 Login here
                             </b>
-                            <span>&nbsp; <a href="index.html" style="color: black; font-size: 1rem;"
+                            <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
                                     onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
                                         class="fa fa-home" aria-hidden="true"></i></a></span>
                         </p>
@@ -553,7 +553,7 @@
                                 <a href="authentication.html" class="pointer" style="text-decoration: underline; color: black;">
                                     Login here
                                 </a>
-                                <span>&nbsp; <a href="index.html" style="color: black; font-size: 1rem;"
+                                <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
                                         onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
                                             class="fa fa-home" aria-hidden="true"></i></a></span>
                             </b>

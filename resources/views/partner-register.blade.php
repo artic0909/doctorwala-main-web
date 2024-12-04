@@ -96,35 +96,36 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
+        <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="../img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="opd.html" class="dropdown-item">OPD Details</a>
-                        <a href="doctor.html" class="dropdown-item">Doctor Details</a>
-                        <a href="pathology.html" class="dropdown-item">Pathology Details</a>
-                        <a href="coupon.html" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link">Blogs</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
+                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="authentication.html" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i class="fa fa-user" aria-hidden="true"></i></a> -->
+            <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -298,7 +299,7 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Partner Register</h1>
-                <a href="index.html" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">Register</a>
             </div>
@@ -687,7 +688,7 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
                 </div>
 
 
@@ -704,7 +705,7 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
-    <a href="partner-register.html" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:dwuser')->group(function () {
     Route::get('/dw/user-auth', [DwUserController::class, 'viewUserLogForm'])->name('dw.user-auth');
-    Route::post('/dw/user-register', [DwUserController::class, 'userRegForm'])->name('user-register');
+    Route::post('/dw/user-register', [DwUserController::class, 'userRegForm'])->name('dw.user-register');
     Route::post('/dw/user-auth', [DwUserController::class, 'userLogin'])->name('dw.user-login');
 });
 

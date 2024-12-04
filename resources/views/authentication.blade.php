@@ -441,7 +441,7 @@
             <!-- SIGN UP -->
             <div class="col align-items-center flex-col sign-up signup-form" style="margin-top: -10px;">
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-up" action="{{ route('user-register') }}" method="POST">
+                    <form class="form sign-up" action="{{ route('dw.user-register') }}" method="POST">
                         @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
                                 style="color: red; font-weight: 1000;">+</span> JOIN US NOW <span
@@ -512,7 +512,7 @@
                             <b onclick="toggle()" class="pointer" style="text-decoration: underline;">
                                 Login here
                             </b>
-                            <span>&nbsp; <a href="index.html" style="color: black; font-size: 0.8rem;"
+                            <span>&nbsp; <a href="/" style="color: black; font-size: 0.8rem;"
                                     onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
                                         class="fa fa-home" aria-hidden="true"></i></a></span>
                         </p>
@@ -568,7 +568,7 @@
                             <b onclick="toggle()" class="pointer" style="text-decoration: underline;">
                                 Sign up here
                             </b>
-                            <span>&nbsp; <a href="index.html" style="color: black; font-size: 1rem;"
+                            <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
                                     onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
                                         class="fa fa-home" aria-hidden="true"></i></a></span>
                         </p>

@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,20 +25,21 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="{{asset('../lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('../lib/twentytwenty/twentytwenty.css')}}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('../css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
-    <link href="responsive/service_responsive.css" rel="stylesheet">
+    <link href="{{asset('../css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/cards-css.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/partner-btn.css')}}" rel="stylesheet">
+    <link href="{{asset('../responsive/index_responsive.css')}}" rel="stylesheet">
+    <link href="{{asset('responsive/service_responsive.css')}}" rel="stylesheet">
+
 
 
     <style>
@@ -108,35 +109,36 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="index.html" class="navbar-brand p-0">
+        <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="opd.html" class="dropdown-item">OPD Details</a>
-                        <a href="doctor.html" class="dropdown-item">Doctor Details</a>
-                        <a href="pathology.html" class="dropdown-item">Pathology Details</a>
-                        <a href="coupon.html" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link">Blogs</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
+                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="authentication.html" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i class="fa fa-user" aria-hidden="true"></i></a> -->
+            <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -296,7 +298,7 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Doctor Details</h1>
-                <a href="index.html" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">Doctor</a>
             </div>
@@ -394,7 +396,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -435,7 +437,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.5s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -474,7 +476,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -513,7 +515,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.1s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -553,7 +555,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -593,7 +595,7 @@
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.4s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/newlife.png" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -710,7 +712,7 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
                 </div>
 
 
@@ -727,7 +729,7 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
-    <a href="partner-register.html" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
@@ -754,20 +756,20 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="{{asset('../lib/wow/wow.min.js')}}"></script>
+    <script src="{{asset('../lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('../lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{asset('../lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.event.move.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.twentytwenty.js')}}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/captcha.js"></script>
+    <script src="{{asset('../js/main.js')}}"></script>
+    <script src="{{asset('../js/cards-scroll.js')}}"></script>
+    <script src="{{asset('../js/captcha.js')}}"></script>
 </body>
 
 </html>

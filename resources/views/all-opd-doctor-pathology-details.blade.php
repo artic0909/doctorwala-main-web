@@ -163,7 +163,7 @@
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="/user-login" class="btn btn-primary py-2 px-4 ms-3">Login</a>
+            <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
             <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
                     class="fa fa-user" aria-hidden="true"></i></a>
         </div>
@@ -394,7 +394,7 @@
         <div class="row py-3">
             <div class="col-12 text-center">
                 <h1 class="display-3 text-white animated zoomIn">Clinic Name</h1>
-                <a href="index.html" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
                 <a href="" class="h4 text-white">Details</a>
             </div>

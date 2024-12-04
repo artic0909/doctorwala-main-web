@@ -95,10 +95,10 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::get('/partnerpanel/partner-feedbacks', function () {
         return view('partnerpanel.partner-feedbacks');
     })->name('partnerpanel.partner-feedbacks');
+
     // ===========================================================================================================
     // ========================================== Partner Restricted Routes End ==================================
     // ===========================================================================================================
-
 
 
 
