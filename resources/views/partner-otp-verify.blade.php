@@ -379,40 +379,45 @@
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
-                        <h1 class="text-white mb-1">Hi Partner !</h1>
-                        <h3 class="text-white mb-1">You Forget Your Password, Don't Worry</h3>
-                        <h3 class="text-white mb-4">Let's Login With OTP</h3>
+                        <h1 class="text-white mb-1">Hurry Up !</h1>
+                        <h3 class="text-white mb-1">Enter Your OTP Before Expire</h3>
 
-
-                        <form method="POST" action="{{ route('partner.send.otp') }}">
+                        <form method="POST" action="{{ route('partner.verify.otp') }}">
                             @csrf
-                            <div class="row g-3" id="afteClickSendOtpButtonItHideAlso">
+                            <div class="row g-3">
                                 <div class="col-12">
-                                    <input type="email" class="form-control bg-light border-0" placeholder="Enter Registered Email *"
-                                        style="height: 55px;" name="partner_email" id="partner_email" required>
+                                    <input type="number" class="form-control bg-light border-0" placeholder="Enter OTP *"
+                                        style="height: 55px;" name="partner_otp" id="partner_otp" required>
                                 </div>
 
-                                @if(session('message'))
-                                <div class="alert alert-success">{{ session('message') }}</div>
-                                @endif
-                                @if($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
+                                <div class="w-100">
+                                    <p class="w-50 m-0 mt-2 mb-2 text-start text-white"><span id="otpExpireCountdown">Your OTP will expire in 3 minutes</span></p>
+
+                                    @if(session('message'))
+                                    <div class="alert alert-success">{{ session('message') }}</div>
+                                    @endif
+                                    @if($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
                                 </div>
-                                @endif
-
-
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-dark w-100 py-3">SEND OTP</button>
+                                    <button type="submit" class="btn btn-dark w-100 py-3">LOGIN</button>
                                 </div>
-
-
                             </div>
                         </form>
+
+
+
+
+
+
+
 
 
                     </div>
@@ -621,6 +626,10 @@
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
     <!-- <script src="../js/cards-scroll.js"></script> -->
+
+
+
+
 
 
 </body>

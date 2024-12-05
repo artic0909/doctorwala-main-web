@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\DwPartnerController;
 use App\Http\Controllers\DwPartnerOTPController;
+use App\Http\Controllers\Partnerpanel\ProfileEditController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:partner')->group(function () {
@@ -15,10 +16,17 @@ Route::middleware('guest:partner')->group(function () {
 
 
 
-    Route::get('/partner-otp', [DwPartnerOTPController::class, 'partnerLoginWithOTPView'])->name('partner-otp-login');
-    
-    Route::post('send-otp', [DwPartnerOTPController::class, 'sendOTP']);
-    Route::post('verify-otp', [DwPartnerOTPController::class, 'verifyOTP']);
+    // Route for showing the email input form (partner-otp)
+    Route::get('/partner-otp', [DwPartnerOTPController::class, 'partnerLoginWithOTPView'])->name('partner-otp.view');
+
+    // Route for showing the OTP verification form
+    Route::get('/partner-otp-verify', [DwPartnerOTPController::class, 'partnerLoginWithOTPVerifyView'])->name('partner-otp.verify');
+
+    // Route to send OTP to the email
+    Route::post('/partner-send-otp', [DwPartnerOTPController::class, 'sendOTP'])->name('partner.send.otp');
+
+    // Route to verify the OTP
+    Route::post('/partner-verify-otp', [DwPartnerOTPController::class, 'verifyOTP'])->name('partner.verify.otp');
 });
 
 
@@ -30,6 +38,7 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     // ===========================================================================================================
     // ========================================== Parter Restricted Routes End ===================================
     // ===========================================================================================================
+
     Route::get('/partnerpanel/partner-dashboard', function () {
         return view('partnerpanel.partner-dashboard');
     })->name('partnerpanel.partner-dashboard');
@@ -109,6 +118,37 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     // ===========================================================================================================
     // ========================================== Partner Restricted Routes End ==================================
     // ===========================================================================================================
+
+
+
+
+
+
+
+    // Route to show the profile edit page
+    Route::get('/partnerpanel/partner-profile', [ProfileEditController::class, 'partnerProfileEditWithCurrentPartnerDetails']);
+
+    // Route to update the profile details
+    Route::post('/partnerpanel/partner-profile-update', [ProfileEditController::class, 'updateProfile'])->name('partner.profile.update');
+
+    // Route to update the password
+    Route::post('/partnerpanel/partner-password-update', [ProfileEditController::class, 'updatePassword'])->name('partner.password.update');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

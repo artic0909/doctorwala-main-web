@@ -341,82 +341,51 @@
 
                             <div class="row m-auto">
                                 <div class="col-12 mt-4">
+                                    
 
-                                    <form class="prof-view">
-
-                                        <div
-                                            class="prof-img d-flex justify-content-center flex-column align-items-center">
-                                            <img src="../img/empty.jpg" alt="" width="140" style="border-radius: 50%;">
-                                            <label for="img" class="mt-2" style="cursor: pointer; font-weight: 700;"><i
-                                                    class="fa fa-camera text-primary" aria-hidden="true"></i>
-                                                Upload</label>
-                                            <input type="file" id="img" name="img" style="display: none;">
-                                        </div>
+                                    <form method="POST" action="{{ route('partner.profile.update') }}">
+                                        @csrf
+                                        <div class="from-view row mt-4">
+                                            <!-- Clinic Name, Contact Person, Mobile, Email, etc. -->
 
 
-
-
-                                        <div class="from-view row  mt-2">
-
-
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-house-medical text-primary"></i>
-                                                    Clinic Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz clinic" style="height: 55px;">
-                                            </div>
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-user text-primary" aria-hidden="true"></i> Contact
-                                                    Person Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="Saklin Mustak" style="height: 55px;">
+                                            <div class="col-12 form-group">
+                                                <label for="partner_id" style="font-weight: 700;">Partner ID <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_id"  value="{{ $partner->partner_id }}" style="height: 55px;" readonly>
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
-                                                    Number <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="909999999" style="height: 55px;">
+                                                <label for="partner_clinic_name" style="font-weight: 700;">Clinic Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_clinic_name" name="partner_clinic_name" value="{{ $partner->partner_clinic_name }}" style="height: 55px;">
                                             </div>
-
-
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-envelope text-primary" aria-hidden="true"></i>
-                                                    Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;">
+                                                <label for="partner_contact_person_name" style="font-weight: 700;">Contact Person Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_contact_person_name" name="partner_contact_person_name" value="{{ $partner->partner_contact_person_name }}" style="height: 55px;">
                                             </div>
-
-
-
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-globe text-primary"></i>
-                                                    State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select State</option>
-                                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar
-                                                        Islands</option>
+                                                <label for="partner_mobile_number" style="font-weight: 700;">Mobile Number <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_mobile_number" name="partner_mobile_number" value="{{ $partner->partner_mobile_number }}" style="height: 55px;">
+                                            </div>
+                                            <div class="col-4 form-group">
+                                                <label for="partner_email" style="font-weight: 700;">Email Id <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_email" name="partner_email" value="{{ $partner->partner_email }}" style="height: 55px;">
+                                            </div>
+                                            <!-- State and City selection -->
+                                            <div class="col-4 form-group">
+                                                <label for="partner_state" style="font-weight: 700;">State <span class="text-danger">*</span></label>
+                                                <select name="partner_state" id="partner_state" class="form-control" style="height: 55px;">
+                                                    <option selected>{{ $partner->partner_state }}</option>
+                                                    <option >--Select State--</option>
+                                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                                     <option value="Assam">Assam</option>
                                                     <option value="Bihar">Bihar</option>
                                                     <option value="Chandigarh">Chandigarh</option>
                                                     <option value="Chhattisgarh">Chhattisgarh</option>
-                                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and
-                                                        Nagar Haveli
+                                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli
                                                         and Daman and Diu</option>
                                                     <option value="Delhi">Delhi</option>
                                                     <option value="Goa">Goa</option>
@@ -446,38 +415,18 @@
                                                     <option value="Uttar Pradesh">Uttar Pradesh</option>
                                                     <option value="Uttarakhand">Uttarakhand</option>
                                                     <option value="West Bengal">West Bengal</option>
-
                                                 </select>
                                             </div>
-
-
-
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-city text-primary"></i> City
-                                                    <span class="text-danger">*</span></label>
-
-
-
-                                                <input type="text" class="form-control" id="name" name="name" style="height: 55px;" value="city">
+                                                <label for="partner_city" style="font-weight: 700;">City <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_city" name="partner_city" value="{{ $partner->partner_city }}" style="height: 55px;">
                                             </div>
-
-
-                                            <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded">Update
-                                                    Profile</button>
-                                            </div>
-
-
-
-
                                         </div>
-
-
-
+                                        <div class="d-flex justify-content-center w-100">
+                                            <button type="submit" class="btn btn-danger rounded">Update Profile</button>
+                                        </div>
                                     </form>
+
 
 
 
@@ -493,53 +442,26 @@
 
 
 
-                                    <form class="prof-view">
-
-
-                                        <div class="from-view row  mt-5">
-
-
-
+                                    <form method="POST" action="{{ route('partner.password.update') }}">
+                                        @csrf
+                                        <div class="from-view row mt-4">
+                                            <!-- Current Password, New Password, Confirm Password -->
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i>
-                                                    Current Password <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyzClini123@" style="height: 55px;">
+                                                <label for="partner_password_existing" style="font-weight: 700;">Existing Password <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_password_existing" value="*******************" required style="height: 55px;">
                                             </div>
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock-open text-primary"></i>
-                                                    New Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" id="name" name="name"
-                                                    value="11111111" style="height: 55px;">
+                                                <label for="partner_password" style="font-weight: 700;">New Password <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_password" name="partner_password" required style="height: 55px;">
                                             </div>
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i>
-                                                    Confirm Password <span class="text-danger">*</span></label>
-                                                <input type="password" class="form-control" id="name" name="name"
-                                                    value="11111111" style="height: 55px;">
+                                                <label for="confirm_password" style="font-weight: 700;">Confirm Password <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="confirm_password" name="confirm_password" required style="height: 55px;">
                                             </div>
-
-
-
-
-                                            <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded">Update
-                                                    Password</button>
-                                            </div>
-
-
-
                                         </div>
-
-
-
+                                        <div class="d-flex justify-content-center w-100">
+                                            <button type="submit" class="btn btn-danger rounded">Update Password</button>
+                                        </div>
                                     </form>
 
 

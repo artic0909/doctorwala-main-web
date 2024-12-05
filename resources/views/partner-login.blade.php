@@ -436,7 +436,7 @@
                                     <a href="#" class="text-white fw-bold" style="text-decoration: none;">Forget
                                         Password ?</a>
                                     <span><a href="/partner-otp" class="text-white "
-                                            style="text-decoration: underline;">Login wiith OTP</a></span>
+                                            style="text-decoration: underline;">Login with OTP</a></span>
                                 </p>
                             </div>
                         </form>

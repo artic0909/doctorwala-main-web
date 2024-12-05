@@ -341,7 +341,9 @@
                             <div class="row m-auto">
                                 <div class="col-12 mt-4">
 
-                                    <form class="prof-view">
+
+                                    <!--This Form workings( If Not have Details it Work As Add details,If any related details exist it work as update )  it add details in current partner-->
+                                    <form class="prof-view ">
 
 
                                         <div class="from-view row  mt-2">
@@ -354,7 +356,7 @@
                                                         class="fa fa-sitemap text-primary" aria-hidden="true"></i> Type
                                                     <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="name" name="name"
-                                                    value="OPD" style="height: 55px;">
+                                                    value="" style="height: 55px;" readonly>
                                             </div>
 
 
@@ -363,8 +365,8 @@
                                                 <label for="name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-user text-primary"></i>
                                                     Autorized Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="Saklin Mustak" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_contact_person_name" name="clinic_contact_person_name"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -373,8 +375,8 @@
                                                 <label for="name" style="font-weight: 700;"><i
                                                         class="fa fa-hashtag text-primary" aria-hidden="true"></i> GSTIN
                                                     <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="ddfdgfjfgdf355" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_gst_number" name="clinic_gst_number"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -384,8 +386,8 @@
                                                 <label for="name" style="font-weight: 700;"><i
                                                         class="fa fa-envelope text-primary" aria-hidden="true"></i>
                                                     Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_email" name="clinic_email"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -396,8 +398,8 @@
                                                 <label for="name" style="font-weight: 700;"><i
                                                         class="fa fa-map-pin text-primary" aria-hidden="true"></i>
                                                     Landmark <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_landmark" name="clinic_landmark"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -407,8 +409,8 @@
                                                         class="fa fa-location-pin-lock text-primary"
                                                         aria-hidden="true"></i>
                                                     Pin Code <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_pincode" name="clinic_pincode"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -418,8 +420,8 @@
                                                         class="fa fa-map-location-dot text-primary"
                                                         aria-hidden="true"></i>
                                                     Google Map <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;">
+                                                <input type="text" class="form-control" id="clinic_google_map_link" name="clinic_google_map_link"
+                                                    value="" style="height: 55px;">
                                             </div>
 
 
@@ -430,7 +432,7 @@
                                                 <label for="name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-globe text-primary"></i>
                                                     State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
+                                                <select name="clinic_state" id="clinic_state" class="form-control" style="height: 55px;">
                                                     <option selected>Select State</option>
                                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar
                                                         Islands</option>
@@ -484,7 +486,7 @@
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
 
-                                                <input type="text" class="form-control" id="name" name="name" style="height: 55px;" value="city">
+                                                <input type="text" class="form-control" id="clinic_city" name="clinic_city" style="height: 55px;" value="">
                                             </div>
 
 
@@ -495,11 +497,14 @@
                                                         class="fa-solid fa-location-dot text-primary"></i> Address
                                                     <span class="text-danger">*</span></label>
 
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
+                                                <textarea name="clinic_address" id="clinic_address" class="form-control" rows="7"></textarea>
                                             </div>
 
 
                                             <div class="d-flex justify-content-center w-100">
+                                                <button type="submit" class="btn btn-primary rounded mr-4">Add
+                                                    Contact Person</button>
+
                                                 <button type="submit" class="btn btn-danger rounded">Update
                                                     Contact Person</button>
                                             </div>
