@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,20 +25,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
-    <link href="responsive/partner_responsive.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/cards-css.css" rel="stylesheet">
+    <link href="../css/partner-btn.css" rel="stylesheet">
+    <link href="../responsive/index_responsive.css" rel="stylesheet">
+    <link href="../responsive/partner_responsive.css" rel="stylesheet">
 
 
 
@@ -387,7 +387,7 @@
                                 <div class="col-12">
                                     <input type="email" class="form-control bg-light border-0"
                                         placeholder="Enter Registered Email *" style="height: 55px;" name="partner_email"
-                                        id="partner_email">
+                                        id="partner_email" required>
                                 </div>
 
 
@@ -396,8 +396,27 @@
                                 <div class="col-12">
                                     <input type="password" class="form-control bg-light border-0"
                                         placeholder="Enter Password *" style="height: 55px;" name="partner_password"
-                                        id="partner_password">
+                                        id="partner_password" required>
                                 </div>
+
+
+                                <div class="col-12 col-sm-6">
+                                    <div class="cap-back" style="background: url('../img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 2px;" data-captcha="{{ $captcha }}">
+                                        <canvas id="captchaCanvas" width="150" height="49" style="cursor: pointer;"></canvas>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-12 col-sm-6">
+                                    <input type="text" class="form-control bg-light border-0"
+                                        placeholder="Enter Captcha *" style="height: 55px;" name="captcha" id="captcha" required>
+                                    @error('captcha')
+                                    <small class="text-white">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+
+
 
                                 <div class="col-12">
                                     <button class="btn btn-dark w-100 py-3" type="submit">LOGIN</button>
@@ -416,7 +435,7 @@
                                 <p>
                                     <a href="#" class="text-white fw-bold" style="text-decoration: none;">Forget
                                         Password ?</a>
-                                    <span><a href="partner-otp.html" class="text-white "
+                                    <span><a href="/partner-otp" class="text-white "
                                             style="text-decoration: underline;">Login wiith OTP</a></span>
                                 </p>
                             </div>
@@ -612,20 +631,32 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/captcha.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/cards-scroll.js"></script>
+
+
+    <script>
+        // Render captcha on canvas
+        const captcha = @json($captcha); // Pass captcha value from controller
+        const canvas = document.getElementById('captchaCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.font = '23px Arial';
+        ctx.fillText(captcha, 10, 35);
+
+        // Reload captcha on click
+        canvas.addEventListener('click', () => location.reload());
+    </script>
 </body>
 
 </html>

@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('dw_user_models', function (Blueprint $table) {
             $table->id();
             $table->string('user_name');
-            $table->string('user_mobile');
+            $table->string('user_mobile')->unique();
             $table->string('user_city');
-            $table->string('user_email');
+            $table->string('user_email')->unique();
             $table->string('user_password');
             $table->string('signupCaptchaInput');
             $table->timestamps();

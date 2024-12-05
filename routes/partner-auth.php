@@ -2,13 +2,23 @@
 
 
 use App\Http\Controllers\DwPartnerController;
+use App\Http\Controllers\DwPartnerOTPController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:partner')->group(function () {
+
     Route::get('/partner-register', [DwPartnerController::class, 'viewPartnerRegForm']);
     Route::get('/partner-login', [DwPartnerController::class, 'partnerLoginFormView']);
+
     Route::post('/partner-register', [DwPartnerController::class, 'partnerRegForm'])->name('partnerRegForm');
     Route::post('/partner-login', [DwPartnerController::class, 'partnerLogin'])->name('partnerpanel.partner-login');
+
+
+
+    Route::get('/partner-otp', [DwPartnerOTPController::class, 'partnerLoginWithOTPView'])->name('partner-otp-login');
+    
+    Route::post('send-otp', [DwPartnerOTPController::class, 'sendOTP']);
+    Route::post('verify-otp', [DwPartnerOTPController::class, 'verifyOTP']);
 });
 
 

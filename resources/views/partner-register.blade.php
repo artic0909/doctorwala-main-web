@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="../img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -397,7 +397,7 @@
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0"
                                         placeholder="Clinic Name *" style="height: 55px;" name="partner_clinic_name"
-                                        id="partner_clinic_name">
+                                        id="partner_clinic_name" required>
                                 </div>
 
 
@@ -405,7 +405,7 @@
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0"
                                         placeholder="Contact Person *" style="height: 55px;" name="partner_contact_person_name"
-                                        id="partner_contact_person_name">
+                                        id="partner_contact_person_name" required>
                                 </div>
 
 
@@ -413,7 +413,7 @@
                                 <div class="col-12 col-sm-6">
                                     <input type="number" class="form-control bg-light border-0"
                                         placeholder="Mobile Number *" style="height: 55px;" name="partner_mobile_number"
-                                        id="partner_mobile_number">
+                                        id="partner_mobile_number" required>
                                 </div>
 
 
@@ -421,7 +421,7 @@
 
                                 <div class="col-12 col-sm-6">
                                     <input type="email" class="form-control bg-light border-0" placeholder="Email ID *"
-                                        style="height: 55px;" name="partner_email" id="partner_email">
+                                        style="height: 55px;" name="partner_email" id="partner_email" required>
                                 </div>
 
 
@@ -429,7 +429,7 @@
 
                                 <div class="col-12 col-sm-6">
                                     <select class="form-select bg-light border-0" style="height: 55px;" name="partner_state"
-                                        id="partner_state">
+                                        id="partner_state" required>
                                         <option selected>Select State</option>
                                         <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                         <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -476,7 +476,7 @@
 
 
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="City *" style="height: 55px;" name="partner_city" id="partner_city">
+                                    <input type="text" class="form-control bg-light border-0" placeholder="City *" style="height: 55px;" name="partner_city" id="partner_city" required>
                                 </div>
 
 
@@ -484,14 +484,14 @@
 
 
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="Pin Code *"
-                                        style="height: 55px;" name="partner_pincode" id="partner_pincode">
+                                    <input type="number" class="form-control bg-light border-0" placeholder="Pin Code *"
+                                        style="height: 55px;" name="partner_pincode" id="partner_pincode" required>
                                 </div>
 
 
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0" placeholder="Landmark *"
-                                        style="height: 55px;" name="partner_landmark" id="partner_landmark">
+                                        style="height: 55px;" name="partner_landmark" id="partner_landmark" required>
                                 </div>
 
 
@@ -500,7 +500,7 @@
 
                                 <div class="col-12">
                                     <textarea name="partner_address" class="form-control bg-light border-0" rows="5"
-                                        id="partner_address" placeholder="Full Address *"></textarea>
+                                        id="partner_address" placeholder="Full Address *" required></textarea>
                                 </div>
 
 
@@ -512,7 +512,7 @@
                                 <div class="col-12">
                                     <input type="password" class="form-control bg-light border-0"
                                         placeholder="Password *" style="height: 55px;" name="partner_password"
-                                        id="partner_password">
+                                        id="partner_password" required>
                                 </div>
 
 
@@ -521,16 +521,21 @@
 
 
                                 <div class="col-12 col-sm-6">
-                                    <div class="cap-back" style="background: url('../img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 2px;">
-                                        <canvas id="partnerRegisterCaptchaCanvas" width="150" height="49" style="cursor: pointer;"></canvas>
+                                    <div class="cap-back" style="background: url('../img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover; border-radius: 2px;" data-captcha="{{ $captcha }}">
+                                        <canvas id="captchaCanvas" width="150" height="49" style="cursor: pointer;"></canvas>
                                     </div>
                                 </div>
 
 
                                 <div class="col-12 col-sm-6">
                                     <input type="text" class="form-control bg-light border-0"
-                                        placeholder="Enter Captcha *" style="height: 55px;" id="partnerRegisterCaptchaInput" name="partnerRegisterCaptchaInput">
+                                        placeholder="Enter Captcha *" style="height: 55px;" name="captcha" id="captcha" required>
+                                    @error('captcha')
+                                    <small class="text-white">{{ $message }}</small>
+                                    @enderror
                                 </div>
+
+
 
 
 
@@ -592,6 +597,7 @@
 
 
 
+    <div id="alertPlaceholder"></div>
 
 
 
@@ -752,7 +758,7 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
-     @guest
+    @guest
     <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
@@ -796,7 +802,6 @@
     <!-- Template Javascript -->
     <script src="../js/main.js"></script>
     <script src="../js/cards-scroll.js"></script>
-    <script src="../js/partner-register-captcha.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -844,6 +849,18 @@
                 }
             });
         });
+    </script>
+
+    <script>
+        // Render captcha on canvas
+        const captcha = @json($captcha); // Pass captcha value from controller
+        const canvas = document.getElementById('captchaCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.font = '23px Arial';
+        ctx.fillText(captcha, 10, 35);
+
+        // Reload captcha on click
+        canvas.addEventListener('click', () => location.reload());
     </script>
 </body>
 

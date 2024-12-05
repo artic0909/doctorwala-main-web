@@ -19,13 +19,13 @@ class DwPartnerController extends Controller
 
     public function viewPartnerRegForm()
     {
-        return view('partner-register');
+        // return view('partner-register');
+
+        $captcha = $this->generateCaptcha();
+        session(['captcha_text' => $captcha]);
+
+        return view('partner-register', compact('captcha'));
     }
-
-
-
-
-
 
 
 
@@ -35,8 +35,14 @@ class DwPartnerController extends Controller
 
     public function partnerLoginFormView()
     {
-        return view('partner-login');
+        // return view('partner-login');
+
+        $captcha = $this->generateCaptcha();
+        session(['captcha_text' => $captcha]);
+
+        return view('partner-login', compact('captcha'));
     }
+
 
 
 
@@ -81,8 +87,13 @@ class DwPartnerController extends Controller
             'partner_password' => 'required|string',
             'registration_type' => 'required|array',
             'registration_type.*' => 'string',
-            'partnerRegisterCaptchaInput' => 'required|string',
+            'captcha' => 'required|string', // Captcha input field
         ]);
+
+        // Check if captcha matches the one in session
+        if ($request->captcha !== session('captcha_text')) {
+            return back()->withErrors(['captcha' => 'Captcha is incorrect.'])->withInput();
+        }
 
 
 
@@ -101,6 +112,29 @@ class DwPartnerController extends Controller
 
 
 
+
+
+
+
+
+    private function generateCaptcha()
+    {
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $captcha = '';
+        for ($i = 0; $i < 6; $i++) {
+            $captcha .= $chars[random_int(0, strlen($chars) - 1)];
+        }
+        return $captcha;
+    }
+
+
+
+
+
+
+
+
+
     public function partnerLogin(Request $request)
     {
         // Validate the login credentials
@@ -108,6 +142,12 @@ class DwPartnerController extends Controller
             'partner_email' => 'required|email',
             'partner_password' => 'required',
         ]);
+
+
+        // Check if captcha matches the one in session
+        if ($request->captcha !== session('captcha_text')) {
+            return back()->withErrors(['captcha' => 'Captcha is incorrect.'])->withInput();
+        }
 
         // Prepare credentials array
         $credentials = [
@@ -122,11 +162,24 @@ class DwPartnerController extends Controller
             return redirect()->route('partnerpanel.partner-dashboard');
         }
 
+
+
         // Login failed
         return back()->withErrors([
             'partner_email' => 'Invalid credentials. Please try again.',
         ]);
     }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

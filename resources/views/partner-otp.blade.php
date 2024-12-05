@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,20 +25,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="../lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
-    <link href="responsive/partner_responsive.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/cards-css.css" rel="stylesheet">
+    <link href="../css/partner-btn.css" rel="stylesheet">
+    <link href="../responsive/index_responsive.css" rel="stylesheet">
+    <link href="../responsive/partner_responsive.css" rel="stylesheet">
 
 
 
@@ -95,40 +95,94 @@
 
 
 
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="opd.html" class="dropdown-item">OPD Details</a>
-                        <a href="doctor.html" class="dropdown-item">Doctor Details</a>
-                        <a href="pathology.html" class="dropdown-item">Pathology Details</a>
-                        <a href="coupon.html" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
+                <a href="/contact" class="nav-item nav-link ">Contact</a>
+                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="authentication.html" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i class="fa fa-user" aria-hidden="true"></i></a> -->
+
+
+            <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/dw" class="nav-item nav-link">Home</a>
+                <a href="/dw/about" class="nav-item nav-link ">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
 
 
 
@@ -326,50 +380,48 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Login With OTP</h1>
-                        <form>
+
+
+                        <form method="POST" action="{{ url('verify-otp') }}">
+                            @csrf
                             <div class="row g-3">
-
-
-
                                 <div class="col-12">
-                                    <input type="email" class="form-control bg-light border-0"
-                                        placeholder="Enter Registered Email *" style="height: 55px;" name="email"
-                                        id="email">
+                                    <input type="number" class="form-control bg-light border-0"
+                                        placeholder="Enter Registered Phone *" style="height: 55px;" name="partner_mobile_number"
+                                        id="partner_mobile_number" required>
                                 </div>
 
-
-
-
                                 <div class="col-12">
-                                    <input type="password" class="form-control bg-light border-0"
-                                        placeholder="Enter Password *" style="height: 55px;" name="password"
-                                        id="password">
+                                    <input type="number" class="form-control bg-light border-0"
+                                        placeholder="Enter OTP *" style="height: 55px;" name="partner_otp" id="partner_otp">
                                 </div>
 
-
-                                <div class="col-12">
-                                    <a href="partner-dashboard.html" class="btn btn-dark w-100 py-3"
-                                        type="submit">LOGIN</a>
+                                <div class="d-flex justify-between align-items-center w-100">
+                                    <p class="w-50 m-0 mt-2 text-start text-white"><span id="otpExpireCountdown">00:59</span></p>
+                                    <p class="w-50 m-0 mt-2 text-end">
+                                        <button type="submit" class="text-white" style="text-decoration: underline;">Send OTP</button>
+                                    </p>
                                 </div>
 
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-dark w-100 py-3">LOGIN</button>
+                                </div>
 
-
-
-                                <p style="margin-bottom: 0; padding-bottom: 0;">
-                                    <a href="#" class="text-white fw-bold" style="text-decoration: none;">Create New
-                                        account ?</a>
-                                    <span><a href="partner-register.html" class="text-white "
-                                            style="text-decoration: underline;">Sign Up</a></span>
+                                <p>
+                                    <a href="#" class="text-white fw-bold" style="text-decoration: none;">Create New account?</a>
+                                    <span><a href="partner-register.html" class="text-white" style="text-decoration: underline;">Sign Up</a></span>
                                 </p>
 
                                 <p>
-                                    <a href="#" class="text-white fw-bold" style="text-decoration: none;">Already have
-                                        an account ?</a>
-                                    <span><a href="partner-login.html" class="text-white "
-                                            style="text-decoration: underline;">Login</a></span>
+                                    <a href="#" class="text-white fw-bold" style="text-decoration: none;">Already have an account?</a>
+                                    <span><a href="partner-login.html" class="text-white" style="text-decoration: underline;">Login</a></span>
                                 </p>
                             </div>
                         </form>
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -561,20 +613,43 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="../lib/wow/wow.min.js"></script>
+    <script src="../lib/easing/easing.min.js"></script>
+    <script src="../lib/waypoints/waypoints.min.js"></script>
+    <script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../lib/twentytwenty/jquery.event.move.js"></script>
+    <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/captcha.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/cards-scroll.js"></script>
+
+
+    <script>
+        let countdownTime = 59; // Set countdown timer to 59 seconds
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('otpExpireCountdown');
+            const minutes = Math.floor(countdownTime / 60);
+            const seconds = countdownTime % 60;
+            countdownElement.innerText = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            countdownTime--;
+
+            if (countdownTime < 0) {
+                countdownElement.innerText = '00:00';
+                alert('OTP expired! Please request a new one.');
+                // Optionally disable the submit button or reset the form here
+            }
+        }
+
+        setInterval(updateCountdown, 1000); // Update countdown every second
+    </script>
+
+
+
 </body>
 
 </html>

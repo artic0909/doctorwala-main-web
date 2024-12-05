@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('partner_id')->unique();
             $table->string('partner_clinic_name');
             $table->string('partner_contact_person_name');
-            $table->string('partner_mobile_number');
-            $table->string('partner_email');
+            $table->string('partner_mobile_number')->unique();
+            $table->string('partner_email')->unique();
             $table->string('partner_state');
             $table->string('partner_city');
             $table->string('partner_pincode');
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('partner_address');
             $table->string('partner_password');
             $table->json('registration_type');
-            $table->string('partnerRegisterCaptchaInput');
             $table->timestamps();
         });
     }
