@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
-use App\Models\PartnerOPDContactModel;
+use App\Models\PartnerPathologyContactModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class PartnerOPDContactController extends Controller
+class PartnerPathologyContactController extends Controller
 {
     public function create()
     {
@@ -16,9 +16,9 @@ class PartnerOPDContactController extends Controller
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
-        $contactDetails = PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-opd-contact', compact('contactDetails', 'registrationTypes'));
+        return view('partnerpanel.partner-pathology-contact', compact('contactDetails', 'registrationTypes'));
     }
 
     public function store(Request $request)
@@ -39,7 +39,7 @@ class PartnerOPDContactController extends Controller
             'clinic_address' => 'required|string',
         ]);
 
-        $contactDetails = PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         if ($contactDetails) {
             // Update the existing record
@@ -57,10 +57,10 @@ class PartnerOPDContactController extends Controller
                 'clinic_address' => $request->clinic_address,
             ]);
 
-            return redirect()->route('partner.opd.contact.create')->with('success', 'Contact details updated successfully.');
+            return redirect()->route('partner.pathology.contact.create')->with('success', 'Contact details updated successfully.');
         } else {
             // Create a new record
-            PartnerOPDContactModel::create([
+            PartnerPathologyContactModel::create([
                 'currently_loggedin_partner_id' => $partnerId,
                 'clinic_registration_type' => $request->clinic_registration_type,
                 'clinic_contact_person_name' => $request->clinic_contact_person_name,
@@ -75,7 +75,7 @@ class PartnerOPDContactController extends Controller
                 'clinic_address' => $request->clinic_address,
             ]);
 
-            return redirect()->route('partner.opd.contact.create')->with('success', 'Contact details saved successfully.');
+            return redirect()->route('partner.pathology.contact.create')->with('success', 'Contact details saved successfully.');
         }
     }
 }

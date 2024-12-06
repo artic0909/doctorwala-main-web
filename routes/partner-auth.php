@@ -3,6 +3,11 @@
 
 use App\Http\Controllers\DwPartnerController;
 use App\Http\Controllers\DwPartnerOTPController;
+use App\Http\Controllers\Partnerpanel\PartnerAboutDetailsController;
+use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
+use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
+use App\Http\Controllers\Partnerpanel\PartnerPathologyContactController;
+use App\Http\Controllers\Partnerpanel\PartnerServiceListController;
 use App\Http\Controllers\Partnerpanel\ProfileEditController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,9 +44,7 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     // ========================================== Parter Restricted Routes End ===================================
     // ===========================================================================================================
 
-    Route::get('/partnerpanel/partner-dashboard', function () {
-        return view('partnerpanel.partner-dashboard');
-    })->name('partnerpanel.partner-dashboard');
+    Route::get('/partnerpanel/partner-dashboard', [DwPartnerController::class, 'partnerdashboardview'])->name('partnerpanel.partner-dashboard');
 
     Route::get('/partnerpanel/partner-profile', function () {
         return view('partnerpanel.partner-profile');
@@ -115,9 +118,7 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
         return view('partnerpanel.partner-feedbacks');
     })->name('partnerpanel.partner-feedbacks');
 
-    // ===========================================================================================================
-    // ========================================== Partner Restricted Routes End ==================================
-    // ===========================================================================================================
+
 
 
 
@@ -137,6 +138,32 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
 
+    // Route of the OPD contact page
+    Route::get('/partnerpanel/partner-opd-contact', [PartnerOPDContactController::class, 'create'])->name('partner.opd.contact.create');
+    Route::post('/partnerpanel/partner-opd-contact', [PartnerOPDContactController::class, 'store'])->name('partner.opd.contact.store');
+
+    // Route of the Pathology contact page
+    Route::get('/partnerpanel/partner-pathology-contact', [PartnerPathologyContactController::class, 'create'])->name('partner.pathology.contact.create');
+    Route::post('/partnerpanel/partner-pathology-contact', [PartnerPathologyContactController::class, 'store'])->name('partner.pathology.contact.store');
+
+
+    // Route of the Partner About Details
+    Route::get('/partnerpanel/partner-about-clinic', [PartnerAboutDetailsController::class, 'create'])->name('partner.about.details.create');
+    Route::post('/partnerpanel/partner-about-clinic', [PartnerAboutDetailsController::class, 'store'])->name('partner.about.details.store');
+
+
+    // Route of the Partner Service Lists
+    Route::get('/partnerpanel/partner-service-lists', [PartnerServiceListController::class, 'index'])->name('partner.services.index'); // View services
+    Route::post('/partnerpanel/partner-service-lists/store', [PartnerServiceListController::class, 'store'])->name('partner.services.store'); // Add service
+    Route::post('/partnerpanel/partner-service-lists/update/{index}', [PartnerServiceListController::class, 'update'])->name('partner.services.update'); // Update service
+    Route::delete('/partnerpanel/partner-service-lists/delete/{index}', [PartnerServiceListController::class, 'destroy'])->name('partner.services.delete'); // Delete service
+
+
+    // Route of the Partner Gallery
+    Route::get('/partnerpanel/partner-gallery', [PartnerGalleryController::class, 'index'])->name('partner.gallery.index');
+    Route::post('/partnerpanel/partner-gallery/store', [PartnerGalleryController::class, 'store'])->name('partner.gallery.store');
+    Route::post('/partnerpanel/partner-gallery/update/{index}', [PartnerGalleryController::class, 'update'])->name('partner.gallery.update');
+    Route::delete('/partnerpanel/partner-gallery/delete/{index}', [PartnerGalleryController::class, 'destroy'])->name('partner.gallery.delete');
 
 
 
@@ -145,6 +172,9 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
 
+    // ===========================================================================================================
+    // ========================================== Partner Restricted Routes End ==================================
+    // ===========================================================================================================
 
 
 

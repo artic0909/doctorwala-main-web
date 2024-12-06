@@ -123,12 +123,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -170,7 +173,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -188,12 +191,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -213,11 +216,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -237,7 +240,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -355,16 +358,80 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse($services as $index => $service)
                                             <tr>
-                                                <th scope="row">1</th>
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-                                                <td style="font-size: 1.2rem;">Ambulance</td>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+                                                <td>
+                                                    <a href="#" data-toggle="modal" data-target="#editServiceModal{{ $index }}" class="ed-btn">
+                                                        <i class="fa fa-edit text-success"
+                                                            style="font-size: 1.2rem;"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="#" data-toggle="modal" data-target="#deleteServiceModal{{ $index }}" class="ed-btn">
+                                                        <i class="fa fa-trash text-danger"
+                                                            style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                </td>
+                                                <td style="text-transform: capitalize; font-size: 1rem;"><strong>{{ $service }}</strong></td>
                                             </tr>
+
+                                            <!-- Edit Modal -->
+                                            <div class="modal fade" id="editServiceModal{{ $index }}" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+
+                                                    <div class="modal-content" style="padding: 20px;">
+                                                        <div class="modal-body">
+
+
+                                                            <form action="{{ route('partner.services.update', $index) }}" method="POST">
+                                                                @csrf
+                                                                @method('POST')
+                                                                <div class="form-group">
+                                                                    <label for="service_lists"><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Edit
+                                                                        Service <span class="text-danger">*</span></label>
+                                                                    <input type="text" class="form-control" name="service" id="service" value="{{ $service }}" required>
+                                                                </div>
+
+                                                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Delete Modal -->
+                                            <div class="modal fade" id="deleteServiceModal{{ $index }}" tabindex="-1" role="dialog">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('partner.services.delete', $index) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <div class="form-group d-flex flex-column align-items-center">
+                                                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
+
+                                                                    <h3 class="mt-3">Are You Sure ?</h3>
+
+                                                                    <p class="mt-2 text-center">Are you sure you want to delete this service: <strong style="color: red; font-size: 1.1rem; text-transform: capitalize">{{ $service }} ?</strong>  This Process
+                                                                        cannot be undone.</p>
+
+                                                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
+                                                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
+                                                                            data-dismiss="modal">Cancel</button>
+                                                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @empty
+                                            <tr>
+                                                <td colspan="4" class="text-center">No services found.</td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
 
@@ -404,11 +471,12 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{ route('partner.services.store') }}" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Add
+                                    <label for="service_lists"><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Add
                                         Service <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="">
+                                    <input type="text" class="form-control" name="service" id="service">
                                 </div>
 
                                 <button type="submit" class="btn btn-success rounded w-100">Submit</button>
@@ -419,54 +487,6 @@
                 </div>
 
 
-                <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Edit
-                                        Service <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="" value="">
-                                </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form action="" class="modal-body">
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
-
-                                    <h3 class="mt-3">Are You Sure ?</h3>
-
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
-                                        cannot be undone.</p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
 
 

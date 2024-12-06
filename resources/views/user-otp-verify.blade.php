@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Authentication Page | Doctorwala</title>
+    <title>Home Page | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -247,12 +247,12 @@
         }
 
         .text {
-            margin: 3.5rem;
+            margin: 4rem;
             color: var(--white);
         }
 
         .text h2 {
-            font-size: 2.5rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin: 2rem 0;
             transition: 1s ease-in-out;
@@ -279,7 +279,7 @@
         .text.sign-up h2,
         .text.sign-up p,
         .img.sign-up img {
-            transform: translateX(200%);
+            transform: translateX(250%);
         }
 
         .container.sign-in .text.sign-in h2,
@@ -325,15 +325,10 @@
 
         @media only screen and (max-width: 425px) {
 
-
-            .container.sign-in,
-            .container.sign-up {
-                margin-top: -33px;
+            .container.sign-in {
+                margin-top: -90px;
             }
 
-            .container.sign-up {
-                margin-top: -40px;
-            }
 
             .container::before,
             .container.sign-in::before,
@@ -347,8 +342,8 @@
             }
 
             /* .container.sign-in .col.sign-up {
-                transform: translateY(100%);
-            } */
+        transform: translateY(100%);
+    } */
 
             .container.sign-in .col.sign-in,
             .container.sign-up .col.sign-up {
@@ -389,7 +384,7 @@
 
             .text {
                 margin: 0;
-                margin-top: 30px;
+                margin-top: 110px;
             }
 
             .text p {
@@ -398,13 +393,8 @@
 
             .text h2 {
                 margin: 0.5rem;
-                font-size: 1.9rem;
+                font-size: 2rem;
             }
-
-            .sig-text {
-                opacity: 0;
-            }
-
         }
     </style>
 </head>
@@ -439,41 +429,51 @@
 
 
             <!-- SIGN UP -->
-            <div class="col align-items-center flex-col sign-up signup-form" style="margin-top: -10px;">
+            <div class="col align-items-center flex-col sign-up">
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-up" action="{{ route('dw.user-register') }}" method="POST">
-                        @csrf
+                    <form class="form sign-up">
                         <h1 style="color: #1896e4; font-weight: 900;"><span
-                                style="color: red; font-weight: 1000;">+</span> JOIN US NOW <span
+                                style="color: red; font-weight: 1000;">+</span> JOIN US TODAY <span
                                 style="color: red; font-weight: 1000;">+</span></h1>
                         <div class="input-group">
                             <i class="fa-solid fa-user"></i>
-                            <input type="text" placeholder="Your Name*" name="user_name" id="user_name" required>
+                            <input type="text" placeholder="Name" name="user_name" id="user_name">
                         </div>
 
 
                         <div class="input-group">
                             <i class="fa-solid fa-phone"></i>
-                            <input type="number" placeholder="Mobile Number*" name="user_mobile" id="user_mobile" required>
+                            <input type="text" placeholder="Mobile" name="user_mobile" id="user_mobile">
                         </div>
 
 
                         <div class="input-group">
                             <i class="fa-solid fa-building"></i>
-                            <input type="text" name="user_city" id="user_city" placeholder="Your City*" required>
+                            <select name="user_city" id="user_city">
+                                <option value="">Select City</option>
+                            </select>
                         </div>
 
 
                         <div class="input-group">
                             <i class="fa-solid fa-at"></i>
-                            <input type="email" placeholder="Email ID*" name="user_email" id="user_email" required>
+                            <input type="email" placeholder="Email" name="user_email" id="user_email">
                         </div>
+
+
+
+
+
 
 
                         <div class="input-group">
                             <i class="fa-solid fa-lock signin-lock-icon"></i>
-                            <input type="password" placeholder="Password at least 8 characters*" name="user_password" id="user_password" required>
-                            
+                            <input type="password" placeholder="Password" name="user_password" id="user_password">
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fa-solid fa-eye signin-eye-icon"></i>
+                            <input type="password" placeholder="Confirm password" id="user_confirm_password">
                         </div>
 
 
@@ -481,23 +481,28 @@
 
 
 
+                        <div class="input-group">
+                            <canvas id="signupCaptchaCanvas" width="150" height="40"></canvas>
+                        </div>
+
+                        <div class="input-group">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <input type="text" placeholder="Enter Captcha" id="signupCaptchaInput">
+                        </div>
 
 
 
-
-
-
-                        <button type="submit" style="font-weight: 700;">
-                            SIGN UP
+                        <button>
+                            Sign up
                         </button>
-                        <p style="margin-top: 4px;">
+                        <p>
                             <span>
                                 Already have an account?
                             </span>
                             <b onclick="toggle()" class="pointer" style="text-decoration: underline;">
                                 Login here
                             </b>
-                            <span>&nbsp; <a href="/" style="color: black; font-size: 0.8rem;"
+                            <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
                                     onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
                                         class="fa fa-home" aria-hidden="true"></i></a></span>
                         </p>
@@ -511,56 +516,55 @@
 
 
 
-            <!-- Login -->
-            <div class="col align-items-center flex-col sign-in">
-
+            <!-- Login with OTP -->
+            <div class="col align-items-center flex-col sign-in login">
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-in login-form" action="{{ route('dw.user-login') }}" method="POST">
+                    <form class="form sign-in" method="POST" action="{{ route('user.verify.otp') }}">
                         @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
-                                style="color: red; font-weight: 1000;">+</span> HELLO USER <span
-                                style="color: red; font-weight: 1000;">+</span></h1>
-                        <div class="input-group">
-                            <i class="fa-solid fa-at"></i>
-                            <input type="email" placeholder="Email" name="user_email" id="user_email">
+                                style="color: red; font-weight: 1000;">+</span> ENTER THE OTP
+                            <span style="color: red; font-weight: 1000;">+</span>
+                        </h1>
+
+                        @if(session('message'))
+                        <div class="alert alert-success">{{ session('message') }}</div>
+                        @endif
+                        @if($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                        @endif
+
                         <div class="input-group">
-                            <i class="fa-regular fa-eye login-eye-icon"></i>
-                            <input type="password" placeholder="Password" name="user_password" id="user_password">
+                            <i class="fa-solid fa-user-secret"></i>
+                            <input type="text" placeholder="Enter OTP" name="user_otp" id="user_otp">
                         </div>
 
-                        <div class="input-group"
-                            style="background: url('{{asset('img/captcha.jpg')}}'); background-repeat: no-repeat; background-position: center; background-size: cover;" data-captcha="{{ $captcha }}">
-                            <canvas id="captchaCanvas" width="200" height="40" style="cursor: pointer;"></canvas>
-                        </div>
+                        <p style="text-align: start; margin-top: -10px;">Your OTP will expired in 3 minutes</p>
 
-                        <div class="input-group">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <input type="text" placeholder="Enter Captcha" name="captcha" id="captcha" required>
-                            @error('captcha')
-                            <small class="text-white">{{ $message }}</small>
-                            @enderror
-                        </div>
 
                         <button type="submit" style="font-weight: 700;">
                             LOGIN
                         </button>
-                        <p style="margin-top: 4px;">
+
+
+
+                        <p style="margin-top: 3px;">
                             <b>
-                                Forgot password? <a href="/user-otp" class="pointer" style="color: black;">Login
-                                    with OTP</a>
+                                <span>
+                                    If Not Send?
+                                </span>
+                                <a href="/user-otp" class="pointer" style="text-decoration: underline; color: black;">
+                                    Go back
+                                </a>
+                                <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
+                                        onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
+                                            class="fa fa-home" aria-hidden="true"></i></a></span>
                             </b>
-                        </p>
-                        <p style="margin-top: -14px;">
-                            <span>
-                                Don't have an account?
-                            </span>
-                            <b onclick="toggle()" class="pointer" style="text-decoration: underline;">
-                                Sign up here
-                            </b>
-                            <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"
-                                    onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"><i
-                                        class="fa fa-home" aria-hidden="true"></i></a></span>
                         </p>
                     </form>
                 </div>
@@ -590,7 +594,7 @@
             <div class="col align-items-center flex-col">
                 <div class="text sign-in">
                     <h2>
-                        Welcome Back to DoctorWala.info !
+                        Login Using OTP !
                     </h2>
 
                 </div>
@@ -601,7 +605,7 @@
 
 
             <!-- SIGN UP CONTENT -->
-            <div class="col align-items-center flex-col sig-text">
+            <div class="col align-items-center flex-col">
                 <div class="text sign-up">
                     <h2>
                         Join us!
@@ -638,17 +642,24 @@
 
 
 
-    <script>
-        // Render captcha on canvas
-        const captcha = @json($captcha); // Pass captcha value from controller
-        const canvas = document.getElementById('captchaCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.font = '23px Arial';
-        ctx.fillText(captcha, 10, 35);
 
-        // Reload captcha on click
-        canvas.addEventListener('click', () => location.reload());
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="js/captcha.js"></script>
 
 
     <script>
@@ -661,7 +672,7 @@
 
         setTimeout(() => {
             container.classList.add('sign-in')
-        }, 200);
+        }, 200)
     </script>
 
 

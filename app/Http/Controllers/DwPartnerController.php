@@ -57,7 +57,10 @@ class DwPartnerController extends Controller
 
     public function partnerdashboardview()
     {
-        return view('partnerpanel.partner-dashboard');
+        $partner = Auth::guard('partner')->user();
+        $registrationTypes = json_decode($partner->registration_type, true); // Decode the JSON
+
+        return view('partnerpanel.partner-dashboard', compact('registrationTypes'));
     }
 
 

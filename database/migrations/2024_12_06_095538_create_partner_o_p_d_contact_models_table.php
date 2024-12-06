@@ -13,16 +13,17 @@ return new class extends Migration
     {
         Schema::create('partner_o_p_d_contact_models', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('partner_id')->constrained('dw_partner_models')->onDelete('cascade'); // Foreign key relation to dw_partner_models table
-            $table->json('registration_type'); // Array field, stored as JSON
+            $table->unsignedBigInteger('currently_loggedin_partner_id'); // Foreign key
+            $table->string('clinic_registration_type'); // OPD, Pathology, etc.
             $table->string('clinic_contact_person_name');
-            $table->string('clinic_gst_number')->nullable(); // Optional field
+            $table->string('clinic_gstin')->nullable(); // Optional
+            $table->string('clinic_mobile_number');
             $table->string('clinic_email');
             $table->string('clinic_landmark');
             $table->string('clinic_pincode');
-            $table->string('clinic_google_map_link')->nullable(); // Optional field
             $table->string('clinic_state');
             $table->string('clinic_city');
+            $table->string('clinic_google_map_link')->nullable(); // Optional
             $table->text('clinic_address');
             $table->timestamps();
         });

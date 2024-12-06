@@ -189,7 +189,7 @@
 
 
 
-
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -200,7 +200,8 @@
 
 
                     <!-- profile update form -->
-                    <form class="text-center">
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -209,26 +210,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -236,7 +219,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -248,36 +257,28 @@
 
 
                     <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
 
-
+                            <!-- dummy start -->
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
-
+                            <!-- dummy end -->
 
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -285,11 +286,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -322,11 +324,7 @@
                     </div>
 
 
-                    <!-- <div class="col-md-12">
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
-                        </div>
-                    </div> -->
+
 
 
 
@@ -335,48 +333,94 @@
             </div>
         </div>
     </div>
+    @endauth
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Full Screen Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+    <!-- profile update success modal start -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h2 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                    <h2 class="text-primary">Profile Updated Successfully</h2>
                 </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
-                    <div class="input-group" style="max-width: 600px;">
-                        <input type="text" class="form-control bg-transparent border-primary p-3"
-                            placeholder="Type search keyword">
-                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
-                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Full Screen Search End -->
+    <!-- profile update success modal end -->
+
+    <!-- profile update Unsuccess modal start -->
+    <div class="modal fade" id="profileUpdateUnsuccessModal" tabindex="-1" aria-labelledby="profileUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Profile Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update Unsuccess modal end -->
+
+
+    <!-- password update success modal start -->
+    <div class="modal fade" id="passwordUpdateSuccessModal" tabindex="-1" aria-labelledby="passwordUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h3>
+                    <h4 class="text-primary">Password Updated Successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update success modal end -->
+
+    <!-- password update Unsuccess modal start -->
+    <div class="modal fade" id="passwordUpdateUnsuccessModal" tabindex="-1" aria-labelledby="passwordUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Password Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update Unsuccess modal end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- Carousel Start -->
@@ -1268,6 +1312,39 @@
 
 
 
+    @if(session('password_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('passwordUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('password_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('passwordUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
+
+    @if(session('profile_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('profileUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('profile_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('profileUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
+
+
 
 
 
@@ -1276,6 +1353,9 @@
 
 
     <!-- JavaScript Libraries -->
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('../lib/wow/wow.min.js')}}"></script>
@@ -1291,7 +1371,7 @@
     <!-- Template Javascript -->
     <script src="{{asset('../js/main.js')}}"></script>
     <script src="{{asset('../js/cards-scroll.js')}}"></script>
-    <script src="{{asset('js/password-update-captcha.js')}}"></script>
+
 </body>
 
 </html>

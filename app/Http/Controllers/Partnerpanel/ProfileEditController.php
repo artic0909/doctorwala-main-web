@@ -13,17 +13,17 @@ class ProfileEditController extends Controller
 {
     protected $guard = 'partner';
 
-   
+
 
 
 
     public function partnerProfileEditWithCurrentPartnerDetails()
     {
-        $partner = Auth::guard('partner')->user(); 
-        return view('partnerpanel.partner-profile', compact('partner'));  
+        $partner = Auth::guard('partner')->user();
+        return view('partnerpanel.partner-profile', compact('partner'));
     }
 
-   
+
 
 
 
@@ -31,7 +31,7 @@ class ProfileEditController extends Controller
 
     public function updateProfile(Request $request)
     {
-        
+
         $request->validate([
             'partner_clinic_name' => 'required|string|max:255',
             'partner_contact_person_name' => 'required|string|max:255',
@@ -41,11 +41,11 @@ class ProfileEditController extends Controller
             'partner_city' => 'required|string|max:255',
         ]);
 
-      
+
         $partnerId = Auth::guard('partner')->id();
 
-        
-        DB::table('dw_partner_models')
+
+        $profileUpdateResult = DB::table('dw_partner_models')
             ->where('id', $partnerId)
             ->update([
                 'partner_clinic_name' => $request->partner_clinic_name,
@@ -56,36 +56,40 @@ class ProfileEditController extends Controller
                 'partner_city' => $request->partner_city,
             ]);
 
-        
-        return back()->with('message', 'Profile updated successfully!');
+
+        if ($profileUpdateResult) {
+            return back()->with('profile_update_status', 'success');
+        } else {
+            return back()->with('profile_update_status', 'failure');
+        }
     }
 
 
 
 
- 
 
 
-    
+
+
     public function updatePassword(Request $request)
     {
-        
+
         $request->validate([
-            'partner_password' => 'required|string|min:8',  
+            'partner_password' => 'required|string|min:8',
         ]);
 
-        
+
         $partnerId = Auth::guard('partner')->id();
 
         if (!$partnerId) {
             return back()->withErrors(['message' => 'Partner not found or not logged in']);
         }
 
-        
+
         $newPassword = Hash::make($request->partner_password);
 
-     
-     
+
+
         $updateResult = DB::table('dw_partner_models')
             ->where('id', $partnerId)
             ->update([
@@ -93,9 +97,9 @@ class ProfileEditController extends Controller
             ]);
 
         if ($updateResult) {
-            return back()->with('message', 'Password updated successfully!');
+            return back()->with('password_update_status', 'success');
         } else {
-            return back()->withErrors(['message' => 'Error updating password. Please try again.']);
+            return back()->with('password_update_status', 'failure');
         }
     }
 }

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dw_user_models', function (Blueprint $table) {
+        Schema::create('partner_about_details_models', function (Blueprint $table) {
+
             $table->id();
-            $table->string('user_name');
-            $table->string('user_mobile')->unique();
-            $table->string('user_city');
-            $table->string('user_email')->unique();
-            $table->string('user_password');
+            $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->text('about_details')->nullable();
+            $table->text('mission_details')->nullable();
+            $table->text('vision_details')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dw_user_models');
+        Schema::dropIfExists('partner_about_details_models');
     }
 };

@@ -8,8 +8,11 @@ use Illuminate\Notifications\Notifiable;
 
 class DwPartnerModel extends Authenticatable
 {
-
+    
     use Notifiable;
+    
+    protected $table = 'dw_partner_models';
+
     public $fillable = [
         'partner_id',
         'partner_clinic_name',
@@ -40,4 +43,20 @@ class DwPartnerModel extends Authenticatable
     {
         return $this->partner_password;
     }
+
+
+
+
+    public function opdContact()
+    {
+        return $this->hasOne(PartnerOPDContactModel::class, 'partner_id');
+    }
+
+    public function pathologyContact()
+    {
+        return $this->hasOne(PartnerPathologyContactModel::class, 'partner_id');
+    }
+
+
+    
 }

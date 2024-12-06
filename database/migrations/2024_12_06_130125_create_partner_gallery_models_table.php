@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dw_user_models', function (Blueprint $table) {
+        Schema::create('partner_gallery_models', function (Blueprint $table) {
             $table->id();
-            $table->string('user_name');
-            $table->string('user_mobile')->unique();
-            $table->string('user_city');
-            $table->string('user_email')->unique();
-            $table->string('user_password');
+            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('partners')->onDelete('cascade');
+            $table->json('images'); // Stores multiple images as JSON array
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dw_user_models');
+        Schema::dropIfExists('partner_gallery_models');
     }
 };

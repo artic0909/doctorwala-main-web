@@ -16,7 +16,6 @@ class DwUserModel extends Authenticatable
         'user_city',
         'user_email',
         'user_password',
-        'signupCaptchaInput',
     ];
 
     protected $hidden = [

@@ -516,41 +516,45 @@
 
 
 
-            <!-- Login -->
+            <!-- Login with OTP -->
             <div class="col align-items-center flex-col sign-in login">
                 <div class="form-wrapper align-items-center">
-                    <form class="form sign-in">
+                    <form class="form sign-in" method="POST" action="{{ route('user.send.otp') }}">
+                        @csrf
                         <h1 style="color: #1896e4; font-weight: 900;"><span
-                                style="color: red; font-weight: 1000;">+</span> ENTER THE OTP
+                                style="color: red; font-weight: 1000;">+</span> ENTER THE EMAIL
                             <span style="color: red; font-weight: 1000;">+</span>
                         </h1>
                         <div class="input-group">
-                            <i class="fa-solid fa-message"></i>
-                            <input type="number" placeholder="Enter Number" name="user_mobile" id="user_mobile">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" placeholder="Enter Register Email" name="user_email" id="user_email" required>
                         </div>
-                        <div class="input-group">
-                            <i class="fa-solid fa-user-secret"></i>
-                            <input type="text" placeholder="Enter OTP" name="user_otp" id="user_otp">
+
+                        @if(session('message'))
+                        <div class="alert alert-success">{{ session('message') }}</div>
+                        @endif
+                        @if($errors->any())
+                        <div class="alert alert-danger" style="margin-bottom: 2px;">
+                            <ul style="list-style-type: none;">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
+                        @endif
 
                         <button type="submit" style="font-weight: 700;">
-                            LOGIN
+                            SEND OTP
                         </button>
 
-                        <p style="margin-top: 4px;">
-                            <b>
-                                <a href="#" class="pointer" style="text-decoration: underline; color: black;"
-                                    onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Resend
-                                    OTP</a>
-                            </b>
-                        </p>
 
-                        <p style="margin-top: -14px;">
+
+                        <p style="margin-top: 1px;">
                             <b>
                                 <span>
                                     Login with password?
                                 </span>
-                                <a href="authentication.html" class="pointer" style="text-decoration: underline; color: black;">
+                                <a href="/dw/user-auth" class="pointer" style="text-decoration: underline; color: black;">
                                     Login here
                                 </a>
                                 <span>&nbsp; <a href="/" style="color: black; font-size: 1rem;"

@@ -122,12 +122,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -169,7 +172,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +190,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +215,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +239,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -357,28 +360,7 @@
                                     <div class="ab-view">
                                         <div class="form-control" style="height: auto; font-size: 1rem;">
                                             <p style="text-align: justify;">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                                                adipisci voluptates, repudiandae eveniet distinctio consectetur quas
-                                                blanditiis odit iste assumenda tempora facilis modi delectus nesciunt
-                                                voluptatem, ipsa totam corrupti sapiente natus soluta. Et corporis iure
-                                                fuga enim delectus! Laborum repellat adipisci, blanditiis, ex
-                                                repellendus commodi dignissimos maiores sed, laboriosam labore ipsa
-                                                provident dolore quo explicabo ipsam nam ad natus optio quibusdam omnis
-                                                debitis. Distinctio rerum numquam porro quisquam suscipit natus
-                                                excepturi, a laudantium, expedita placeat possimus molestiae assumenda!
-                                                Quo ipsam laborum aliquam maiores molestias doloribus fugit ea repellat
-                                                delectus! Rerum eaque dolore quos recusandae amet veritatis deleniti
-                                                nemo perferendis temporibus repudiandae, odit, aspernatur non porro
-                                                reiciendis praesentium! Nihil ad maxime animi fugiat perferendis quo
-                                                adipisci totam cumque. Est explicabo cupiditate consequuntur sed minima,
-                                                quas, nisi velit vero corporis reprehenderit eligendi optio mollitia
-                                                vitae quo. Nesciunt praesentium distinctio, sequi magnam quod quis fuga
-                                                recusandae animi? Quidem neque velit omnis doloremque. Nulla asperiores
-                                                suscipit omnis veniam fugit maxime deserunt commodi corporis, id impedit
-                                                odio, atque laborum eius ut delectus. Rem, enim vitae! Natus corrupti
-                                                ipsa possimus? Omnis voluptas qui vel repellat id rerum aliquam, nulla
-                                                culpa delectus soluta ratione odit dolorum earum tenetur autem error
-                                                provident maiores blanditiis? Asperiores omnis doloremque non.
+                                                {{ $aboutDetails->about_details ?? 'No details provided yet.' }}
                                             </p>
 
                                             <div class="btnn d-flex justify-content-end">
@@ -410,28 +392,7 @@
                                     <div class="ab-view">
                                         <div class="form-control" style="height: auto; font-size: 1rem;">
                                             <p style="text-align: justify;">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                                                adipisci voluptates, repudiandae eveniet distinctio consectetur quas
-                                                blanditiis odit iste assumenda tempora facilis modi delectus nesciunt
-                                                voluptatem, ipsa totam corrupti sapiente natus soluta. Et corporis iure
-                                                fuga enim delectus! Laborum repellat adipisci, blanditiis, ex
-                                                repellendus commodi dignissimos maiores sed, laboriosam labore ipsa
-                                                provident dolore quo explicabo ipsam nam ad natus optio quibusdam omnis
-                                                debitis. Distinctio rerum numquam porro quisquam suscipit natus
-                                                excepturi, a laudantium, expedita placeat possimus molestiae assumenda!
-                                                Quo ipsam laborum aliquam maiores molestias doloribus fugit ea repellat
-                                                delectus! Rerum eaque dolore quos recusandae amet veritatis deleniti
-                                                nemo perferendis temporibus repudiandae, odit, aspernatur non porro
-                                                reiciendis praesentium! Nihil ad maxime animi fugiat perferendis quo
-                                                adipisci totam cumque. Est explicabo cupiditate consequuntur sed minima,
-                                                quas, nisi velit vero corporis reprehenderit eligendi optio mollitia
-                                                vitae quo. Nesciunt praesentium distinctio, sequi magnam quod quis fuga
-                                                recusandae animi? Quidem neque velit omnis doloremque. Nulla asperiores
-                                                suscipit omnis veniam fugit maxime deserunt commodi corporis, id impedit
-                                                odio, atque laborum eius ut delectus. Rem, enim vitae! Natus corrupti
-                                                ipsa possimus? Omnis voluptas qui vel repellat id rerum aliquam, nulla
-                                                culpa delectus soluta ratione odit dolorum earum tenetur autem error
-                                                provident maiores blanditiis? Asperiores omnis doloremque non.
+                                                {{ $aboutDetails->mission_details ?? 'No details provided yet.' }}
                                             </p>
 
                                             <div class="btnn d-flex justify-content-end">
@@ -464,28 +425,7 @@
                                     <div class="ab-view">
                                         <div class="form-control" style="height: auto; font-size: 1rem;">
                                             <p style="text-align: justify;">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae,
-                                                adipisci voluptates, repudiandae eveniet distinctio consectetur quas
-                                                blanditiis odit iste assumenda tempora facilis modi delectus nesciunt
-                                                voluptatem, ipsa totam corrupti sapiente natus soluta. Et corporis iure
-                                                fuga enim delectus! Laborum repellat adipisci, blanditiis, ex
-                                                repellendus commodi dignissimos maiores sed, laboriosam labore ipsa
-                                                provident dolore quo explicabo ipsam nam ad natus optio quibusdam omnis
-                                                debitis. Distinctio rerum numquam porro quisquam suscipit natus
-                                                excepturi, a laudantium, expedita placeat possimus molestiae assumenda!
-                                                Quo ipsam laborum aliquam maiores molestias doloribus fugit ea repellat
-                                                delectus! Rerum eaque dolore quos recusandae amet veritatis deleniti
-                                                nemo perferendis temporibus repudiandae, odit, aspernatur non porro
-                                                reiciendis praesentium! Nihil ad maxime animi fugiat perferendis quo
-                                                adipisci totam cumque. Est explicabo cupiditate consequuntur sed minima,
-                                                quas, nisi velit vero corporis reprehenderit eligendi optio mollitia
-                                                vitae quo. Nesciunt praesentium distinctio, sequi magnam quod quis fuga
-                                                recusandae animi? Quidem neque velit omnis doloremque. Nulla asperiores
-                                                suscipit omnis veniam fugit maxime deserunt commodi corporis, id impedit
-                                                odio, atque laborum eius ut delectus. Rem, enim vitae! Natus corrupti
-                                                ipsa possimus? Omnis voluptas qui vel repellat id rerum aliquam, nulla
-                                                culpa delectus soluta ratione odit dolorum earum tenetur autem error
-                                                provident maiores blanditiis? Asperiores omnis doloremque non.
+                                                {{ $aboutDetails->vision_details ?? 'No details provided yet.' }}
                                             </p>
 
                                             <div class="btnn d-flex justify-content-end">
@@ -519,72 +459,72 @@
 
 
 
-                <!-- about edit modal -->
-                <div class="modal fade" id="myAboutModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myAboutModalLabel" aria-hidden="true">
+                <!-- About Edit Modal -->
+                <div class="modal fade" id="myAboutModal" tabindex="-1" role="dialog" aria-labelledby="myAboutModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for="about" style="font-weight: 700; font-size: 1.1rem;"><i
-                                            class="fa fa-info-circle text-success" aria-hidden="true"></i> About <span
-                                            class="text-danger">*</span></label>
-                                    <textarea class="form-control rounded" id="about" rows="12"></textarea>
+                            <form method="POST" action="{{ route('partner.about.details.store') }}">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="about_details" style="font-weight: 700; font-size: 1.1rem;">
+                                            <i class="fa fa-info-circle text-success" aria-hidden="true"></i> About <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea name="about_details" class="form-control rounded" id="about_details" rows="12">
+                                        {{ $aboutDetails->about_details ?? '' }}
+                                        </textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                                 </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
 
-
-
-                <!-- mission edit modal -->
-                <div class="modal fade" id="myMissionModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myMissionModalLabel" aria-hidden="true">
+                <!-- Mission Edit Modal -->
+                <div class="modal fade" id="myMissionModal" tabindex="-1" role="dialog" aria-labelledby="myMissionModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for="about" style="font-weight: 700; font-size: 1.1rem;"><i
-                                            class="fa fa-users-viewfinder text-success" aria-hidden="true"></i> Mission
-                                        <span class="text-danger">*</span></label>
-                                    <textarea class="form-control rounded" id="about" rows="12"></textarea>
+                            <form method="POST" action="{{ route('partner.about.details.store') }}">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="mission_details" style="font-weight: 700; font-size: 1.1rem;">
+                                            <i class="fa fa-users-viewfinder text-success" aria-hidden="true"></i> Mission <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea name="mission_details" class="form-control rounded" id="mission_details" rows="12">
+                                        {{ $aboutDetails->mission_details ?? '' }}
+                                        </textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                                 </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
 
-
-
-                <!-- vision edit modal -->
-                <div class="modal fade" id="myVisionModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myVisionModalLabel" aria-hidden="true">
+                <!-- Vision Edit Modal -->
+                <div class="modal fade" id="myVisionModal" tabindex="-1" role="dialog" aria-labelledby="myVisionModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for="about" style="font-weight: 700; font-size: 1.1rem;"><i
-                                            class="fa fa-eye text-success" aria-hidden="true"></i> Vision
-                                        <span class="text-danger">*</span></label>
-                                    <textarea class="form-control rounded" id="about" rows="12"></textarea>
+                            <form method="POST" action="{{ route('partner.about.details.store') }}">
+                                @csrf
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="vision_details" style="font-weight: 700; font-size: 1.1rem;">
+                                            <i class="fa fa-eye text-success" aria-hidden="true"></i> Vision <span class="text-danger">*</span>
+                                        </label>
+                                        <textarea name="vision_details" class="form-control rounded" id="vision_details" rows="12">
+                                        {{ $aboutDetails->vision_details ?? '' }}
+                                        </textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                                 </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
+
 
 
 
@@ -636,6 +576,53 @@
 
 
 
+
+
+        <!-- floating right button -->
+        <a type="button" class="btn btn-danger rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
+            data-target="#myAddModal" data-toggle="modal" style="width: fit-content;">
+            <i class="fa fa-2x fa-plus" aria-hidden="true" style="font-size: 1.7rem;"></i>
+        </a>
+
+
+
+
+        <!-- Add Modal -->
+        <div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+
+                    <form class="modal-body" method="POST" action="{{ route('partner.about.details.store') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="about_details"><i class="fa fa-circle-info text-success" aria-hidden="true"></i> Add
+                                About Details <span class="text-danger">*</span></label>
+                            <textarea name="about_details" id="about_details" rows="9" class="form-control"></textarea>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="about_details"><i class="fa fa-users-viewfinder text-success" aria-hidden="true"></i> Add
+                                Mission Details <span class="text-danger">*</span></label>
+                            <textarea name="mission_details" id="mission_details" rows="9" class="form-control"></textarea>
+                        </div>
+
+
+
+
+                        <div class="form-group">
+                            <label for="about_details"><i class="fa fa-eye text-success" aria-hidden="true"></i> Add
+                                Vision Details <span class="text-danger">*</span></label>
+                            <textarea name="vision_details" id="vision_details" rows="9" class="form-control"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success rounded w-100">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
 
 
 

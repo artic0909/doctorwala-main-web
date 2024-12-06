@@ -122,12 +122,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -169,7 +172,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +190,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +215,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +239,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -313,6 +316,7 @@
 
 
 
+
             <!-- partial -->
             <div class="main-panel">
 
@@ -354,24 +358,24 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($images as $index => $image)
                                             <tr>
-                                                <th scope="row">1</th>
-
-
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-
-                                                <td><img src="../img/a1.jpg" alt=""
-                                                        style="width: 150px; height: 80px; border-radius: 10px;"></td>
+                                                <th scope="row">{{$loop->iteration}}</th>
+                                                <td>
+                                                    <a href="" data-target="#myEditModal{{$index}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-pen-to-square text-success" style="font-size: 1.4rem;"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="" data-target="#myDeleteModal{{$index}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-trash-can text-danger" style="font-size: 1.4rem;"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <img src="{{ asset('storage/' . $image) }}" alt="Gallery Image" style="width: 150px; height: 80px; border-radius: 10px;">
+                                                </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -406,76 +410,74 @@
 
 
                 <!-- Add Modal -->
-                <div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel"
-                    aria-hidden="true">
+                <div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
-
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{ route('partner.gallery.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-image text-success" aria-hidden="true"></i> Add
-                                        Photo <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="" id="">
+                                    <label for=""><i class="fa fa-image text-success" aria-hidden="true"></i> Add Photo <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" name="images[]" id="" multiple>
                                 </div>
 
                                 <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
+
 
 
                 <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
-                    aria-hidden="true">
+                @foreach($images as $index => $image)
+                <div class="modal fade" id="myEditModal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
+                            <img src="{{ asset('storage/' . $image) }}" alt="Gallery Image" style="height: inherit; width: inherit;">
 
-                            <img src="../img/a1.jpg" alt="" style="height: inherit; width: inherit;">
-
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{ route('partner.gallery.update', $index) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-image text-success" aria-hidden="true"></i> Edit
-                                        Photo <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="" id="" value="">
+                                    <label for=""><i class="fa fa-image text-success" aria-hidden="true"></i> Edit Photo <span class="text-danger">*</span></label>
+                                    <input type="file" class="form-control" name="image" id="" value="">
                                 </div>
 
                                 <button type="submit" class="btn btn-success rounded w-100">Submit</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
+                @endforeach
+
 
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
+                @foreach($images as $index => $image)
+                <div class="modal fade" id="myDeleteModal{{$index}}" tabindex="-1" role="dialog" aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-
-                            <form action="" class="modal-body">
+                            <form action="{{ route('partner.gallery.delete', $index) }}" method="POST" class="modal-body">
+                                @csrf
+                                @method('DELETE')
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
                                     <h3 class="mt-3">Are You Sure ?</h3>
 
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
-                                        cannot be undone.</p>
+                                    <p class="mt-2 text-center">Do you really want to delete this record? This process cannot be undone.</p>
 
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="button" class="btn btn-primary rounded w-50 mr-3" data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
+                @endforeach
+
 
 
 
