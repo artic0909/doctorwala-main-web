@@ -352,8 +352,8 @@
                             <div class="row m-auto">
                                 <div class="col-12 mt-4">
 
-                                    <form class="prof-view">
-
+                                    <form class="prof-view" action="{{route('partner.pathology.store')}}" method="POST">
+                                        @csrf
 
 
 
@@ -364,19 +364,19 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="test_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-syringe text-primary"></i>
                                                     Test Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz clinic" style="height: 55px;">
+                                                <input type="text" class="form-control" id="test_name" name="test_name"
+                                                    placeholder="Enter Test Name" style="height: 55px;">
                                             </div>
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="test_type" style="font-weight: 700;"><i
                                                         class="fa fa-sitemap text-primary" aria-hidden="true"></i> Test
                                                     Type <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option value="" selected>Select Type</option>
+                                                <select name="test_type" id="test_type" class="form-control" style="height: 55px;">
+                                                    <option value="" selected>---Select Type---</option>
 
                                                     <option value="cbc">Complete Blood Count (CBC)</option>
                                                     <option value="lft">Liver Function Test (LFT)</option>
@@ -454,12 +454,12 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="test_price" style="font-weight: 700;"><i
                                                         class="fa fa-indian-rupee-sign text-primary"
                                                         aria-hidden="true"></i>
                                                     Test Price <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="999" style="height: 55px;">
+                                                <input type="text" class="form-control" id="test_price" name="test_price"
+                                                    placeholder="Enter Test Price" style="height: 55px;">
                                             </div>
 
 
@@ -471,10 +471,10 @@
 
 
                                                 <div class="col-3 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="test_day" style="font-weight: 700;"><i
                                                             class="fa-solid fa-calendar-days text-primary"></i>
                                                         Day <span class="text-danger">*</span></label>
-                                                    <select name="" id="" class="form-control" style="height: 55px;">
+                                                    <select name="test_day[]" id="test_day" class="form-control" style="height: 55px;">
                                                         <option selected>Select Day</option>
                                                         <option value="All Day">All Day</option>
                                                         <option value="Monday">Monday</option>
@@ -492,11 +492,11 @@
 
 
                                                 <div class="col-4 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="test_start_time" style="font-weight: 700;"><i
                                                             class="fa-solid fa-clock text-primary"></i> Time From
                                                         <span class="text-danger">*</span></label>
 
-                                                    <input type="time" class="form-control" style="height: 55px;">
+                                                    <input type="time" class="form-control" style="height: 55px;" id="test_start_time" name="test_start_time[]">
                                                 </div>
 
 
@@ -504,13 +504,13 @@
 
 
                                                 <div class="col-4 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="test_end_time" style="font-weight: 700;"><i
                                                             class="fa-solid fa-clock-rotate-left text-primary"></i> Time
                                                         To
                                                         <span class="text-danger">*</span></label>
 
                                                     <div class="d-flex align-items-center">
-                                                        <input type="time" class="form-control" style="height: 55px;">
+                                                        <input type="time" class="form-control" style="height: 55px;" name="test_end_time[]" id="test_end_time">
 
                                                         <button type="button" id="add-section-button"
                                                             class="btn btn-primary rounded col-3 ml-3"
@@ -636,7 +636,7 @@
 
 
     <!-- add section JS -->
-    <script src="../partner-assets/js/add-section.js"></script>
+    <script src="../partner-assets/js/add-section-path.js"></script>
 </body>
 
 </html>

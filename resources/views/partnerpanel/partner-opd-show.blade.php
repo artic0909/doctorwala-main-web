@@ -123,12 +123,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -170,7 +173,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -188,12 +191,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -213,11 +216,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -237,7 +240,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -348,58 +351,94 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
+                                                <th scope="col">Type</th>
                                                 <th scope="col">Edit</th>
                                                 <th scope="col">Delete</th>
                                                 <th scope="col">Status</th>
-                                                <th scope="col">Doctor ID/Name</th>
+                                                <th scope="col">Doctor Name</th>
                                                 <th scope="col">Specialization</th>
                                                 <th scope="col">Day & Time</th>
                                                 <th scope="col">Fees</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{-- Check if opdInfo exists and is not empty --}}
+                                            @if($opdInfo && $opdInfo->isNotEmpty())
+                                            {{-- Loop through all opdInfo records --}}
+                                            @foreach($opdInfo as $info)
+                                            {{-- Check if doctors exist for the current opdInfo record --}}
+                                            @if(isset($info->doctors) && count($info->doctors) > 0)
+                                            {{-- Loop through each doctor for the current opdInfo record --}}
+                                            @foreach($info->doctors as $index => $doctor)
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row"><i class="fa fa-stethoscope text-primary fa-2x" aria-hidden="true"></i></th>
 
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <b>Available</b>
+                                              
+                                                <td>
+                                                    <a href="" data-target="#myEditModal" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-pen-to-square text-success" style="font-size: 1.4rem;"></i>
+                                                    </a>
                                                 </td>
 
-                                                <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>DOC3535</b></p>
-                                                    <p class="m-0"><b>Saklin Mustak</b></p>
+                                               
+                                                <td>
+                                                    <a href="" data-target="#myDeleteModal" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-trash-can text-danger" style="font-size: 1.4rem;"></i>
+                                                    </a>
                                                 </td>
 
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <b>ENT</b>
+                                               
+                                                <td>
+                                                    @if(isset($doctor['status']) && $doctor['status'] === 'Unavailable')
+                                                    <b class="badge badge-danger p-3" style="font-size: 1.03rem;">{{ $doctor['status'] }}</b>
+                                                    @else
+                                                    <b class="badge badge-success p-3" style="font-size: 1.03rem;">{{ $doctor['status'] ?? 'Available' }}</b>
+                                                    @endif
                                                 </td>
 
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>Wedness Day</b></p>
-                                                    <p class="m-0"><b>9:00 AM - 11:00 AM</b></p>
+                                                
+                                                <td style="font-size: 1.03rem;">
+                                                    <p class="m-0"><b>{{ $doctor['name'] }}</b></p>
                                                 </td>
 
-
+                                               
                                                 <td style="font-size: 1.05rem;">
-                                                    <b>₹ 999</b>
+                                                    <b>{{ $doctor['specialist'] }}</b>
                                                 </td>
 
+                                               
+                                                <td style="font-size: 1.05rem;">
+                                                    <ul style="list-style: none; padding-left: 0;">
+                                                        @foreach($doctor['schedule'] as $schedule)
+                                                        <li>
+                                                            <p class="m-0"><b>{{ $schedule['visit_day'] }}</b></p>
+                                                            <p class="m-0"><b>{{ $schedule['visit_start_time'] }} - {{ $schedule['visit_end_time'] }}</b></p>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
 
-
+                                              
+                                                <td style="font-size: 1.05rem;">
+                                                    <b>₹ {{ $doctor['fees'] }}</b>
+                                                </td>
                                             </tr>
+                                            @endforeach
+                                            @else
+                                            {{-- If no doctors found for this opdInfo --}}
+                                            <tr>
+                                                <td colspan="7">No doctor details found for this record.</td>
+                                            </tr>
+                                            @endif
+                                            @endforeach
+                                            @else
+                                            {{-- If no opdInfo records are found --}}
+                                            <tr>
+                                                <td colspan="7">No OPD info found.</td>
+                                            </tr>
+                                            @endif
+
+
                                         </tbody>
                                     </table>
 
@@ -440,54 +479,88 @@
                                 </button>
                             </div>
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="" method="POST">
+                                @csrf
+                                @method('PUT')
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
+                                    <label for="doctor_name"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
                                         Doctor Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="" value="">
+                                    <input type="text" class="form-control" name="doctor_name" id="doctor_name" value="">
                                 </div>
 
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
-                                        Doctor Specialization <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="" value="">
+                                    <label for="doctor_designation"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
+                                        Doctor Designation <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="doctor_designation" id="doctor_designation" value="">
                                 </div>
 
-
-
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Day
-                                        <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option selected>Select Day</option>
-                                        <option value="All Day">All Day</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                        <option value="Sunday">Sunday</option>
+                                    <label for="doctor_specialist"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
+                                        Doctor Specialist <span class="text-danger">*</span></label>
+                                    <select class="form-control" name="doctor_specialist" id="doctor_specialist">
+                                        <option selected>---Select Specialist---</option>
+                                        <option value="allergy_immunology">Allergy and Immunology</option>
+                                        <option value="anesthesiology">Anesthesiology</option>
+                                        <option value="cardiology">Cardiology</option>
+                                        <option value="dermatology">Dermatology</option>
+                                        <option value="endocrinology">Endocrinology</option>
+                                        <option value="emergency_medicine">Emergency Medicine</option>
+                                        <option value="family_medicine">Family Medicine</option>
+                                        <option value="gastroenterology">Gastroenterology</option>
+                                        <option value="general_surgery">General Surgery</option>
+                                        <option value="geriatrics">Geriatrics</option>
+                                        <option value="hematology">Hematology</option>
+                                        <option value="infectious_disease">Infectious Disease</option>
+                                        <option value="internal_medicine">Internal Medicine</option>
+                                        <option value="neurology">Neurology</option>
+                                        <option value="neurosurgery">Neurosurgery</option>
+                                        <option value="obstetrics_gynecology">Obstetrics and Gynecology
+                                        </option>
+                                        <option value="oncology">Oncology</option>
+                                        <option value="ophthalmology">Ophthalmology</option>
+                                        <option value="orthopedics">Orthopedics</option>
+                                        <option value="otolaryngology">Otolaryngology (ENT)</option>
+                                        <option value="pediatrics">Pediatrics</option>
+                                        <option value="plastic_surgery">Plastic Surgery</option>
+                                        <option value="psychiatry">Psychiatry</option>
+                                        <option value="pulmonology">Pulmonology</option>
+                                        <option value="radiology">Radiology</option>
+                                        <option value="rheumatology">Rheumatology</option>
+                                        <option value="sports_medicine">Sports Medicine</option>
+                                        <option value="urology">Urology</option>
+                                        <option value="vascular_surgery">Vascular Surgery</option>
+                                        <option value="nephrology">Nephrology</option>
+                                        <option value="pathology">Pathology</option>
+                                        <option value="palliative_care">Palliative Care</option>
+                                        <option value="physical_medicine_rehabilitation">Physical Medicine
+                                            and Rehabilitation</option>
+                                        <option value="proctology">Proctology</option>
+                                        <option value="thoracic_surgery">Thoracic Surgery</option>
+                                        <option value="genetics">Genetics</option>
+                                        <option value="nuclear_medicine">Nuclear Medicine</option>
+                                        <option value="pain_management">Pain Management</option>
+                                        <option value="public_health">Public Health</option>
+                                        <option value="pharmacology">Pharmacology</option>
                                     </select>
                                 </div>
 
 
 
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Time
-                                        From
+                                    <label for="doctor_visit_day"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Day / From Time / To Time
                                         <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" name="" id="">
+                                    <textarea name="" id="" class="form-control" rows="12"></textarea>
                                 </div>
 
 
 
-
                                 <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Time
-                                        To
+                                    <label for="status"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Status
                                         <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control" name="" id="">
+                                    <select class="form-control" name="status" id="status">
+                                        <option value="Available">Available</option>
+                                        <option value="Unavailable">Unavailable</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary rounded w-100">Submit</button>
@@ -499,13 +572,18 @@
 
 
 
+
+
+
+
                 <!-- Delete Modal -->
                 <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="" method="POST" class="modal-body">
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -621,6 +699,27 @@
     <script src="../partner-assets/js/dashboard.js"></script>
     <script src="../partner-assets/js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+
+
+    <script>
+        $('#myEditModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var doctorId = button.data('id');
+            var name = button.data('name');
+            var designation = button.data('designation');
+            var specialist = button.data('specialist');
+            var status = button.data('status');
+            var schedule = button.data('schedule');
+
+            var modal = $(this);
+            modal.find('form').attr('action', '/doctor/update/' + doctorId); // Set the action with doctorId
+            modal.find('#doctor_name').val(name);
+            modal.find('#doctor_designation').val(designation);
+            modal.find('#doctor_specialist').val(specialist);
+            modal.find('#status').val(status);
+            // Optionally, handle the schedule
+        });
+    </script>
 </body>
 
 </html>

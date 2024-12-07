@@ -8,9 +8,9 @@ use Illuminate\Notifications\Notifiable;
 
 class DwPartnerModel extends Authenticatable
 {
-    
+
     use Notifiable;
-    
+
     protected $table = 'dw_partner_models';
 
     public $fillable = [
@@ -57,6 +57,13 @@ class DwPartnerModel extends Authenticatable
         return $this->hasOne(PartnerPathologyContactModel::class, 'partner_id');
     }
 
+    public function opdInfo()
+    {
+        return $this->hasMany(PartnerAllOPDInfoModel::class, 'currently_loggedin_partner_id');
+    }
 
-    
+    public function pathologyInfo()
+    {
+        return $this->hasMany(PartnerAllPathologyInfoModel::class, 'currently_loggedin_partner_id');
+    }
 }

@@ -122,12 +122,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -169,7 +172,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +190,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +215,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +239,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -352,8 +355,8 @@
                             <div class="row m-auto">
                                 <div class="col-12 mt-4">
 
-                                    <form class="prof-view">
-
+                                    <form class="prof-view" action="{{ route('partner.opd.store') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
 
 
 
@@ -364,20 +367,20 @@
 
 
                                             <div class="col-3 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="doctor_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-user-doctor text-primary"></i>
                                                     Doctor Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz clinic" style="height: 55px;">
+                                                <input type="text" class="form-control" id="doctor_name" name="doctor_name"
+                                                    style="height: 55px;" placeholder="Enter Doctor Name *">
                                             </div>
 
                                             <div class="col-3 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="doctor_designation" style="font-weight: 700;"><i
                                                         class="fa fa-graduation-cap text-primary"
                                                         aria-hidden="true"></i> Designation <span
                                                         class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select</option>
+                                                <select name="doctor_designation" id="doctor_designation" class="form-control" style="height: 55px;">
+                                                    <option selected>---Select Designation---</option>
                                                     <option value="MD">MD</option>
                                                     <option value="Dr">Dr</option>
                                                     <option value="Prof">Prof</option>
@@ -388,11 +391,11 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="doctor_specialist" style="font-weight: 700;"><i
                                                         class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
                                                     Specialist <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select</option>
+                                                <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
+                                                    <option selected>---Select Specialist---</option>
                                                     <option value="allergy_immunology">Allergy and Immunology</option>
                                                     <option value="anesthesiology">Anesthesiology</option>
                                                     <option value="cardiology">Cardiology</option>
@@ -443,12 +446,12 @@
 
 
                                             <div class="col-2 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="doctor_fees" style="font-weight: 700;"><i
                                                         class="fa fa-indian-rupee-sign text-primary"
                                                         aria-hidden="true"></i>
                                                     Doctor Fees <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="999" style="height: 55px;">
+                                                <input type="text" class="form-control" id="doctor_fees" name="doctor_fees"
+                                                    style="height: 55px;" placeholder="Enter Doctor Fees *">
                                             </div>
 
 
@@ -460,11 +463,11 @@
 
 
                                                 <div class="col-3 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="doctor_visit_day" style="font-weight: 700;"><i
                                                             class="fa-solid fa-calendar-days text-primary"></i>
                                                         Day <span class="text-danger">*</span></label>
-                                                    <select name="" id="" class="form-control" style="height: 55px;">
-                                                        <option selected>Select Day</option>
+                                                    <select name="doctor_visit_day[]" id="doctor_visit_day" class="form-control" style="height: 55px;">
+                                                        <option selected>---Select Day---</option>
                                                         <option value="All Day">All Day</option>
                                                         <option value="Monday">Monday</option>
                                                         <option value="Tuesday">Tuesday</option>
@@ -481,11 +484,11 @@
 
 
                                                 <div class="col-4 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="doctor_visit_start_time" style="font-weight: 700;"><i
                                                             class="fa-solid fa-clock text-primary"></i> Time From
                                                         <span class="text-danger">*</span></label>
 
-                                                    <input type="time" class="form-control" style="height: 55px;">
+                                                    <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_start_time" name="doctor_visit_start_time[]">
                                                 </div>
 
 
@@ -493,13 +496,13 @@
 
 
                                                 <div class="col-4 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="doctor_visit_end_time" style="font-weight: 700;"><i
                                                             class="fa-solid fa-clock-rotate-left text-primary"></i> Time
                                                         To
                                                         <span class="text-danger">*</span></label>
 
                                                     <div class="d-flex align-items-center">
-                                                        <input type="time" class="form-control" style="height: 55px;">
+                                                        <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_end_time" name="doctor_visit_end_time[]">
 
                                                         <button type="button" id="add-section-button"
                                                             class="btn btn-primary rounded col-3 ml-3"
@@ -519,7 +522,7 @@
 
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded">Upload
+                                                <button type="submit" class="btn btn-danger rounded" style="height: 55px; font-weight: 700;">Upload
                                                     Details</button>
                                             </div>
 

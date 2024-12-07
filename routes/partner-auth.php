@@ -4,6 +4,8 @@
 use App\Http\Controllers\DwPartnerController;
 use App\Http\Controllers\DwPartnerOTPController;
 use App\Http\Controllers\Partnerpanel\PartnerAboutDetailsController;
+use App\Http\Controllers\Partnerpanel\PartnerAllOPDInfoController;
+use App\Http\Controllers\Partnerpanel\PartnerAllPathologyInfoController;
 use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
 use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
 use App\Http\Controllers\Partnerpanel\PartnerPathologyContactController;
@@ -165,6 +167,20 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::post('/partnerpanel/partner-gallery/update/{index}', [PartnerGalleryController::class, 'update'])->name('partner.gallery.update');
     Route::delete('/partnerpanel/partner-gallery/delete/{index}', [PartnerGalleryController::class, 'destroy'])->name('partner.gallery.delete');
 
+
+    // Route to store OPD doctor information
+    Route::get('/partnerpanel/partner-opd', [PartnerAllOPDInfoController::class, 'index'])->name('partner.opd.index');
+    Route::post('/partnerpanel/partner-opd', [PartnerAllOPDInfoController::class, 'store'])->name('partner.opd.store');
+    // Route to Show OPD Doctor information
+    Route::get('/partnerpanel/partner-opd-show', [PartnerAllOPDInfoController::class, 'indexShow'])->name('partner.opd.show');
+
+
+
+    // Route to store Pathology information
+    Route::get('/partnerpanel/partner-pathology', [PartnerAllPathologyInfoController::class, 'index'])->name('partner.pathology.index');
+    Route::post('/partnerpanel/partner-pathology', [PartnerAllPathologyInfoController::class, 'store'])->name('partner.pathology.store');
+    // Route to Show Pathology information
+    Route::get('/partnerpanel/partner-pathology-show', [PartnerAllPathologyInfoController::class, 'indexShow'])->name('partner.pathology.show');
 
 
 
