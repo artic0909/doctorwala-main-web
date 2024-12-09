@@ -6,6 +6,7 @@ use App\Http\Controllers\DwPartnerOTPController;
 use App\Http\Controllers\Partnerpanel\PartnerAboutDetailsController;
 use App\Http\Controllers\Partnerpanel\PartnerAllOPDInfoController;
 use App\Http\Controllers\Partnerpanel\PartnerAllPathologyInfoController;
+use App\Http\Controllers\Partnerpanel\PartnerDoctorContactController;
 use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
 use App\Http\Controllers\Partnerpanel\PartnerInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
@@ -189,6 +190,12 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::post('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'store'])->name('partner.inquiries.store');
     Route::delete('/partnerpanel/partner-show-ticket/{inquiry}', [PartnerInquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::get('/partnerpanel/partner-show-ticket', [PartnerInquiryController::class, 'index'])->name('partner.inquiries.index');
+
+
+    // Routes for Doctor
+    Route::get('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'index'])->name('partner.doctor.contact.index');
+    Route::post('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'store'])->name('partner.doctor.contact.store');
+
 
 
 

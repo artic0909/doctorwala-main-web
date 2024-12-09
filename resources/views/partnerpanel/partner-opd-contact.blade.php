@@ -232,8 +232,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors">Upload Doctor</a>
                                 </li>
 
-                                <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors-show">Show
-                                        Doctor</a></li>
+                               
 
                             </ul>
                         </div>
