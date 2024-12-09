@@ -25,22 +25,22 @@ class PartnerAllPathologyInfoController extends Controller
     public function indexShow()
     {
         $partner = Auth::guard('partner')->user();
+
+        $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
-
-
-        $pathologyInfo = PartnerAllPathologyInfoModel::where('currently_loggedin_partner_id', Auth::guard('partner')->id())->get();
-
-
-        if ($pathologyInfo) {
-            foreach ($pathologyInfo as $info) {
-                $info->pathologyTests = json_decode($info->pathologyTests, true);
-            }
-        } else {
-            $pathologyInfo = null;
-        }
-
-        return view('partnerpanel.partner-pathology-show', compact('registrationTypes', 'pathologyInfo'));
+    
+        // Fetch pathology info for the logged-in partner
+        $pathologyInfo = PartnerAllPathologyInfoModel::where('currently_loggedin_partner_id', $partner->id)
+            ->get()
+            ->map(function ($item) {
+                // Decode pathologytests JSON into an array for each record
+                $item->pathologytests = json_decode($item->pathologytests, true);
+                return $item;
+            });
+    
+        return view('partnerpanel.partner-pathology-show', compact('pathologyInfo', 'registrationTypes'));
     }
+    
 
 
 
@@ -74,20 +74,20 @@ class PartnerAllPathologyInfoController extends Controller
         }
 
         // Build the doctor object with the nested schedule array
-        $doctor = [
+        $tests = [
             'name' => $request->test_name,
             'type' => $request->test_type,
-            'price' => $request->test_fees,
+            'price' => $request->test_price,
             'schedule' => $schedules,
         ];
 
         // Save the doctor details to the database
         $pathologyInfo = new PartnerAllPathologyInfoModel();
         $pathologyInfo->currently_loggedin_partner_id = auth($this->guard)->id();
-        $pathologyInfo->pathology_tests = json_encode([$doctor]);
+        $pathologyInfo->pathologytests = json_encode([$tests]);
         $pathologyInfo->status = 'Available';
         $pathologyInfo->save();
 
-        return redirect()->back()->with('success', 'Doctor details added successfully!');
+        return redirect()->back()->with('success', 'Pathology details added successfully!');
     }
 }

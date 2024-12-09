@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('partner_all_pathology_info_models', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('currently_loggedin_partner_id');
-            $table->json('pathology_tests'); // JSON field for storing doctor details
+            $table->json('pathologytests'); // JSON field for storing doctor details
             $table->string('status')->default('Available'); 
             $table->timestamps();
         });

@@ -123,12 +123,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -170,7 +173,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -188,12 +191,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -213,11 +216,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -237,7 +240,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -354,56 +357,92 @@
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Test Name</th>
                                                 <th scope="col">Test Type</th>
-                                                <th scope="col">Day</th>
-                                                <th scope="col">Time</th>
+                                                <th scope="col">Day | Time</th>
                                                 <th scope="col">Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {{-- Check if pathologyInfo exists and is not empty --}}
+                                            @if($pathologyInfo && $pathologyInfo->isNotEmpty())
+                                            {{-- Loop through all pathologyInfo records --}}
+                                            @foreach($pathologyInfo as $info)
+                                            {{-- Check if tests exist for the current pathologyInfo record --}}
+                                            @if(isset($info->pathologytests) && count($info->pathologytests) > 0)
+                                            {{-- Loop through each test for the current pathologyInfo record --}}
+                                            @foreach($info->pathologytests as $test)
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row"><i class="fa fa-syringe text-primary fa-2x" aria-hidden="true"></i></th>
 
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.4rem;"></i></a></td>
-
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <b>Available</b>
+                                                {{-- Edit Button --}}
+                                                <td>
+                                                    <a href="#" data-target="#myEditModal" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-pen-to-square text-success" style="font-size: 1.1rem;"></i>
+                                                    </a>
                                                 </td>
 
-                                                <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>CBC</b></p>
+                                                {{-- Delete Button --}}
+                                                <td>
+                                                    <a href="#" data-target="#myDeleteModal" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-trash-can text-danger" style="font-size: 1.1rem;"></i>
+                                                    </a>
                                                 </td>
 
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>Blood</b></p>
+                                                {{-- Status --}}
+                                                <td>
+                                                    @if(isset($info->status) && $info->status === 'Unavailable')
+                                                    <b class="badge badge-danger p-3" style="font-size: 1.03rem;">{{ $info->status }}</b>
+                                                    @else
+                                                    <b class="badge badge-success p-3" style="font-size: 1.03rem;">{{ $info->status ?? 'Available' }}</b>
+                                                    @endif
                                                 </td>
 
-
-                                                <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>Wedness Day</b></p>
+                                                {{-- Test Name --}}
+                                                <td style="font-size: 1.03rem;">
+                                                    <p class="m-0"><b>{{ $test['name'] }}</b></p>
                                                 </td>
 
+                                                {{-- Test Type --}}
                                                 <td style="font-size: 1.05rem;">
-                                                    <p class="m-0"><b>9:00 AM - 11:00 AM</b></p>
+                                                    <b>{{ $test['type'] }}</b>
                                                 </td>
 
-
+                                                {{-- Schedule --}}
                                                 <td style="font-size: 1.05rem;">
-                                                    <b>₹ 999</b>
+                                                    <ul style="list-style: none; padding-left: 0;">
+                                                        @foreach($test['schedule'] as $schedule)
+                                                        <li>
+                                                            <p class="m-0"><b>{{ $schedule['visit_day'] }}</b></p>
+                                                            <p class="m-0"><b>{{ $schedule['visit_start_time'] }} - {{ $schedule['visit_end_time'] }}</b></p>
+                                                        </li>
+                                                        @endforeach
+                                                    </ul>
                                                 </td>
 
-
-
+                                                {{-- Price --}}
+                                                <td style="font-size: 1.05rem;">
+                                                    <b>₹ {{ $test['price'] }}</b>
+                                                </td>
                                             </tr>
+                                            @endforeach
+                                            @else
+                                            {{-- If no tests are found for this record --}}
+                                            <tr>
+                                                <td colspan="7">No test details found for this record.</td>
+                                            </tr>
+                                            @endif
+                                            @endforeach
+                                            @else
+                                            {{-- If no pathologyInfo records are found --}}
+                                            <tr>
+                                                <td colspan="7">No pathology information found.</td>
+                                            </tr>
+                                            @endif
                                         </tbody>
+
+
+
+
+
                                     </table>
 
 

@@ -30,7 +30,7 @@ class PartnerAllPathologyInfoModel extends Model
      * @var array
      */
     protected $casts = [
-        'pathology_tests' => 'array', // Automatically cast JSON data to an array
+        'pathologytests' => 'array',
     ];
 
     /**

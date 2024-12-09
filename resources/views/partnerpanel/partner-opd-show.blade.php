@@ -362,6 +362,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+
                                             {{-- Check if opdInfo exists and is not empty --}}
                                             @if($opdInfo && $opdInfo->isNotEmpty())
                                             {{-- Loop through all opdInfo records --}}
@@ -376,14 +377,14 @@
                                               
                                                 <td>
                                                     <a href="" data-target="#myEditModal" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-pen-to-square text-success" style="font-size: 1.4rem;"></i>
+                                                        <i class="fa-solid fa-pen-to-square text-success" style="font-size: 1.1rem;"></i>
                                                     </a>
                                                 </td>
 
                                                
                                                 <td>
                                                     <a href="" data-target="#myDeleteModal" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-trash-can text-danger" style="font-size: 1.4rem;"></i>
+                                                        <i class="fa-solid fa-trash-can text-danger" style="font-size: 1.1rem;"></i>
                                                     </a>
                                                 </td>
 
@@ -424,12 +425,17 @@
                                                 </td>
                                             </tr>
                                             @endforeach
+
+
+
                                             @else
                                             {{-- If no doctors found for this opdInfo --}}
                                             <tr>
                                                 <td colspan="7">No doctor details found for this record.</td>
                                             </tr>
                                             @endif
+
+                                            
                                             @endforeach
                                             @else
                                             {{-- If no opdInfo records are found --}}
