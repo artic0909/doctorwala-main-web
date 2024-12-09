@@ -122,12 +122,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -169,7 +172,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +190,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +215,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +239,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -343,52 +346,56 @@
                             <div class="row m-auto">
                                 <div class="col-12 mt-4">
 
-                                    <form class="prof-view">
+                                    <form class="prof-view" action="{{ route('partner.inquiries.store') }}" method="POST">
+                                        @csrf
 
+                                        <div class="from-view row mt-2">
 
-
-
-
-
-                                        <div class="from-view row  mt-2">
+                                            <div class="col-4 form-group">
+                                                <label for="currently_loggedin_partner_id" style="font-weight: 700;"><i
+                                                        class="fa fa-id-card text-primary" aria-hidden="true"></i>
+                                                    Partner ID <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="currently_loggedin_partner_id" name="currently_loggedin_partner_id"
+                                                    value="{{ $partner->partner_id }}" style="height: 55px;" readonly>
+                                            </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_clinic_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-house-medical text-primary"></i>
                                                     Clinic Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz clinic" style="height: 55px;" readonly>
+                                                <input type="text" class="form-control" id="partner_clinic_name" name="partner_clinic_name"
+                                                    value="{{ $partner->partner_clinic_name }}" style="height: 55px;" readonly>
                                             </div>
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_contact_person_name" style="font-weight: 700;"><i
                                                         class="fa fa-user text-primary" aria-hidden="true"></i> Contact
                                                     Person Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="Saklin Mustak" style="height: 55px;" readonly>
+                                                <input type="text" class="form-control" id="partner_contact_person_name" name="partner_contact_person_name"
+                                                    value="{{ $partner->partner_contact_person_name }}" style="height: 55px;" readonly>
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_mobile_number" style="font-weight: 700;"><i
                                                         class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
                                                     Number <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="909999999" style="height: 55px;" readonly>
+                                                <input type="text" class="form-control" id="partner_mobile_number" name="partner_mobile_number"
+                                                    value="{{ $partner->partner_mobile_number }}" style="height: 55px;" readonly>
                                             </div>
 
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_email" style="font-weight: 700;"><i
                                                         class="fa fa-envelope text-primary" aria-hidden="true"></i>
                                                     Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    value="xyz@gmail.com" style="height: 55px;" readonly>
+                                                <input type="text" class="form-control" id="partner_email" name="partner_email"
+                                                    value="{{ $partner->partner_email }}" style="height: 55px;" readonly>
                                             </div>
 
 
@@ -396,53 +403,10 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_state" style="font-weight: 700;"><i
                                                         class="fa-solid fa-globe text-primary"></i>
                                                     State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;"
-                                                    readonly>
-                                                    <option selected>Select State</option>
-                                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar
-                                                        Islands</option>
-                                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                                    <option value="Assam">Assam</option>
-                                                    <option value="Bihar">Bihar</option>
-                                                    <option value="Chandigarh">Chandigarh</option>
-                                                    <option value="Chhattisgarh">Chhattisgarh</option>
-                                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and
-                                                        Nagar Haveli
-                                                        and Daman and Diu</option>
-                                                    <option value="Delhi">Delhi</option>
-                                                    <option value="Goa">Goa</option>
-                                                    <option value="Gujarat">Gujarat</option>
-                                                    <option value="Haryana">Haryana</option>
-                                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                                    <option value="Jharkhand">Jharkhand</option>
-                                                    <option value="Karnataka">Karnataka</option>
-                                                    <option value="Kerala">Kerala</option>
-                                                    <option value="Ladakh">Ladakh</option>
-                                                    <option value="Lakshadweep">Lakshadweep</option>
-                                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                                    <option value="Maharashtra">Maharashtra</option>
-                                                    <option value="Manipur">Manipur</option>
-                                                    <option value="Meghalaya">Meghalaya</option>
-                                                    <option value="Mizoram">Mizoram</option>
-                                                    <option value="Nagaland">Nagaland</option>
-                                                    <option value="Odisha">Odisha</option>
-                                                    <option value="Puducherry">Puducherry</option>
-                                                    <option value="Punjab">Punjab</option>
-                                                    <option value="Rajasthan">Rajasthan</option>
-                                                    <option value="Sikkim">Sikkim</option>
-                                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                                    <option value="Telangana">Telangana</option>
-                                                    <option value="Tripura">Tripura</option>
-                                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                                    <option value="Uttarakhand">Uttarakhand</option>
-                                                    <option value="West Bengal">West Bengal</option>
-
-                                                </select>
+                                                <input type="text" id="partner_state" name="partner_state" class="form-control" style="height: 55px;" value="{{ $partner->partner_state }}" readonly>
                                             </div>
 
 
@@ -450,28 +414,37 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_city" style="font-weight: 700;"><i
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
 
-                                                <select name="" id="" class="form-control" style="height: 55px;"
-                                                    readonly>
-                                                    <option selected>Select City</option>
-                                                    <option value="">City 1</option>
-                                                    <option value="">City 2</option>
-                                                    <option value="">City 3</option>
-                                                    <option value="">City 4</option>
-                                                    <option value="">City 5</option>
-                                                </select>
+                                                <input type="text" id="partner_city" name="partner_city" class="form-control" value="{{ $partner->partner_city }}" style="height: 55px;" readonly>
+                                            </div>
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_landmark" style="font-weight: 700;"><i
+                                                        class="fa fa-map-pin text-primary" aria-hidden="true"></i>
+                                                    Landmark <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_landmark" name="partner_landmark"
+                                                    value="{{ $partner->partner_landmark }}" style="height: 55px;" readonly>
+                                            </div>
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_pincode" style="font-weight: 700;"><i
+                                                        class="fa fa-location-pin-lock text-primary" aria-hidden="true"></i>
+                                                    Pin Code <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_pincode" name="partner_pincode"
+                                                    value="{{ $partner->partner_pincode }}" style="height: 55px;" readonly>
                                             </div>
 
 
                                             <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_problem" style="font-weight: 700;"><i
                                                         class="fa-solid fa-ticket text-primary"></i> Problems
                                                     <span class="text-danger">*</span></label>
 
-                                                <textarea name="" id="" class="form-control" rows="9"></textarea>
+                                                <textarea name="partner_problem" id="partner_problem" class="form-control" rows="15">{{ old('partner_problem') }}</textarea>
                                             </div>
 
 

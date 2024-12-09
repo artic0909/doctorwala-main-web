@@ -20,7 +20,9 @@ class ProfileEditController extends Controller
     public function partnerProfileEditWithCurrentPartnerDetails()
     {
         $partner = Auth::guard('partner')->user();
-        return view('partnerpanel.partner-profile', compact('partner'));
+        $registrationTypes = json_decode($partner->registration_type, true);
+        $partner = Auth::guard('partner')->user();
+        return view('partnerpanel.partner-profile', compact('partner', 'registrationTypes'));
     }
 
 

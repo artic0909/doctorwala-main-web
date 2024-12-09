@@ -7,6 +7,7 @@ use App\Http\Controllers\Partnerpanel\PartnerAboutDetailsController;
 use App\Http\Controllers\Partnerpanel\PartnerAllOPDInfoController;
 use App\Http\Controllers\Partnerpanel\PartnerAllPathologyInfoController;
 use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
+use App\Http\Controllers\Partnerpanel\PartnerInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
 use App\Http\Controllers\Partnerpanel\PartnerPathologyContactController;
 use App\Http\Controllers\Partnerpanel\PartnerServiceListController;
@@ -182,6 +183,12 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     // Route to Show Pathology information
     Route::get('/partnerpanel/partner-pathology-show', [PartnerAllPathologyInfoController::class, 'indexShow'])->name('partner.pathology.show');
 
+
+    // Routes for get tickets & show tickets
+    Route::get('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'create'])->name('partner.inquiries.create');
+    Route::post('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'store'])->name('partner.inquiries.store');
+    Route::delete('/partnerpanel/partner-show-ticket/{inquiry}', [PartnerInquiryController::class, 'destroy'])->name('inquiries.destroy');
+    Route::get('/partnerpanel/partner-show-ticket', [PartnerInquiryController::class, 'index'])->name('partner.inquiries.index');
 
 
 

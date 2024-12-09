@@ -122,12 +122,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -169,7 +172,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +190,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +215,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +239,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -350,31 +353,31 @@
 
 
                                             <div class="col-12 form-group">
-                                                <label for="partner_id" style="font-weight: 700;">Partner ID <span class="text-danger">*</span></label>
+                                                <label for="partner_id" style="font-weight: 700;"><i class="fa fa-id-card text-primary" aria-hidden="true"></i> Partner ID <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_id" value="{{ $partner->partner_id }}" style="height: 55px;" readonly>
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="partner_clinic_name" style="font-weight: 700;">Clinic Name <span class="text-danger">*</span></label>
+                                                <label for="partner_clinic_name" style="font-weight: 700;"><i class="fa fa-hospital text-primary" aria-hidden="true"></i> Clinic Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_clinic_name" name="partner_clinic_name" value="{{ $partner->partner_clinic_name }}" style="height: 55px;">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="partner_contact_person_name" style="font-weight: 700;">Contact Person Name <span class="text-danger">*</span></label>
+                                                <label for="partner_contact_person_name" style="font-weight: 700;"><i class="fa fa-user text-primary" aria-hidden="true"></i> Contact Person Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_contact_person_name" name="partner_contact_person_name" value="{{ $partner->partner_contact_person_name }}" style="height: 55px;">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="partner_mobile_number" style="font-weight: 700;">Mobile Number <span class="text-danger">*</span></label>
+                                                <label for="partner_mobile_number" style="font-weight: 700;"><i class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile Number <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_mobile_number" name="partner_mobile_number" value="{{ $partner->partner_mobile_number }}" style="height: 55px;">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="partner_email" style="font-weight: 700;">Email Id <span class="text-danger">*</span></label>
+                                                <label for="partner_email" style="font-weight: 700;"><i class="fa fa-envelope text-primary" aria-hidden="true"></i> Email Id <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_email" name="partner_email" value="{{ $partner->partner_email }}" style="height: 55px;">
                                             </div>
                                             <!-- State and City selection -->
                                             <div class="col-4 form-group">
-                                                <label for="partner_state" style="font-weight: 700;">State <span class="text-danger">*</span></label>
+                                                <label for="partner_state" style="font-weight: 700;"><i class="fa fa-globe text-primary" aria-hidden="true"></i> State <span class="text-danger">*</span></label>
                                                 <select name="partner_state" id="partner_state" class="form-control" style="height: 55px;">
                                                     <option selected>{{ $partner->partner_state }}</option>
                                                     <option>--Select State--</option>
@@ -418,7 +421,7 @@
                                                 </select>
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="partner_city" style="font-weight: 700;">City <span class="text-danger">*</span></label>
+                                                <label for="partner_city" style="font-weight: 700;"><i class="fa fa-building text-primary" aria-hidden="true"></i> City <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_city" name="partner_city" value="{{ $partner->partner_city }}" style="height: 55px;">
                                             </div>
                                         </div>
@@ -447,15 +450,15 @@
                                         <div class="from-view row mt-4">
                                             <!-- Current Password, New Password, Confirm Password -->
                                             <div class="col-4 form-group">
-                                                <label for="partner_password_existing" style="font-weight: 700;">Existing Password <span class="text-danger">*</span></label>
+                                                <label for="partner_password_existing" style="font-weight: 700;"><i class="fa fa-lock text-primary" aria-hidden="true"></i> Existing Password <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_password_existing" value="*******************" required style="height: 55px;">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="partner_password" style="font-weight: 700;">New Password <span class="text-danger">*</span></label>
+                                                <label for="partner_password" style="font-weight: 700;"><i class="fa fa-unlock text-primary" aria-hidden="true"></i> New Password <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="partner_password" name="partner_password" required style="height: 55px;">
                                             </div>
                                             <div class="col-4 form-group">
-                                                <label for="confirm_password" style="font-weight: 700;">Confirm Password <span class="text-danger">*</span></label>
+                                                <label for="confirm_password" style="font-weight: 700;"><i class="fa fa-lock text-primary" aria-hidden="true"></i> Confirm Password <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="confirm_password" name="confirm_password" required style="height: 55px;">
                                             </div>
                                         </div>

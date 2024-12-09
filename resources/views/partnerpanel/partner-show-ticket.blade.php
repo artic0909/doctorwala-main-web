@@ -123,12 +123,15 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
@@ -170,7 +173,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -188,12 +191,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -213,11 +216,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -237,7 +240,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -356,30 +359,38 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse ($inquiries as $ticket)
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">{{ $loop->iteration }}</th>
 
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myDeleteModal{{ $ticket->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1.4rem;"></i></a></td>
 
 
 
                                                 <td style="font-size: 1.2rem;">
-                                                    <p class="m-0"><b>TKT3535</b></p>
+                                                    <p class="m-0"><b>{{$ticket->ticket_id}}</b></p>
                                                 </td>
-                                                <td style="font-size: 1.2rem;">
-                                                    <p class="m-0"><b>Lorem ipsum dolor sit amet, consectetur
-                                                            adipisicing elit. Eius, maiores?</b></p>
-                                                </td>
-                                                <td style="font-size: 1.2rem;">
-                                                    <p class="m-0"><b>Lorem ipsum dolor sit amet.</b></p>
-                                                </td>
+                                                <td><a href="" data-target="#myTicketViewModal{{ $ticket->id }}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-triangle-exclamation text-warning"
+                                                            style="font-size: 1.4rem;"></i></a></td>
+
+                                                <td><a href="" data-target="#myReplyViewModal{{ $ticket->id }}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-reply text-success"
+                                                            style="font-size: 1.4rem;"></i></a></td>
 
 
 
                                             </tr>
+                                            @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center" style="font-size: 1.2rem;">
+                                                    <p>No Tickets Available.</p>
+                                                </td>
+                                            </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
 
@@ -407,24 +418,27 @@
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach ($inquiries as $ticket)
+                <div class="modal fade" id="myDeleteModal{{ $ticket->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{ route('inquiries.destroy', $ticket->id) }}" method="POST" class="modal-body">
+                                @csrf
+                                @method('DELETE')
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
                                     <h3 class="mt-3">Are You Sure ?</h3>
 
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
+                                    <p class="mt-2 text-center">Do you really want to delete this Ticket <strong class="text-danger" style="font-size: 1.1rem;">{{ $ticket->ticket_id }} ?</strong> This Process
                                         cannot be undone.</p>
 
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -432,6 +446,57 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
+
+
+                <!-- Ticket view Modal -->
+                @foreach ($inquiries as $ticket)
+                <div class="modal fade" id="myTicketViewModal{{ $ticket->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="myTicketViewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content p-3">
+
+                            <h3 class="modal-title text-primary text-center" style="font-weight: 700;"><i class="fa-solid fa-triangle-exclamation text-danger"></i> My Ticket Details <i class="fa-solid fa-triangle-exclamation text-danger"></i> </h3>
+
+                            <div class="modal-body">
+                                <p class="text-start text-danger" style="font-weight: 700; font-size: 1.1rem;">Ticket ID : {{ $ticket->ticket_id }}</p>
+                                <p class="text-start text-dark" style="text-align: justify; font-size: 1.1rem;"><b class="text-success">My Problem : </b>{{ $ticket->partner_problem }}</p>
+                            </div>
+
+
+                            <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
+                                <button type="button" class="btn btn-primary rounded w-100 mr-3"
+                                    data-dismiss="modal">Cancel</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
+
+
+                <!-- Reply view Modal -->
+                @foreach ($inquiries as $ticket)
+                <div class="modal fade" id="myReplyViewModal{{ $ticket->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="myReplyViewModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content p-3">
+
+                            <h3 class="modal-title text-primary text-center" style="font-weight: 700;"><i class="fa-solid fa-reply text-danger"></i> My Ticket Reply Details <i class="fa-solid fa-reply text-danger"></i> </h3>
+
+                            <div class="modal-body">
+                                <p class="text-start text-danger" style="font-weight: 700; font-size: 1.1rem;">Ticket ID : {{ $ticket->ticket_id }}</p>
+                                <p class="text-start text-dark" style="text-align: justify; font-size: 1.1rem;"><b class="text-success">Reply : </b>{{ $ticket->partner_problem_reply ?? 'No Reply Available' }}</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
 
 
 
