@@ -233,7 +233,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors">Upload Doctor</a>
                                 </li>
 
-                               
+
 
                             </ul>
                         </div>
@@ -678,8 +678,12 @@
                                                 <button type="submit" class="btn btn-success rounded mr-3" style="font-weight: 700;">Upload
                                                     Contact Person</button>
 
-                                                <!-- delete button -->
-                                                <a href="" data-target="#myEditModal" data-toggle="modal" class="text-danger ed-btn" style="font-weight: 700;"><i class="fa fa-pen-to-square" aria-hidden="true"></i></a>
+                                                <!-- Edit Button (only visible if data was successfully added) -->
+                                                @if(session('data_added'))
+                                                <a href="" data-target="#myEditModal" data-toggle="modal" class="text-danger ed-btn" style="font-weight: 700;">
+                                                    <i class="fa fa-pen-to-square" aria-hidden="true"></i>
+                                                </a>
+                                                @endif
                                             </div>
 
 
@@ -715,7 +719,7 @@
                 <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content p-4"  style="background-color:#F5F7FF;">
+                        <div class="modal-content p-4" style="background-color:#F5F7FF;">
 
 
                             <form class="prof-view modal-body" action="{{ route('partner.doctor.contact.store') }}" method="POST">

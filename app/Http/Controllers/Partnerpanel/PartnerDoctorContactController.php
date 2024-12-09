@@ -73,6 +73,8 @@ class PartnerDoctorContactController extends Controller
             $validatedData
         );
 
+        session()->flash('data_added', true);
+
         return redirect()->back()->with('success', 'Doctor contact saved successfully!');
     }
 }

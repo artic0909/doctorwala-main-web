@@ -24,11 +24,11 @@ class PartnerAllPathologyInfoController extends Controller
 
     public function indexShow()
     {
-        $partner = Auth::guard('partner')->user();
+
 
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
-    
+
         // Fetch pathology info for the logged-in partner
         $pathologyInfo = PartnerAllPathologyInfoModel::where('currently_loggedin_partner_id', $partner->id)
             ->get()
@@ -37,10 +37,10 @@ class PartnerAllPathologyInfoController extends Controller
                 $item->pathologytests = json_decode($item->pathologytests, true);
                 return $item;
             });
-    
+
         return view('partnerpanel.partner-pathology-show', compact('pathologyInfo', 'registrationTypes'));
     }
-    
+
 
 
 
@@ -90,4 +90,7 @@ class PartnerAllPathologyInfoController extends Controller
 
         return redirect()->back()->with('success', 'Pathology details added successfully!');
     }
+
+
+
 }

@@ -94,10 +94,6 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
         return view('partnerpanel.partner-doctors');
     })->name('partnerpanel.partner-doctors');
 
-    Route::get('/partnerpanel/partner-doctors-show', function () {
-        return view('partnerpanel.partner-doctors-show');
-    })->name('partnerpanel.partner-doctors-show');
-
     Route::get('/partnerpanel/partner-inquiry-from-patients', function () {
         return view('partnerpanel.partner-inquiry-from-patients');
     })->name('partnerpanel.partner-inquiry-from-patients');
@@ -185,16 +181,17 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::get('/partnerpanel/partner-pathology-show', [PartnerAllPathologyInfoController::class, 'indexShow'])->name('partner.pathology.show');
 
 
+    // Routes for Doctor
+    Route::get('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'index'])->name('partner.doctor.contact.index');
+    Route::post('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'store'])->name('partner.doctor.contact.store');
+
+
     // Routes for get tickets & show tickets
     Route::get('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'create'])->name('partner.inquiries.create');
     Route::post('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'store'])->name('partner.inquiries.store');
     Route::delete('/partnerpanel/partner-show-ticket/{inquiry}', [PartnerInquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::get('/partnerpanel/partner-show-ticket', [PartnerInquiryController::class, 'index'])->name('partner.inquiries.index');
 
-
-    // Routes for Doctor
-    Route::get('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'index'])->name('partner.doctor.contact.index');
-    Route::post('/partnerpanel/partner-doctors', [PartnerDoctorContactController::class, 'store'])->name('partner.doctor.contact.store');
 
 
 

@@ -234,7 +234,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors">Upload Doctor</a>
                                 </li>
 
-                             
+
 
                             </ul>
                         </div>
@@ -482,129 +482,212 @@
                                 </button>
                             </div>
 
-                            <form class="modal-body">
-
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
-                                        Test Name <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="" value="">
-                                </div>
+                            <div class="modal-body">
+                                <form class="prof-view" action="" method="POST">
+                                    @csrf
 
 
 
 
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i>
-                                        Test Type <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="" selected>Select Type</option>
-                                        <option value="cbc">Complete Blood Count (CBC)</option>
-                                        <option value="lft">Liver Function Test (LFT)</option>
-                                        <option value="kft">Kidney Function Test (KFT)</option>
-                                        <option value="rft">Renal Function Test (RFT)</option>
-                                        <option value="lipid_profile">Lipid Profile</option>
-                                        <option value="thyroid_panel">Thyroid Function Tests (T3, T4, TSH)
-                                        </option>
-                                        <option value="hba1c">HbA1c (Glycated Hemoglobin)</option>
-                                        <option value="fasting_blood_sugar">Fasting Blood Sugar (FBS)
-                                        </option>
-                                        <option value="postprandial_blood_sugar">Postprandial Blood Sugar
-                                            (PPBS)</option>
-                                        <option value="urine_analysis">Urine Routine and Microscopy</option>
-                                        <option value="stool_test">Stool Test</option>
-                                        <option value="esr">Erythrocyte Sedimentation Rate (ESR)</option>
-                                        <option value="crp">C-Reactive Protein (CRP)</option>
-                                        <option value="vitamin_d">Vitamin D Test</option>
-                                        <option value="vitamin_b12">Vitamin B12 Test</option>
-                                        <option value="iron_studies">Iron Studies (Ferritin, TIBC, Serum
-                                            Iron)</option>
-                                        <option value="blood_group">Blood Group and Rh Typing</option>
-                                        <option value="pt_inr">Prothrombin Time (PT/INR)</option>
-                                        <option value="d_dimer">D-Dimer Test</option>
-                                        <option value="hiv_test">HIV Test</option>
-                                        <option value="hbsag">Hepatitis B Surface Antigen (HBsAg)</option>
-                                        <option value="hcv_test">Hepatitis C Test</option>
-                                        <option value="widal_test">Widal Test</option>
-                                        <option value="rapid_malaria_test">Rapid Malaria Test</option>
-                                        <option value="dengue_ns1">Dengue NS1 Antigen Test</option>
-                                        <option value="rtpcr">RT-PCR Test (e.g., for COVID-19)</option>
-                                        <option value="pap_smear">Pap Smear</option>
-                                        <option value="psa">Prostate-Specific Antigen (PSA)</option>
-                                        <option value="blood_culture">Blood Culture</option>
-                                        <option value="sputum_culture">Sputum Culture</option>
-                                        <option value="ascitic_fluid_analysis">Ascitic Fluid Analysis
-                                        </option>
-                                        <option value="csf_analysis">Cerebrospinal Fluid (CSF) Analysis
-                                        </option>
-                                        <option value="skin_biopsy">Skin Biopsy</option>
-                                        <option value="fine_needle_aspiration">Fine Needle Aspiration
-                                            Cytology (FNAC)</option>
-                                        <option value="bone_marrow_test">Bone Marrow Aspiration/Biopsy
-                                        </option>
-                                        <option value="microalbumin_test">Urine Microalbumin Test</option>
-                                        <option value="pregnancy_test">Pregnancy Test (hCG)</option>
-                                        <option value="tissue_biopsy">Tissue Biopsy</option>
-                                        <option value="coombs_test">Direct/Indirect Coombs Test</option>
-                                        <option value="ra_factor">Rheumatoid Factor (RA Factor)</option>
-                                        <option value="anti_ccp">Anti-CCP Antibodies</option>
-                                        <option value="ana_test">Anti-Nuclear Antibody (ANA) Test</option>
-                                        <option value="troponin">Troponin Test</option>
-                                        <option value="ck_mb">Creatine Kinase-MB (CK-MB)</option>
-                                        <option value="electrolyte_panel">Electrolyte Panel (Sodium,
-                                            Potassium, Chloride)</option>
-                                        <option value="amylase_lipase">Amylase and Lipase Test</option>
-                                        <option value="serum_calcium">Serum Calcium</option>
-                                        <option value="serum_albumin">Serum Albumin</option>
-                                        <option value="serum_protein">Serum Protein Electrophoresis</option>
-                                        <option value="ldh">Lactate Dehydrogenase (LDH)</option>
-                                        <option value="asthma_panel">Asthma Panel (Allergen Testing)
-                                        </option>
-                                        <option value="allergy_panel">Allergy Panel</option>
-                                        <option value="tumor_markers">Tumor Marker Tests (e.g., CA-125, CA
-                                            19-9)</option>
 
-                                    </select>
-                                </div>
+                                    <div class="from-view row">
 
 
 
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Day
-                                        <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option selected>Select Day</option>
-                                        <option value="All Day">All Day</option>
-                                        <option value="Monday">Monday</option>
-                                        <option value="Tuesday">Tuesday</option>
-                                        <option value="Wednesday">Wednesday</option>
-                                        <option value="Thursday">Thursday</option>
-                                        <option value="Friday">Friday</option>
-                                        <option value="Saturday">Saturday</option>
-                                        <option value="Sunday">Sunday</option>
-                                    </select>
-                                </div>
+                                        <div class="col-12 form-group">
+                                            <label for="test_name" style="font-weight: 700;"><i
+                                                    class="fa-solid fa-syringe text-primary"></i>
+                                                Test Name <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="test_name" name="test_name"
+                                                placeholder="Enter Test Name" style="height: 55px;">
+                                        </div>
 
+                                        <div class="col-12 form-group">
+                                            <label for="test_type" style="font-weight: 700;"><i
+                                                    class="fa fa-sitemap text-primary" aria-hidden="true"></i> Test
+                                                Type <span class="text-danger">*</span></label>
+                                            <select name="test_type" id="test_type" class="form-control" style="height: 55px;">
+                                                <option value="" selected>---Select Type---</option>
 
+                                                <option value="cbc">Complete Blood Count (CBC)</option>
+                                                <option value="lft">Liver Function Test (LFT)</option>
+                                                <option value="kft">Kidney Function Test (KFT)</option>
+                                                <option value="rft">Renal Function Test (RFT)</option>
+                                                <option value="lipid_profile">Lipid Profile</option>
+                                                <option value="thyroid_panel">Thyroid Function Tests (T3, T4, TSH)
+                                                </option>
+                                                <option value="hba1c">HbA1c (Glycated Hemoglobin)</option>
+                                                <option value="fasting_blood_sugar">Fasting Blood Sugar (FBS)
+                                                </option>
+                                                <option value="postprandial_blood_sugar">Postprandial Blood Sugar
+                                                    (PPBS)</option>
+                                                <option value="urine_analysis">Urine Routine and Microscopy</option>
+                                                <option value="stool_test">Stool Test</option>
+                                                <option value="esr">Erythrocyte Sedimentation Rate (ESR)</option>
+                                                <option value="crp">C-Reactive Protein (CRP)</option>
+                                                <option value="vitamin_d">Vitamin D Test</option>
+                                                <option value="vitamin_b12">Vitamin B12 Test</option>
+                                                <option value="iron_studies">Iron Studies (Ferritin, TIBC, Serum
+                                                    Iron)</option>
+                                                <option value="blood_group">Blood Group and Rh Typing</option>
+                                                <option value="pt_inr">Prothrombin Time (PT/INR)</option>
+                                                <option value="d_dimer">D-Dimer Test</option>
+                                                <option value="hiv_test">HIV Test</option>
+                                                <option value="hbsag">Hepatitis B Surface Antigen (HBsAg)</option>
+                                                <option value="hcv_test">Hepatitis C Test</option>
+                                                <option value="widal_test">Widal Test</option>
+                                                <option value="rapid_malaria_test">Rapid Malaria Test</option>
+                                                <option value="dengue_ns1">Dengue NS1 Antigen Test</option>
+                                                <option value="rtpcr">RT-PCR Test (e.g., for COVID-19)</option>
+                                                <option value="pap_smear">Pap Smear</option>
+                                                <option value="psa">Prostate-Specific Antigen (PSA)</option>
+                                                <option value="blood_culture">Blood Culture</option>
+                                                <option value="sputum_culture">Sputum Culture</option>
+                                                <option value="ascitic_fluid_analysis">Ascitic Fluid Analysis
+                                                </option>
+                                                <option value="csf_analysis">Cerebrospinal Fluid (CSF) Analysis
+                                                </option>
+                                                <option value="skin_biopsy">Skin Biopsy</option>
+                                                <option value="fine_needle_aspiration">Fine Needle Aspiration
+                                                    Cytology (FNAC)</option>
+                                                <option value="bone_marrow_test">Bone Marrow Aspiration/Biopsy
+                                                </option>
+                                                <option value="microalbumin_test">Urine Microalbumin Test</option>
+                                                <option value="pregnancy_test">Pregnancy Test (hCG)</option>
+                                                <option value="tissue_biopsy">Tissue Biopsy</option>
+                                                <option value="coombs_test">Direct/Indirect Coombs Test</option>
+                                                <option value="ra_factor">Rheumatoid Factor (RA Factor)</option>
+                                                <option value="anti_ccp">Anti-CCP Antibodies</option>
+                                                <option value="ana_test">Anti-Nuclear Antibody (ANA) Test</option>
+                                                <option value="troponin">Troponin Test</option>
+                                                <option value="ck_mb">Creatine Kinase-MB (CK-MB)</option>
+                                                <option value="electrolyte_panel">Electrolyte Panel (Sodium,
+                                                    Potassium, Chloride)</option>
+                                                <option value="amylase_lipase">Amylase and Lipase Test</option>
+                                                <option value="serum_calcium">Serum Calcium</option>
+                                                <option value="serum_albumin">Serum Albumin</option>
+                                                <option value="serum_protein">Serum Protein Electrophoresis</option>
+                                                <option value="ldh">Lactate Dehydrogenase (LDH)</option>
+                                                <option value="asthma_panel">Asthma Panel (Allergen Testing)
+                                                </option>
+                                                <option value="allergy_panel">Allergy Panel</option>
+                                                <option value="tumor_markers">Tumor Marker Tests (e.g., CA-125, CA
+                                                    19-9)</option>
 
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Time
-                                        From
-                                        <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control">
-                                </div>
+                                            </select>
+                                        </div>
 
 
 
 
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Time
-                                        To
-                                        <span class="text-danger">*</span></label>
-                                    <input type="time" class="form-control">
-                                </div>
 
-                                <button type="submit" class="btn btn-primary rounded w-100">Submit</button>
-                            </form>
+
+
+
+                                        <div class="col-12 form-group">
+                                            <label for="test_price" style="font-weight: 700;"><i
+                                                    class="fa fa-indian-rupee-sign text-primary"
+                                                    aria-hidden="true"></i>
+                                                Test Price <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="test_price" name="test_price"
+                                                placeholder="Enter Test Price" style="height: 55px;">
+                                        </div>
+
+
+                                        <div class="col-12 form-group">
+                                            <label for="test_price" style="font-weight: 700;"><i
+                                                    class="fa fa-toggle-on text-primary"
+                                                    aria-hidden="true"></i>
+                                                Status <span class="text-danger">*</span></label>
+                                            <select name="status" id="status" class="form-control" style="height: 55px;">
+                                                <option value="Available" selected>Available</option>
+                                                <option value="Unavailable">Unavailable</option>
+                                            </select>
+                                        </div>
+
+
+
+
+
+                                        <!-- multiple -->
+                                        <div id="add-same-section" class="row col-12">
+                                            <label for="test_price" style="font-weight: 700;">
+                                                Days & Times</label>
+
+                                            <div class="col-12 form-group">
+                                                <label for="test_day" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-calendar-days text-primary"></i>
+                                                    Day <span class="text-danger">*</span></label>
+                                                <select name="test_day[]" id="test_day" class="form-control" style="height: 55px;">
+                                                    <option selected>Select Day</option>
+                                                    <option value="All Day">All Day</option>
+                                                    <option value="Monday">Monday</option>
+                                                    <option value="Tuesday">Tuesday</option>
+                                                    <option value="Wednesday">Wednesday</option>
+                                                    <option value="Thursday">Thursday</option>
+                                                    <option value="Friday">Friday</option>
+                                                    <option value="Saturday">Saturday</option>
+                                                    <option value="Sunday">Sunday</option>
+                                                </select>
+                                            </div>
+
+
+
+
+
+                                            <div class="col-12 form-group">
+                                                <label for="test_start_time" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-clock text-primary"></i> Time From
+                                                    <span class="text-danger">*</span></label>
+
+                                                <input type="time" class="form-control" style="height: 55px;" id="test_start_time" name="test_start_time[]">
+                                            </div>
+
+
+
+
+
+                                            <div class="col-12 form-group">
+                                                <label for="test_end_time" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-clock-rotate-left text-primary"></i> Time
+                                                    To
+                                                    <span class="text-danger">*</span></label>
+
+                                                <div class="d-flex align-items-center">
+                                                    <input type="time" class="form-control" style="height: 55px;" name="test_end_time[]" id="test_end_time">
+
+                                                    <button type="button" id="add-section-button"
+                                                        class="btn btn-primary rounded col-3 ml-3"
+                                                        style="height: 55px; font-weight: 700;">ADD</button>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+
+                                        </div>
+
+
+
+
+
+                                        <div class="d-flex justify-content-center w-100 p-2">
+                                            <button type="submit" class="btn btn-danger rounded w-100 p-4" style="font-weight: 700;">Update
+                                                Details</button>
+                                        </div>
+
+
+
+
+                                    </div>
+
+
+
+                                </form>
+                            </div>
 
                         </div>
                     </div>
