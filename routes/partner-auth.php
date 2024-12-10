@@ -205,7 +205,6 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
     // Routes for Partner Profile Banner Upload
-    Route::get('/partnerpanel/partner-dashboard', [PartnerProfileBannerController::class, 'showOPDBanner']);
     Route::post('/partnerpanel/partner-dashboard', [PartnerProfileBannerController::class, 'opdBannerStoreEdit'])->name('partner.opd.banner.store');
     Route::post('/partnerpanel/partner-dashboard/pathology', [PartnerProfileBannerController::class, 'pathologyBannerStoreEdit'])->name('partner.pathology.banner.store');
     Route::post('/partnerpanel/partner-dashboard/doctor', [PartnerProfileBannerController::class, 'doctorBannerStoreEdit'])->name('partner.doctor.banner.store');

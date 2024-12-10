@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 // use App\Http\Controllers\Auth;
 use App\Models\DwPartnerModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
 
@@ -57,10 +60,20 @@ class DwPartnerController extends Controller
 
     public function partnerdashboardview()
     {
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+
+
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true); // Decode the JSON
 
-        return view('partnerpanel.partner-dashboard', compact('registrationTypes'));
+
+        $clinicName = $partner->partner_clinic_name;
+        $partnerName = $partner->partner_contact_person_name;
+
+        return view('partnerpanel.partner-dashboard', compact('opdBanner', 'pathologyBanner','doctorBanner', 'registrationTypes', 'partnerName', 'clinicName'));
     }
 
 

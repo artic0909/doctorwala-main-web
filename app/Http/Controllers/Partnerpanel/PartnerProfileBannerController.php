@@ -16,18 +16,18 @@ class PartnerProfileBannerController extends Controller
 
 
 
-    public function showOPDBanner()
-    {
-        $partnerId = Auth::guard('partner')->id();
-        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+    // public function showOPDBanner()
+    // {
+    //     $partnerId = Auth::guard('partner')->id();
+    //     $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+    //     $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+    //     $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
+    //     $partner = Auth::guard('partner')->user();
+    //     $registrationTypes = json_decode($partner->registration_type, true);
 
-        return view('partnerpanel.partner-dashboard', compact('opdBanner', 'pathologyBanner','doctorBanner', 'registrationTypes'));
-    }
+    //     return view('partnerpanel.partner-dashboard', compact('opdBanner', 'pathologyBanner','doctorBanner', 'registrationTypes'));
+    // }
 
 
 

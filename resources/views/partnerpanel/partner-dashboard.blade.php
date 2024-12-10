@@ -549,7 +549,9 @@
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Welcome Back Partner Name</h3>
+                                    <h3 class="font-weight-bold" style="text-transform: capitalize;">Welcome Back {{ $partnerName }} </h3>
+                                    <h4 class="font-weight-bold" style="text-transform: capitalize;"><i
+                                    class="fa-solid fa-heart text-danger"></i>&nbsp; {{ $clinicName }} </h4>
 
                                     <h6 class="font-weight-normal mb-0"><i
                                             class="fa-solid fa-heart text-danger"></i>&nbsp;It's great to connect with
