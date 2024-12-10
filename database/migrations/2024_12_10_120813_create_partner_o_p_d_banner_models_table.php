@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partner_all_pathology_info_models', function (Blueprint $table) {
+        Schema::create('partner_o_p_d_banner_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('currently_loggedin_partner_id');
-            $table->json('pathologytests'); // JSON field for storing doctor details
-            $table->string('status')->default('Available'); 
+            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('partners')->onDelete('cascade');
+            $table->string('opdbanner');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partner_all_pathology_info_models');
+        Schema::dropIfExists('partner_o_p_d_banner_models');
     }
 };

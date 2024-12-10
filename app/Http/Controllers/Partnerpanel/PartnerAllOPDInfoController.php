@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
-use App\Models\PartnerAllOPDInfoModel;
+use App\Models\PartnerAllOPDDoctorModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,89 +18,169 @@ class PartnerAllOPDInfoController extends Controller
 
     public function index()
     {
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
-        return view('partnerpanel.partner-opd', compact('registrationTypes'));
+        $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
+        $contactDetails = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->first();
+
+        return view('partnerpanel.partner-opd', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes', 'registrationTypess'));
     }
 
 
-    public function indexShow()
-    {
-        $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
 
-
-        $opdInfo = PartnerAllOPDInfoModel::where('currently_loggedin_partner_id', Auth::guard('partner')->id())->get();
-
-
-        if ($opdInfo) {
-            foreach ($opdInfo as $info) {
-                $info->doctors = json_decode($info->doctors, true);
-            }
-        } else {
-            $opdInfo = null;
-        }
-
-        return view('partnerpanel.partner-opd-show', compact('registrationTypes', 'opdInfo'));
-    }
 
 
 
 
     public function store(Request $request)
     {
+        $partnerId = Auth::guard('partner')->id();
+
+        // Validate the input
         $request->validate([
             'doctor_name' => 'required|string|max:255',
-            'doctor_designation' => 'required|string',
-            'doctor_specialist' => 'required|string',
+            'doctor_designation' => 'required|string|max:255',
+            'doctor_specialist' => 'required|string|max:255',
             'doctor_fees' => 'required|numeric',
             'doctor_visit_day' => 'required|array',
-            'doctor_visit_day.*' => 'required|string',
+            'doctor_visit_day.*' => 'required|string|max:255',
             'doctor_visit_start_time' => 'required|array',
             'doctor_visit_start_time.*' => 'required|date_format:H:i',
             'doctor_visit_end_time' => 'required|array',
             'doctor_visit_end_time.*' => 'required|date_format:H:i',
         ]);
 
-        // Group the day, start time, and end time into the schedule array
-        $schedules = [];
-        $visitDays = $request->doctor_visit_day;
-        $visitStartTimes = $request->doctor_visit_start_time;
-        $visitEndTimes = $request->doctor_visit_end_time;
-
-        for ($i = 0; $i < count($visitDays); $i++) {
-            $schedules[] = [
-                'visit_day' => $visitDays[$i],
-                'visit_start_time' => $visitStartTimes[$i],
-                'visit_end_time' => $visitEndTimes[$i],
+        // Prepare visit day and time data
+        $visitDayTime = [];
+        foreach ($request->doctor_visit_day as $index => $day) {
+            $visitDayTime[] = [
+                'day' => $day,
+                'start_time' => $request->doctor_visit_start_time[$index],
+                'end_time' => $request->doctor_visit_end_time[$index],
             ];
         }
 
-        // Build the doctor object with the nested schedule array
-        $doctor = [
-            'name' => $request->doctor_name,
-            'designation' => $request->doctor_designation,
-            'specialist' => $request->doctor_specialist,
-            'fees' => $request->doctor_fees,
-            'schedule' => $schedules,
+        // Prepare the data to be stored
+        $data = [
+            'currently_loggedin_partner_id' => $partnerId, // Always store the partner ID
+            'doctor_name' => $request->doctor_name,
+            'doctor_designation' => $request->doctor_designation,
+            'doctor_specialist' => $request->doctor_specialist,
+            'doctor_fees' => $request->doctor_fees,
+            'visit_day_time' => json_encode($visitDayTime), // Ensure it's stored as JSON
         ];
 
-        // Save the doctor details to the database
-        $opdInfo = new PartnerAllOPDInfoModel();
-        $opdInfo->currently_loggedin_partner_id = auth($this->guard)->id();
-        $opdInfo->doctors = json_encode([$doctor]);
-        $opdInfo->status = 'Available';
-        $opdInfo->save();
+        // Store new data for the partner without overwriting existing records
+        PartnerAllOPDDoctorModel::create($data);
 
-        return redirect()->back()->with('success', 'Doctor details added successfully!');
+        return redirect()->back()->with('success', 'OPD Doctor details added successfully!');
     }
 
 
 
- 
+
+    public function showStoredData()
+    {
+
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $storedData = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->get();
+        foreach ($storedData as $data) {
+            $data->visit_day_time = json_decode($data->visit_day_time, true);
+        }
+
+        $partner = Auth::guard('partner')->user();
+        $registrationTypes = json_decode($partner->registration_type, true);
+
+        return view('partnerpanel.partner-opd-show', compact('opdBanner', 'pathologyBanner','doctorBanner', 'storedData', 'registrationTypes'));
+    }
 
 
 
 
+
+    public function updateStoredData(Request $request, $id)
+    {
+        // Get the partner ID from the currently authenticated partner
+        $partnerId = Auth::guard('partner')->id();
+
+        // Validate the input
+        $request->validate([
+            'doctor_name' => 'string|max:255',
+            'doctor_designation' => 'string|max:255',
+            'doctor_specialist' => 'string|max:255',
+            'doctor_fees' => 'numeric',
+            'doctor_visit_day' => 'array',
+            'doctor_visit_day.*' => 'string|max:255',
+            'doctor_visit_start_time' => 'array',
+            'doctor_visit_start_time.*' => 'date_format:H:i',
+            'doctor_visit_end_time' => 'array',
+            'doctor_visit_end_time.*' => 'date_format:H:i',
+            'status' => 'string|max:255',
+        ]);
+
+        // Fetch the specific record for the given $id and $partnerId
+        $opdDoctor = PartnerAllOPDDoctorModel::where('id', $id)
+            ->where('currently_loggedin_partner_id', $partnerId)
+            ->first();
+
+        if (!$opdDoctor) {
+            return redirect()->back()->with('error', 'OPD Doctor details not found.');
+        }
+
+        // Prepare visit day and time data
+        $visitDayTime = [];
+        foreach ($request->doctor_visit_day as $index => $day) {
+            $visitDayTime[] = [
+                'day' => $day,
+                'start_time' => $request->doctor_visit_start_time[$index],
+                'end_time' => $request->doctor_visit_end_time[$index],
+            ];
+        }
+
+        // Prepare the data to update
+        $data = [
+            'doctor_name' => $request->doctor_name,
+            'doctor_designation' => $request->doctor_designation,
+            'doctor_specialist' => $request->doctor_specialist,
+            'doctor_fees' => $request->doctor_fees,
+            'status' => $request->status,
+            'visit_day_time' => json_encode($visitDayTime), // Serialize to JSON
+        ];
+
+        // Update the record
+        $opdDoctor->update($data);
+
+        return redirect()->back()->with('success', 'OPD Doctor details updated successfully!');
+    }
+
+
+
+    
+    public function destroy(Request $request, $id)
+    {
+       
+        $partnerId = Auth::guard('partner')->id();
+
+        $opdDoctor = PartnerAllOPDDoctorModel::where('id', $id)
+            ->where('currently_loggedin_partner_id', $partnerId)
+            ->first();
+
+        if (!$opdDoctor) {
+            return redirect()->back()->with('error', 'OPD Doctor details not found.');
+        }
+
+    
+        $opdDoctor->delete();
+
+        return redirect()->back()->with('success', 'OPD Doctor details deleted successfully!');
+    }
 }

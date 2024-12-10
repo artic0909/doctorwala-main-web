@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\PartnerServiceListModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +16,9 @@ class PartnerServiceListController extends Controller
     public function index()
     {
         $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $serviceList = PartnerServiceListModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
@@ -21,7 +27,7 @@ class PartnerServiceListController extends Controller
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
-        return view('partnerpanel.partner-service-lists', compact('services', 'registrationTypes'));
+        return view('partnerpanel.partner-service-lists', compact('opdBanner', 'pathologyBanner','doctorBanner', 'services', 'registrationTypes'));
     }
 
     // Add a new service

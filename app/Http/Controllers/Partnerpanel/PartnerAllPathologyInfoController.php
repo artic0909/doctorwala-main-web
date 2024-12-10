@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
-use App\Models\PartnerAllPathologyInfoModel;
+use App\Models\PartnerAllPathologyTestModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,31 +18,21 @@ class PartnerAllPathologyInfoController extends Controller
 
     public function index()
     {
-        $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
-
-        return view('partnerpanel.partner-pathology', compact('registrationTypes'));
-    }
-
-
-    public function indexShow()
-    {
-
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
-        // Fetch pathology info for the logged-in partner
-        $pathologyInfo = PartnerAllPathologyInfoModel::where('currently_loggedin_partner_id', $partner->id)
-            ->get()
-            ->map(function ($item) {
-                // Decode pathologytests JSON into an array for each record
-                $item->pathologytests = json_decode($item->pathologytests, true);
-                return $item;
-            });
+        $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
+        $contactDetails = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-pathology-show', compact('pathologyInfo', 'registrationTypes'));
+        return view('partnerpanel.partner-pathology', compact('contactDetails', 'registrationTypes', 'registrationTypess'));
     }
+
+
 
 
 
@@ -47,50 +40,147 @@ class PartnerAllPathologyInfoController extends Controller
 
     public function store(Request $request)
     {
+        $partnerId = Auth::guard('partner')->id();
+
+        // Validate the input
         $request->validate([
-            'test_name' => 'required|string|max:255',
+            'test_name' => 'required|string',
             'test_type' => 'required|string',
             'test_price' => 'required|numeric',
             'test_day' => 'required|array',
-            'test_day.*' => 'required|string',
+            'test_day.*' => 'required|string|max:255',
             'test_start_time' => 'required|array',
             'test_start_time.*' => 'required|date_format:H:i',
             'test_end_time' => 'required|array',
             'test_end_time.*' => 'required|date_format:H:i',
         ]);
 
-        // Group the day, start time, and end time into the schedule array
-        $schedules = [];
-        $visitDays = $request->test_day;
-        $visitStartTimes = $request->test_start_time;
-        $visitEndTimes = $request->test_end_time;
-
-        for ($i = 0; $i < count($visitDays); $i++) {
-            $schedules[] = [
-                'visit_day' => $visitDays[$i],
-                'visit_start_time' => $visitStartTimes[$i],
-                'visit_end_time' => $visitEndTimes[$i],
+        // Prepare visit day and time data
+        $testDayTime = [];
+        foreach ($request->test_day as $index => $day) {
+            $testDayTime[] = [
+                'day' => $day,
+                'start_time' => $request->test_start_time[$index],
+                'end_time' => $request->test_end_time[$index],
             ];
         }
 
-        // Build the doctor object with the nested schedule array
-        $tests = [
-            'name' => $request->test_name,
-            'type' => $request->test_type,
-            'price' => $request->test_price,
-            'schedule' => $schedules,
+        // Prepare the data to be stored
+        $data = [
+            'currently_loggedin_partner_id' => $partnerId, // Always store the partner ID
+            'test_name' => $request->test_name,
+            'test_type' => $request->test_type,
+            'test_price' => $request->test_price,
+            'test_day_time' => json_encode($testDayTime), // Ensure it's stored as JSON
         ];
 
-        // Save the doctor details to the database
-        $pathologyInfo = new PartnerAllPathologyInfoModel();
-        $pathologyInfo->currently_loggedin_partner_id = auth($this->guard)->id();
-        $pathologyInfo->pathologytests = json_encode([$tests]);
-        $pathologyInfo->status = 'Available';
-        $pathologyInfo->save();
+        // Store new data for the partner without overwriting existing records
+        PartnerAllPathologyTestModel::create($data);
 
-        return redirect()->back()->with('success', 'Pathology details added successfully!');
+        return redirect()->back()->with('success', 'Pathology test details added successfully!');
     }
 
 
 
+
+    public function showStoredData()
+    {
+
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $storedData = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->get();
+        foreach ($storedData as $data) {
+            $data->test_day_time = json_decode($data->test_day_time, true);
+        }
+
+        $partner = Auth::guard('partner')->user();
+        $registrationTypes = json_decode($partner->registration_type, true);
+
+        return view('partnerpanel.partner-pathology-show', compact('opdBanner', 'pathologyBanner','doctorBanner', 'storedData', 'registrationTypes'));
+    }
+
+
+
+
+
+    public function updateStoredData(Request $request, $id)
+    {
+        // Get the partner ID from the currently authenticated partner
+        $partnerId = Auth::guard('partner')->id();
+
+        // Validate the input
+        $request->validate([
+            'test_name' => 'string|max:255',
+            'test_type' => 'string|max:255',
+            'test_price' => 'numeric',
+            'test_day' => 'array',
+            'test_day.*' => 'string|max:255',
+            'test_start_time' => 'array',
+            'test_start_time.*' => 'date_format:H:i',
+            'test_end_time' => 'array',
+            'test_end_time.*' => 'date_format:H:i',
+            'status' => 'string|max:255',
+        ]);
+
+        // Fetch the specific record for the given $id and $partnerId
+        $pathologyTest = PartnerAllPathologyTestModel::where('id', $id)
+            ->where('currently_loggedin_partner_id', $partnerId)
+            ->first();
+
+        if (!$pathologyTest) {
+            return redirect()->back()->with('error', 'Pathology test details not found.');
+        }
+
+        // Prepare day and time data
+        $testDayTime = [];
+        if ($request->has('test_day')) {
+            foreach ($request->test_day as $index => $day) {
+                $testDayTime[] = [
+                    'day' => $day,
+                    'start_time' => $request->test_start_time[$index] ?? null,
+                    'end_time' => $request->test_end_time[$index] ?? null,
+                ];
+            }
+        }
+
+        // Prepare the data to update
+        $data = [
+            'test_name' => $request->test_name,
+            'test_type' => $request->test_type,
+            'test_price' => $request->test_price,
+            'status' => $request->status,
+            'test_day_time' => json_encode($testDayTime), // Serialize to JSON
+        ];
+
+        // Update the record
+        $pathologyTest->update($data);
+
+        return redirect()->back()->with('success', 'Pathology test details updated successfully!');
+    }
+
+
+
+
+
+
+    public function destroy(Request $request, $id)
+    {
+
+        $partnerId = Auth::guard('partner')->id();
+
+        $opdDoctor = PartnerAllPathologyTestModel::where('id', $id)
+            ->where('currently_loggedin_partner_id', $partnerId)
+            ->first();
+
+        if (!$opdDoctor) {
+            return redirect()->back()->with('error', 'Pathology test details not found.');
+        }
+
+
+        $opdDoctor->delete();
+
+        return redirect()->back()->with('success', 'Pathology test details deleted successfully!');
+    }
 }

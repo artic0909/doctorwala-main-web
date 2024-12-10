@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +25,13 @@ class ProfileEditController extends Controller
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
         $partner = Auth::guard('partner')->user();
-        return view('partnerpanel.partner-profile', compact('partner', 'registrationTypes'));
+
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+
+        return view('partnerpanel.partner-profile', compact('opdBanner', 'pathologyBanner','doctorBanner', 'partner', 'registrationTypes'));
     }
 
 

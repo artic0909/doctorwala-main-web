@@ -11,6 +11,7 @@ use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
 use App\Http\Controllers\Partnerpanel\PartnerInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
 use App\Http\Controllers\Partnerpanel\PartnerPathologyContactController;
+use App\Http\Controllers\Partnerpanel\PartnerProfileBannerController;
 use App\Http\Controllers\Partnerpanel\PartnerServiceListController;
 use App\Http\Controllers\Partnerpanel\ProfileEditController;
 use Illuminate\Support\Facades\Route;
@@ -166,11 +167,17 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::delete('/partnerpanel/partner-gallery/delete/{index}', [PartnerGalleryController::class, 'destroy'])->name('partner.gallery.delete');
 
 
+
+
     // Route to store OPD doctor information
     Route::get('/partnerpanel/partner-opd', [PartnerAllOPDInfoController::class, 'index'])->name('partner.opd.index');
     Route::post('/partnerpanel/partner-opd', [PartnerAllOPDInfoController::class, 'store'])->name('partner.opd.store');
     // Route to Show OPD Doctor information
-    Route::get('/partnerpanel/partner-opd-show', [PartnerAllOPDInfoController::class, 'indexShow'])->name('partner.opd.show');
+    Route::get('/partnerpanel/partner-opd-show', [PartnerAllOPDInfoController::class, 'showStoredData'])->name('partner.opd.show');
+    Route::put('/partnerpanel/partner-opd-show/update/{id}', [PartnerAllOPDInfoController::class, 'updateStoredData'])->name('partner.opd.update');
+    Route::delete('/partnerpanel/partner-opd-show/delete/{id}', [PartnerAllOPDInfoController::class, 'destroy'])->name('partner.opd.delete');
+
+
 
 
 
@@ -178,7 +185,11 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::get('/partnerpanel/partner-pathology', [PartnerAllPathologyInfoController::class, 'index'])->name('partner.pathology.index');
     Route::post('/partnerpanel/partner-pathology', [PartnerAllPathologyInfoController::class, 'store'])->name('partner.pathology.store');
     // Route to Show Pathology information
-    Route::get('/partnerpanel/partner-pathology-show', [PartnerAllPathologyInfoController::class, 'indexShow'])->name('partner.pathology.show');
+    Route::get('/partnerpanel/partner-pathology-show', [PartnerAllPathologyInfoController::class, 'showStoredData'])->name('partner.pathology.show');
+    Route::put('/partnerpanel/partner-pathology-show/update/{id}', [PartnerAllPathologyInfoController::class, 'updateStoredData'])->name('partner.pathology.update');
+    Route::delete('/partnerpanel/partner-pathology-show/delete/{id}', [PartnerAllPathologyInfoController::class, 'destroy'])->name('partner.pathology.delete');
+
+
 
 
     // Routes for Doctor
@@ -191,6 +202,13 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::post('/partnerpanel/partner-get-ticket', [PartnerInquiryController::class, 'store'])->name('partner.inquiries.store');
     Route::delete('/partnerpanel/partner-show-ticket/{inquiry}', [PartnerInquiryController::class, 'destroy'])->name('inquiries.destroy');
     Route::get('/partnerpanel/partner-show-ticket', [PartnerInquiryController::class, 'index'])->name('partner.inquiries.index');
+
+
+    // Routes for Partner Profile Banner Upload
+    Route::get('/partnerpanel/partner-dashboard', [PartnerProfileBannerController::class, 'showOPDBanner']);
+    Route::post('/partnerpanel/partner-dashboard', [PartnerProfileBannerController::class, 'opdBannerStoreEdit'])->name('partner.opd.banner.store');
+    Route::post('/partnerpanel/partner-dashboard/pathology', [PartnerProfileBannerController::class, 'pathologyBannerStoreEdit'])->name('partner.pathology.banner.store');
+    Route::post('/partnerpanel/partner-dashboard/doctor', [PartnerProfileBannerController::class, 'doctorBannerStoreEdit'])->name('partner.doctor.banner.store');
 
 
 

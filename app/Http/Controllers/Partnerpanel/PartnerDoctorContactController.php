@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\PartnerDoctorContactModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,6 +20,9 @@ class PartnerDoctorContactController extends Controller
     public function index()
     {
         $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
@@ -24,7 +30,7 @@ class PartnerDoctorContactController extends Controller
         $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
         $contactDetails = PartnerDoctorContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-doctors', compact('contactDetails', 'registrationTypes' ,'registrationTypess'));
+        return view('partnerpanel.partner-doctors', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes' ,'registrationTypess'));
     }
 
     /**

@@ -137,6 +137,37 @@
 
 
 
+                                        <!-- partner-profile-banner -->
+                                        <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
+                            aria-controls="ui-basicuy">
+                            <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
+                                class="menu-title">Profile Banner</span><i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basicuy">
+
+                            <ul class="nav flex-column sub-menu">
+
+                                @if(in_array('OPD', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myOPDBanner">OPD Banner</a></li>
+                                @endif
+
+                                @if(in_array('Pathology', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myPathologyBanner">Pathology Banner</a></li>
+                                @endif
+
+
+                                @if(in_array('Doctor', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myDoctorBanner">Doctor Banner</a></li>
+                                @endif
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+
+
 
                     <!-- partner about clinic -->
                     <li class="nav-item">
@@ -233,7 +264,7 @@
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-doctors">Upload Doctor</a>
                                 </li>
 
-                            
+
 
                             </ul>
                         </div>
@@ -380,72 +411,61 @@
                                                 <select name="test_type" id="test_type" class="form-control" style="height: 55px;">
                                                     <option value="" selected>---Select Type---</option>
 
-                                                    <option value="cbc">Complete Blood Count (CBC)</option>
-                                                    <option value="lft">Liver Function Test (LFT)</option>
-                                                    <option value="kft">Kidney Function Test (KFT)</option>
-                                                    <option value="rft">Renal Function Test (RFT)</option>
-                                                    <option value="lipid_profile">Lipid Profile</option>
-                                                    <option value="thyroid_panel">Thyroid Function Tests (T3, T4, TSH)
-                                                    </option>
-                                                    <option value="hba1c">HbA1c (Glycated Hemoglobin)</option>
-                                                    <option value="fasting_blood_sugar">Fasting Blood Sugar (FBS)
-                                                    </option>
-                                                    <option value="postprandial_blood_sugar">Postprandial Blood Sugar
-                                                        (PPBS)</option>
-                                                    <option value="urine_analysis">Urine Routine and Microscopy</option>
-                                                    <option value="stool_test">Stool Test</option>
-                                                    <option value="esr">Erythrocyte Sedimentation Rate (ESR)</option>
-                                                    <option value="crp">C-Reactive Protein (CRP)</option>
-                                                    <option value="vitamin_d">Vitamin D Test</option>
-                                                    <option value="vitamin_b12">Vitamin B12 Test</option>
-                                                    <option value="iron_studies">Iron Studies (Ferritin, TIBC, Serum
-                                                        Iron)</option>
-                                                    <option value="blood_group">Blood Group and Rh Typing</option>
-                                                    <option value="pt_inr">Prothrombin Time (PT/INR)</option>
-                                                    <option value="d_dimer">D-Dimer Test</option>
-                                                    <option value="hiv_test">HIV Test</option>
-                                                    <option value="hbsag">Hepatitis B Surface Antigen (HBsAg)</option>
-                                                    <option value="hcv_test">Hepatitis C Test</option>
-                                                    <option value="widal_test">Widal Test</option>
-                                                    <option value="rapid_malaria_test">Rapid Malaria Test</option>
-                                                    <option value="dengue_ns1">Dengue NS1 Antigen Test</option>
-                                                    <option value="rtpcr">RT-PCR Test (e.g., for COVID-19)</option>
-                                                    <option value="pap_smear">Pap Smear</option>
-                                                    <option value="psa">Prostate-Specific Antigen (PSA)</option>
-                                                    <option value="blood_culture">Blood Culture</option>
-                                                    <option value="sputum_culture">Sputum Culture</option>
-                                                    <option value="ascitic_fluid_analysis">Ascitic Fluid Analysis
-                                                    </option>
-                                                    <option value="csf_analysis">Cerebrospinal Fluid (CSF) Analysis
-                                                    </option>
-                                                    <option value="skin_biopsy">Skin Biopsy</option>
-                                                    <option value="fine_needle_aspiration">Fine Needle Aspiration
-                                                        Cytology (FNAC)</option>
-                                                    <option value="bone_marrow_test">Bone Marrow Aspiration/Biopsy
-                                                    </option>
-                                                    <option value="microalbumin_test">Urine Microalbumin Test</option>
-                                                    <option value="pregnancy_test">Pregnancy Test (hCG)</option>
-                                                    <option value="tissue_biopsy">Tissue Biopsy</option>
-                                                    <option value="coombs_test">Direct/Indirect Coombs Test</option>
-                                                    <option value="ra_factor">Rheumatoid Factor (RA Factor)</option>
-                                                    <option value="anti_ccp">Anti-CCP Antibodies</option>
-                                                    <option value="ana_test">Anti-Nuclear Antibody (ANA) Test</option>
-                                                    <option value="troponin">Troponin Test</option>
-                                                    <option value="ck_mb">Creatine Kinase-MB (CK-MB)</option>
-                                                    <option value="electrolyte_panel">Electrolyte Panel (Sodium,
-                                                        Potassium, Chloride)</option>
-                                                    <option value="amylase_lipase">Amylase and Lipase Test</option>
-                                                    <option value="serum_calcium">Serum Calcium</option>
-                                                    <option value="serum_albumin">Serum Albumin</option>
-                                                    <option value="serum_protein">Serum Protein Electrophoresis</option>
-                                                    <option value="ldh">Lactate Dehydrogenase (LDH)</option>
-                                                    <option value="asthma_panel">Asthma Panel (Allergen Testing)
-                                                    </option>
-                                                    <option value="allergy_panel">Allergy Panel</option>
-                                                    <option value="tumor_markers">Tumor Marker Tests (e.g., CA-125, CA
-                                                        19-9)</option>
-
+                                                    <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+                                                    <option value="Liver Function Test (LFT)">Liver Function Test (LFT)</option>
+                                                    <option value="Kidney Function Test (KFT)">Kidney Function Test (KFT)</option>
+                                                    <option value="Renal Function Test (RFT)">Renal Function Test (RFT)</option>
+                                                    <option value="Lipid Profile">Lipid Profile</option>
+                                                    <option value="Thyroid Function Tests (T3, T4, TSH)">Thyroid Function Tests (T3, T4, TSH)</option>
+                                                    <option value="HbA1c (Glycated Hemoglobin)">HbA1c (Glycated Hemoglobin)</option>
+                                                    <option value="Fasting Blood Sugar (FBS)">Fasting Blood Sugar (FBS)</option>
+                                                    <option value="Postprandial Blood Sugar (PPBS)">Postprandial Blood Sugar (PPBS)</option>
+                                                    <option value="Urine Routine and Microscopy">Urine Routine and Microscopy</option>
+                                                    <option value="Stool Test">Stool Test</option>
+                                                    <option value="Erythrocyte Sedimentation Rate (ESR)">Erythrocyte Sedimentation Rate (ESR)</option>
+                                                    <option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option>
+                                                    <option value="Vitamin D Test">Vitamin D Test</option>
+                                                    <option value="Vitamin B12 Test">Vitamin B12 Test</option>
+                                                    <option value="Iron Studies (Ferritin, TIBC, Serum Iron)">Iron Studies (Ferritin, TIBC, Serum Iron)</option>
+                                                    <option value="Blood Group and Rh Typing">Blood Group and Rh Typing</option>
+                                                    <option value="Prothrombin Time (PT/INR)">Prothrombin Time (PT/INR)</option>
+                                                    <option value="D-Dimer Test">D-Dimer Test</option>
+                                                    <option value="HIV Test">HIV Test</option>
+                                                    <option value="Hepatitis B Surface Antigen (HBsAg)">Hepatitis B Surface Antigen (HBsAg)</option>
+                                                    <option value="Hepatitis C Test">Hepatitis C Test</option>
+                                                    <option value="Widal Test">Widal Test</option>
+                                                    <option value="Rapid Malaria Test">Rapid Malaria Test</option>
+                                                    <option value="Dengue NS1 Antigen Test">Dengue NS1 Antigen Test</option>
+                                                    <option value="RT-PCR Test (e.g., for COVID-19)">RT-PCR Test (e.g., for COVID-19)</option>
+                                                    <option value="Pap Smear">Pap Smear</option>
+                                                    <option value="Prostate-Specific Antigen (PSA)">Prostate-Specific Antigen (PSA)</option>
+                                                    <option value="Blood Culture">Blood Culture</option>
+                                                    <option value="Sputum Culture">Sputum Culture</option>
+                                                    <option value="Ascitic Fluid Analysis">Ascitic Fluid Analysis</option>
+                                                    <option value="Cerebrospinal Fluid (CSF) Analysis">Cerebrospinal Fluid (CSF) Analysis</option>
+                                                    <option value="Skin Biopsy">Skin Biopsy</option>
+                                                    <option value="Fine Needle Aspiration Cytology (FNAC)">Fine Needle Aspiration Cytology (FNAC)</option>
+                                                    <option value="Bone Marrow Aspiration/Biopsy">Bone Marrow Aspiration/Biopsy</option>
+                                                    <option value="Urine Microalbumin Test">Urine Microalbumin Test</option>
+                                                    <option value="Pregnancy Test (hCG)">Pregnancy Test (hCG)</option>
+                                                    <option value="Tissue Biopsy">Tissue Biopsy</option>
+                                                    <option value="Direct/Indirect Coombs Test">Direct/Indirect Coombs Test</option>
+                                                    <option value="Rheumatoid Factor (RA Factor)">Rheumatoid Factor (RA Factor)</option>
+                                                    <option value="Anti-CCP Antibodies">Anti-CCP Antibodies</option>
+                                                    <option value="Anti-Nuclear Antibody (ANA) Test">Anti-Nuclear Antibody (ANA) Test</option>
+                                                    <option value="Troponin Test">Troponin Test</option>
+                                                    <option value="Creatine Kinase-MB (CK-MB)">Creatine Kinase-MB (CK-MB)</option>
+                                                    <option value="Electrolyte Panel (Sodium, Potassium, Chloride)">Electrolyte Panel (Sodium, Potassium, Chloride)</option>
+                                                    <option value="Amylase and Lipase Test">Amylase and Lipase Test</option>
+                                                    <option value="Serum Calcium">Serum Calcium</option>
+                                                    <option value="Serum Albumin">Serum Albumin</option>
+                                                    <option value="Serum Protein Electrophoresis">Serum Protein Electrophoresis</option>
+                                                    <option value="Lactate Dehydrogenase (LDH)">Lactate Dehydrogenase (LDH)</option>
+                                                    <option value="Asthma Panel (Allergen Testing)">Asthma Panel (Allergen Testing)</option>
+                                                    <option value="Allergy Panel">Allergy Panel</option>
+                                                    <option value="Tumor Marker Tests (e.g., CA-125, CA 19-9)">Tumor Marker Tests (e.g., CA-125, CA 19-9)</option>
                                                 </select>
+
                                             </div>
 
 

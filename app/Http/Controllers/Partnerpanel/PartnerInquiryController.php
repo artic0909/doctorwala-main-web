@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DwPartnerModel;
 use App\Models\PartnerInquiryModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Support\Facades\Auth;
 
 class PartnerInquiryController extends Controller
@@ -16,15 +19,25 @@ class PartnerInquiryController extends Controller
     public function index()
     {
         $partner = Auth::guard('partner')->user();
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $registrationTypes = json_decode($partner->registration_type, true);
 
         $inquiries = PartnerInquiryModel::where('currently_loggedin_partner_id', Auth::id())->get();
-        return view('partnerpanel.partner-show-ticket', compact('inquiries', 'registrationTypes'));
+        return view('partnerpanel.partner-show-ticket', compact('opdBanner', 'pathologyBanner','doctorBanner', 'inquiries', 'registrationTypes'));
     }
 
     // Show form to create a new inquiry
     public function create()
     {
+
+        $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
         $partner = DwPartnerModel::find(Auth::id());
@@ -33,7 +46,7 @@ class PartnerInquiryController extends Controller
             return redirect()->route('partnerpanel.dashboard')->with('error', 'Partner not found!');
         }
 
-        return view('partnerpanel.partner-get-ticket', compact('partner', 'registrationTypes'));
+        return view('partnerpanel.partner-get-ticket', compact('opdBanner', 'pathologyBanner','doctorBanner', 'partner', 'registrationTypes'));
     }
 
     // Store a new inquiry

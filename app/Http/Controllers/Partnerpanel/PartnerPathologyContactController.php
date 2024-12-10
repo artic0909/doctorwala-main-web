@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\PartnerPathologyContactModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,13 +15,16 @@ class PartnerPathologyContactController extends Controller
     public function create()
     {
         $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
         $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-pathology-contact', compact('contactDetails', 'registrationTypes'));
+        return view('partnerpanel.partner-pathology-contact', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes'));
     }
 
     public function store(Request $request)

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\PartnerGalleryModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,13 +19,16 @@ class PartnerGalleryController extends Controller
     public function index()
     {
         $partnerId = Auth::guard('partner')->id();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $gallery = PartnerGalleryModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $partner = Auth::guard('partner')->user();
         $registrationTypes = json_decode($partner->registration_type, true);
 
         $images = $gallery ? $gallery->images : [];
-        return view('partnerpanel.partner-gallery', compact('images', 'registrationTypes'));
+        return view('partnerpanel.partner-gallery', compact('opdBanner', 'pathologyBanner','doctorBanner', 'images', 'registrationTypes'));
     }
 
 
