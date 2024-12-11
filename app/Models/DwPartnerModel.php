@@ -27,6 +27,7 @@ class DwPartnerModel extends Authenticatable
         'partner_password',
         'partnerRegisterCaptchaInput',
         'registration_type',
+        'status',
     ];
 
     protected $casts = [
@@ -55,15 +56,5 @@ class DwPartnerModel extends Authenticatable
     public function pathologyContact()
     {
         return $this->hasOne(PartnerPathologyContactModel::class, 'partner_id');
-    }
-
-    public function opdInfo()
-    {
-        return $this->hasMany(PartnerAllOPDInfoModel::class, 'currently_loggedin_partner_id');
-    }
-
-    public function pathologyInfo()
-    {
-        return $this->hasMany(PartnerAllPathologyInfoModel::class, 'currently_loggedin_partner_id');
     }
 }

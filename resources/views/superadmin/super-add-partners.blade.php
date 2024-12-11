@@ -365,7 +365,8 @@
 
 
 
-                                    <form class="prof-view">
+                                    <form class="prof-view" action="{{route('superadmin.register.partners')}}" method="post" enctype="multipart/form-data">
+                                        @csrf
 
 
                                         <div class="from-view row  mt-3">
@@ -377,50 +378,50 @@
 
                                                 <div class="group-main d-flex">
                                                     <div class="group ml-3">
-                                                        <label for="" style="font-weight: 700;">OPD</label>
-                                                        <input type="radio">
+                                                        <label for="opd" style="font-weight: 700;">OPD</label>
+                                                        <input type="checkbox" name="registration_type[]" id="opd" value="OPD" style="cursor: pointer;">
                                                     </div>
 
                                                     <div class="group ml-3">
-                                                        <label for="" style="font-weight: 700;">Pathology</label>
-                                                        <input type="radio">
+                                                        <label for="pathology" style="font-weight: 700;">Pathology</label>
+                                                        <input type="checkbox" name="registration_type[]" id="pathology" value="Pathology" style="cursor: pointer;">
                                                     </div>
 
                                                     <div class="group ml-3">
-                                                        <label for="" style="font-weight: 700;">Doctor</label>
-                                                        <input type="radio">
+                                                        <label for="doctor" style="font-weight: 700;">Doctor</label>
+                                                        <input type="checkbox" name="registration_type[]" id="doctor" value="Doctor" style="cursor: pointer;">
                                                     </div>
                                                 </div>
                                             </div>
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_clinic_name" style="font-weight: 700;"><i
                                                         class="fa fa-hospital text-primary" aria-hidden="true"></i>
                                                     Clinic Name
                                                     <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_clinic_name" name="partner_clinic_name"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_contact_person_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-user text-primary"></i>
                                                     Contact Person <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_contact_person_name" name="partner_contact_person_name"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_mobile_number" style="font-weight: 700;"><i
                                                         class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
                                                     Number
                                                     <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_mobile_number" name="partner_mobile_number"
                                                     style="height: 55px;">
                                             </div>
 
@@ -428,10 +429,10 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_email" style="font-weight: 700;"><i
                                                         class="fa fa-envelope text-primary" aria-hidden="true"></i>
                                                     Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_email" name="partner_email"
                                                     style="height: 55px;">
                                             </div>
 
@@ -440,33 +441,33 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_landmark" style="font-weight: 700;"><i
                                                         class="fa fa-map-pin text-primary" aria-hidden="true"></i>
                                                     Landmark <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_landmark" name="partner_landmark"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_pincode" style="font-weight: 700;"><i
                                                         class="fa fa-location-pin-lock text-primary"
                                                         aria-hidden="true"></i>
                                                     Pin Code <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="partner_pincode" name="partner_pincode"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label style="font-weight: 700;"><i
                                                         class="fa fa-map-location-dot text-primary"
                                                         aria-hidden="true"></i>
                                                     Google Map <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;">
+                                                <input type="text" class="form-control"
+                                                    style="height: 55px;" readonly>
                                             </div>
 
 
@@ -474,10 +475,10 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_state" style="font-weight: 700;"><i
                                                         class="fa-solid fa-globe text-primary"></i>
                                                     State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
+                                                <select name="partner_state" id="partner_state" class="form-control" style="height: 55px;">
                                                     <option selected>Select State</option>
                                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar
                                                         Islands</option>
@@ -527,39 +528,32 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_city" style="font-weight: 700;"><i
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
 
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select City</option>
-                                                    <option value="">City 1</option>
-                                                    <option value="">City 2</option>
-                                                    <option value="">City 3</option>
-                                                    <option value="">City 4</option>
-                                                    <option value="">City 5</option>
-                                                </select>
+                                                <input type="text" name="partner_city" id="partner_city" class="form-control" style="height: 55px;">
                                             </div>
 
 
 
 
                                             <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_address" style="font-weight: 700;"><i
                                                         class="fa-solid fa-location-dot text-primary"></i> Address
                                                     <span class="text-danger">*</span></label>
 
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
+                                                <textarea name="partner_address" id="partner_address" class="form-control" rows="7"></textarea>
                                             </div>
 
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_password" style="font-weight: 700;"><i
                                                         class="fa-solid fa-lock text-primary"></i> Password
                                                     <span class="text-danger">*</span></label>
 
-                                                <input type="text" class="form-control" style="height: 55px;">
+                                                <input type="text" class="form-control" style="height: 55px;" id="partner_password" name="partner_password">
                                             </div>
 
 
@@ -567,121 +561,135 @@
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label style="font-weight: 700;"><i
                                                         class="fa-solid fa-lock text-primary"></i> Confirm Password
                                                     <span class="text-danger">*</span></label>
 
-                                                <input type="text" class="form-control" style="height: 55px;">
+                                                <input type="text" class="form-control" style="height: 55px;" readonly>
                                             </div>
-
-
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-info-circle text-primary"></i> About Clinic
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-users-viewfinder text-primary"></i> Mission
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-eye text-primary"></i> Vision
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-
-
-
-
 
 
 
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded">Update
-                                                    Contact Person</button>
+                                                <button type="submit" class="btn btn-danger rounded">Register Partner</button>
                                             </div>
 
-
-
-
-                                        </div>
 
 
 
                                     </form>
 
 
+                                    <!-- About Details Upload -->
+                                    <div class="d-flex justify-content-start w-100 mt-5 mb-3">
+                                        <h4 style="font-weight: 700;"><i class="fa-solid fa-user-doctor text-primary"></i> About Details</h4>
+                                    </div>
+
+                                    <form action="" class="prof-view row col-12">
+
+                                        <div class="col-12 form-group">
+                                            <label for="name" style="font-weight: 700;"><i
+                                                    class="fa-solid fa-info-circle text-primary"></i> About Clinic
+                                            </label>
+
+                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
+                                        </div>
+
+
+
+
+
+                                        <div class="col-12 form-group">
+                                            <label for="name" style="font-weight: 700;"><i
+                                                    class="fa-solid fa-users-viewfinder text-primary"></i> Mission
+                                            </label>
+
+                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
+                                        </div>
+
+
+
+
+                                        <div class="col-12 form-group">
+                                            <label for="name" style="font-weight: 700;"><i
+                                                    class="fa-solid fa-eye text-primary"></i> Vision
+                                            </label>
+
+                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="d-flex justify-content-center w-100">
+                                            <button type="submit" class="btn btn-danger rounded">Upload
+                                                Partner About Details</button>
+                                        </div>
+
+                                    </form>
+
+
                                 </div>
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </div>
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
-                                href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
-                            All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
-                            <i class="ti-heart text-danger ml-1"></i></span>
-                    </div>
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
-                                href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
-                    </div>
-                </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- partial:partials/_footer.html -->
+            <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
+                            href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
+                        All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
+                        <i class="ti-heart text-danger ml-1"></i></span>
+                </div>
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
+                            href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
+                </div>
+            </footer>
+            <!-- partial -->
         </div>
-        <!-- page-body-wrapper ends -->
+        <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
 
 
 
@@ -719,6 +727,57 @@
     <script src="{{asset('../partner-assets/js/dashboard.js')}}"></script>
     <script src="{{asset('../partner-assets/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Form validation
+            const form = document.querySelector("form");
+            const passwordField = document.getElementById("partner_password");
+            const confirmPasswordField = document.querySelector("input[placeholder='Confirm Password *']");
+            const opdCheckbox = document.getElementById("opd");
+            const pathologyCheckbox = document.getElementById("pathology");
+            const doctorCheckbox = document.getElementById("doctor");
+
+            // Validate form before submission
+            form.addEventListener("submit", function(e) {
+                let valid = true;
+
+                // Check password and confirm password
+                if (passwordField.value !== confirmPasswordField.value) {
+                    alert("Passwords do not match!");
+                    valid = false;
+                }
+
+                // If not valid, prevent form submission
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Handle registration type logic
+            opdCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    doctorCheckbox.checked = false;
+                }
+            });
+
+            pathologyCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    doctorCheckbox.checked = false;
+                }
+            });
+
+            doctorCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    opdCheckbox.checked = false;
+                    pathologyCheckbox.checked = false;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -50,8 +50,10 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
+                <form method="GET" action="{{ route('superadmin.super-all-user') }}" class="d-flex w-100">
+                    <input type="search" id="search" name="search" value="{{ request('search') }}"
+                        placeholder="Search Here ........" class="form-control mx-4 w-100">
+                </form>
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -369,14 +371,50 @@
                                         <div class="col-9 d-flex justify-content-end align-items-center">
                                             <nav aria-label="Page navigation">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                    {{-- Previous Page Link --}}
+                                                    @if ($users->onFirstPage())
+                                                    <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                                    @else
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{{ $users->previousPageUrl() }}" rel="prev">Prev</a>
+                                                    </li>
+                                                    @endif
+
+                                                    {{-- Pagination Elements --}}
+                                                    @foreach ($users->links()->elements as $element)
+                                                    {{-- "Three Dots" Separator --}}
+                                                    @if (is_string($element))
+                                                    <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
+                                                    @endif
+
+                                                    {{-- Array Of Links --}}
+                                                    @if (is_array($element))
+                                                    @foreach ($element as $page => $url)
+                                                    @if ($page == $users->currentPage())
+                                                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                                    @else
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                    </li>
+                                                    @endif
+                                                    @endforeach
+                                                    @endif
+                                                    @endforeach
+
+                                                    {{-- Next Page Link --}}
+                                                    @if ($users->hasMorePages())
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{{ $users->nextPageUrl() }}" rel="next">Next</a>
+                                                    </li>
+                                                    @else
+                                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                                    @endif
                                                 </ul>
                                             </nav>
                                         </div>
+
+
+
                                     </div>
 
 
@@ -394,8 +432,7 @@
                                         </thead>
 
                                         <tbody>
-
-
+                                            @foreach ($users as $user)
                                             <tr>
 
 
@@ -406,37 +443,47 @@
 
 
                                                 <td>
-                                                    <p class="m-0" style="font-weight: 700;">Saklin Mustak</p>
+                                                    <p class="m-0" style="font-weight: 700;">{{$user->user_name}}</p>
                                                 </td>
+
+
+
+
+                                                <td class="d-flex justify-content-between align-items-center">
+
+                                                    <p class="m-0" style="font-weight: 700;">{{$user->user_email}}</p>
+
+                                                    <a href="mailto:{{$user->user_email}}" class="ed-btn"><i
+                                                            class="fa fa-envelope" aria-hidden="true"
+                                                            style="font-size: 1.1rem;"></i></a>
+                                                </td>
+
 
 
 
 
                                                 <td>
-                                                    <p class="m-0" style="font-weight: 700;">sm@gmail.com</p>
+                                                    <p class="m-0" style="font-weight: 700;">{{$user->user_city}}</p>
                                                 </td>
 
+                                                <td style="font-size: 1rem;" class="d-flex justify-content-between align-items-center">
 
+                                                    <p class="m-0" style="font-weight: 700;">{{$user->user_mobile}}</p>
 
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">dsfsdgfsdgdfgf</p>
-                                                </td>
-
-                                                <td style="font-size: 1rem;"><a href="tel:" class="ed-btn"><i
+                                                    <a href="tel:{{$user->user_mobile}}" class="ed-btn"><i
                                                             class="fa fa-phone" aria-hidden="true"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                            style="font-size: 1.1rem;"></i></a>
+
+
+                                                </td>
 
 
 
-                                                <td style="font-size: 1rem;"><a href="" data-target="#myPassModal"
-                                                        data-toggle="modal" class="ed-btn"><i
-                                                            class="fa-solid fa-fingerprint text-dark" aria-hidden="true"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                <td style="font-size: 1rem;"><i
+                                                        class="fa-solid fa-check text-success" aria-hidden="true"
+                                                        style="font-size: 1.1rem;"></i></td>
                                             </tr>
-
-
-
-
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -458,12 +505,16 @@
 
 
                 <!-- Delete Modal -->
+                @foreach ($users as $user)
                 <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{route('superadmin.super-all-user.delete', $user->id)}}" class="modal-body" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -475,7 +526,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -483,42 +534,12 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
 
 
-                <!-- Pass Modal -->
-                <div class="modal fade" id="myPassModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form action="" class="modal-body">
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-user-secret fa-3x text-danger"></i>
-
-                                    <h3 class="mt-3">It's Me user name !</h3>
-
-                                    <p class="mt-2 text-center" style="font-weight: 700;">⚠️Highly restricted to share
-                                        PassKeys*** to anyone⚠️</p>
-
-                                    <p class="m-0"><strong>Email ID: sm@gmail.com</strong></p>
-
-                                    <p class="m-0"><strong>Passkey: Qr3$-vjDW-UserPass-DW0-0&#</strong></p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50"
-                                            data-dismiss="modal">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
 
 

@@ -389,6 +389,7 @@
                                                 <th>SL.</th>
                                                 <th>Date</th>
                                                 <th>Subscription Date</th>
+                                                <th>ID</th>
                                                 <th>Clinic Name</th>
                                                 <th>Name|Email|Mobile</th>
                                                 <th>Address</th>
@@ -399,53 +400,61 @@
                                         </thead>
 
                                         <tbody>
-
-
+                                            @foreach($opds as $opd)
                                             <tr>
 
-                                                <td>1</td>
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>29-11-2024</td>
                                                 <td>29-11-2024</td>
 
-                                                <td>Life LIne</td>
+                                                <td>{{$opd->partner_id}}</td>
+                                                <td>{{$opd->partner_clinic_name}}</td>
 
                                                 <td>
-                                                    <p class="m-0">Saklin Mustak</p>
-                                                    <p class="m-0">sm@gmail.com</p>
-                                                    <p class="m-0">+91 8985458848</p>
+                                                    <p class="m-0">{{$opd->clinic_contact_person_name}}</p>
+                                                    <p class="m-0">{{$opd->clinic_email}}</p>
+                                                    <p class="m-0">{{$opd->clinic_mobile_number}}</p>
                                                 </td>
 
-                                                <td>Ranihati, Howrah, 711302</td>
+                                                <td>{{$opd->clinic_address}}</td>
 
                                                 <td>
-                                                    <p class="m-0">West Bengal</p>
-                                                    <p class="m-0">Ranihati</p>
+                                                    <p class="m-0">{{$opd->clinic_state}}</p>
+                                                    <p class="m-0">{{$opd->clinic_city}}</p>
                                                 </td>
 
 
-                                                <td><a href="" data-target="#myActiveInactiveModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-toggle-off text-success"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                <td>
+                                                    @if($opd->status == 'Active')
+                                                    <a href="" data-target="#myActiveInactiveModal{{$opd->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @else
+                                                    <a href="" data-target="#myActiveInactiveModal{{$opd->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @endif
+                                                </td>
 
 
 
                                                 <td>
 
                                                     <div class="actions d-flex flex-wrap">
-                                                        <a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                        <a href="" data-target="#myDeleteModal{{$opd->id}}" data-toggle="modal"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-trash-can text-danger"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
 
-                                                        <a href="/superadmin/super-edit-opd-details"
+                                                        <a href="/superadmin/super-edit-opd-details/{{$opd->id}}"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-pen-to-square text-primaryy"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
-                                                        <a href="" data-target="#myAddOPDModal" data-toggle="modal"
+                                                        <a href="/superadmin/super-addopd-doctor/{{$opd->id}}"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-plus text-success"
                                                                 style="font-size: 1rem;"></i>
@@ -453,7 +462,7 @@
 
 
 
-                                                        <a href="" data-target="#myallOPDShowModal" data-toggle="modal"
+                                                        <a href="" data-target="#myallOPDShowModal{{$opd->id}}" data-toggle="modal"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-user-doctor text-dark"
                                                                 style="font-size: 1rem;"></i>
@@ -461,14 +470,8 @@
                                                     </div>
 
                                                 </td>
-
-
-
-
-
-
-
-
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -520,58 +523,33 @@
 
 
 
-                <!-- Pass Modal -->
-                <div class="modal fade" id="myPassModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
 
-                            <form action="" class="modal-body">
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-user-secret fa-3x text-danger"></i>
-
-                                    <h3 class="mt-3">It's Me user name !</h3>
-
-                                    <p class="mt-2 text-center" style="font-weight: 700;">⚠️Highly restricted to share
-                                        PassKeys*** to anyone⚠️</p>
-
-                                    <p class="m-0"><strong>Email ID: sm@gmail.com</strong></p>
-
-                                    <p class="m-0"><strong>Passkey: Qr3$-vjDW-UserPass-DW0-0&#</strong></p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50"
-                                            data-dismiss="modal">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
 
                 <!-- My Active Inactive  Modal -->
-                <div class="modal fade" id="myActiveInactiveModal" tabindex="-1" role="dialog"
+                @foreach ($opds as $opd)
+                <div class="modal fade" id="myActiveInactiveModal{{$opd->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
 
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{route('superadmin.status.opd.edit', $opd->id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
 
 
                                 <div class="form-group">
-                                    <label for="other_banner"><i class="fa fa-stethoscope text-success"
+                                    <label for="status"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Set Status <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="" selected>Inactive</option>
-                                        <option value="">Active</option>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="Inactive" selected>{{$opd->status}}</option>
+                                        <option value="">---Select Status---</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
 
@@ -583,209 +561,16 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
 
 
-                <!-- My add OPD Modal -->
-                <div class="modal fade" id="myAddOPDModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myAddOPDModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
 
 
-                            <div class="modal-header">
-                                <p style="font-size: 1.5rem; font-weight: 700;" class="modal-title"
-                                    id="myAddOPDModalLabel">Add OPD Details</p>
-                            </div>
 
 
-
-                            <form class="prof-view m-4">
-
-
-
-                                <p class="m-0" style="font-size: 1.3rem; font-weight: 700;">Clinic Name: xyz</p>
-                                <p class="m-0 mt-1" style="font-size: 1.3rem; font-weight: 700;">Contact Person: xyz</p>
-
-
-
-
-                                <div class="from-view row  mt-5">
-
-
-
-                                    <div class="col-3 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa-solid fa-user-doctor text-primary"></i>
-                                            Doctor Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" value="xyz clinic"
-                                            style="height: 55px;">
-                                    </div>
-
-                                    <div class="col-3 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa fa-graduation-cap text-primary" aria-hidden="true"></i>
-                                            Designation <span class="text-danger">*</span></label>
-                                        <select name="" id="" class="form-control" style="height: 55px;">
-                                            <option selected>Select</option>
-                                            <option value="MD">MD</option>
-                                            <option value="Dr">Dr</option>
-                                            <option value="Prof">Prof</option>
-                                            <option value="BDS">BDS</option>
-                                        </select>
-                                    </div>
-
-
-
-                                    <div class="col-4 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
-                                            Specialist <span class="text-danger">*</span></label>
-                                        <select name="" id="" class="form-control" style="height: 55px;">
-                                            <option selected>Select</option>
-                                            <option value="allergy_immunology">Allergy and Immunology</option>
-                                            <option value="anesthesiology">Anesthesiology</option>
-                                            <option value="cardiology">Cardiology</option>
-                                            <option value="dermatology">Dermatology</option>
-                                            <option value="endocrinology">Endocrinology</option>
-                                            <option value="emergency_medicine">Emergency Medicine</option>
-                                            <option value="family_medicine">Family Medicine</option>
-                                            <option value="gastroenterology">Gastroenterology</option>
-                                            <option value="general_surgery">General Surgery</option>
-                                            <option value="geriatrics">Geriatrics</option>
-                                            <option value="hematology">Hematology</option>
-                                            <option value="infectious_disease">Infectious Disease</option>
-                                            <option value="internal_medicine">Internal Medicine</option>
-                                            <option value="neurology">Neurology</option>
-                                            <option value="neurosurgery">Neurosurgery</option>
-                                            <option value="obstetrics_gynecology">Obstetrics and Gynecology
-                                            </option>
-                                            <option value="oncology">Oncology</option>
-                                            <option value="ophthalmology">Ophthalmology</option>
-                                            <option value="orthopedics">Orthopedics</option>
-                                            <option value="otolaryngology">Otolaryngology (ENT)</option>
-                                            <option value="pediatrics">Pediatrics</option>
-                                            <option value="plastic_surgery">Plastic Surgery</option>
-                                            <option value="psychiatry">Psychiatry</option>
-                                            <option value="pulmonology">Pulmonology</option>
-                                            <option value="radiology">Radiology</option>
-                                            <option value="rheumatology">Rheumatology</option>
-                                            <option value="sports_medicine">Sports Medicine</option>
-                                            <option value="urology">Urology</option>
-                                            <option value="vascular_surgery">Vascular Surgery</option>
-                                            <option value="nephrology">Nephrology</option>
-                                            <option value="pathology">Pathology</option>
-                                            <option value="palliative_care">Palliative Care</option>
-                                            <option value="physical_medicine_rehabilitation">Physical Medicine
-                                                and Rehabilitation</option>
-                                            <option value="proctology">Proctology</option>
-                                            <option value="thoracic_surgery">Thoracic Surgery</option>
-                                            <option value="genetics">Genetics</option>
-                                            <option value="nuclear_medicine">Nuclear Medicine</option>
-                                            <option value="pain_management">Pain Management</option>
-                                            <option value="public_health">Public Health</option>
-                                            <option value="pharmacology">Pharmacology</option>
-
-                                        </select>
-                                    </div>
-
-
-
-
-                                    <div class="col-2 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa fa-indian-rupee-sign text-primary" aria-hidden="true"></i>
-                                            Doctor Fees <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" value="999"
-                                            style="height: 55px;">
-                                    </div>
-
-
-
-
-
-                                    <!-- multiple -->
-                                    <div id="add-same-section" class="row col-12">
-
-
-                                        <div class="col-3 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-calendar-days text-primary"></i>
-                                                Day <span class="text-danger">*</span></label>
-                                            <select name="" id="" class="form-control" style="height: 55px;">
-                                                <option selected>Select Day</option>
-                                                <option value="All Day">All Day</option>
-                                                <option value="Monday">Monday</option>
-                                                <option value="Tuesday">Tuesday</option>
-                                                <option value="Wednesday">Wednesday</option>
-                                                <option value="Thursday">Thursday</option>
-                                                <option value="Friday">Friday</option>
-                                                <option value="Saturday">Saturday</option>
-                                                <option value="Sunday">Sunday</option>
-                                            </select>
-                                        </div>
-
-
-
-
-
-                                        <div class="col-4 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-clock text-primary"></i> Time From
-                                                <span class="text-danger">*</span></label>
-
-                                            <input type="time" class="form-control" style="height: 55px;">
-                                        </div>
-
-
-
-
-
-                                        <div class="col-4 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-clock-rotate-left text-primary"></i> Time
-                                                To
-                                                <span class="text-danger">*</span></label>
-
-                                            <div class="d-flex align-items-center">
-                                                <input type="time" class="form-control" style="height: 55px;">
-
-                                                <button type="button" id="add-section-button"
-                                                    class="btn btn-primary rounded col-3 ml-3"
-                                                    style="height: 55px; font-weight: 700;">ADD</button>
-                                            </div>
-                                        </div>
-
-
-
-
-
-
-
-                                    </div>
-
-
-
-
-                                    <div class="d-flex justify-content-center w-100">
-                                        <button type="submit" class="btn btn-danger rounded">Upload
-                                            Details</button>
-                                    </div>
-
-
-
-
-                                </div>
-
-
-
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
 
 

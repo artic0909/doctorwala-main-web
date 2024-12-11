@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>All Partners</title>
+    <title>Add OPD Doctors</title>
 
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('../partner-assets')}}">
@@ -23,11 +23,10 @@
 
     <link href="{{asset('fav5.png')}}" rel="icon">
 
-    <link href="../img/fav5.png" rel="icon">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
 
 </head>
@@ -52,10 +51,8 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-                <form method="GET" action="{{ route('superadmin.super-all-partner.get') }}" class="d-flex w-100">
-                    <input type="search" id="search" name="search" value="{{ request('search') }}"
-                        placeholder="Search Here ........" class="form-control mx-4 w-100">
-                </form>
+                <input type="search" id="search" placeholder="Search Here ........" name="search"
+                    class="form-control mx-4 w-100">
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -356,305 +353,257 @@
 
 
                 <div class="content-wrapper">
-
-
-
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12">
 
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <h3 class="font-weight-bold">All Partners</h3>
+                                    <h3 class="font-weight-bold">Add Partners</h3>
+
+
+
+                                    <div class="row m-auto">
+                                        <div class="col-12 mt-4">
+
+                                            <form class="prof-view" action="{{ route('superadmin.add.doctor', $opd->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="from-view row  mt-5">
+
+
+
+                                                    <div class="col-3 form-group">
+                                                        <label for="doctor_name" style="font-weight: 700;"><i
+                                                                class="fa-solid fa-user-doctor text-primary"></i>
+                                                            Doctor Name <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="doctor_name" name="doctor_name"
+                                                            style="height: 55px;" placeholder="Enter Doctor Name *">
+                                                    </div>
+
+                                                    <div class="col-3 form-group">
+                                                        <label for="doctor_designation" style="font-weight: 700;"><i
+                                                                class="fa fa-graduation-cap text-primary"
+                                                                aria-hidden="true"></i> Designation <span
+                                                                class="text-danger">*</span></label>
+                                                        <select name="doctor_designation" id="doctor_designation" class="form-control" style="height: 55px;">
+                                                            <option selected>---Select Designation---</option>
+                                                            <option value="MD">MD</option>
+                                                            <option value="Dr">Dr</option>
+                                                            <option value="Prof">Prof</option>
+                                                            <option value="BDS">BDS</option>
+                                                        </select>
+                                                    </div>
+
+
+
+                                                    <div class="col-4 form-group">
+                                                        <label for="doctor_specialist" style="font-weight: 700;"><i
+                                                                class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
+                                                            Specialist <span class="text-danger">*</span></label>
+                                                        <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
+                                                            <option selected>---Select Specialist---</option>
+                                                            <option value="allergy_immunology">Allergy and Immunology</option>
+                                                            <option value="anesthesiology">Anesthesiology</option>
+                                                            <option value="cardiology">Cardiology</option>
+                                                            <option value="dermatology">Dermatology</option>
+                                                            <option value="endocrinology">Endocrinology</option>
+                                                            <option value="emergency_medicine">Emergency Medicine</option>
+                                                            <option value="family_medicine">Family Medicine</option>
+                                                            <option value="gastroenterology">Gastroenterology</option>
+                                                            <option value="general_surgery">General Surgery</option>
+                                                            <option value="geriatrics">Geriatrics</option>
+                                                            <option value="hematology">Hematology</option>
+                                                            <option value="infectious_disease">Infectious Disease</option>
+                                                            <option value="internal_medicine">Internal Medicine</option>
+                                                            <option value="neurology">Neurology</option>
+                                                            <option value="neurosurgery">Neurosurgery</option>
+                                                            <option value="obstetrics_gynecology">Obstetrics and Gynecology
+                                                            </option>
+                                                            <option value="oncology">Oncology</option>
+                                                            <option value="ophthalmology">Ophthalmology</option>
+                                                            <option value="orthopedics">Orthopedics</option>
+                                                            <option value="otolaryngology">Otolaryngology (ENT)</option>
+                                                            <option value="pediatrics">Pediatrics</option>
+                                                            <option value="plastic_surgery">Plastic Surgery</option>
+                                                            <option value="psychiatry">Psychiatry</option>
+                                                            <option value="pulmonology">Pulmonology</option>
+                                                            <option value="radiology">Radiology</option>
+                                                            <option value="rheumatology">Rheumatology</option>
+                                                            <option value="sports_medicine">Sports Medicine</option>
+                                                            <option value="urology">Urology</option>
+                                                            <option value="vascular_surgery">Vascular Surgery</option>
+                                                            <option value="nephrology">Nephrology</option>
+                                                            <option value="pathology">Pathology</option>
+                                                            <option value="palliative_care">Palliative Care</option>
+                                                            <option value="physical_medicine_rehabilitation">Physical Medicine
+                                                                and Rehabilitation</option>
+                                                            <option value="proctology">Proctology</option>
+                                                            <option value="thoracic_surgery">Thoracic Surgery</option>
+                                                            <option value="genetics">Genetics</option>
+                                                            <option value="nuclear_medicine">Nuclear Medicine</option>
+                                                            <option value="pain_management">Pain Management</option>
+                                                            <option value="public_health">Public Health</option>
+                                                            <option value="pharmacology">Pharmacology</option>
+
+                                                        </select>
+                                                    </div>
+
+
+
+
+                                                    <div class="col-2 form-group">
+                                                        <label for="doctor_fees" style="font-weight: 700;"><i
+                                                                class="fa fa-indian-rupee-sign text-primary"
+                                                                aria-hidden="true"></i>
+                                                            Doctor Fees <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="doctor_fees" name="doctor_fees"
+                                                            style="height: 55px;" placeholder="Enter Doctor Fees *">
+                                                    </div>
+
+
+
+
+
+                                                    <!-- multiple -->
+                                                    <div id="add-same-section" class="row col-12">
+
+
+                                                        <div class="col-3 form-group">
+                                                            <label for="doctor_visit_day" style="font-weight: 700;"><i
+                                                                    class="fa-solid fa-calendar-days text-primary"></i>
+                                                                Day <span class="text-danger">*</span></label>
+                                                            <select name="doctor_visit_day[]" id="doctor_visit_day" class="form-control" style="height: 55px;">
+                                                                <option selected>---Select Day---</option>
+                                                                <option value="All Day">All Day</option>
+                                                                <option value="Monday">Monday</option>
+                                                                <option value="Tuesday">Tuesday</option>
+                                                                <option value="Wednesday">Wednesday</option>
+                                                                <option value="Thursday">Thursday</option>
+                                                                <option value="Friday">Friday</option>
+                                                                <option value="Saturday">Saturday</option>
+                                                                <option value="Sunday">Sunday</option>
+                                                            </select>
+                                                        </div>
+
+
+
+
+
+                                                        <div class="col-4 form-group">
+                                                            <label for="doctor_visit_start_time" style="font-weight: 700;"><i
+                                                                    class="fa-solid fa-clock text-primary"></i> Time From
+                                                                <span class="text-danger">*</span></label>
+
+                                                            <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_start_time" name="doctor_visit_start_time[]">
+                                                        </div>
+
+
+
+
+
+                                                        <div class="col-4 form-group">
+                                                            <label for="doctor_visit_end_time" style="font-weight: 700;"><i
+                                                                    class="fa-solid fa-clock-rotate-left text-primary"></i> Time
+                                                                To
+                                                                <span class="text-danger">*</span></label>
+
+                                                            <div class="d-flex align-items-center">
+                                                                <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_end_time" name="doctor_visit_end_time[]">
+
+                                                                <button type="button" id="add-section-button"
+                                                                    class="btn btn-primary rounded col-3 ml-3"
+                                                                    style="height: 55px; font-weight: 700;">ADD</button>
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+
+                                                    </div>
+
+
+
+
+                                                    <div class="d-flex justify-content-center w-100">
+                                                        <button type="submit" class="btn btn-danger rounded" style="height: 55px; font-weight: 700;">Upload
+                                                            Details</button>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </form>
+
                                         </div>
-
-                                        <div class="col-9 d-flex justify-content-end align-items-center">
-                                            <nav aria-label="Page navigation">
-                                                <ul class="pagination">
-                                                    <!-- Previous Page Link -->
-                                                    @if ($partners->onFirstPage())
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Prev</a>
-                                                    </li>
-                                                    @else
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="{{ $partners->previousPageUrl() }}">Prev</a>
-                                                    </li>
-                                                    @endif
-
-                                                    <!-- Page Number Links -->
-                                                    @foreach ($partners->getUrlRange(1, $partners->lastPage()) as $page => $url)
-                                                    <li class="page-item {{ $partners->currentPage() == $page ? 'active' : '' }}">
-                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                                    </li>
-                                                    @endforeach
-
-                                                    <!-- Next Page Link -->
-                                                    @if ($partners->hasMorePages())
-                                                    <li class="page-item">
-                                                        <a class="page-link" href="{{ $partners->nextPageUrl() }}">Next</a>
-                                                    </li>
-                                                    @else
-                                                    <li class="page-item disabled">
-                                                        <a class="page-link" href="#" aria-disabled="true">Next</a>
-                                                    </li>
-                                                    @endif
-                                                </ul>
-                                            </nav>
-                                        </div>
-
-
-
 
                                     </div>
-
-
-
-                                    <table class="table table-stripped table-bordered mt-4">
-                                        <thead>
-                                            <tr>
-                                                <th>Staus</th>
-                                                <th>Actions</th>
-                                                <th>ID</th>
-                                                <th>Type</th>
-                                                <th>Clinic Name</th>
-                                                <th>Contact Person</th>
-                                                <th>Email ID</th>
-                                                <th>State/City</th>
-                                                <th>Mobile</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                            @foreach ($partners as $partner)
-                                            <tr>
-                                                <td>
-                                                    @if($partner->status == 'Active')
-                                                    <!-- If partner is Active -->
-                                                    <a href="" data-target="#myActiveInactiveModal{{$partner->id}}" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
-                                                    </a>
-                                                    @else
-                                                    <!-- If partner is Inactive -->
-                                                    <a href="" data-target="#myActiveInactiveModal{{$partner->id}}" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
-                                                    </a>
-                                                    @endif
-                                                </td>
-
-
-                                                <td>
-                                                    <a href="" data-target="#myDeleteModal{{$partner->id}}" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.1rem;"></i></a>
-
-                                                    <a href="" data-target="#myEditModal{{$partner->id}}" data-toggle="modal"
-                                                        class="ed-btn mt-2"><i class="fa-solid fa-pen-to-square text-primary"
-                                                            style="font-size: 1.1rem;"></i></a>
-                                                </td>
-
-
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">
-                                                        {{$partner->partner_id}}
-                                                    </p>
-                                                </td>
-
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">
-                                                        @php
-                                                        $registrationTypes = is_string($partner->registration_type) ? explode(',', $partner->registration_type) : $partner->registration_type;
-                                                        @endphp
-
-                                                        @foreach($registrationTypes as $type)
-                                                        <span>{{ $type }}</span> @if(!$loop->last) - @endif
-                                                        @endforeach
-                                                    </p>
-                                                </td>
-
-
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">{{$partner->partner_clinic_name}}</p>
-                                                </td>
-
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">{{$partner->partner_contact_person_name}}</p>
-                                                </td>
-
-
-
-
-                                                <td>
-                                                    <a href="mailto:{{$partner->partner_email}}" class="text-dark" style="text-decoration: underline;">{{$partner->partner_email}}</a>
-                                                </td>
-
-
-
-                                                <td>
-                                                    <p class="m-0" style="font-weight: 700;">
-                                                        <span>{{$partner->partner_state}} - </span>
-                                                        <span class="text-primary">{{$partner->partner_city}}</span>
-                                                    </p>
-                                                </td>
-
-                                                <td><a href="tel:{{$partner->partner_mobile_number}}" style="text-decoration: underline;">{{$partner->partner_mobile_number}}</a></td>
-
-
-
-
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </div>
 
 
 
 
 
-
-
-
-
-
-                <!-- floating right button -->
-                <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
-                    href="/superadmin/super-add-partners" style="width: fit-content;">
-                    <i class="fa fa-2x fa-plus" aria-hidden="true" style="font-size: 1.7rem;"></i>
-                </a>
-
-
-
-
-
-
-
-                <!-- My Active Inactive  Modal -->
-                @foreach ($partners as $partner)
-                <div class="modal fade" id="myActiveInactiveModal{{$partner->id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-
-
-                            <form class="modal-body" action="{{route('superadmin.status.edit', $partner->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
-
-
-                                <div class="form-group">
-                                    <label for="status"><i class="fa fa-stethoscope text-success"
-                                            aria-hidden="true"></i>
-                                        Set Status <span class="text-danger">*</span></label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="Inactive" selected>{{$partner->status}}</option>
-                                        <option value="">---Select Status---</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
-                                </div>
-
-
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-
-                <!-- Delete Modal -->
-                @foreach($partners as $partner)
-                <div class="modal fade" id="myDeleteModal{{$partner->id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form action="{{ route('superadmin.status.delete', $partner->id )}}" class="modal-body" method="POST">
-                                @csrf
-                                @method('DELETE')
-
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
-
-                                    <h3 class="mt-3">Are You Sure ?</h3>
-
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
-                                        cannot be undone.</p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-
-
-
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
-                                href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
-                            All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
-                            <i class="ti-heart text-danger ml-1"></i></span>
-                    </div>
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
-                                href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
-                    </div>
-                </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- partial:partials/_footer.html -->
+            <!-- <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
+                            href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
+                        All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
+                        <i class="ti-heart text-danger ml-1"></i></span>
+                </div>
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
+                            href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
+                </div>
+            </footer> -->
+            <!-- partial -->
         </div>
-        <!-- page-body-wrapper ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
     <!-- container-scroller -->
 
     <!-- plugins:js -->
-    <script src="{{asset('../partner-assets/vendors/js/vendor.bundle.base.js')}}">
-    </script>
+    <script src="{{asset('../partner-assets/vendors/js/vendor.bundle.base.js')}}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="{{asset('../partner-assets/vendors/chart.js/Chart.min.js')}}"></script>
@@ -674,6 +623,14 @@
     <script src="{{asset('../partner-assets/js/dashboard.js')}}"></script>
     <script src="{{asset('../partner-assets/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
+
+
+
+    <!-- add section JS -->
+    <script src="{{asset('../partner-assets/js/add-section.js')}}"></script>
+
+
+
 </body>
 
 </html>

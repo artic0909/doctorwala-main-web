@@ -374,22 +374,24 @@
                                         </thead>
 
                                         <tbody>
+                                            @foreach ($banners as $banner)
                                             <tr>
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myEditModal{{ $banner->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myDeleteModal{{ $banner->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
 
-                                                <td><img src="../img/a1.jpg" alt=""
+                                                <td><img src="{{ asset('storage/' . $banner->banner_image) }}" alt=""
                                                         style="width: 150px; height: 80px; border-radius: 10px;">
                                                 </td>
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -429,15 +431,15 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Add Other Banner</h5>
                             </div>
 
-                            <form class="modal-body">
-
+                            <form class="modal-body" action="{{ route('superadmin.otherbanner.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
                                 <div class="form-group">
-                                    <label for="other_banner"><i class="fa fa-stethoscope text-success"
+                                    <label for="banner_image"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Banner <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="other_banner" id="other_banner">
+                                    <input type="file" class="form-control" name="banner_image" id="banner_image">
                                 </div>
 
 
@@ -452,7 +454,8 @@
 
 
                 <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
+                @foreach ($banners as $banner)
+                <div class="modal fade" id="myEditModal{{ $banner->id }}" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -463,18 +466,19 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Edit Other Banner</h5>
                             </div>
 
-                            <img src="../img/a1.jpg" alt="" style="height: inherit; width: inherit;">
+                            <img src="{{ asset('storage/' . $banner->banner_image) }}" alt="" style="height: inherit; width: inherit;">
 
-                            <form class="modal-body">
-
+                            <form class="modal-body" action="{{ route('superadmin.otherbanner.update', $banner->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
 
                                 <div class="form-group">
-                                    <label for="other_banner"><i class="fa fa-stethoscope text-success"
+                                    <label for="banner_image"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Banner <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="other_banner" id="other_banner">
+                                    <input type="file" class="form-control" name="banner_image" id="banner_image">
                                 </div>
 
 
@@ -485,16 +489,21 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach ($banners as $banner)
+                <div class="modal fade" id="myDeleteModal{{ $banner->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{ route('superadmin.otherbanner.delete', $banner->id) }}" method="post" class="modal-body">
+                                @csrf
+                                @method('DELETE')
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -506,7 +515,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -514,6 +523,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 

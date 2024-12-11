@@ -9,6 +9,11 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Superadmin\SuperAllOPDHandleController;
+use App\Http\Controllers\Superadmin\SuperAllUserController;
+use App\Http\Controllers\Superadmin\SuperHomeBannerController;
+use App\Http\Controllers\Superadmin\SuperOtherBannerController;
+use App\Http\Controllers\Superadmin\SuperPartnerHandleController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:web')->group(function () {
@@ -188,6 +193,47 @@ Route::middleware('auth:web')->group(function () {
     // ===========================================================================================================
 
 
+
+
+
+    // All API Routes Start
+
+    // Home Banner---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-home-banner', [SuperHomeBannerController::class, 'index']);
+    Route::post('/superadmin/super-home-banner', [SuperHomeBannerController::class, 'store'])->name('superadmin.homebanner.store');
+    Route::put('/superadmin/super-home-banner/update/{id}', [SuperHomeBannerController::class, 'update'])->name('superadmin.homebanner.update');
+    Route::delete('/superadmin/super-home-banner/delete/{id}', [SuperHomeBannerController::class, 'delete'])->name('superadmin.homebanner.delete');
+
+    // Other Banner---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-others-banner', [SuperOtherBannerController::class, 'index']);
+    Route::post('/superadmin/super-others-banner', [SuperOtherBannerController::class, 'store'])->name('superadmin.otherbanner.store');
+    Route::put('/superadmin/super-others-banner/update/{id}', [SuperOtherBannerController::class, 'update'])->name('superadmin.otherbanner.update');
+    Route::delete('/superadmin/super-others-banner/delete/{id}', [SuperOtherBannerController::class, 'delete'])->name('superadmin.otherbanner.delete');
+
+    // All Users---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-all-user', [SuperAllUserController::class, 'index'])->name('superadmin.super-all-user');
+    Route::delete('/superadmin/super-all-user/delete/{id}', [SuperAllUserController::class, 'delete'])->name('superadmin.super-all-user.delete');
+
+    // All Partners---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-add-partners', [SuperPartnerHandleController::class, 'addPartnerView']);
+    Route::post('/superadmin/super-add-partners', [SuperPartnerHandleController::class, 'addPartners'])->name('superadmin.register.partners');
+    Route::get('/superadmin/super-all-partner', [SuperPartnerHandleController::class, 'allPartnersShow'])->name('superadmin.super-all-partner.get');
+    Route::put('/superadmin/super-all-partner/status/{id}', [SuperPartnerHandleController::class, 'statusEdit'])->name('superadmin.status.edit');
+    Route::delete('/superadmin/super-all-partner/delete/{id}', [SuperPartnerHandleController::class, 'deletePartner'])->name('superadmin.status.delete');
+
+
+    // All OPD---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-all-opd', [SuperAllOPDHandleController::class, 'opdView'])->name('superadmin.super-all-opd');
+    Route::put('/superadmin/super-all-opd/status/{id}', [SuperAllOPDHandleController::class, 'statusEdit'])->name('superadmin.status.opd.edit');
+
+    Route::get('/superadmin/super-edit-opd-details/{id}', [SuperAllOPDHandleController::class, 'opdEditPageView']);
+    Route::put('/superadmin/super-edit-opd-details/update/{id}', [SuperAllOPDHandleController::class, 'updateOPDContactDetails'])->name('superadmin.super-update-opd-details');
+    
+    Route::get('/superadmin/super-addopd-doctor/{id}', [SuperAllOPDHandleController::class, 'addOPDDoctorPageView']);
+    Route::post('/superadmin/super-addopd-doctor/add/{id}', [SuperAllOPDHandleController::class, 'addDoctorsOnOPD'])->name('superadmin.add.doctor');
+
+    
+    
 
 
 

@@ -135,8 +135,8 @@
                     </li>
 
 
-                                        <!-- partner-profile-banner -->
-                                        <li class="nav-item">
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
                             aria-controls="ui-basicuy">
                             <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
