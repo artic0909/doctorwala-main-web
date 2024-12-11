@@ -223,14 +223,18 @@ Route::middleware('auth:web')->group(function () {
 
 
     // All OPD---------------------------------------------------------------------------------------------------------------------------------------->
+                                
+    // All OPD View
     Route::get('/superadmin/super-all-opd', [SuperAllOPDHandleController::class, 'opdView'])->name('superadmin.super-all-opd');
     Route::put('/superadmin/super-all-opd/status/{id}', [SuperAllOPDHandleController::class, 'statusEdit'])->name('superadmin.status.opd.edit');
-
+                                
+    // OPD Contact Details
     Route::get('/superadmin/super-edit-opd-details/{id}', [SuperAllOPDHandleController::class, 'opdEditPageView']);
     Route::put('/superadmin/super-edit-opd-details/update/{id}', [SuperAllOPDHandleController::class, 'updateOPDContactDetails'])->name('superadmin.super-update-opd-details');
-    
-    Route::get('/superadmin/super-addopd-doctor/{id}', [SuperAllOPDHandleController::class, 'addOPDDoctorPageView']);
-    Route::post('/superadmin/super-addopd-doctor/add/{id}', [SuperAllOPDHandleController::class, 'addDoctorsOnOPD'])->name('superadmin.add.doctor');
+                                  
+    // OPD Doctors
+    Route::get('/superadmin/super-addopd-doctor/{pid}', [SuperAllOPDHandleController::class, 'addOPDDoctorPageView']);
+    Route::post('/superadmin/super-addopd-doctor/add/', [SuperAllOPDHandleController::class, 'addOPDDoctor'])->name('superadmin.super-addopd.doctor');
 
     
     

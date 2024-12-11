@@ -365,8 +365,21 @@
                                     <div class="row m-auto">
                                         <div class="col-12 mt-4">
 
-                                            <form class="prof-view" action="{{ route('superadmin.add.doctor', $opd->id) }}" method="POST" enctype="multipart/form-data">
+                                            <form class="prof-view" action="{{ route('superadmin.super-addopd.doctor')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
+
+
+                                                <div class="form-view row">
+                                                    <div class="col-3 form-group">
+                                                        <label for="currently_loggedin_partner_id" style="font-weight: 700;"><i
+                                                                class="fa-solid fa-id-card text-primary"></i>
+                                                            Partner ID <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="currently_loggedin_partner_id" name="currently_loggedin_partner_id"
+                                                            style="height: 55px;" value="{{$pid}}" readonly>
+                                                    </div>
+                                                </div>
+
+
                                                 <div class="from-view row  mt-5">
 
 
@@ -599,7 +612,7 @@
 
 
 
-   
+
     <!-- container-scroller -->
 
     <!-- plugins:js -->

@@ -24,10 +24,12 @@ class SuperAllOPDHandleController extends Controller
 
 
             if ($partner) {
+                $opd->pid = $partner->id;
                 $opd->partner_id = $partner->partner_id;
                 $opd->partner_clinic_name = $partner->partner_clinic_name;
             } else {
 
+                $opd->pid = null;
                 $opd->partner_id = null;
                 $opd->partner_clinic_name = null;
             }
@@ -110,67 +112,51 @@ class SuperAllOPDHandleController extends Controller
 
 
 
-    public function addOPDDoctorPageView($id)
+    public function addOPDDoctorPageView($pid)
     {
-
-        $opd = PartnerOPDContactModel::find($id);
-
-        return view('superadmin.super-addopd-doctor', compact('opd'));
+        return view('superadmin.super-addopd-doctor', compact('pid'));
     }
 
-
-
-
-    public function addDoctorsOnOPD(Request $request, $id)
+    public function addOPDDoctor(Request $request)
     {
+        
+
         // Validate the input
         $request->validate([
+            'currently_loggedin_partner_id' => 'required|numeric',
             'doctor_name' => 'required|string|max:255',
             'doctor_designation' => 'required|string|max:255',
             'doctor_specialist' => 'required|string|max:255',
-            'doctor_fees' => 'required|numeric|min:0',
-            'doctor_visit_day' => 'required|array|min:1',
+            'doctor_fees' => 'required|numeric',
+            'doctor_visit_day' => 'required|array',
             'doctor_visit_day.*' => 'required|string|max:255',
-            'doctor_visit_start_time' => 'required|array|min:1',
+            'doctor_visit_start_time' => 'required|array',
             'doctor_visit_start_time.*' => 'required|date_format:H:i',
-            'doctor_visit_end_time' => 'required|array|min:1',
-            'doctor_visit_end_time.*' => 'required|date_format:H:i|after:doctor_visit_start_time.*',
+            'doctor_visit_end_time' => 'required|array',
+            'doctor_visit_end_time.*' => 'required|date_format:H:i',
         ]);
 
-        // Ensure the partner ID exists
-        $partnerId = DwPartnerModel::find($id);
-
-        if (!$partnerId) {
-            return redirect()->back()->with('error', 'Invalid partner ID.');
-        }
-
         // Prepare visit day and time data
-        $visitDayTime = collect($request->doctor_visit_day)->map(function ($day, $index) use ($request) {
-            return [
+        $visitDayTime = [];
+        foreach ($request->doctor_visit_day as $index => $day) {
+            $visitDayTime[] = [
                 'day' => $day,
-                'start_time' => $request->doctor_visit_start_time[$index] ?? null,
-                'end_time' => $request->doctor_visit_end_time[$index] ?? null,
+                'start_time' => $request->doctor_visit_start_time[$index],
+                'end_time' => $request->doctor_visit_end_time[$index],
             ];
-        });
-
-        // Validate that all start and end times are paired correctly
-        foreach ($visitDayTime as $visit) {
-            if (empty($visit['start_time']) || empty($visit['end_time'])) {
-                return redirect()->back()->with('error', 'Each visit day must have a start and end time.');
-            }
         }
 
         // Prepare the data to be stored
         $data = [
-            'currently_loggedin_partner_id' => $partnerId->id, // Retrieve the partner's ID
+            'currently_loggedin_partner_id' => $request->currently_loggedin_partner_id, // Always store the partner ID
             'doctor_name' => $request->doctor_name,
             'doctor_designation' => $request->doctor_designation,
             'doctor_specialist' => $request->doctor_specialist,
             'doctor_fees' => $request->doctor_fees,
-            'visit_day_time' => $visitDayTime->toJson(), // Encode as JSON
+            'visit_day_time' => json_encode($visitDayTime), // Ensure it's stored as JSON
         ];
 
-        // Create a new record for the OPD doctor
+        // Store new data for the partner without overwriting existing records
         PartnerAllOPDDoctorModel::create($data);
 
         return redirect()->back()->with('success', 'OPD Doctor details added successfully!');

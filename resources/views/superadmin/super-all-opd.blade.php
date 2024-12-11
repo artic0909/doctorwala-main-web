@@ -454,11 +454,13 @@
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
-                                                        <a href="/superadmin/super-addopd-doctor/{{$opd->id}}"
+                                                       
+                                                        <a href="/superadmin/super-addopd-doctor/{{$opd->pid}}"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-plus text-success"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
+                                                       
 
 
 
