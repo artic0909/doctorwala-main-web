@@ -41,23 +41,18 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="../super-admin-panel/super-dashboard.html" style="font-weight: 900;"><img
-                        src="../img/logo3.png" alt="logo"></a>
-                <a class="navbar-brand brand-logo-mini" href="../super-admin-panel/super-dashboard.html"><img src="../img/fav5.png"
+                <a class="navbar-brand brand-logo mr-5" href="/superadmin/super-dashboard" style="font-weight: 900;"><img
+                        src="{{asset('../img/logo3.png')}}" alt="logo"></a>
+                <a class="navbar-brand brand-logo-mini" href="/superadmin/super-dashboard"><img src="{{asset('fav5.png')}}"
                         alt="logo" /></a>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
                 <input type="search" id="search" placeholder="Search Here ........" name="search"
                     class="form-control mx-4 w-100">
-
-
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
-
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -95,9 +90,9 @@
 
 
 
+
         <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-
 
 
 
@@ -349,6 +344,7 @@
 
 
 
+
             <!-- partial -->
             <div class="main-panel">
 
@@ -370,98 +366,183 @@
 
 
 
-                                    <form class="prof-view">
+                                    <form class="prof-view" action="{{route('superadmin.super-update-doc-details' , $doc->id)}}" method="POST">
+                                        @csrf
+                                        @method('PUT')
 
 
-                                        <div class="from-view row  mt-3">
+                                        <div class="from-view row  mt-2">
 
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-sitemap text-primary"></i> Type
-                                                    <span class="text-danger">*</span></label>
-
-                                                <div class="group-main d-flex">
-                                                    <div class="group ml-3">
-                                                        <label for="" style="font-weight: 700;">Doctor</label>
-                                                        <input type="radio" checked readonly>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-hospital text-primary" aria-hidden="true"></i>
-                                                    Clinic Name
-                                                    <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="life line">
-                                            </div>
 
 
 
                                             <div class="col-4 form-group">
                                                 <label for="name" style="font-weight: 700;"><i
+                                                        class="fa fa-sitemap text-primary" aria-hidden="true"></i> Type
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="clinic_registration_type" name="clinic_registration_type"
+                                                    value="{{ $contactDetails->clinic_registration_type ?? 'Doctor' }}" style="height: 55px;" readonly>
+                                            </div>
+
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_doctor_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-user text-primary"></i>
-                                                    Contact Person <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="saklin Mustak">
-                                            </div>
-
-
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
-                                                    Number
-                                                    <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="7467365464">
+                                                    Doctor Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="partner_doctor_name" name="partner_doctor_name"
+                                                    value="{{ $doc->partner_doctor_name ?? '' }}" style="height: 55px;">
                                             </div>
 
 
 
 
+
+
+
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_specialist" style="font-weight: 700;"><i
+                                                        class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
+                                                    Specialist <span class="text-danger">*</span></label>
+                                                <select name="partner_doctor_specialist" id="partner_doctor_specialist" class="form-control" style="height: 55px;">
+                                                    <option selected>{{ $doc->partner_doctor_specialist ?? '' }}</option>
+                                                    <option>---Select Specialization---</option>
+                                                    <option value="allergy_immunology">Allergy and Immunology</option>
+                                                    <option value="anesthesiology">Anesthesiology</option>
+                                                    <option value="cardiology">Cardiology</option>
+                                                    <option value="dermatology">Dermatology</option>
+                                                    <option value="endocrinology">Endocrinology</option>
+                                                    <option value="emergency_medicine">Emergency Medicine</option>
+                                                    <option value="family_medicine">Family Medicine</option>
+                                                    <option value="gastroenterology">Gastroenterology</option>
+                                                    <option value="general_surgery">General Surgery</option>
+                                                    <option value="geriatrics">Geriatrics</option>
+                                                    <option value="hematology">Hematology</option>
+                                                    <option value="infectious_disease">Infectious Disease</option>
+                                                    <option value="internal_medicine">Internal Medicine</option>
+                                                    <option value="neurology">Neurology</option>
+                                                    <option value="neurosurgery">Neurosurgery</option>
+                                                    <option value="obstetrics_gynecology">Obstetrics and Gynecology
+                                                    </option>
+                                                    <option value="oncology">Oncology</option>
+                                                    <option value="ophthalmology">Ophthalmology</option>
+                                                    <option value="orthopedics">Orthopedics</option>
+                                                    <option value="otolaryngology">Otolaryngology (ENT)</option>
+                                                    <option value="pediatrics">Pediatrics</option>
+                                                    <option value="plastic_surgery">Plastic Surgery</option>
+                                                    <option value="psychiatry">Psychiatry</option>
+                                                    <option value="pulmonology">Pulmonology</option>
+                                                    <option value="radiology">Radiology</option>
+                                                    <option value="rheumatology">Rheumatology</option>
+                                                    <option value="sports_medicine">Sports Medicine</option>
+                                                    <option value="urology">Urology</option>
+                                                    <option value="vascular_surgery">Vascular Surgery</option>
+                                                    <option value="nephrology">Nephrology</option>
+                                                    <option value="pathology">Pathology</option>
+                                                    <option value="palliative_care">Palliative Care</option>
+                                                    <option value="physical_medicine_rehabilitation">Physical Medicine
+                                                        and Rehabilitation</option>
+                                                    <option value="proctology">Proctology</option>
+                                                    <option value="thoracic_surgery">Thoracic Surgery</option>
+                                                    <option value="genetics">Genetics</option>
+                                                    <option value="nuclear_medicine">Nuclear Medicine</option>
+                                                    <option value="pain_management">Pain Management</option>
+                                                    <option value="public_health">Public Health</option>
+                                                    <option value="pharmacology">Pharmacology</option>
+
+                                                </select>
+                                            </div>
+
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_doctor_designation" style="font-weight: 700;"><i
+                                                        class="fa fa-graduation-cap text-primary"
+                                                        aria-hidden="true"></i> Designation <span
+                                                        class="text-danger">*</span></label>
+                                                <select name="partner_doctor_designation" id="partner_doctor_designation" class="form-control" style="height: 55px;">
+                                                    <option selected>{{ $doc->partner_doctor_designation ?? '' }}</option>
+                                                    <option>---Select Designation---</option>
+                                                    <option value="MD">MD</option>
+                                                    <option value="Dr">Dr</option>
+                                                    <option value="Prof">Prof</option>
+                                                    <option value="BDS">BDS</option>
+                                                </select>
+                                            </div>
+
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_doctor_fees" style="font-weight: 700;"><i
+                                                        class="fa fa-indian-rupee-sign text-primary"
+                                                        aria-hidden="true"></i>
+                                                    Doctor Fees <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="partner_doctor_fees" name="partner_doctor_fees"
+                                                    placeholder="Enter Doctor Fees" style="height: 55px;" value="{{ $doc->partner_doctor_fees ?? '' }}">
+                                            </div>
+
+
+
+
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_doctor_mobile" style="font-weight: 700;"><i
+                                                        class="fa fa-phone text-primary" aria-hidden="true"></i>
+                                                    Mobile Number <span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" id="partner_doctor_mobile" name="partner_doctor_mobile"
+                                                    value="{{ $doc->partner_doctor_mobile ?? '' }}" style="height: 55px;">
+                                            </div>
+
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="partner_doctor_email" style="font-weight: 700;"><i
                                                         class="fa fa-envelope text-primary" aria-hidden="true"></i>
                                                     Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="sm@gmail.com">
+                                                <input type="email" class="form-control" id="partner_doctor_email" name="partner_doctor_email"
+                                                    value="{{ $doc->partner_doctor_email ?? '' }}" style="height: 55px;">
                                             </div>
 
 
 
 
 
+
+
+
+
+
+
+
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_landmark" style="font-weight: 700;"><i
                                                         class="fa fa-map-pin text-primary" aria-hidden="true"></i>
                                                     Landmark <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="Honda Showroom">
+                                                <input type="text" class="form-control" id="partner_doctor_landmark" name="partner_doctor_landmark"
+                                                    value="{{ $doc->partner_doctor_landmark ?? '' }}" style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_pincode" style="font-weight: 700;"><i
                                                         class="fa fa-location-pin-lock text-primary"
                                                         aria-hidden="true"></i>
                                                     Pin Code <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="711302">
+                                                <input type="text" class="form-control" id="partner_doctor_pincode" name="partner_doctor_pincode"
+                                                    value="{{ $doc->partner_doctor_pincode ?? '' }}" style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_google_map_link" style="font-weight: 700;"><i
                                                         class="fa fa-map-location-dot text-primary"
                                                         aria-hidden="true"></i>
-                                                    Google Map <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="dsjksdjhfjksdfjf746t4dhfdfjh">
+                                                    Google Map </label>
+                                                <input type="text" class="form-control" id="partner_doctor_google_map_link" name="partner_doctor_google_map_link"
+                                                    value="{{ $doc->partner_doctor_google_map_link ?? '' }}" style="height: 55px;">
                                             </div>
 
 
@@ -469,11 +550,12 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_state" style="font-weight: 700;"><i
                                                         class="fa-solid fa-globe text-primary"></i>
                                                     State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select State</option>
+                                                <select name="partner_doctor_state" id="partner_doctor_state" class="form-control" style="height: 55px;">
+                                                    <option selected>{{ $doc->partner_doctor_state ?? '' }}</option>
+                                                    <option>---Select State---</option>
                                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar
                                                         Islands</option>
                                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
@@ -522,112 +604,30 @@
 
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_city" style="font-weight: 700;"><i
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
 
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select City</option>
-                                                    <option value="">City 1</option>
-                                                    <option value="">City 2</option>
-                                                    <option value="">City 3</option>
-                                                    <option value="">City 4</option>
-                                                    <option value="">City 5</option>
-                                                </select>
+                                                <input type="text" id="partner_doctor_city" name="partner_doctor_city" class="form-control" style="height: 55px;" value="{{ $doc->partner_doctor_city ?? '' }}">
                                             </div>
 
 
 
 
+
+
+
+
+
+
+
                                             <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="partner_doctor_address" style="font-weight: 700;"><i
                                                         class="fa-solid fa-location-dot text-primary"></i> Address
                                                     <span class="text-danger">*</span></label>
 
-                                                <textarea name="" id="" class="form-control"
-                                                    rows="7">Ranihati, Howrah, 711302</textarea>
+                                                <textarea name="partner_doctor_address" id="partner_doctor_address" class="form-control" rows="7">{{ $doc->partner_doctor_address ?? '' }}</textarea>
                                             </div>
-
-
-
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i> Password
-                                                    <span class="text-danger">*</span></label>
-
-                                                <input type="text" class="form-control" style="height: 55px;"
-                                                    value="djdhjg3764">
-                                            </div>
-
-
-
-
-
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i> Confirm Password
-                                                    <span class="text-danger">*</span></label>
-
-                                                <input type="text" class="form-control" style="height: 55px;">
-                                            </div>
-
-
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-info-circle text-primary"></i> About Clinic
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-users-viewfinder text-primary"></i> Mission
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-eye text-primary"></i> Vision
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-ambulance text-primary"></i> Service Lists
-                                                </label>
-
-                                                <div class="d-flex align-items-center"
-                                                    id="thisSectionAddAgainAfterClickAddBtn">
-                                                    <input type="text" class="form-control" style="height: 55px;">
-
-                                                    <a href="" class="btn btn-success rounded ml-3" id="add-button"
-                                                        style="font-weight: 700;">ADD</a>
-                                                </div>
-                                            </div>
-
-
-                                            <div id="dynamic-services" class="col-6 mb-3"></div>
-
 
 
 
@@ -641,9 +641,8 @@
 
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded"
-                                                    style="font-weight: 700;">Update
-                                                    Details</button>
+                                                <button type="submit" class="btn btn-success rounded mr-3" style="font-weight: 700;">Update
+                                                    Contact Person</button>
                                             </div>
 
 
@@ -673,6 +672,11 @@
 
 
 
+                <!-- floating right button -->
+                <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
+                    href="/superadmin/super-all-doctors" style="width: fit-content;">
+                    <i class="fa fa-2x fa-reply" aria-hidden="true" style="font-size: 1.7rem;"></i>
+                </a>
 
 
 

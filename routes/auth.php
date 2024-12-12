@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Superadmin\SuperAllOnlyDoctorHandleController;
 use App\Http\Controllers\Superadmin\SuperAllOPDHandleController;
 use App\Http\Controllers\Superadmin\SuperAllPathologyHandleController;
 use App\Http\Controllers\Superadmin\SuperAllUserController;
@@ -253,16 +254,36 @@ Route::middleware('auth:web')->group(function () {
     Route::put('/superadmin/super-all-pathology/status/{id}', [SuperAllPathologyHandleController::class, 'statusEdit'])->name('superadmin.status.path.edit');
     Route::delete('/superadmin/super-all-pathology/delete/{id}', [SuperAllPathologyHandleController::class, 'deletePathContactDetails'])->name('superadmin.path.contact.delete');
 
-    // // Pathology Contact Details
+    // Pathology Contact Details
     Route::get('/superadmin/super-edit-pathology-details/{id}', [SuperAllPathologyHandleController::class, 'pathEditPageView']);
     Route::put('/superadmin/super-edit-pathology-details/update/{id}', [SuperAllPathologyHandleController::class, 'updatePathContactDetails'])->name('superadmin.super-update-path-details');
 
-    // // Pathology Tests
+    // Pathology Tests
     Route::get('/superadmin/super-addpath-test/{pid}', [SuperAllPathologyHandleController::class, 'addPathTestPageView']);
     Route::post('/superadmin/super-addpath-test/add/', [SuperAllPathologyHandleController::class, 'addPathTests'])->name('superadmin.super-addpath.test');
     Route::post('/superadmin/super-addpath-banner/add/', [SuperAllPathologyHandleController::class, 'addpathBanner'])->name('superadmin.super-addpath.banner');
     Route::delete('/superadmin/super-addpath/delete/{id}', [SuperAllPathologyHandleController::class, 'deletePathTest'])->name('superadmin.super-deletepath.test');
     Route::put('/superadmin/super-addpath/status/{id}', [SuperAllPathologyHandleController::class, 'statusPathTestEdit'])->name('superadmin.status.pathTest.edit');
+
+
+
+
+
+
+    // All Doctors---------------------------------------------------------------------------------------------------------------------------------------->
+
+    // All Doctors View
+    Route::get('/superadmin/super-all-doctors', [SuperAllOnlyDoctorHandleController::class, 'docView'])->name('superadmin.super-all-doctor');
+    Route::put('/superadmin/super-all-doctors/status/{id}', [SuperAllOnlyDoctorHandleController::class, 'statusEdit'])->name('superadmin.status.doc.edit');
+    Route::delete('/superadmin/super-all-doctors/delete/{id}', [SuperAllOnlyDoctorHandleController::class, 'deleteDocContactDetails'])->name('superadmin.opd.doc.delete');
+
+    // Doctors Contact Details
+    Route::get('/superadmin/super-edit-doctors-details/{id}', [SuperAllOnlyDoctorHandleController::class, 'docEditPageView']);
+    Route::put('/superadmin/super-edit-doctors-details/update/{id}', [SuperAllOnlyDoctorHandleController::class, 'updateDocContactDetails'])->name('superadmin.super-update-doc-details');
+
+    // Doctor Banner
+    Route::get('/superadmin/super-adddoc-banner/{pid}', [SuperAllOnlyDoctorHandleController::class, 'addDoctorPageView']);
+    Route::post('/superadmin/super-adddoc-banner/add/', [SuperAllOnlyDoctorHandleController::class, 'adddocBanner'])->name('superadmin.super-adddoc.banner');
 
 
 

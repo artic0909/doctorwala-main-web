@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>All Doctors Details</title>
+    <title>Add Only Doctor Banner</title>
 
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('../partner-assets')}}">
@@ -41,20 +41,18 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="../super-admin-panel/super-dashboard.html" style="font-weight: 900;"><img
-                        src="../img/logo3.png" alt="logo"></a>
-                <a class="navbar-brand brand-logo-mini" href="../super-admin-panel/super-dashboard.html"><img src="../img/fav5.png"
+                <a class="navbar-brand brand-logo mr-5" href="/superadmin/super-dashboard" style="font-weight: 900;"><img
+                        src="{{asset('../img/logo3.png')}}" alt="logo"></a>
+                <a class="navbar-brand brand-logo-mini" href="/superadmin/super-dashboard"><img src="{{asset('fav5.png')}}"
                         alt="logo" /></a>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-
                 <input type="search" id="search" placeholder="Search Here ........" name="search"
                     class="form-control mx-4 w-100">
-
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -346,7 +344,6 @@
 
 
 
-
             <!-- partial -->
             <div class="main-panel">
 
@@ -356,277 +353,137 @@
 
 
                 <div class="content-wrapper">
-
-
-
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
                                 <div class="col-12">
 
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <h3 class="font-weight-bold">All Doctors Details</h3>
-                                        </div>
 
-                                        <div class="col-9 d-flex justify-content-end align-items-center">
-                                            <nav aria-label="Page navigation">
-                                                <ul class="pagination">
-                                                    @if ($docs->onFirstPage())
-                                                    <li class="page-item disabled"><a class="page-link">Prev</a></li>
-                                                    @else
-                                                    <li class="page-item"><a class="page-link" href="{{ $docs->previousPageUrl() }}">Prev</a></li>
-                                                    @endif
 
-                                                    @foreach ($docs->getUrlRange(1, $docs->lastPage()) as $page => $url)
-                                                    <li class="page-item {{ $page == $docs->currentPage() ? 'active' : '' }}">
-                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                                                    </li>
-                                                    @endforeach
 
-                                                    @if ($docs->hasMorePages())
-                                                    <li class="page-item"><a class="page-link" href="{{ $docs->nextPageUrl() }}">Next</a></li>
-                                                    @else
-                                                    <li class="page-item disabled"><a class="page-link">Next</a></li>
-                                                    @endif
-                                                </ul>
-                                            </nav>
+
+                                    <div class="row m-auto">
+                                        <div class="col-12 mt-4">
+
+                                            <h3 class="font-weight-bold mt-3"><i class="fa fa-panorama text-danger" aria-hidden="true"></i> Add Pathology Banners Image</h3>
+
+                                            <form class="prof-view" action="{{ route('superadmin.super-adddoc.banner')}}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="from-view row mt-5 align-items-center">
+
+                                                    <div class="col-3 form-group">
+                                                        @if($docBanner && isset($docBanner->doctorbanner))
+                                                        <!-- Show the uploaded OPD banner -->
+                                                        <img src="{{ asset('storage/' . $docBanner->doctorbanner) }}" width="500" alt="Pathology Banner" class="img-fluid">
+                                                        @else
+                                                        <!-- Show placeholder if no OPD banner exists -->
+                                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDVuaQbojYLTlYezNW7HPVIYO6QiLZsd8RFP86jMuySoBlJ369aVAK0Mtzo7La2hyVcxU&usqp=CAU" width="500" class="img-fluid" alt="Placeholder OPD Banner">
+                                                        @endif
+
+
+                                                    </div>
+
+                                                    <div class="col-7">
+                                                        <div class="col-12 form-group">
+                                                            <label for="currently_loggedin_partner_id" style="font-weight: 700;"><i
+                                                                    class="fa-solid fa-id-card text-primary"></i>
+                                                                Partner ID <span class="text-danger">*</span></label>
+                                                            <input type="text" class="form-control" id="currently_loggedin_partner_id" name="currently_loggedin_partner_id"
+                                                                style="height: 75px;" value="{{$pid}}" readonly>
+                                                        </div>
+
+                                                        <div class="col-12 form-group">
+                                                            <label for="doctorbanner" style="font-weight: 700;"><i
+                                                                    class="fa-solid fa-user-doctor text-primary"></i>
+                                                                Doctor Banner <span class="text-danger">*</span></label>
+                                                            <input type="file" class="form-control" id="doctorbanner" name="doctorbanner"
+                                                                style="height: 75px;">
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="d-flex justify-content-center col-2">
+                                                        <button type="submit" class="btn btn-danger rounded" style="height: 55px; font-weight: 700;">Upload
+                                                            Banner</button>
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </form>
+
                                         </div>
 
                                     </div>
-
-
-
-                                    <table class="table table-stripped table-bordered mt-4">
-                                        <thead>
-                                            <tr>
-                                                <th>SL.</th>
-                                                <th>Date</th>
-                                                <th>Subscription Date</th>
-                                                <th>Partner ID</th>
-                                                <th>Clinic Name</th>
-                                                <th>
-                                                    Doctor Details
-                                                </th>
-                                                <th>
-                                                    Address Details
-                                                </th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-
-                                            @foreach ($docs as $doc)
-                                            <tr>
-
-                                                <td><b>{{$loop->iteration}}</b></td>
-                                                <td>29-11-2024</td>
-                                                <td>29-11-2024</td>
-
-                                                <td><b>{{$doc->partner_id}}</b></td>
-                                                <td style="text-transform: capitalize;"><b>{{$doc->partner_clinic_name}}</b></td>
-
-
-
-                                                <td style="text-transform: capitalize;">
-                                                    <p class="m-0 text-primary"><b class="text-dark">Name: </b><b>{{$doc->partner_doctor_name}}</b></p>
-                                                    <p class="m-0 text-success"><b class="text-dark">Specialist: </b><b>{{$doc->partner_doctor_specialist}}</b></p>
-                                                    <p class="m-0 text-primary"><b class="text-dark">Designation: </b><b>{{$doc->partner_doctor_designation}}</b></p>
-                                                    <p class="m-0 text-success"><b class="text-dark">Email: </b><b>{{$doc->partner_doctor_email}}</b></p>
-                                                    <p class="m-0 text-danger"><b class="text-dark">Mobile: </b><b>{{$doc->partner_doctor_mobile}}</b></p>
-                                                    <p class="m-0 text-dark"><b class="text-dark">Fees: </b><b>₹ {{$doc->partner_doctor_fees}}</b></p>
-                                                </td>
-
-                                                <!-- <td><b>{{$doc->partner_doctor_address}}</b></td> -->
-
-                                                <td style="text-transform: capitalize;">
-                                                    <p class="m-0 text-primary"><b class="text-dark">State: </b><b>{{$doc->partner_doctor_state}}</b></p>
-                                                    <p class="m-0 text-danger"><b class="text-dark">City: </b><b>{{$doc->partner_doctor_city}}</b></p>
-                                                    <p class="m-0 text-success"><b class="text-dark">Pincode: </b><b>{{$doc->partner_doctor_pincode}}</b></p>
-                                                    <p class="m-0 text-dark"><b class="text-dark">Landmark: </b><b>{{$doc->partner_doctor_landmark}}</b></p>
-                                                </td>
-
-
-                                                <td>
-                                                    @if($doc->status == 'Active')
-                                                    <a href="" data-target="#myActiveInactiveModal{{$doc->id}}" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
-                                                    </a>
-                                                    @else
-                                                    <a href="" data-target="#myActiveInactiveModal{{$doc->id}}" data-toggle="modal" class="ed-btn">
-                                                        <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
-                                                    </a>
-                                                    @endif
-                                                </td>
-
-                                                <td>
-
-                                                    <div class="actions d-flex flex-wrap">
-                                                        <a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                            class="ed-btn ml-3">
-                                                            <i class="fa-solid fa-trash-can text-danger"
-                                                                style="font-size: 1rem;"></i>
-                                                        </a>
-
-
-                                                        <a href="/superadmin/super-edit-doctors-details/{{$doc->id}}"
-                                                            class="ed-btn ml-3">
-                                                            <i class="fa-solid fa-pen-to-square text-primaryy"
-                                                                style="font-size: 1rem;"></i>
-                                                        </a>
-
-                                                        <a href="/superadmin/super-adddoc-banner/{{$doc->pid}}"
-                                                            class="ed-btn ml-3">
-                                                            <i class="fa-solid fa-panorama text-warning"
-                                                                style="font-size: 1rem;"></i>
-                                                        </a>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
-                                            @endforeach
-
-
-
-
-                                        </tbody>
-                                    </table>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
                 </div>
 
 
 
 
 
-
-                <!-- Delete Modal -->
-                @foreach($docs as $doc)
-                <div class="modal fade" id="myDeleteModal{{$doc->id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form action="{{route('superadmin.opd.doc.delete', $doc->id)}}" class="modal-body" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('DELETE')
-
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
-
-                                    <h3 class="mt-3">Are You Sure ?</h3>
-
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
-                                        cannot be undone.</p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-
-
-
-
-                <!-- My Active Inactive  Modal -->
-                @foreach ($docs as $doc)
-                <div class="modal fade" id="myActiveInactiveModal{{$doc->id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-
-
-                            <form class="modal-body" action="{{route('superadmin.status.doc.edit', $doc->id)}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT')
-
-
-
-                                <div class="form-group">
-                                    <label for="status"><i class="fa fa-stethoscope text-success"
-                                            aria-hidden="true"></i>
-                                        Set Status <span class="text-danger">*</span></label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="Inactive" selected>{{$doc->status}}</option>
-                                        <option value="">---Select Status---</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                    </select>
-                                </div>
-
-
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-
-
-
-
-
-
-
-
-                <!-- partial:partials/_footer.html -->
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
-                                href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
-                            All rights reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
-                            <i class="ti-heart text-danger ml-1"></i></span>
-                    </div>
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
-                                href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
-                    </div>
-                </footer>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
+
+
+
+
+
+            <!-- floating right button -->
+            <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
+                href="/superadmin/super-all-doctors" style="width: fit-content;">
+                <i class="fa fa-2x fa-reply" aria-hidden="true" style="font-size: 1.7rem;"></i>
+            </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- partial:partials/_footer.html -->
+            <!-- <footer class="footer">
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024. <a
+                            href="https://doctorwala.info/" target="_blank">Doctorwala.info</a> -
+                        All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Easy-To-Use & made with
+                        <i class="ti-heart text-danger ml-1"></i></span>
+                </div>
+                <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Developed by <a
+                            href="https://github.com/artic0909" target="_blank">SaklinMustak</a></span>
+                </div>
+            </footer> -->
+            <!-- partial -->
         </div>
-        <!-- page-body-wrapper ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <!-- main-panel ends -->
     </div>
+    <!-- page-body-wrapper ends -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- container-scroller -->
 
     <!-- plugins:js -->
@@ -650,6 +507,14 @@
     <script src="{{asset('../partner-assets/js/dashboard.js')}}"></script>
     <script src="{{asset('../partner-assets/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
+
+
+
+    <!-- add section JS -->
+    <script src="{{asset('../partner-assets/js/add-section-path.js')}}"></script>
+
+
+
 </body>
 
 </html>

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('partner_doctor_city');
             $table->text('partner_doctor_address');
             $table->json('visit_day_time'); // JSON field
-            $table->string('status')->default('Not Available');
+            $table->string('status')->default('Inactive');
             $table->timestamps();
         });
     }

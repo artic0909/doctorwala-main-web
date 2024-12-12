@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Add OPD Doctors</title>
+    <title>Add Pathology Tests</title>
 
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('../partner-assets')}}">
@@ -403,7 +403,7 @@
                                                         <div class="col-12 form-group">
                                                             <label for="pathologybanner" style="font-weight: 700;"><i
                                                                     class="fa-solid fa-user-doctor text-primary"></i>
-                                                                OPD Banner <span class="text-danger">*</span></label>
+                                                                Pathology Banner <span class="text-danger">*</span></label>
                                                             <input type="file" class="form-control" id="pathologybanner" name="pathologybanner"
                                                                 style="height: 75px;">
                                                         </div>
