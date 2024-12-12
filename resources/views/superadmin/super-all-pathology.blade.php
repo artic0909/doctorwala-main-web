@@ -370,11 +370,28 @@
                                         <div class="col-9 d-flex justify-content-end align-items-center">
                                             <nav aria-label="Page navigation">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                    {{-- Previous Page Link --}}
+                                                    @if ($paths->onFirstPage())
+                                                    <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $paths->previousPageUrl() }}">Prev</a></li>
+                                                    @endif
+
+                                                    {{-- Pagination Elements --}}
+                                                    @foreach ($paths->links()->elements[0] as $page => $url)
+                                                    @if ($page == $paths->currentPage())
+                                                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                                    @endif
+                                                    @endforeach
+
+                                                    {{-- Next Page Link --}}
+                                                    @if ($paths->hasMorePages())
+                                                    <li class="page-item"><a class="page-link" href="{{ $paths->nextPageUrl() }}">Next</a></li>
+                                                    @else
+                                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                                    @endif
                                                 </ul>
                                             </nav>
                                         </div>
@@ -388,6 +405,7 @@
                                                 <th>SL.</th>
                                                 <th>Date</th>
                                                 <th>Subscription Date</th>
+                                                <th>Partner ID</th>
                                                 <th>Clinic Name</th>
                                                 <th>Name|Email|Mobile</th>
                                                 <th>Address</th>
@@ -400,68 +418,71 @@
                                         <tbody>
 
 
+                                            @foreach($paths as $path)
                                             <tr>
 
-                                                <td>1</td>
+                                                <td>{{$loop->iteration}}</td>
                                                 <td>29-11-2024</td>
                                                 <td>29-11-2024</td>
 
-                                                <td>Life LIne</td>
+                                                <td>{{$path->partner_id}}</td>
+                                                <td>{{$path->partner_clinic_name}}</td>
 
                                                 <td>
-                                                    <p class="m-0">Saklin Mustak</p>
-                                                    <p class="m-0">sm@gmail.com</p>
-                                                    <p class="m-0">+91 8985458848</p>
+                                                    <p class="m-0">{{$path->clinic_contact_person_name}}</p>
+                                                    <p class="m-0">{{$path->clinic_email}}</p>
+                                                    <p class="m-0">{{$path->clinic_mobile_number}}</p>
                                                 </td>
 
-                                                <td>Ranihati, Howrah, 711302</td>
+                                                <td>{{$path->clinic_address}}</td>
 
                                                 <td>
-                                                    <p class="m-0">West Bengal</p>
-                                                    <p class="m-0">Ranihati</p>
+                                                    <p class="m-0">{{$path->clinic_state}}</p>
+                                                    <p class="m-0">{{$path->clinic_city}}</p>
                                                 </td>
 
 
-                                                <td><a href="" data-target="#myActiveInactiveModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-toggle-off text-success"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                <td>
+                                                    @if($path->status == 'Active')
+                                                    <a href="" data-target="#myActiveInactiveModal{{$path->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @else
+                                                    <a href="" data-target="#myActiveInactiveModal{{$path->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @endif
+                                                </td>
 
 
 
                                                 <td>
 
                                                     <div class="actions d-flex flex-wrap">
-                                                        <a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                        <a href="" data-target="#myDeleteModal{{$path->id}}" data-toggle="modal"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-trash-can text-danger"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
 
-                                                        <a href="/superadmin/super-edit-pathology-details"
+                                                        <a href="/superadmin/super-edit-pathology-details/{{$path->id}}"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-pen-to-square text-primaryy"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
 
-
-                                                        <a href="" data-target="#myAddPathologyModal"
-                                                            data-toggle="modal" class="ed-btn ml-3">
+                                                        <a href="/superadmin/super-addpath-test/{{$path->pid}}"
+                                                            class="ed-btn ml-3">
                                                             <i class="fa-solid fa-plus text-success"
-                                                                style="font-size: 1rem;"></i>
-                                                        </a>
-
-
-
-                                                        <a href="" data-target="#myallPathologyShowModal"
-                                                            data-toggle="modal" class="ed-btn ml-3">
-                                                            <i class="fa-solid fa-syringe text-dark"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
                                                     </div>
 
                                                 </td>
+                                            </tr>
+                                            @endforeach
 
 
 
@@ -491,12 +512,16 @@
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach($paths as $path)
+                <div class="modal fade" id="myDeleteModal{{$path->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{route('superadmin.path.contact.delete', $path->id)}}" class="modal-body" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -508,7 +533,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -516,6 +541,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
@@ -524,24 +550,29 @@
 
 
                 <!-- My Active Inactive  Modal -->
-                <div class="modal fade" id="myActiveInactiveModal" tabindex="-1" role="dialog"
+                @foreach ($paths as $path)
+                <div class="modal fade" id="myActiveInactiveModal{{$path->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
 
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{route('superadmin.status.path.edit', $path->id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
 
 
                                 <div class="form-group">
-                                    <label for="other_banner"><i class="fa fa-stethoscope text-success"
+                                    <label for="status"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Set Status <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="" selected>Inactive</option>
-                                        <option value="">Active</option>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="Inactive" selected>{{$path->status}}</option>
+                                        <option value="">---Select Status---</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
 
@@ -553,305 +584,7 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-                <!-- My add Pathology Modal -->
-                <div class="modal fade" id="myAddPathologyModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myAddPathologyModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-
-
-                            <div class="modal-header">
-                                <p style="font-size: 1.5rem; font-weight: 700;" class="modal-title"
-                                    id="myAddPathologyModalLabel">Add Pathology Details</p>
-                            </div>
-
-
-
-                            <form class="prof-view m-4">
-
-
-                                <p class="m-0" style="font-size: 1.3rem; font-weight: 700;">Clinic Name: xyz</p>
-                                <p class="m-0 mt-1" style="font-size: 1.3rem; font-weight: 700;">Contact Person: xyz</p>
-
-
-
-
-                                <div class="from-view row  mt-5">
-
-
-
-                                    <div class="col-4 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa-solid fa-syringe text-primary"></i>
-                                            Test Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" value="xyz clinic"
-                                            style="height: 55px;">
-                                    </div>
-
-                                    <div class="col-4 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa fa-sitemap text-primary" aria-hidden="true"></i> Test
-                                            Type <span class="text-danger">*</span></label>
-                                        <select name="" id="" class="form-control" style="height: 55px;">
-                                            <option value="" selected>Select Type</option>
-
-                                            <option value="cbc">Complete Blood Count (CBC)</option>
-                                            <option value="lft">Liver Function Test (LFT)</option>
-                                            <option value="kft">Kidney Function Test (KFT)</option>
-                                            <option value="rft">Renal Function Test (RFT)</option>
-                                            <option value="lipid_profile">Lipid Profile</option>
-                                            <option value="thyroid_panel">Thyroid Function Tests (T3, T4, TSH)
-                                            </option>
-                                            <option value="hba1c">HbA1c (Glycated Hemoglobin)</option>
-                                            <option value="fasting_blood_sugar">Fasting Blood Sugar (FBS)
-                                            </option>
-                                            <option value="postprandial_blood_sugar">Postprandial Blood Sugar
-                                                (PPBS)</option>
-                                            <option value="urine_analysis">Urine Routine and Microscopy</option>
-                                            <option value="stool_test">Stool Test</option>
-                                            <option value="esr">Erythrocyte Sedimentation Rate (ESR)</option>
-                                            <option value="crp">C-Reactive Protein (CRP)</option>
-                                            <option value="vitamin_d">Vitamin D Test</option>
-                                            <option value="vitamin_b12">Vitamin B12 Test</option>
-                                            <option value="iron_studies">Iron Studies (Ferritin, TIBC, Serum
-                                                Iron)</option>
-                                            <option value="blood_group">Blood Group and Rh Typing</option>
-                                            <option value="pt_inr">Prothrombin Time (PT/INR)</option>
-                                            <option value="d_dimer">D-Dimer Test</option>
-                                            <option value="hiv_test">HIV Test</option>
-                                            <option value="hbsag">Hepatitis B Surface Antigen (HBsAg)</option>
-                                            <option value="hcv_test">Hepatitis C Test</option>
-                                            <option value="widal_test">Widal Test</option>
-                                            <option value="rapid_malaria_test">Rapid Malaria Test</option>
-                                            <option value="dengue_ns1">Dengue NS1 Antigen Test</option>
-                                            <option value="rtpcr">RT-PCR Test (e.g., for COVID-19)</option>
-                                            <option value="pap_smear">Pap Smear</option>
-                                            <option value="psa">Prostate-Specific Antigen (PSA)</option>
-                                            <option value="blood_culture">Blood Culture</option>
-                                            <option value="sputum_culture">Sputum Culture</option>
-                                            <option value="ascitic_fluid_analysis">Ascitic Fluid Analysis
-                                            </option>
-                                            <option value="csf_analysis">Cerebrospinal Fluid (CSF) Analysis
-                                            </option>
-                                            <option value="skin_biopsy">Skin Biopsy</option>
-                                            <option value="fine_needle_aspiration">Fine Needle Aspiration
-                                                Cytology (FNAC)</option>
-                                            <option value="bone_marrow_test">Bone Marrow Aspiration/Biopsy
-                                            </option>
-                                            <option value="microalbumin_test">Urine Microalbumin Test</option>
-                                            <option value="pregnancy_test">Pregnancy Test (hCG)</option>
-                                            <option value="tissue_biopsy">Tissue Biopsy</option>
-                                            <option value="coombs_test">Direct/Indirect Coombs Test</option>
-                                            <option value="ra_factor">Rheumatoid Factor (RA Factor)</option>
-                                            <option value="anti_ccp">Anti-CCP Antibodies</option>
-                                            <option value="ana_test">Anti-Nuclear Antibody (ANA) Test</option>
-                                            <option value="troponin">Troponin Test</option>
-                                            <option value="ck_mb">Creatine Kinase-MB (CK-MB)</option>
-                                            <option value="electrolyte_panel">Electrolyte Panel (Sodium,
-                                                Potassium, Chloride)</option>
-                                            <option value="amylase_lipase">Amylase and Lipase Test</option>
-                                            <option value="serum_calcium">Serum Calcium</option>
-                                            <option value="serum_albumin">Serum Albumin</option>
-                                            <option value="serum_protein">Serum Protein Electrophoresis</option>
-                                            <option value="ldh">Lactate Dehydrogenase (LDH)</option>
-                                            <option value="asthma_panel">Asthma Panel (Allergen Testing)
-                                            </option>
-                                            <option value="allergy_panel">Allergy Panel</option>
-                                            <option value="tumor_markers">Tumor Marker Tests (e.g., CA-125, CA
-                                                19-9)</option>
-
-                                        </select>
-                                    </div>
-
-
-
-
-
-
-
-
-                                    <div class="col-4 form-group">
-                                        <label for="name" style="font-weight: 700;"><i
-                                                class="fa fa-indian-rupee-sign text-primary" aria-hidden="true"></i>
-                                            Test Price <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="name" name="name" value="999"
-                                            style="height: 55px;">
-                                    </div>
-
-
-
-
-
-                                    <!-- multiple -->
-                                    <div id="add-same-section" class="row col-12">
-
-
-                                        <div class="col-3 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-calendar-days text-primary"></i>
-                                                Day <span class="text-danger">*</span></label>
-                                            <select name="" id="" class="form-control" style="height: 55px;">
-                                                <option selected>Select Day</option>
-                                                <option value="All Day">All Day</option>
-                                                <option value="Monday">Monday</option>
-                                                <option value="Tuesday">Tuesday</option>
-                                                <option value="Wednesday">Wednesday</option>
-                                                <option value="Thursday">Thursday</option>
-                                                <option value="Friday">Friday</option>
-                                                <option value="Saturday">Saturday</option>
-                                                <option value="Sunday">Sunday</option>
-                                            </select>
-                                        </div>
-
-
-
-
-
-                                        <div class="col-4 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-clock text-primary"></i> Time From
-                                                <span class="text-danger">*</span></label>
-
-                                            <input type="time" class="form-control" style="height: 55px;">
-                                        </div>
-
-
-
-
-
-                                        <div class="col-4 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-clock-rotate-left text-primary"></i> Time
-                                                To
-                                                <span class="text-danger">*</span></label>
-
-                                            <div class="d-flex align-items-center">
-                                                <input type="time" class="form-control" style="height: 55px;">
-
-                                                <button type="button" id="add-section-button"
-                                                    class="btn btn-primary rounded col-3 ml-3"
-                                                    style="height: 55px; font-weight: 700;">ADD</button>
-                                            </div>
-                                        </div>
-
-
-
-
-
-
-
-                                    </div>
-
-
-
-
-
-                                    <div class="d-flex justify-content-center w-100">
-                                        <button type="submit" class="btn btn-danger rounded">Upload
-                                            Details</button>
-                                    </div>
-
-
-
-
-                                </div>
-
-
-
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-                <!-- My Show Pathology Modal -->
-                <div class="modal fade" id="myallPathologyShowModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myallOPDShowModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-
-
-                            <div class="modal-header">
-                                <p style="font-size: 1.5rem; font-weight: 700;" class="modal-title"
-                                    id="myallOPDShowModalLabel">All Pathology Details</p>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                        aria-hidden="true">&times;</span></button>
-                            </div>
-
-
-
-                            <div class="modal-body">
-
-
-
-                                <p class="m-0" style="font-size: 1.2rem; font-weight: 700;">Clinic Name: xyz</p>
-                                <p class="m-0 mt-1" style="font-size: 1.2rem; font-weight: 700;">Contact Person: xyz</p>
-
-
-
-
-                                <table class="table table-stripped table-bordered mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th>Test Name</th>
-                                            <th>Test Type</th>
-                                            <th>Test Price</th>
-                                            <th>Day & Time</th>
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                        <tr>
-                                            <td>Dr. xyz</td>
-                                            <td>fsdjhfdjfh</td>
-                                            <td>₹ 999</td>
-
-                                            <td>
-                                                <p class="m-0">
-                                                    <span class="badge badge-danger">Monday - (10:00 AM - 11:00
-                                                        AM)</span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
-
-
-
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
+                @endforeach
 
 
 

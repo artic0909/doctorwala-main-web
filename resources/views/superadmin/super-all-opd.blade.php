@@ -52,8 +52,7 @@
                 </button>
 
 
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
+
 
 
                 <ul class="navbar-nav navbar-nav-right">
@@ -371,14 +370,32 @@
                                         <div class="col-9 d-flex justify-content-end align-items-center">
                                             <nav aria-label="Page navigation">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                    {{-- Previous Page Link --}}
+                                                    @if ($opds->onFirstPage())
+                                                    <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $opds->previousPageUrl() }}">Prev</a></li>
+                                                    @endif
+
+                                                    {{-- Pagination Elements --}}
+                                                    @foreach ($opds->links()->elements[0] as $page => $url)
+                                                    @if ($page == $opds->currentPage())
+                                                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                                    @endif
+                                                    @endforeach
+
+                                                    {{-- Next Page Link --}}
+                                                    @if ($opds->hasMorePages())
+                                                    <li class="page-item"><a class="page-link" href="{{ $opds->nextPageUrl() }}">Next</a></li>
+                                                    @else
+                                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                                    @endif
                                                 </ul>
                                             </nav>
                                         </div>
+
                                     </div>
 
 
@@ -454,21 +471,13 @@
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
-                                                       
+
                                                         <a href="/superadmin/super-addopd-doctor/{{$opd->pid}}"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-plus text-success"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
-                                                       
 
-
-
-                                                        <a href="" data-target="#myallOPDShowModal{{$opd->id}}" data-toggle="modal"
-                                                            class="ed-btn ml-3">
-                                                            <i class="fa-solid fa-user-doctor text-dark"
-                                                                style="font-size: 1rem;"></i>
-                                                        </a>
                                                     </div>
 
                                                 </td>
@@ -495,12 +504,16 @@
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach($opds as $opd)
+                <div class="modal fade" id="myDeleteModal{{$opd->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{route('superadmin.opd.contact.delete', $opd->id)}}" class="modal-body" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -512,7 +525,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -520,6 +533,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
@@ -564,95 +578,6 @@
                     </div>
                 </div>
                 @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- My Show OPD Modal -->
-                <div class="modal fade" id="myallOPDShowModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myallOPDShowModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-
-
-                            <div class="modal-header">
-                                <p style="font-size: 1.5rem; font-weight: 700;" class="modal-title"
-                                    id="myallOPDShowModalLabel">All OPD Details</p>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-
-
-
-                            <div class="modal-body">
-
-
-
-                                <p class="m-0" style="font-size: 1.2rem; font-weight: 700;">Clinic Name: xyz</p>
-                                <p class="m-0 mt-1" style="font-size: 1.2rem; font-weight: 700;">Contact Person: xyz</p>
-
-
-
-
-                                <table class="table table-stripped table-bordered mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th>Doctor Name</th>
-                                            <th>Designation</th>
-                                            <th>Specialist</th>
-                                            <th>Doctor Fees</th>
-                                            <th>Day & Time</th>
-                                        </tr>
-                                    </thead>
-
-
-                                    <tbody>
-                                        <tr>
-                                            <td>Dr. xyz</td>
-                                            <td>fsdjhfdjfh</td>
-                                            <td>fsdjhfdjfh</td>
-                                            <td>₹ 999</td>
-
-                                            <td>
-                                                <p class="m-0">
-                                                    <span class="badge badge-primary">Monday - (10:00 AM - 11:00 AM)</span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-
-
-
-
-
-
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

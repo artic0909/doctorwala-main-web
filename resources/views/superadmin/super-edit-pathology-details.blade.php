@@ -37,27 +37,21 @@
     <div class="container-scroller">
 
 
-
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="../super-admin-panel/super-dashboard.html" style="font-weight: 900;"><img
-                        src="../img/logo3.png" alt="logo"></a>
-                <a class="navbar-brand brand-logo-mini" href="../super-admin-panel/super-dashboard.html"><img src="../img/fav5.png"
+                <a class="navbar-brand brand-logo mr-5" href="/superadmin/super-dashboard" style="font-weight: 900;"><img
+                        src="{{asset('../img/logo3.png')}}" alt="logo"></a>
+                <a class="navbar-brand brand-logo-mini" href="/superadmin/super-dashboard"><img src="{{asset('fav5.png')}}"
                         alt="logo" /></a>
             </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-between">
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
                 <input type="search" id="search" placeholder="Search Here ........" name="search"
                     class="form-control mx-4 w-100">
-
-
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
-
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -348,7 +342,6 @@
 
 
 
-
             <!-- partial -->
             <div class="main-panel">
 
@@ -370,289 +363,140 @@
 
 
 
-                                    <form class="prof-view">
+                                    <form class="prof-view" method="POST" action="{{ route('superadmin.super-update-path-details', $path->id) }}">
+                                        @csrf
+                                        @method('PUT')
 
-
-                                        <div class="from-view row  mt-3">
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-sitemap text-primary"></i> Type
+                                        <div class="from-view row mt-2">
+                                            <div class="col-4 form-group">
+                                                <label for="clinic_registration_type" style="font-weight: 700;"><i
+                                                        class="fa fa-sitemap text-primary" aria-hidden="true"></i> Type
                                                     <span class="text-danger">*</span></label>
-
-                                                <div class="group-main d-flex">
-                                                    <div class="group ml-3">
-                                                        <label for="" style="font-weight: 700;">Pathology</label>
-                                                        <input type="radio" checked readonly>
-                                                    </div>
-                                                </div>
+                                                <input type="text" class="form-control" id="clinic_registration_type" name="clinic_registration_type"
+                                                    value="{{ $path->clinic_registration_type ?? 'Pathology' }}" style="height: 55px;" readonly>
                                             </div>
 
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-hospital text-primary" aria-hidden="true"></i>
-                                                    Clinic Name
-                                                    <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="life line">
-                                            </div>
-
-
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_contact_person_name" style="font-weight: 700;"><i
                                                         class="fa-solid fa-user text-primary"></i>
-                                                    Contact Person <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="saklin Mustak">
+                                                    Authorized Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="clinic_contact_person_name" name="clinic_contact_person_name"
+                                                    value="{{ $path->clinic_contact_person_name ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
-                                                    Number
-                                                    <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="7467365464">
+                                                <label for="clinic_gstin" style="font-weight: 700;"><i
+                                                        class="fa fa-hashtag text-primary" aria-hidden="true"></i> GSTIN
+                                                </label>
+                                                <input type="text" class="form-control" id="clinic_gstin" name="clinic_gstin"
+                                                    value="{{ $path->clinic_gstin ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
+                                            <div class="col-4 form-group">
+                                                <label for="clinic_mobile_number" style="font-weight: 700;"><i
+                                                        class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile Number <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="number" class="form-control" id="clinic_mobile_number" name="clinic_mobile_number"
+                                                    value="{{ $path->clinic_mobile_number ?? '' }}" style="height: 55px;">
+                                            </div>
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_email" style="font-weight: 700;"><i
                                                         class="fa fa-envelope text-primary" aria-hidden="true"></i>
                                                     Email Id <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="sm@gmail.com">
+                                                <input type="text" class="form-control" id="clinic_email" name="clinic_email"
+                                                    value="{{ $path->clinic_email ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_landmark" style="font-weight: 700;"><i
                                                         class="fa fa-map-pin text-primary" aria-hidden="true"></i>
                                                     Landmark <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="Honda Showroom">
+                                                <input type="text" class="form-control" id="clinic_landmark" name="clinic_landmark"
+                                                    value="{{ $path->clinic_landmark ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-location-pin-lock text-primary"
-                                                        aria-hidden="true"></i>
+                                                <label for="clinic_pincode" style="font-weight: 700;"><i
+                                                        class="fa fa-location-pin-lock text-primary" aria-hidden="true"></i>
                                                     Pin Code <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="711302">
+                                                <input type="text" class="form-control" id="clinic_pincode" name="clinic_pincode"
+                                                    value="{{ $path->clinic_pincode ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa fa-map-location-dot text-primary"
-                                                        aria-hidden="true"></i>
-                                                    Google Map <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    style="height: 55px;" value="dsjksdjhfjksdfjf746t4dhfdfjh">
-                                            </div>
-
-
-
-
-
-                                            <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_state" style="font-weight: 700;"><i
                                                         class="fa-solid fa-globe text-primary"></i>
                                                     State <span class="text-danger">*</span></label>
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select State</option>
-                                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar
-                                                        Islands</option>
-                                                    <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                                                    <option value="Assam">Assam</option>
-                                                    <option value="Bihar">Bihar</option>
-                                                    <option value="Chandigarh">Chandigarh</option>
-                                                    <option value="Chhattisgarh">Chhattisgarh</option>
-                                                    <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and
-                                                        Nagar Haveli
-                                                        and Daman and Diu</option>
-                                                    <option value="Delhi">Delhi</option>
-                                                    <option value="Goa">Goa</option>
-                                                    <option value="Gujarat">Gujarat</option>
-                                                    <option value="Haryana">Haryana</option>
-                                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
-                                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                                                    <option value="Jharkhand">Jharkhand</option>
-                                                    <option value="Karnataka">Karnataka</option>
-                                                    <option value="Kerala">Kerala</option>
-                                                    <option value="Ladakh">Ladakh</option>
-                                                    <option value="Lakshadweep">Lakshadweep</option>
-                                                    <option value="Madhya Pradesh">Madhya Pradesh</option>
-                                                    <option value="Maharashtra">Maharashtra</option>
-                                                    <option value="Manipur">Manipur</option>
-                                                    <option value="Meghalaya">Meghalaya</option>
-                                                    <option value="Mizoram">Mizoram</option>
-                                                    <option value="Nagaland">Nagaland</option>
-                                                    <option value="Odisha">Odisha</option>
-                                                    <option value="Puducherry">Puducherry</option>
-                                                    <option value="Punjab">Punjab</option>
-                                                    <option value="Rajasthan">Rajasthan</option>
-                                                    <option value="Sikkim">Sikkim</option>
-                                                    <option value="Tamil Nadu">Tamil Nadu</option>
-                                                    <option value="Telangana">Telangana</option>
-                                                    <option value="Tripura">Tripura</option>
-                                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                                                    <option value="Uttarakhand">Uttarakhand</option>
-                                                    <option value="West Bengal">West Bengal</option>
+                                                <select name="clinic_state" id="clinic_state" class="form-control" style="height: 55px;">
+                                                    <option>--Select State--</option>
+                                                    <option value="Andaman and Nicobar Islands" {{ (isset($path) && $path->clinic_state == 'Andaman and Nicobar Islands') ? 'selected' : '' }}>Andaman and Nicobar Islands</option>
+                                                    <option value="Andhra Pradesh" {{ (isset($path) && $path->clinic_state == 'Andhra Pradesh') ? 'selected' : '' }}>Andhra Pradesh</option>
+                                                    <option value="Arunachal Pradesh" {{ (isset($path) && $path->clinic_state == 'Arunachal Pradesh') ? 'selected' : '' }}>Arunachal Pradesh</option>
+                                                    <option value="Assam" {{ (isset($path) && $path->clinic_state == 'Assam') ? 'selected' : '' }}>Assam</option>
+                                                    <option value="Bihar" {{ (isset($path) && $path->clinic_state == 'Bihar') ? 'selected' : '' }}>Bihar</option>
+                                                    <option value="Chandigarh" {{ (isset($path) && $path->clinic_state == 'Chandigarh') ? 'selected' : '' }}>Chandigarh</option>
+                                                    <option value="Chhattisgarh" {{ (isset($path) && $path->clinic_state == 'Chhattisgarh') ? 'selected' : '' }}>Chhattisgarh</option>
+                                                    <option value="Dadra and Nagar Haveli and Daman and Diu" {{ (isset($path) && $path->clinic_state == 'Dadra and Nagar Haveli and Daman and Diu') ? 'selected' : '' }}>Dadra and Nagar Haveli and Daman and Diu</option>
+                                                    <option value="Delhi" {{ (isset($path) && $path->clinic_state == 'Delhi') ? 'selected' : '' }}>Delhi</option>
+                                                    <option value="Goa" {{ (isset($path) && $path->clinic_state == 'Goa') ? 'selected' : '' }}>Goa</option>
+                                                    <option value="Gujarat" {{ (isset($path) && $path->clinic_state == 'Gujarat') ? 'selected' : '' }}>Gujarat</option>
+                                                    <option value="Haryana" {{ (isset($path) && $path->clinic_state == 'Haryana') ? 'selected' : '' }}>Haryana</option>
+                                                    <option value="Himachal Pradesh" {{ (isset($path) && $path->clinic_state == 'Himachal Pradesh') ? 'selected' : '' }}>Himachal Pradesh</option>
+                                                    <option value="Jammu and Kashmir" {{ (isset($path) && $path->clinic_state == 'Jammu and Kashmir') ? 'selected' : '' }}>Jammu and Kashmir</option>
+                                                    <option value="Jharkhand" {{ (isset($path) && $path->clinic_state == 'Jharkhand') ? 'selected' : '' }}>Jharkhand</option>
+                                                    <option value="Karnataka" {{ (isset($path) && $path->clinic_state == 'Karnataka') ? 'selected' : '' }}>Karnataka</option>
+                                                    <option value="Kerala" {{ (isset($path) && $path->clinic_state == 'Kerala') ? 'selected' : '' }}>Kerala</option>
+                                                    <option value="Ladakh" {{ (isset($path) && $path->clinic_state == 'Ladakh') ? 'selected' : '' }}>Ladakh</option>
+                                                    <option value="Lakshadweep" {{ (isset($path) && $path->clinic_state == 'Lakshadweep') ? 'selected' : '' }}>Lakshadweep</option>
+                                                    <option value="Madhya Pradesh" {{ (isset($path) && $path->clinic_state == 'Madhya Pradesh') ? 'selected' : '' }}>Madhya Pradesh</option>
+                                                    <option value="Maharashtra" {{ (isset($path) && $path->clinic_state == 'Maharashtra') ? 'selected' : '' }}>Maharashtra</option>
+                                                    <option value="Manipur" {{ (isset($path) && $path->clinic_state == 'Manipur') ? 'selected' : '' }}>Manipur</option>
+                                                    <option value="Meghalaya" {{ (isset($path) && $path->clinic_state == 'Meghalaya') ? 'selected' : '' }}>Meghalaya</option>
+                                                    <option value="Mizoram" {{ (isset($path) && $path->clinic_state == 'Mizoram') ? 'selected' : '' }}>Mizoram</option>
+                                                    <option value="Nagaland" {{ (isset($path) && $path->clinic_state == 'Nagaland') ? 'selected' : '' }}>Nagaland</option>
+                                                    <option value="Odisha" {{ (isset($path) && $path->clinic_state == 'Odisha') ? 'selected' : '' }}>Odisha</option>
+                                                    <option value="Puducherry" {{ (isset($path) && $path->clinic_state == 'Puducherry') ? 'selected' : '' }}>Puducherry</option>
+                                                    <option value="Punjab" {{ (isset($path) && $path->clinic_state == 'Punjab') ? 'selected' : '' }}>Punjab</option>
+                                                    <option value="Rajasthan" {{ (isset($path) && $path->clinic_state == 'Rajasthan') ? 'selected' : '' }}>Rajasthan</option>
+                                                    <option value="Sikkim" {{ (isset($path) && $path->clinic_state == 'Sikkim') ? 'selected' : '' }}>Sikkim</option>
+                                                    <option value="Tamil Nadu" {{ (isset($path) && $path->clinic_state == 'Tamil Nadu') ? 'selected' : '' }}>Tamil Nadu</option>
+                                                    <option value="Telangana" {{ (isset($path) && $path->clinic_state == 'Telangana') ? 'selected' : '' }}>Telangana</option>
+                                                    <option value="Tripura" {{ (isset($path) && $path->clinic_state == 'Tripura') ? 'selected' : '' }}>Tripura</option>
+                                                    <option value="Uttar Pradesh" {{ (isset($path) && $path->clinic_state == 'Uttar Pradesh') ? 'selected' : '' }}>Uttar Pradesh</option>
+                                                    <option value="Uttarakhand" {{ (isset($path) && $path->clinic_state == 'Uttarakhand') ? 'selected' : '' }}>Uttarakhand</option>
+                                                    <option value="West Bengal" {{ (isset($path) && $path->clinic_state == 'West Bengal') ? 'selected' : '' }}>West Bengal</option>
 
                                                 </select>
                                             </div>
-
-
-
-
 
                                             <div class="col-4 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_city" style="font-weight: 700;"><i
                                                         class="fa-solid fa-city text-primary"></i> City
                                                     <span class="text-danger">*</span></label>
-
-                                                <select name="" id="" class="form-control" style="height: 55px;">
-                                                    <option selected>Select City</option>
-                                                    <option value="">City 1</option>
-                                                    <option value="">City 2</option>
-                                                    <option value="">City 3</option>
-                                                    <option value="">City 4</option>
-                                                    <option value="">City 5</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="clinic_city" name="clinic_city"
+                                                    value="{{ $path->clinic_city ?? '' }}" style="height: 55px;">
                                             </div>
 
-
-
+                                            <div class="col-12 form-group">
+                                                <label for="clinic_google_map_link" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-map-location-dot text-primary"></i> Google Map
+                                                </label>
+                                                <input type="text" class="form-control" id="clinic_google_map_link" name="clinic_google_map_link"
+                                                    value="{{ $path->clinic_google_map_link ?? '' }}" style="height: 55px;">
+                                            </div>
 
                                             <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="clinic_address" style="font-weight: 700;"><i
                                                         class="fa-solid fa-location-dot text-primary"></i> Address
                                                     <span class="text-danger">*</span></label>
-
-                                                <textarea name="" id="" class="form-control"
-                                                    rows="7">Ranihati, Howrah, 711302</textarea>
+                                                <textarea name="clinic_address" id="clinic_address" class="form-control" rows="7">{{ $path->clinic_address ?? '' }}</textarea>
                                             </div>
-
-
-
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i> Password
-                                                    <span class="text-danger">*</span></label>
-
-                                                <input type="text" class="form-control" style="height: 55px;"
-                                                    value="djdhjg3764">
-                                            </div>
-
-
-
-
-
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-lock text-primary"></i> Confirm Password
-                                                    <span class="text-danger">*</span></label>
-
-                                                <input type="text" class="form-control" style="height: 55px;">
-                                            </div>
-
-
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-info-circle text-primary"></i> About Clinic
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-users-viewfinder text-primary"></i> Mission
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-eye text-primary"></i> Vision
-                                                </label>
-
-                                                <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                            </div>
-
-
-
-
-                                            <div class="col-12 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-ambulance text-primary"></i> Service Lists
-                                                </label>
-
-                                                <div class="d-flex align-items-center"
-                                                    id="thisSectionAddAgainAfterClickAddBtn">
-                                                    <input type="text" class="form-control" style="height: 55px;">
-
-                                                    <a href="" class="btn btn-success rounded ml-3" id="add-button"
-                                                        style="font-weight: 700;">ADD</a>
-                                                </div>
-                                            </div>
-
-
-                                            <div id="dynamic-services" class="col-6 mb-3"></div>
-
-
-
-
-
-
-
-
-
-
-
-
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded"
-                                                    style="font-weight: 700;">Update
-                                                    Details</button>
+                                                <button type="submit" class="btn btn-danger rounded" style="padding-right: 60px; padding-left: 60px; font-weight: 700;">UPDATE</button>
                                             </div>
-
-
-
-
                                         </div>
-
-
-
                                     </form>
 
 
@@ -675,6 +519,11 @@
 
 
 
+                <!-- floating right button -->
+                <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
+                    href="/superadmin/super-all-pathology" style="width: fit-content;">
+                    <i class="fa fa-2x fa-reply" aria-hidden="true" style="font-size: 1.7rem;"></i>
+                </a>
 
 
 

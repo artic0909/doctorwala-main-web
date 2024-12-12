@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerAllOPDDoctorModel;
+use App\Models\PartnerOPDBannerModel;
 use Illuminate\Http\Request;
 
 class SuperAllOPDHandleController extends Controller
@@ -15,7 +16,7 @@ class SuperAllOPDHandleController extends Controller
 
     public function opdView(Request $request)
     {
-        $opds = PartnerOPDContactModel::orderBy('created_at', 'desc')->get();
+        $opds = PartnerOPDContactModel::orderBy('created_at', 'desc')->paginate(8);
 
 
         foreach ($opds as $opd) {
@@ -34,6 +35,8 @@ class SuperAllOPDHandleController extends Controller
                 $opd->partner_clinic_name = null;
             }
         }
+
+
 
         return view('superadmin.super-all-opd', compact('opds'));
     }
@@ -110,16 +113,49 @@ class SuperAllOPDHandleController extends Controller
     }
 
 
+    public function deleteOPDContactDetails($id){
+
+        $contactDetails = PartnerOPDContactModel::find($id);
+
+        if (!$contactDetails) {
+            return redirect()->back()->with('error', 'Contact details not found.');
+        }
+
+        $contactDetails->delete();
+
+        return redirect()->back()->with('success', 'Contact details deleted successfully.');
+    }
+
+
 
 
     public function addOPDDoctorPageView($pid)
     {
-        return view('superadmin.super-addopd-doctor', compact('pid'));
+
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $pid)->first();
+
+
+
+        $opdDoctors = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $pid)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+
+        foreach ($opdDoctors as $opdDoctor) {
+            $opdDoctor->visit_day_time = json_decode($opdDoctor->visit_day_time, true);
+        }
+
+        return view('superadmin.super-addopd-doctor', compact('pid', 'opdBanner', 'opdDoctors'));
     }
+
+
+
+
+
 
     public function addOPDDoctor(Request $request)
     {
-        
+
 
         // Validate the input
         $request->validate([
@@ -160,5 +196,103 @@ class SuperAllOPDHandleController extends Controller
         PartnerAllOPDDoctorModel::create($data);
 
         return redirect()->back()->with('success', 'OPD Doctor details added successfully!');
+    }
+
+
+
+
+    public function deleteOPDDoctor($id)
+    {
+        $opdDoctor = PartnerAllOPDDoctorModel::find($id);
+
+        if (!$opdDoctor) {
+            return redirect()->back()->with('error', 'OPD Doctor details not found.');
+        }
+
+        $opdDoctor->delete();
+
+        return redirect()->back()->with('success', 'OPD Doctor details deleted successfully!');
+    }
+
+
+
+    public function statusOPDDoctorEdit(Request $request, $id)
+    {
+
+        $validated = $request->validate([
+            'status' => 'string|nullable',
+        ]);
+
+        $opdDoctor = PartnerAllOPDDoctorModel::find($id);
+
+        if (!$opdDoctor) {
+            return back()->withErrors(['error' => 'OPD Details not found']);
+        }
+
+        if ($request->has('status')) {
+            $opdDoctor->status = $request->status;
+        }
+
+        $opdDoctor->save();
+
+        return back()->with('success', 'Updated successfully!');
+    }
+
+
+
+
+
+
+
+
+    public function addOPDBanner(Request $request)
+    {
+        // Validate the request
+        $validated = $request->validate([
+            'currently_loggedin_partner_id' => 'required|numeric',
+            'opdbanner' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Upload the OPD banner if present
+        $opdBannerPath = $this->uploadOpdBanner($request);
+
+        // Update or create the OPD banner record
+        $this->updateOrCreateOpdBanner($validated['currently_loggedin_partner_id'], $opdBannerPath);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'OPD Banner uploaded/updated successfully.');
+    }
+
+    /**
+     * Handles the upload of the OPD banner file.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return string|null
+     */
+    private function uploadOpdBanner(Request $request)
+    {
+        if ($request->hasFile('opdbanner')) {
+            return $request->file('opdbanner')->store('partner-opd-profile', 'public');
+        }
+
+        return null;
+    }
+
+    /**
+     * Updates or creates the OPD banner record for the partner.
+     *
+     * @param int $partnerId
+     * @param string|null $opdBannerPath
+     * @return void
+     */
+    private function updateOrCreateOpdBanner(int $partnerId, ?string $opdBannerPath)
+    {
+        $opdBanner = PartnerOPDBannerModel::firstOrNew(['currently_loggedin_partner_id' => $partnerId]);
+
+        if ($opdBannerPath) {
+            $opdBanner->opdbanner = $opdBannerPath;
+        }
+
+        $opdBanner->save();
     }
 }

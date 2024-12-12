@@ -373,20 +373,22 @@
 
 
 
-                                            <h3 class="font-weight-bold mt-3"><i class="fa fa-panorama text-danger" aria-hidden="true"></i> Add OPD Banners Image</h3>
+                                            <h3 class="font-weight-bold mt-3"><i class="fa fa-panorama text-danger" aria-hidden="true"></i> Add Pathology Banners Image</h3>
 
-                                            <form class="prof-view" action="{{ route('superadmin.super-addopd.banner')}}" method="POST" enctype="multipart/form-data">
+                                            <form class="prof-view" action="{{ route('superadmin.super-addpath.banner')}}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="from-view row mt-5 align-items-center">
 
                                                     <div class="col-3 form-group">
-                                                        @if($opdBanner && isset($opdBanner->opdbanner))
+                                                        @if($pathBanner && isset($pathBanner->pathologybanner))
                                                         <!-- Show the uploaded OPD banner -->
-                                                        <img src="{{ asset('storage/' . $opdBanner->opdbanner) }}" width="500" alt="OPD Banner" class="img-fluid">
+                                                        <img src="{{ asset('storage/' . $pathBanner->pathologybanner) }}" width="500" alt="Pathology Banner" class="img-fluid">
                                                         @else
                                                         <!-- Show placeholder if no OPD banner exists -->
                                                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDVuaQbojYLTlYezNW7HPVIYO6QiLZsd8RFP86jMuySoBlJ369aVAK0Mtzo7La2hyVcxU&usqp=CAU" width="500" class="img-fluid" alt="Placeholder OPD Banner">
                                                         @endif
+
+
                                                     </div>
 
                                                     <div class="col-7">
@@ -399,10 +401,10 @@
                                                         </div>
 
                                                         <div class="col-12 form-group">
-                                                            <label for="opdbanner" style="font-weight: 700;"><i
+                                                            <label for="pathologybanner" style="font-weight: 700;"><i
                                                                     class="fa-solid fa-user-doctor text-primary"></i>
                                                                 OPD Banner <span class="text-danger">*</span></label>
-                                                            <input type="file" class="form-control" id="opdbanner" name="opdbanner"
+                                                            <input type="file" class="form-control" id="pathologybanner" name="pathologybanner"
                                                                 style="height: 75px;">
                                                         </div>
                                                     </div>
@@ -423,20 +425,13 @@
 
 
 
+                                            <h3 class="font-weight-bold mt-3"><i class="fa fa-syringe text-danger" aria-hidden="true"></i> Add Pathology Tests</h3>
 
-
-
-
-
-
-
-                                            <h3 class="font-weight-bold mt-5 mb-3"><i class="fa fa-user-doctor text-danger" aria-hidden="true"></i> Add OPD Doctors</h3>
-                                            
-                                            <form class="prof-view" action="{{ route('superadmin.super-addopd.doctor')}}" method="POST" enctype="multipart/form-data">
+                                            <form class="prof-view" action="{{route('superadmin.super-addpath.test')}}" method="POST">
                                                 @csrf
 
 
-                                                <div class="form-view row">
+                                                <div class="from-view row mt-3">
                                                     <div class="col-3 form-group">
                                                         <label for="currently_loggedin_partner_id" style="font-weight: 700;"><i
                                                                 class="fa-solid fa-id-card text-primary"></i>
@@ -447,96 +442,97 @@
                                                 </div>
 
 
-                                                <div class="from-view row  mt-5">
 
-
-
-                                                    <div class="col-3 form-group">
-                                                        <label for="doctor_name" style="font-weight: 700;"><i
-                                                                class="fa-solid fa-user-doctor text-primary"></i>
-                                                            Doctor Name <span class="text-danger">*</span></label>
-                                                        <input type="text" class="form-control" id="doctor_name" name="doctor_name"
-                                                            style="height: 55px;" placeholder="Enter Doctor Name *">
-                                                    </div>
-
-                                                    <div class="col-3 form-group">
-                                                        <label for="doctor_designation" style="font-weight: 700;"><i
-                                                                class="fa fa-graduation-cap text-primary"
-                                                                aria-hidden="true"></i> Designation <span
-                                                                class="text-danger">*</span></label>
-                                                        <select name="doctor_designation" id="doctor_designation" class="form-control" style="height: 55px;">
-                                                            <option selected>---Select Designation---</option>
-                                                            <option value="MD">MD</option>
-                                                            <option value="Dr">Dr</option>
-                                                            <option value="Prof">Prof</option>
-                                                            <option value="BDS">BDS</option>
-                                                        </select>
-                                                    </div>
+                                                <div class="from-view row">
 
 
 
                                                     <div class="col-4 form-group">
-                                                        <label for="doctor_specialist" style="font-weight: 700;"><i
-                                                                class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
-                                                            Specialist <span class="text-danger">*</span></label>
-                                                        <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
-                                                            <option selected>---Select Specialist---</option>
-                                                            <option value="allergy_immunology">Allergy and Immunology</option>
-                                                            <option value="anesthesiology">Anesthesiology</option>
-                                                            <option value="cardiology">Cardiology</option>
-                                                            <option value="dermatology">Dermatology</option>
-                                                            <option value="endocrinology">Endocrinology</option>
-                                                            <option value="emergency_medicine">Emergency Medicine</option>
-                                                            <option value="family_medicine">Family Medicine</option>
-                                                            <option value="gastroenterology">Gastroenterology</option>
-                                                            <option value="general_surgery">General Surgery</option>
-                                                            <option value="geriatrics">Geriatrics</option>
-                                                            <option value="hematology">Hematology</option>
-                                                            <option value="infectious_disease">Infectious Disease</option>
-                                                            <option value="internal_medicine">Internal Medicine</option>
-                                                            <option value="neurology">Neurology</option>
-                                                            <option value="neurosurgery">Neurosurgery</option>
-                                                            <option value="obstetrics_gynecology">Obstetrics and Gynecology
-                                                            </option>
-                                                            <option value="oncology">Oncology</option>
-                                                            <option value="ophthalmology">Ophthalmology</option>
-                                                            <option value="orthopedics">Orthopedics</option>
-                                                            <option value="otolaryngology">Otolaryngology (ENT)</option>
-                                                            <option value="pediatrics">Pediatrics</option>
-                                                            <option value="plastic_surgery">Plastic Surgery</option>
-                                                            <option value="psychiatry">Psychiatry</option>
-                                                            <option value="pulmonology">Pulmonology</option>
-                                                            <option value="radiology">Radiology</option>
-                                                            <option value="rheumatology">Rheumatology</option>
-                                                            <option value="sports_medicine">Sports Medicine</option>
-                                                            <option value="urology">Urology</option>
-                                                            <option value="vascular_surgery">Vascular Surgery</option>
-                                                            <option value="nephrology">Nephrology</option>
-                                                            <option value="pathology">Pathology</option>
-                                                            <option value="palliative_care">Palliative Care</option>
-                                                            <option value="physical_medicine_rehabilitation">Physical Medicine
-                                                                and Rehabilitation</option>
-                                                            <option value="proctology">Proctology</option>
-                                                            <option value="thoracic_surgery">Thoracic Surgery</option>
-                                                            <option value="genetics">Genetics</option>
-                                                            <option value="nuclear_medicine">Nuclear Medicine</option>
-                                                            <option value="pain_management">Pain Management</option>
-                                                            <option value="public_health">Public Health</option>
-                                                            <option value="pharmacology">Pharmacology</option>
+                                                        <label for="test_name" style="font-weight: 700;"><i
+                                                                class="fa-solid fa-syringe text-primary"></i>
+                                                            Test Name <span class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control" id="test_name" name="test_name"
+                                                            placeholder="Enter Test Name" style="height: 55px;">
+                                                    </div>
 
+                                                    <div class="col-4 form-group">
+                                                        <label for="test_type" style="font-weight: 700;"><i
+                                                                class="fa fa-sitemap text-primary" aria-hidden="true"></i> Test
+                                                            Type <span class="text-danger">*</span></label>
+                                                        <select name="test_type" id="test_type" class="form-control" style="height: 55px;">
+                                                            <option value="" selected>---Select Type---</option>
+
+                                                            <option value="Complete Blood Count (CBC)">Complete Blood Count (CBC)</option>
+                                                            <option value="Liver Function Test (LFT)">Liver Function Test (LFT)</option>
+                                                            <option value="Kidney Function Test (KFT)">Kidney Function Test (KFT)</option>
+                                                            <option value="Renal Function Test (RFT)">Renal Function Test (RFT)</option>
+                                                            <option value="Lipid Profile">Lipid Profile</option>
+                                                            <option value="Thyroid Function Tests (T3, T4, TSH)">Thyroid Function Tests (T3, T4, TSH)</option>
+                                                            <option value="HbA1c (Glycated Hemoglobin)">HbA1c (Glycated Hemoglobin)</option>
+                                                            <option value="Fasting Blood Sugar (FBS)">Fasting Blood Sugar (FBS)</option>
+                                                            <option value="Postprandial Blood Sugar (PPBS)">Postprandial Blood Sugar (PPBS)</option>
+                                                            <option value="Urine Routine and Microscopy">Urine Routine and Microscopy</option>
+                                                            <option value="Stool Test">Stool Test</option>
+                                                            <option value="Erythrocyte Sedimentation Rate (ESR)">Erythrocyte Sedimentation Rate (ESR)</option>
+                                                            <option value="C-Reactive Protein (CRP)">C-Reactive Protein (CRP)</option>
+                                                            <option value="Vitamin D Test">Vitamin D Test</option>
+                                                            <option value="Vitamin B12 Test">Vitamin B12 Test</option>
+                                                            <option value="Iron Studies (Ferritin, TIBC, Serum Iron)">Iron Studies (Ferritin, TIBC, Serum Iron)</option>
+                                                            <option value="Blood Group and Rh Typing">Blood Group and Rh Typing</option>
+                                                            <option value="Prothrombin Time (PT/INR)">Prothrombin Time (PT/INR)</option>
+                                                            <option value="D-Dimer Test">D-Dimer Test</option>
+                                                            <option value="HIV Test">HIV Test</option>
+                                                            <option value="Hepatitis B Surface Antigen (HBsAg)">Hepatitis B Surface Antigen (HBsAg)</option>
+                                                            <option value="Hepatitis C Test">Hepatitis C Test</option>
+                                                            <option value="Widal Test">Widal Test</option>
+                                                            <option value="Rapid Malaria Test">Rapid Malaria Test</option>
+                                                            <option value="Dengue NS1 Antigen Test">Dengue NS1 Antigen Test</option>
+                                                            <option value="RT-PCR Test (e.g., for COVID-19)">RT-PCR Test (e.g., for COVID-19)</option>
+                                                            <option value="Pap Smear">Pap Smear</option>
+                                                            <option value="Prostate-Specific Antigen (PSA)">Prostate-Specific Antigen (PSA)</option>
+                                                            <option value="Blood Culture">Blood Culture</option>
+                                                            <option value="Sputum Culture">Sputum Culture</option>
+                                                            <option value="Ascitic Fluid Analysis">Ascitic Fluid Analysis</option>
+                                                            <option value="Cerebrospinal Fluid (CSF) Analysis">Cerebrospinal Fluid (CSF) Analysis</option>
+                                                            <option value="Skin Biopsy">Skin Biopsy</option>
+                                                            <option value="Fine Needle Aspiration Cytology (FNAC)">Fine Needle Aspiration Cytology (FNAC)</option>
+                                                            <option value="Bone Marrow Aspiration/Biopsy">Bone Marrow Aspiration/Biopsy</option>
+                                                            <option value="Urine Microalbumin Test">Urine Microalbumin Test</option>
+                                                            <option value="Pregnancy Test (hCG)">Pregnancy Test (hCG)</option>
+                                                            <option value="Tissue Biopsy">Tissue Biopsy</option>
+                                                            <option value="Direct/Indirect Coombs Test">Direct/Indirect Coombs Test</option>
+                                                            <option value="Rheumatoid Factor (RA Factor)">Rheumatoid Factor (RA Factor)</option>
+                                                            <option value="Anti-CCP Antibodies">Anti-CCP Antibodies</option>
+                                                            <option value="Anti-Nuclear Antibody (ANA) Test">Anti-Nuclear Antibody (ANA) Test</option>
+                                                            <option value="Troponin Test">Troponin Test</option>
+                                                            <option value="Creatine Kinase-MB (CK-MB)">Creatine Kinase-MB (CK-MB)</option>
+                                                            <option value="Electrolyte Panel (Sodium, Potassium, Chloride)">Electrolyte Panel (Sodium, Potassium, Chloride)</option>
+                                                            <option value="Amylase and Lipase Test">Amylase and Lipase Test</option>
+                                                            <option value="Serum Calcium">Serum Calcium</option>
+                                                            <option value="Serum Albumin">Serum Albumin</option>
+                                                            <option value="Serum Protein Electrophoresis">Serum Protein Electrophoresis</option>
+                                                            <option value="Lactate Dehydrogenase (LDH)">Lactate Dehydrogenase (LDH)</option>
+                                                            <option value="Asthma Panel (Allergen Testing)">Asthma Panel (Allergen Testing)</option>
+                                                            <option value="Allergy Panel">Allergy Panel</option>
+                                                            <option value="Tumor Marker Tests (e.g., CA-125, CA 19-9)">Tumor Marker Tests (e.g., CA-125, CA 19-9)</option>
                                                         </select>
+
                                                     </div>
 
 
 
 
-                                                    <div class="col-2 form-group">
-                                                        <label for="doctor_fees" style="font-weight: 700;"><i
+
+
+
+
+                                                    <div class="col-4 form-group">
+                                                        <label for="test_price" style="font-weight: 700;"><i
                                                                 class="fa fa-indian-rupee-sign text-primary"
                                                                 aria-hidden="true"></i>
-                                                            Doctor Fees <span class="text-danger">*</span></label>
-                                                        <input type="number" class="form-control" id="doctor_fees" name="doctor_fees"
-                                                            style="height: 55px;" placeholder="Enter Doctor Fees *">
+                                                            Test Price <span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" id="test_price" name="test_price"
+                                                            placeholder="Enter Test Price" style="height: 55px;">
                                                     </div>
 
 
@@ -548,11 +544,11 @@
 
 
                                                         <div class="col-3 form-group">
-                                                            <label for="doctor_visit_day" style="font-weight: 700;"><i
+                                                            <label for="test_day" style="font-weight: 700;"><i
                                                                     class="fa-solid fa-calendar-days text-primary"></i>
                                                                 Day <span class="text-danger">*</span></label>
-                                                            <select name="doctor_visit_day[]" id="doctor_visit_day" class="form-control" style="height: 55px;">
-                                                                <option selected>---Select Day---</option>
+                                                            <select name="test_day[]" id="test_day" class="form-control" style="height: 55px;">
+                                                                <option selected>Select Day</option>
                                                                 <option value="All Day">All Day</option>
                                                                 <option value="Monday">Monday</option>
                                                                 <option value="Tuesday">Tuesday</option>
@@ -569,11 +565,11 @@
 
 
                                                         <div class="col-4 form-group">
-                                                            <label for="doctor_visit_start_time" style="font-weight: 700;"><i
+                                                            <label for="test_start_time" style="font-weight: 700;"><i
                                                                     class="fa-solid fa-clock text-primary"></i> Time From
                                                                 <span class="text-danger">*</span></label>
 
-                                                            <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_start_time" name="doctor_visit_start_time[]">
+                                                            <input type="time" class="form-control" style="height: 55px;" id="test_start_time" name="test_start_time[]">
                                                         </div>
 
 
@@ -581,13 +577,13 @@
 
 
                                                         <div class="col-4 form-group">
-                                                            <label for="doctor_visit_end_time" style="font-weight: 700;"><i
+                                                            <label for="test_end_time" style="font-weight: 700;"><i
                                                                     class="fa-solid fa-clock-rotate-left text-primary"></i> Time
                                                                 To
                                                                 <span class="text-danger">*</span></label>
 
                                                             <div class="d-flex align-items-center">
-                                                                <input type="time" class="form-control" style="height: 55px;" id="doctor_visit_end_time" name="doctor_visit_end_time[]">
+                                                                <input type="time" class="form-control" style="height: 55px;" name="test_end_time[]" id="test_end_time">
 
                                                                 <button type="button" id="add-section-button"
                                                                     class="btn btn-primary rounded col-3 ml-3"
@@ -606,8 +602,9 @@
 
 
 
+
                                                     <div class="d-flex justify-content-center w-100">
-                                                        <button type="submit" class="btn btn-danger rounded" style="height: 55px; font-weight: 700;">Upload
+                                                        <button type="submit" class="btn btn-danger rounded">Upload
                                                             Details</button>
                                                     </div>
 
@@ -615,6 +612,9 @@
 
 
                                                 </div>
+
+
+
                                             </form>
 
 
@@ -623,37 +623,34 @@
 
 
 
-
-                                            <h3 class="font-weight-bold mt-5 mb-2"><i class="fa fa-user-doctor text-danger" aria-hidden="true"></i> Your All OPD Doctors</h3>
+                                            <h3 class="font-weight-bold mt-5 mb-2"><i class="fa fa-syringe text-danger" aria-hidden="true"></i> Your All Pathology Tests</h3>
 
                                             <div class="table-responsive">
                                                 <table class="table table-striped">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">ID</th>
-                                                            <th scope="col">Name</th>
-                                                            <th scope="col">Designation</th>
-                                                            <th scope="col">Specialist</th>
-                                                            <th scope="col">Fees</th>
+                                                            <th scope="col">Test Name</th>
+                                                            <th scope="col">Test Type</th>
+                                                            <th scope="col">Test Price</th>
                                                             <th scope="col">Day | Time</th>
                                                             <th scope="col">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @forelse ($opdDoctors as $opdDoctor)
+                                                        @forelse ($pathTests as $pathTest)
                                                         <tr>
                                                             <th scope="row">{{ $loop->iteration }}</th>
-                                                            <td>{{ $opdDoctor->doctor_name }}</td>
-                                                            <td>{{ $opdDoctor->doctor_designation }}</td>
-                                                            <td>{{ $opdDoctor->doctor_specialist }}</td>
-                                                            <td>₹ {{ $opdDoctor->doctor_fees }}</td>
+                                                            <td>{{ $pathTest->test_name }}</td>
+                                                            <td>{{ $pathTest->test_type }}</td>
+                                                            <td>₹ {{ $pathTest->test_price }}</td>
                                                             <td>
-                                                                @if(!empty($opdDoctor->visit_day_time) && is_array($opdDoctor->visit_day_time))
-                                                                @foreach($opdDoctor->visit_day_time as $visit)
+                                                                @if(!empty($pathTest->test_day_time) && is_array($pathTest->test_day_time))
+                                                                @foreach($pathTest->test_day_time as $test)
                                                                 <ul style="list-style: none; padding: 0; margin: 0;">
                                                                     <li>
-                                                                        <p class="m-0"><strong>{{ $visit['day'] }}</strong></p>
-                                                                        <p class="m-0">{{ $visit['start_time'] }} - {{ $visit['end_time'] }}</p>
+                                                                        <p class="m-0"><strong>{{ $test['day'] }}</strong></p>
+                                                                        <p class="m-0">{{ $test['start_time'] }} - {{ $test['end_time'] }}</p>
                                                                     </li>
                                                                 </ul>
                                                                 @endforeach
@@ -661,19 +658,21 @@
                                                                 <p class="text-muted">No visit schedule available</p>
                                                                 @endif
                                                             </td>
+
+
                                                             <td class="d-flex align-items-center" style="gap: 8px;">
-                                                                @if($opdDoctor->status == 'Available')
-                                                                <a href="" data-target="#myActiveInactiveModal{{$opdDoctor->id}}" data-toggle="modal" class="ed-btn">
+                                                                @if($pathTest->status == 'Available')
+                                                                <a href="" data-target="#myActiveInactiveModal{{$pathTest->id}}" data-toggle="modal" class="ed-btn">
                                                                     <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
                                                                 </a>
                                                                 @else
-                                                                <a href="" data-target="#myActiveInactiveModal{{$opdDoctor->id}}" data-toggle="modal" class="ed-btn">
+                                                                <a href="" data-target="#myActiveInactiveModal{{$pathTest->id}}" data-toggle="modal" class="ed-btn">
                                                                     <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
                                                                 </a>
                                                                 @endif
 
 
-                                                                <a href="" data-target="#myDeleteModal{{ $opdDoctor->id }}" data-toggle="modal"
+                                                                <a href="" data-target="#myDeleteModal{{ $pathTest->id }}" data-toggle="modal"
                                                                     class="ed-btn"
                                                                     style="font-size: 1.03rem;">
                                                                     <i class="fa fa-trash text-danger" aria-hidden="true"></i>
@@ -689,6 +688,14 @@
 
                                                 </table>
                                             </div>
+
+
+
+
+
+
+
+
 
                                         </div>
 
@@ -711,7 +718,7 @@
 
             <!-- floating right button -->
             <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
-                href="/superadmin/super-all-opd" style="width: fit-content;">
+                href="/superadmin/super-all-pathology" style="width: fit-content;">
                 <i class="fa fa-2x fa-reply" aria-hidden="true" style="font-size: 1.7rem;"></i>
             </a>
 
@@ -724,13 +731,13 @@
 
 
             <!-- Delete Modal -->
-            @foreach ($opdDoctors as $opdDoctor)
-            <div class="modal fade" id="myDeleteModal{{ $opdDoctor->id }}" tabindex="-1" role="dialog"
+            @foreach ($pathTests as $pathTest)
+            <div class="modal fade" id="myDeleteModal{{ $pathTest->id }}" tabindex="-1" role="dialog"
                 aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
 
-                        <form action="{{ route('superadmin.super-deleteopd.doctor' , $opdDoctor->id) }}" class="modal-body" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('superadmin.super-deletepath.test' , $pathTest->id) }}" class="modal-body" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')
 
@@ -758,15 +765,15 @@
 
 
             <!-- My Active Inactive  Modal -->
-            @foreach ($opdDoctors as $opdDoctor)
-            <div class="modal fade" id="myActiveInactiveModal{{$opdDoctor->id}}" tabindex="-1" role="dialog"
+            @foreach ($pathTests as $pathTest)
+            <div class="modal fade" id="myActiveInactiveModal{{$pathTest->id}}" tabindex="-1" role="dialog"
                 aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
 
 
 
-                        <form class="modal-body" action="{{route('superadmin.status.opdDoctor.edit', $opdDoctor->id)}}" method="POST" enctype="multipart/form-data">
+                        <form class="modal-body" action="{{route('superadmin.status.pathTest.edit', $pathTest->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -777,7 +784,7 @@
                                         aria-hidden="true"></i>
                                     Set Status <span class="text-danger">*</span></label>
                                 <select name="status" id="status" class="form-control">
-                                    <option value="Inactive" selected>{{$opdDoctor->status}}</option>
+                                    <option value="Inactive" selected>{{$pathTest->status}}</option>
                                     <option value="">---Select Status---</option>
                                     <option value="Available">Available</option>
                                     <option value="Unavailable">Unavailable</option>
@@ -793,6 +800,8 @@
                 </div>
             </div>
             @endforeach
+
+
 
 
 
@@ -860,7 +869,7 @@
 
 
     <!-- add section JS -->
-    <script src="{{asset('../partner-assets/js/add-section.js')}}"></script>
+    <script src="{{asset('../partner-assets/js/add-section-path.js')}}"></script>
 
 
 
