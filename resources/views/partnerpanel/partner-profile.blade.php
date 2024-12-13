@@ -137,8 +137,8 @@
 
 
 
-                                        <!-- partner-profile-banner -->
-                                        <li class="nav-item">
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
                             aria-controls="ui-basicuy">
                             <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
@@ -379,7 +379,63 @@
                                     <form method="POST" action="{{ route('partner.profile.update') }}">
                                         @csrf
                                         <div class="from-view row mt-4">
-                                            <!-- Clinic Name, Contact Person, Mobile, Email, etc. -->
+
+
+
+
+                                            <div class="col-12 form-group">
+                                                <label for="name" style="font-weight: 700;">
+                                                    <i class="fa-solid fa-sitemap text-primary"></i> Type
+                                                    <span class="text-danger">*</span>
+                                                </label>
+
+                                                <div class="group-main d-flex">
+                                                    {{-- Conditionally show OPD and Pathology --}}
+                                                    @if (is_array($registrationTypes))
+                                                    @if (in_array('OPD', $registrationTypes) || in_array('Pathology', $registrationTypes))
+                                                    <div class="group ml-3">
+                                                        <label for="opd" style="font-weight: 700;">OPD</label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="registration_type[]"
+                                                            id="opd"
+                                                            value="OPD"
+                                                            style="cursor: pointer;"
+                                                            {{ in_array('OPD', $registrationTypes) ? 'checked' : '' }}>
+                                                    </div>
+
+                                                    <div class="group ml-3">
+                                                        <label for="pathology" style="font-weight: 700;">Pathology</label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="registration_type[]"
+                                                            id="pathology"
+                                                            value="Pathology"
+                                                            style="cursor: pointer;"
+                                                            {{ in_array('Pathology', $registrationTypes) ? 'checked' : '' }}>
+                                                    </div>
+                                                    @endif
+                                                    @endif
+
+                                                    {{-- Conditionally show Doctor --}}
+                                                    @if (is_array($registrationTypes) && count($registrationTypes) === 1 && in_array('Doctor', $registrationTypes))
+                                                    <div class="group ml-3">
+                                                        <label for="doctor" style="font-weight: 700;">Doctor</label>
+                                                        <input
+                                                            type="checkbox"
+                                                            name="registration_type[]"
+                                                            id="doctor"
+                                                            value="Doctor"
+                                                            style="cursor: pointer;"
+                                                            {{ in_array('Doctor', $registrationTypes) ? 'checked' : '' }}>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+
+
+
 
 
                                             <div class="col-12 form-group">

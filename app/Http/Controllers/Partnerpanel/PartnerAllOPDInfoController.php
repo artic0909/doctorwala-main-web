@@ -98,7 +98,12 @@ class PartnerAllOPDInfoController extends Controller
         }
 
         $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
+
 
         return view('partnerpanel.partner-opd-show', compact('opdBanner', 'pathologyBanner','doctorBanner', 'storedData', 'registrationTypes'));
     }

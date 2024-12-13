@@ -25,7 +25,12 @@ class PartnerServiceListController extends Controller
         $services = $serviceList ? $serviceList->service_lists : [];
 
         $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
+
 
         return view('partnerpanel.partner-service-lists', compact('opdBanner', 'pathologyBanner','doctorBanner', 'services', 'registrationTypes'));
     }

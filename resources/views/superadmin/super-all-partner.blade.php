@@ -890,49 +890,11 @@
 
 
 
-                <!-- Add OPD Contact Details -->
-                @foreach($partners as $partner)
-                @php
-                // Check registration types
-                $registrationTypes = is_string($partner->registration_type) ? explode(',', $partner->registration_type) : $partner->registration_type;
-                $hasOPD = in_array('OPD', $registrationTypes);
-                $hasPathology = in_array('Pathology', $registrationTypes);
-                $hasDoctor = in_array('Doctor', $registrationTypes);
-                @endphp
-
-
-
-                <div class="modal fade" id="myCNDocModal{{$partner->id}}" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h3 style="font-weight: 700; color: red; font-size: 2rem; text-align: center;">
-                                    {{ isset($contactDetails) ? 'Edit Doctor Contact Details' : 'Add Doctor Contact Details' }}
-                                </h3>
-                                <!-- Form content for Doctor modal -->
-                                <form class="prof-view" method="POST" action="" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="clinic_registration_type" style="font-weight: 700;">
-                                            <i class="fa fa-sitemap text-primary" aria-hidden="true"></i> Type
-                                            <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="text" class="form-control" id="clinic_registration_type" name="clinic_registration_type"
-                                            value="{{ $contactDetails->clinic_registration_type ?? 'Doctor' }}" style="height: 55px;" readonly>
-                                    </div>
-                                    <!-- Rest of the form content for Doctor modal -->
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
 
 
 
 
-
+                
 
 
 

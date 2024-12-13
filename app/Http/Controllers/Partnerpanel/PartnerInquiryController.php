@@ -23,7 +23,12 @@ class PartnerInquiryController extends Controller
         $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-        $registrationTypes = json_decode($partner->registration_type, true);
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
+
 
         $inquiries = PartnerInquiryModel::where('currently_loggedin_partner_id', Auth::id())->get();
         return view('partnerpanel.partner-show-ticket', compact('opdBanner', 'pathologyBanner','doctorBanner', 'inquiries', 'registrationTypes'));

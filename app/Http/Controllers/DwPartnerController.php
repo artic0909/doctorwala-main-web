@@ -67,7 +67,11 @@ class DwPartnerController extends Controller
 
 
         $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true); // Decode the JSON
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
 
 
         $clinicName = $partner->partner_clinic_name;
