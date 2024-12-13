@@ -373,55 +373,68 @@
                                                 <th>Edit</th>
                                                 <th>Delete</th>
                                                 <th>Image</th>
-                                                <th>Title</th>
-                                                <th>Bold Text</th>
-                                                <th>Description</th>
-                                                <th>Mission</th>
-                                                <th>Vision</th>
+                                                <th>About Doctor Wala Details</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
+                                            @foreach($abouts as $about)
                                             <tr>
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myEditModal{{$about->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myDeleteModal{{$about->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
 
-                                                <td><img src="../img/a1.jpg" alt=""
+                                                <td><img src="{{ asset('storage/' . $about->about_image) }}" alt=""
                                                         style="width: 150px; height: 80px; border-radius: 10px;">
                                                 </td>
 
-                                                <td>fggfgfg</td>
+                                                <td>
+                                                    <p class="m-0"><b>Title: </b><b class="text-primary">{{$about->ab_title}}</b></p>
+                                                    <p class="m-0"><b>Bold Text: </b><b class="text-danger">{{$about->ab_b_txt}}</b></p>
+
+                                                    <div class="d-flex mt-3" style="gap: 25px;">
+
+                                                        <p class="d-flex flex-column align-items-center">
+                                                            <span class="mb-2"><b class="text-primary">Description</b></span>
+                                                            <a href="" data-target="#myDescModal{{$about->id}}" data-toggle="modal"
+                                                                class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
+                                                                    style="font-size: 1.1rem;"></i></a>
+                                                        </p>
 
 
-                                                <td>fggfgfg</td>
 
 
-                                                <td><a href="" data-target="#myDescModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                        <p class="d-flex flex-column align-items-center">
+                                                            <span class="mb-2"><b class="text-success">Mission Details</b></span>
+                                                            <a href="" data-target="#myMissionModal{{$about->id}}" data-toggle="modal"
+                                                                class="ed-btn"><i
+                                                                    class="fa-solid fa-users-viewfinder text-success"
+                                                                    style="font-size: 1.1rem;"></i></a>
+                                                        </p>
 
 
 
-                                                <td><a href="" data-target="#myMissionModal" data-toggle="modal"
-                                                        class="ed-btn"><i
-                                                            class="fa-solid fa-users-viewfinder text-success"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                        <p class="d-flex flex-column align-items-center">
+                                                            <span class="mb-2"><b class="text-danger">Vision Details</b></span>
+                                                            <a href="" data-target="#myVisionModal{{$about->id}}" data-toggle="modal"
+                                                                class="ed-btn"><i class="fa-solid fa-eye text-danger"
+                                                                    style="font-size: 1.1rem;"></i></a>
+                                                        </p>
+                                                    </div>
+                                                </td>
 
 
-                                                <td><a href="" data-target="#myVisionModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-eye text-dark"
-                                                            style="font-size: 1.1rem;"></i></a></td>
 
 
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -441,12 +454,13 @@
 
 
 
-
+                @if(!$hasAboutData)
                 <!-- floating right button -->
                 <a type="button" class="btn btn-primary rounded btn-icon-text p-0 px-2 py-2 floating-btnn"
                     data-target="#myAddModal" data-toggle="modal" style="width: fit-content;">
                     <i class="fa fa-2x fa-plus" aria-hidden="true" style="font-size: 1.7rem;"></i>
                 </a>
+                @endif
 
 
 
@@ -461,8 +475,8 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Add About Details</h5>
                             </div>
 
-                            <form class="modal-body">
-
+                            <form class="modal-body" action="{{route('superadmin.super-aboutus.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
                                 <div class="form-group">
                                     <label for="about_image"><i class="fa fa-stethoscope text-success"
@@ -537,7 +551,8 @@
 
 
                 <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
+                @foreach($abouts as $about)
+                <div class="modal fade" id="myEditModal{{$about->id}}" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -548,9 +563,11 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Edit About Details</h5>
                             </div>
 
-                            <img src="../img/a1.jpg" alt="" style="height: inherit; width: inherit;">
+                            <img src="{{ asset('storage/' . $about->about_image) }}" style="height: inherit; width: inherit;">
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{route('superadmin.super-aboutus.update', $about->id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
 
                                 <div class="form-group">
@@ -567,7 +584,7 @@
                                             aria-hidden="true"></i>
                                         Add
                                         Title <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="ab_title" id="ab_title">
+                                    <input type="text" class="form-control" name="ab_title" id="ab_title" value="{{$about->ab_title}}">
                                 </div>
 
 
@@ -577,7 +594,7 @@
                                             aria-hidden="true"></i>
                                         Add
                                         Bold Text <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="ab_b_txt" id="ab_b_txt">
+                                    <input type="text" class="form-control" name="ab_b_txt" id="ab_b_txt" value="{{$about->ab_b_txt}}">
                                 </div>
 
 
@@ -590,7 +607,7 @@
                                             aria-hidden="true"></i>
                                         Add
                                         Description <span class="text-danger">*</span></label>
-                                    <textarea name="ab_desc" id="ab_desc" class="form-control" rows="5"></textarea>
+                                    <textarea name="ab_desc" id="ab_desc" class="form-control" rows="5">{{$about->ab_desc}}</textarea>
                                 </div>
 
 
@@ -600,7 +617,7 @@
                                         Add
                                         Mission <span class="text-danger">*</span></label>
                                     <textarea name="ab_mission" id="ab_mission" class="form-control"
-                                        rows="5"></textarea>
+                                        rows="5">{{$about->ab_mission}}</textarea>
                                 </div>
 
 
@@ -611,7 +628,7 @@
                                             aria-hidden="true"></i>
                                         Add
                                         Vision <span class="text-danger">*</span></label>
-                                    <textarea name="ab_vision" id="ab_vision" class="form-control" rows="5"></textarea>
+                                    <textarea name="ab_vision" id="ab_vision" class="form-control" rows="5">{{$about->ab_vision}}</textarea>
                                 </div>
 
 
@@ -623,16 +640,20 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach($abouts as $about)
+                <div class="modal fade" id="myDeleteModal{{$about->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{route('superadmin.super-aboutus.delete', $about->id)}}" method="POST" class="modal-body" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -644,7 +665,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -652,12 +673,14 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
 
                 <!-- Description Modal -->
-                <div class="modal fade" id="myDescModal" tabindex="-1" role="dialog"
+                @foreach($abouts as $about)
+                <div class="modal fade" id="myDescModal{{$about->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -670,10 +693,7 @@
 
                             <form action="" class="modal-body">
 
-                                <p class="mt-2 text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Illum rerum similique deleniti dolores magni. Repellendus magni voluptatum earum
-                                    ducimus? Praesentium laboriosam a cum voluptates. Quisquam, incidunt magnam sit
-                                    nulla id doloribus ut quis cupiditate cumque, obcaecati corrupti amet dicta libero!
+                                <p class="mt-2 text-start"><b>{{$about->ab_desc}}</b>
                                 </p>
 
 
@@ -682,14 +702,14 @@
 
                     </div>
                 </div>
-
-
+                @endforeach
 
 
 
 
                 <!-- Mission Modal -->
-                <div class="modal fade" id="myMissionModal" tabindex="-1" role="dialog"
+                @foreach($abouts as $about)
+                <div class="modal fade" id="myMissionModal{{$about->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -702,10 +722,7 @@
 
                             <form action="" class="modal-body">
 
-                                <p class="mt-2 text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Illum rerum similique deleniti dolores magni. Repellendus magni voluptatum earum
-                                    ducimus? Praesentium laboriosam a cum voluptates. Quisquam, incidunt magnam sit
-                                    nulla id doloribus ut quis cupiditate cumque, obcaecati corrupti amet dicta libero!
+                                <p class="mt-2 text-start"><b>{{$about->ab_mission}}</b>
                                 </p>
 
 
@@ -714,19 +731,15 @@
 
                     </div>
                 </div>
-
-
-
-
-
-
+                @endforeach
 
 
 
 
 
                 <!-- Vision Modal -->
-                <div class="modal fade" id="myVisionModal" tabindex="-1" role="dialog"
+                @foreach($abouts as $about)
+                <div class="modal fade" id="myVisionModal{{$about->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -739,10 +752,7 @@
 
                             <form action="" class="modal-body">
 
-                                <p class="mt-2 text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Illum rerum similique deleniti dolores magni. Repellendus magni voluptatum earum
-                                    ducimus? Praesentium laboriosam a cum voluptates. Quisquam, incidunt magnam sit
-                                    nulla id doloribus ut quis cupiditate cumque, obcaecati corrupti amet dicta libero!
+                                <p class="mt-2 text-start"><b>{{$about->ab_vision}}</b>
                                 </p>
 
 
@@ -751,6 +761,7 @@
 
                     </div>
                 </div>
+                @endforeach
 
 
 

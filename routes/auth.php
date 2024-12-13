@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Superadmin\SuperAboutusController;
 use App\Http\Controllers\Superadmin\SuperAllOnlyDoctorHandleController;
 use App\Http\Controllers\Superadmin\SuperAllOPDHandleController;
 use App\Http\Controllers\Superadmin\SuperAllPathologyHandleController;
@@ -285,6 +286,13 @@ Route::middleware('auth:web')->group(function () {
     // Doctor Banner
     Route::get('/superadmin/super-adddoc-banner/{pid}', [SuperAllOnlyDoctorHandleController::class, 'addDoctorPageView']);
     Route::post('/superadmin/super-adddoc-banner/add/', [SuperAllOnlyDoctorHandleController::class, 'adddocBanner'])->name('superadmin.super-adddoc.banner');
+
+
+    // About Doctorwal------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-aboutus', [SuperAboutusController::class, 'index']);
+    Route::post('/superadmin/super-aboutus', [SuperAboutusController::class, 'store'])->name('superadmin.super-aboutus.store');
+    Route::put('/superadmin/super-aboutus/update/{id}', [SuperAboutusController::class, 'update'])->name('superadmin.super-aboutus.update');
+    Route::delete('/superadmin/super-aboutus/delete/{id}', [SuperAboutusController::class, 'delete'])->name('superadmin.super-aboutus.delete');
 
 
 
