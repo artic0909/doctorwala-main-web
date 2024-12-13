@@ -408,9 +408,8 @@
                                                 <th>Subscription Date</th>
                                                 <th>ID</th>
                                                 <th>Clinic Name</th>
-                                                <th>Name|Email|Mobile</th>
-                                                <th>Address</th>
-                                                <th>State|City</th>
+                                                <th>Clinic Contacts</th>
+                                                <th>Address Details</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -420,24 +419,24 @@
                                             @foreach($opds as $opd)
                                             <tr>
 
-                                                <td>{{$loop->iteration}}</td>
+                                                <td><b>{{$loop->iteration}}</b></td>
                                                 <td>29-11-2024</td>
                                                 <td>29-11-2024</td>
 
-                                                <td>{{$opd->partner_id}}</td>
-                                                <td>{{$opd->partner_clinic_name}}</td>
+                                                <td><b>{{$opd->partner_id}}</b></td>
+                                                <td style="text-transform: capitalize;"><b>{{$opd->partner_clinic_name}}</b></td>
 
                                                 <td>
-                                                    <p class="m-0">{{$opd->clinic_contact_person_name}}</p>
-                                                    <p class="m-0">{{$opd->clinic_email}}</p>
-                                                    <p class="m-0">{{$opd->clinic_mobile_number}}</p>
+                                                    <p class="m-0" style="text-transform: capitalize;"><b>Name: </b><b class="text-primary">{{$opd->clinic_contact_person_name}}</b></p>
+                                                    <p class="m-0"><b>Email: </b><b class="text-danger">{{$opd->clinic_email}}</b></p>
+                                                    <p class="m-0"><b>Mobile: </b><b class="text-success">{{$opd->clinic_mobile_number}}</b></p>
                                                 </td>
 
-                                                <td>{{$opd->clinic_address}}</td>
 
                                                 <td>
-                                                    <p class="m-0">{{$opd->clinic_state}}</p>
-                                                    <p class="m-0">{{$opd->clinic_city}}</p>
+                                                    <p class="m-0"><b>State: </b><b class="text-priamry">{{$opd->clinic_state}}</b></p>
+                                                    <p class="m-0"><b>City: </b><b class="text-danger">{{$opd->clinic_city}}</b></p>
+                                                    <p class="m-0" style="text-transform: capitalize;"><b>Address: </b><b class="text-success">{{$opd->clinic_address}}</b></p>
                                                 </td>
 
 

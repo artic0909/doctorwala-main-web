@@ -219,6 +219,7 @@ Route::middleware('auth:web')->group(function () {
     // All Partners---------------------------------------------------------------------------------------------------------------------------------------->
     Route::get('/superadmin/super-add-partners', [SuperPartnerHandleController::class, 'addPartnerView']);
     Route::post('/superadmin/super-add-partners', [SuperPartnerHandleController::class, 'addPartners'])->name('superadmin.register.partners');
+    Route::put('/superadmin/super-all-partner/update/{id}', [SuperPartnerHandleController::class, 'editPartnerDetails'])->name('superadmin.update.partner');
     Route::get('/superadmin/super-all-partner', [SuperPartnerHandleController::class, 'allPartnersShow'])->name('superadmin.super-all-partner.get');
     Route::put('/superadmin/super-all-partner/status/{id}', [SuperPartnerHandleController::class, 'statusEdit'])->name('superadmin.status.edit');
     Route::delete('/superadmin/super-all-partner/delete/{id}', [SuperPartnerHandleController::class, 'deletePartner'])->name('superadmin.status.delete');

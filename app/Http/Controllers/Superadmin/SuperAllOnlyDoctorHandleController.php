@@ -15,7 +15,7 @@ class SuperAllOnlyDoctorHandleController extends Controller
 
     public function docView(Request $request)
     {
-        $docs = PartnerDoctorContactModel::orderBy('created_at', 'desc')->paginate(8);
+        $docs = PartnerDoctorContactModel::orderBy('created_at', 'desc')->paginate(4);
 
 
         foreach ($docs as $doc) {

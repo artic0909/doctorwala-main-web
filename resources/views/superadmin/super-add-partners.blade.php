@@ -572,72 +572,13 @@
 
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-danger rounded">Register Partner</button>
+                                                <button type="submit" class="btn btn-danger rounded" style="font-weight: 700;">Register Partner</button>
                                             </div>
 
-
+                                        
 
 
                                     </form>
-
-
-                                    <!-- About Details Upload -->
-                                    <div class="d-flex justify-content-start w-100 mt-5 mb-3">
-                                        <h4 style="font-weight: 700;"><i class="fa-solid fa-user-doctor text-primary"></i> About Details</h4>
-                                    </div>
-
-                                    <form action="" class="prof-view row col-12">
-
-                                        <div class="col-12 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-info-circle text-primary"></i> About Clinic
-                                            </label>
-
-                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                        </div>
-
-
-
-
-
-                                        <div class="col-12 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-users-viewfinder text-primary"></i> Mission
-                                            </label>
-
-                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                        </div>
-
-
-
-
-                                        <div class="col-12 form-group">
-                                            <label for="name" style="font-weight: 700;"><i
-                                                    class="fa-solid fa-eye text-primary"></i> Vision
-                                            </label>
-
-                                            <textarea name="" id="" class="form-control" rows="7"></textarea>
-                                        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-                                        <div class="d-flex justify-content-center w-100">
-                                            <button type="submit" class="btn btn-danger rounded">Upload
-                                                Partner About Details</button>
-                                        </div>
-
-                                    </form>
-
-
                                 </div>
 
 

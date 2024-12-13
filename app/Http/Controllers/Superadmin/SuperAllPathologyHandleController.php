@@ -16,7 +16,7 @@ class SuperAllPathologyHandleController extends Controller
 
     public function pathView(Request $request)
     {
-        $paths = PartnerPathologyContactModel::orderBy('created_at', 'desc')->paginate(8);
+        $paths = PartnerPathologyContactModel::orderBy('created_at', 'desc')->paginate(4);
 
 
         foreach ($paths as $path) {

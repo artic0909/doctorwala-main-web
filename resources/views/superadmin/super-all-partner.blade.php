@@ -417,6 +417,7 @@
                                                 <th>Staus</th>
                                                 <th>Actions</th>
                                                 <th>ID</th>
+                                                <th>Partner ID</th>
                                                 <th>Type</th>
                                                 <th>Clinic Name</th>
                                                 <th>Contact Person</th>
@@ -453,8 +454,16 @@
                                                     <a href="" data-target="#myEditModal{{$partner->id}}" data-toggle="modal"
                                                         class="ed-btn mt-2"><i class="fa-solid fa-pen-to-square text-primary"
                                                             style="font-size: 1.1rem;"></i></a>
+
+
                                                 </td>
 
+
+                                                <td>
+                                                    <p class="m-0" style="font-weight: 700;">
+                                                        {{$partner->id}}
+                                                    </p>
+                                                </td>
 
                                                 <td>
                                                     <p class="m-0" style="font-weight: 700;">
@@ -617,6 +626,317 @@
 
 
 
+                <!-- Edit Modal -->
+                @foreach($partners as $partner)
+                <div class="modal fade" id="myEditModal{{$partner->id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+
+                            <form action="{{route('superadmin.update.partner', $partner->id)}}" class="modal-body" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+
+                                <h3 style="font-weight: 700; color: red; font-size: 2rem; text-align: center;">Edit Partner</h3>
+
+                                <div class="from-view row  mt-3">
+
+                                    <div class="col-12 form-group">
+                                        <label for="name" style="font-weight: 700;">
+                                            <i class="fa-solid fa-sitemap text-primary"></i> Type
+                                            <span class="text-danger">*</span>
+                                        </label>
+
+                                        <div class="group-main d-flex">
+                                            {{-- Conditionally show OPD and Pathology --}}
+                                            @if (is_array($partner->registration_type))
+                                            @if (in_array('OPD', $partner->registration_type) || in_array('Pathology', $partner->registration_type))
+                                            <div class="group ml-3">
+                                                <label for="opd" style="font-weight: 700;">OPD</label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="registration_type[]"
+                                                    id="opd"
+                                                    value="OPD"
+                                                    style="cursor: pointer;"
+                                                    {{ in_array('OPD', $partner->registration_type) ? 'checked' : '' }}>
+                                            </div>
+
+                                            <div class="group ml-3">
+                                                <label for="pathology" style="font-weight: 700;">Pathology</label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="registration_type[]"
+                                                    id="pathology"
+                                                    value="Pathology"
+                                                    style="cursor: pointer;"
+                                                    {{ in_array('Pathology', $partner->registration_type) ? 'checked' : '' }}>
+                                            </div>
+                                            @endif
+                                            @endif
+
+                                            {{-- Conditionally show Doctor --}}
+                                            @if (is_array($partner->registration_type) && count($partner->registration_type) === 1 && in_array('Doctor', $partner->registration_type))
+                                            <div class="group ml-3">
+                                                <label for="doctor" style="font-weight: 700;">Doctor</label>
+                                                <input
+                                                    type="checkbox"
+                                                    name="registration_type[]"
+                                                    id="doctor"
+                                                    value="Doctor"
+                                                    style="cursor: pointer;"
+                                                    {{ in_array('Doctor', $partner->registration_type) ? 'checked' : '' }}>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_clinic_name" style="font-weight: 700;"><i
+                                                class="fa fa-hospital text-primary" aria-hidden="true"></i>
+                                            Clinic Name
+                                            <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_clinic_name" name="partner_clinic_name"
+                                            style="height: 55px;" value="{{$partner->partner_clinic_name}}">
+                                    </div>
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_contact_person_name" style="font-weight: 700;"><i
+                                                class="fa-solid fa-user text-primary"></i>
+                                            Contact Person <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_contact_person_name" name="partner_contact_person_name"
+                                            style="height: 55px;" value="{{$partner->partner_contact_person_name}}">
+                                    </div>
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_mobile_number" style="font-weight: 700;"><i
+                                                class="fa fa-phone text-primary" aria-hidden="true"></i> Mobile
+                                            Number
+                                            <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_mobile_number" name="partner_mobile_number"
+                                            style="height: 55px;" value="{{$partner->partner_mobile_number}}">
+                                    </div>
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_email" style="font-weight: 700;"><i
+                                                class="fa fa-envelope text-primary" aria-hidden="true"></i>
+                                            Email Id <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_email" name="partner_email"
+                                            style="height: 55px;" value="{{$partner->partner_email}}">
+                                    </div>
+
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_landmark" style="font-weight: 700;"><i
+                                                class="fa fa-map-pin text-primary" aria-hidden="true"></i>
+                                            Landmark <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_landmark" name="partner_landmark"
+                                            style="height: 55px;" value="{{$partner->partner_landmark}}">
+                                    </div>
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_pincode" style="font-weight: 700;"><i
+                                                class="fa fa-location-pin-lock text-primary"
+                                                aria-hidden="true"></i>
+                                            Pin Code <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="partner_pincode" name="partner_pincode"
+                                            style="height: 55px;" value="{{$partner->partner_pincode}}">
+                                    </div>
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label style="font-weight: 700;"><i
+                                                class="fa fa-map-location-dot text-primary"
+                                                aria-hidden="true"></i>
+                                            Google Map <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"
+                                            style="height: 55px;" value="{{$partner->partner_google_map_link}}">
+                                    </div>
+
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_state" style="font-weight: 700;"><i
+                                                class="fa-solid fa-globe text-primary"></i>
+                                            State <span class="text-danger">*</span></label>
+                                        <select name="partner_state" id="partner_state" class="form-control" style="height: 55px;">
+                                            <option selected>{{$partner->partner_state}}</option>
+                                            <option>---Select State---</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar
+                                                Islands</option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and
+                                                Nagar Haveli
+                                                and Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Ladakh">Ladakh</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+
+                                        </select>
+                                    </div>
+
+
+
+
+
+                                    <div class="col-4 form-group">
+                                        <label for="partner_city" style="font-weight: 700;"><i
+                                                class="fa-solid fa-city text-primary"></i> City
+                                            <span class="text-danger">*</span></label>
+
+                                        <input type="text" name="partner_city" id="partner_city" class="form-control" style="height: 55px;" value="{{$partner->partner_city}}">
+                                    </div>
+
+
+
+
+                                    <div class="col-12 form-group">
+                                        <label for="partner_address" style="font-weight: 700;"><i
+                                                class="fa-solid fa-location-dot text-primary"></i> Address
+                                            <span class="text-danger">*</span></label>
+
+                                        <textarea name="partner_address" id="partner_address" class="form-control" rows="7">{{$partner->partner_address}}</textarea>
+                                    </div>
+
+
+
+                                    <div class="col-6 form-group">
+                                        <label style="font-weight: 700;"><i
+                                                class="fa-solid fa-lock text-primary"></i> Existing Password
+                                            <span class="text-danger">*</span></label>
+
+                                        <input type="text" class="form-control" style="height: 55px;" value="*********************" readonly>
+                                    </div>
+
+
+
+                                    <div class="col-6 form-group">
+                                        <label for="partner_password" style="font-weight: 700;"><i
+                                                class="fa-solid fa-lock text-primary"></i> New Password
+                                            <span class="text-danger">*</span></label>
+
+                                        <input type="text" class="form-control" style="height: 55px;" id="partner_password" name="partner_password" placeholder="Enter New Password">
+                                    </div>
+
+
+
+
+
+
+                                    <div class="d-flex justify-content-center w-100">
+                                        <button type="submit" class="btn btn-danger rounded" style="font-weight: 700;">Update Partner Details</button>
+                                    </div>
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
+
+
+
+
+                <!-- Add OPD Contact Details -->
+                @foreach($partners as $partner)
+                @php
+                // Check registration types
+                $registrationTypes = is_string($partner->registration_type) ? explode(',', $partner->registration_type) : $partner->registration_type;
+                $hasOPD = in_array('OPD', $registrationTypes);
+                $hasPathology = in_array('Pathology', $registrationTypes);
+                $hasDoctor = in_array('Doctor', $registrationTypes);
+                @endphp
+
+
+
+                <div class="modal fade" id="myCNDocModal{{$partner->id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <h3 style="font-weight: 700; color: red; font-size: 2rem; text-align: center;">
+                                    {{ isset($contactDetails) ? 'Edit Doctor Contact Details' : 'Add Doctor Contact Details' }}
+                                </h3>
+                                <!-- Form content for Doctor modal -->
+                                <form class="prof-view" method="POST" action="" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="clinic_registration_type" style="font-weight: 700;">
+                                            <i class="fa fa-sitemap text-primary" aria-hidden="true"></i> Type
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="clinic_registration_type" name="clinic_registration_type"
+                                            value="{{ $contactDetails->clinic_registration_type ?? 'Doctor' }}" style="height: 55px;" readonly>
+                                    </div>
+                                    <!-- Rest of the form content for Doctor modal -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+
+
+
+
+
+
+
+
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -674,6 +994,62 @@
     <script src="{{asset('../partner-assets/js/dashboard.js')}}"></script>
     <script src="{{asset('../partner-assets/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Form validation
+            const form = document.querySelector("form");
+            const passwordField = document.getElementById("partner_password");
+            const confirmPasswordField = document.querySelector("input[placeholder='Confirm Password *']");
+            const opdCheckbox = document.getElementById("opd");
+            const pathologyCheckbox = document.getElementById("pathology");
+            const doctorCheckbox = document.getElementById("doctor");
+
+            // Validate form before submission
+            form.addEventListener("submit", function(e) {
+                let valid = true;
+
+                // Check password and confirm password
+                if (passwordField.value !== confirmPasswordField.value) {
+                    alert("Passwords do not match!");
+                    valid = false;
+                }
+
+                // If not valid, prevent form submission
+                if (!valid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Handle registration type logic
+            opdCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    doctorCheckbox.checked = false;
+                }
+            });
+
+            pathologyCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    doctorCheckbox.checked = false;
+                }
+            });
+
+            doctorCheckbox.addEventListener("change", function() {
+                if (this.checked) {
+                    opdCheckbox.checked = false;
+                    pathologyCheckbox.checked = false;
+                }
+            });
+        });
+    </script>
+
+
+
+
+
 </body>
 
 </html>

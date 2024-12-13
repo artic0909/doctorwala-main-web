@@ -407,9 +407,8 @@
                                                 <th>Subscription Date</th>
                                                 <th>Partner ID</th>
                                                 <th>Clinic Name</th>
-                                                <th>Name|Email|Mobile</th>
-                                                <th>Address</th>
-                                                <th>State|City</th>
+                                                <th>Clinic Contacts</th>
+                                                <th>Address Details</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -421,24 +420,24 @@
                                             @foreach($paths as $path)
                                             <tr>
 
-                                                <td>{{$loop->iteration}}</td>
+                                                <td><b>{{$loop->iteration}}</b></td>
                                                 <td>29-11-2024</td>
                                                 <td>29-11-2024</td>
 
-                                                <td>{{$path->partner_id}}</td>
-                                                <td>{{$path->partner_clinic_name}}</td>
+                                                <td><b>{{$path->partner_id}}</b></td>
+                                                <td style="text-transform: capitalize;"><b>{{$path->partner_clinic_name}}</b></td>
 
                                                 <td>
-                                                    <p class="m-0">{{$path->clinic_contact_person_name}}</p>
-                                                    <p class="m-0">{{$path->clinic_email}}</p>
-                                                    <p class="m-0">{{$path->clinic_mobile_number}}</p>
+                                                    <p class="m-0" style="text-transform: capitalize;"><b class="text-dark">Name: </b><b class="text-primary">{{$path->clinic_contact_person_name}}</b></p>
+                                                    <p class="m-0"><b class="text-dark">Mobile: </b><b class="text-danger">{{$path->clinic_mobile_number}}</b></p>
+                                                    <p class="m-0"><b class="text-dark">Email: </b><b class="text-success">{{$path->clinic_email}}</b></p>
                                                 </td>
 
-                                                <td>{{$path->clinic_address}}</td>
 
                                                 <td>
-                                                    <p class="m-0">{{$path->clinic_state}}</p>
-                                                    <p class="m-0">{{$path->clinic_city}}</p>
+                                                    <p class="m-0"><b class="text-dark">State: </b><b class="text-primary">{{$path->clinic_state}}</b></p>
+                                                    <p class="m-0"><b class="text-dark">City: </b><b class="text-danger">{{$path->clinic_city}}</b></p>
+                                                    <p class="m-0" style="text-transform: capitalize;"><b class="text-dark">Address: </b><b class="text-success">{{$path->clinic_address}}</b></p>
                                                 </td>
 
 
