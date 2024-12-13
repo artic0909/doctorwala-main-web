@@ -619,6 +619,8 @@
                                     </a>
                                 </div>
 
+                                @if(in_array('OPD', $registrationTypes))
+
                                 <div class="col-md-4 mb-4 stretch-card transparent">
                                     <a href="/partnerpanel/partner-opd-show" class="card card_orange"
                                         style="cursor: pointer; text-decoration: none;">
@@ -633,6 +635,29 @@
                                     </a>
                                 </div>
 
+                                @endif
+
+
+                                @if(in_array('Doctor', $registrationTypes))
+
+                                <div class="col-md-4 mb-4 stretch-card transparent">
+                                    <a href="/partnerpanel/partner-doctors" class="card card_orange"
+                                        style="cursor: pointer; text-decoration: none;">
+                                        <div class="card-body">
+                                            <div class="prof d-flex align-items-center">
+                                                <img src="../img/gif/doctors.gif" class="rounded" width="50" alt="">
+                                                <p class="fs-30 m-0 p-0 ml-2 text-uppercase"
+                                                    style="font-weight: 700; cursor: pointer; font-size: 1.1rem;">Doctor
+                                                    Details</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                @endif
+
+                                @if(in_array('Pathology', $registrationTypes))
+
                                 <div class="col-md-4 mb-4 stretch-card transparent">
                                     <a href="/partnerpanel/partner-pathology-show" class="card card_red"
                                         style="cursor: pointer; text-decoration: none;">
@@ -646,6 +671,8 @@
                                         </div>
                                     </a>
                                 </div>
+
+                                @endif
 
 
 

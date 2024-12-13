@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
+use App\Models\PartnerAllOPDDoctorModel;
+use App\Models\PartnerAllPathologyTestModel;
 use App\Models\PartnerDoctorContactModel;
 use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerOPDContactModel;
@@ -118,11 +120,13 @@ class SuperPartnerHandleController extends Controller
         if (in_array('OPD', $removedTypes)) {
             PartnerOPDContactModel::where('currently_loggedin_partner_id', $partner->id)->delete();
             PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partner->id)->delete();
+            PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partner->id)->delete();
         }
 
         if (in_array('Pathology', $removedTypes)) {
             PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partner->id)->delete();
             PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partner->id)->delete();
+            PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partner->id)->delete();
         }
 
         // Handle addition of new registration types

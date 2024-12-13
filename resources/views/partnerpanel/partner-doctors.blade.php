@@ -906,8 +906,9 @@
                                         <label class="col-12" style="font-weight: 700;">Visit Schedule</label>
                                         <div id="visit-schedule-wrapper">
                                             @php
-                                            $visitSchedule = old('partner_doctor_visit_day', $contactDetails->visit_day_time ?? []);
+                                            $visitSchedule = old('partner_doctor_visit_day', is_array($contactDetails->visit_day_time) ? $contactDetails->visit_day_time : []);
                                             @endphp
+
                                             @foreach($visitSchedule as $index => $visit)
 
                                             <div class="row w-100 mb-2 visit-schedule-row p-3">

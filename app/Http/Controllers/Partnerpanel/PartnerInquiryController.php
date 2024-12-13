@@ -44,7 +44,11 @@ class PartnerInquiryController extends Controller
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         
         $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
         $partner = DwPartnerModel::find(Auth::id());
 
         if (!$partner) {

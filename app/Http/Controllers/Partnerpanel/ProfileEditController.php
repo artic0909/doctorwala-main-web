@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
+use App\Models\PartnerAllOPDDoctorModel;
+use App\Models\PartnerAllPathologyTestModel;
 use App\Models\PartnerDoctorBannerModel;
 use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerPathologyBannerModel;
@@ -86,12 +88,14 @@ class ProfileEditController extends Controller
 
             PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)->delete();
             PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->delete();
+            PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->delete();
         }
 
         if (in_array('Pathology', $oldRegistrationType) && !in_array('Pathology', $newRegistrationType)) {
 
             PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->delete();
             PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->delete();
+            PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->delete();
         }
 
         if (in_array('OPD', $newRegistrationType) && !in_array('OPD', $oldRegistrationType)) {
