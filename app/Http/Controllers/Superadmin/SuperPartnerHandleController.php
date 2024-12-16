@@ -212,6 +212,7 @@ class SuperPartnerHandleController extends Controller
                     ->orWhere('partner_mobile_number', 'like', "%{$search}%")
                     ->orWhere('partner_state', 'like', "%{$search}%")
                     ->orWhere('partner_city', 'like', "%{$search}%")
+                    ->orWhere('partner_id', 'like', "%{$search}%")
                     ->orWhere('registration_type', 'like', "%{$search}%");
             });
         }

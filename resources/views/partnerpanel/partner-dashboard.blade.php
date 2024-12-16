@@ -708,7 +708,7 @@
                                 </div>
 
 
-                                <div class="col-md-4 stretch-card transparent">
+                                <div class="col-md-4 mb-4 stretch-card transparent">
                                     <a href="/partnerpanel/partner-feedbacks" class="card card_ash_tyran"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
@@ -724,7 +724,7 @@
 
 
 
-                                <div class="col-md-4 stretch-card transparent">
+                                <div class="col-md-4 mb-4 stretch-card transparent">
                                     <a href="/partnerpanel/partner-show-ticket" class="card card_dim_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
@@ -739,7 +739,7 @@
                                 </div>
 
 
-                                <div class="col-md-4 stretch-card transparent">
+                                <div class="col-md-4 mb-4 stretch-card transparent">
                                     <a href="/partnerpanel/partner-inquiry-from-patients" class="card card_am_orange"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">

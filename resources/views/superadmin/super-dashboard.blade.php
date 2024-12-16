@@ -665,6 +665,21 @@
                                 </div>
 
 
+                                <div class="col-md-4 mb-4 stretch-card transparent">
+                                    <a href="partner-pathology-show.html" class="card card_purple"
+                                        style="cursor: pointer; text-decoration: none;">
+                                        <div class="card-body">
+                                            <div class="prof d-flex align-items-center">
+                                                <img src="{{asset('../img/gif/2.gif')}}" class="rounded" width="50" alt="">
+                                                <p class="fs-30 m-0 p-0 ml-2 text-uppercase"
+                                                    style="font-weight: 700; cursor: pointer; font-size: 1.1rem;">
+                                                    All Users</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
@@ -736,6 +751,37 @@
                                                 <p class="fs-30 m-0 p-0 ml-2 text-uppercase"
                                                     style="font-weight: 700; cursor: pointer; font-size: 1.1rem;">
                                                     Doc Inquiries</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+
+                                <div class="col-md-4 mb-4 stretch-card transparent">
+                                    <a href="/superadmin/super-aboutus" class="card card_red"
+                                        style="cursor: pointer; text-decoration: none;">
+                                        <div class="card-body">
+                                            <div class="prof d-flex align-items-center">
+                                                <img src="{{asset('../img/gif/about.gif')}}" class="rounded" width="50" alt="">
+                                                <p class="fs-30 m-0 p-0 ml-2 text-uppercase"
+                                                    style="font-weight: 700; cursor: pointer; font-size: 1.1rem;">About Us</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+
+
+
+
+                                <div class="col-md-4 mb-4 stretch-card transparent">
+                                    <a href="/superadmin/super-aboutus" class="card card_blue"
+                                        style="cursor: pointer; text-decoration: none;">
+                                        <div class="card-body">
+                                            <div class="prof d-flex align-items-center">
+                                                <img src="{{asset('../img/gif/feed.gif')}}" class="rounded" width="50" alt="">
+                                                <p class="fs-30 m-0 p-0 ml-2 text-uppercase"
+                                                    style="font-weight: 700; cursor: pointer; font-size: 1.1rem;">All Feedbacks</p>
                                             </div>
                                         </div>
                                     </a>
