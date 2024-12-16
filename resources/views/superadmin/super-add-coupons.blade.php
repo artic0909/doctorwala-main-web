@@ -355,26 +355,37 @@
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 mt-5">
 
                                     <h3 class="font-weight-bold">Add Coupons</h3>
 
 
 
-                                    <form class="prof-view">
+                                    <form class="prof-view" action="{{ route('superadmin.super-coupon.store') }}" method="post" enctype="multipart/form-data">
+                                        @csrf
 
 
                                         <div class="from-view row  mt-3">
 
 
+                                            <div class="col-4 form-group">
+                                                <label for="coupon_image" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-gifts text-primary" aria-hidden="true"></i>
+                                                    Coupon Image
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" id="coupon_image" name="coupon_image"
+                                                    style="height: 55px;">
+                                            </div>
 
 
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="coupon_code" style="font-weight: 700;"><i
                                                         class="fa-solid fa-gifts text-primary" aria-hidden="true"></i>
                                                     Coupon Code
                                                     <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Enter Coupon Code (e.g- 1, 2, 3)"
                                                     style="height: 55px;">
                                             </div>
 
@@ -384,11 +395,11 @@
 
 
 
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                            <div class="col-4 form-group">
+                                                <label for="coupon_amount" style="font-weight: 700;"><i
                                                         class="fa fa-indian-rupee text-primary" aria-hidden="true"></i>
                                                     Amount <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="number" class="form-control" id="coupon_amount" name="coupon_amount" placeholder="Enter Coupon Amount"
                                                     style="height: 55px;">
                                             </div>
 
@@ -396,22 +407,22 @@
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="coupon_start_date" style="font-weight: 700;"><i
                                                         class="fa-solid fa-calendar-days text-primary"></i>
                                                     Opening Date <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="name" name="name"
+                                                <input type="date" class="form-control" id="coupon_start_date" name="coupon_start_date"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="coupon_end_date" style="font-weight: 700;"><i
                                                         class="fa fa-calendar-xmark text-primary"
                                                         aria-hidden="true"></i> Closing
                                                     Date
                                                     <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="name" name="name"
+                                                <input type="date" class="form-control" id="coupon_end_date" name="coupon_end_date"
                                                     style="height: 55px;">
                                             </div>
 

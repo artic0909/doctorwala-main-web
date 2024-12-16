@@ -14,6 +14,8 @@ use App\Http\Controllers\Superadmin\SuperAllOnlyDoctorHandleController;
 use App\Http\Controllers\Superadmin\SuperAllOPDHandleController;
 use App\Http\Controllers\Superadmin\SuperAllPathologyHandleController;
 use App\Http\Controllers\Superadmin\SuperAllUserController;
+use App\Http\Controllers\Superadmin\SuperBlogController;
+use App\Http\Controllers\Superadmin\SuperCouponController;
 use App\Http\Controllers\Superadmin\SuperHomeBannerController;
 use App\Http\Controllers\Superadmin\SuperOtherBannerController;
 use App\Http\Controllers\Superadmin\SuperPartnerHandleController;
@@ -288,11 +290,32 @@ Route::middleware('auth:web')->group(function () {
     Route::post('/superadmin/super-adddoc-banner/add/', [SuperAllOnlyDoctorHandleController::class, 'adddocBanner'])->name('superadmin.super-adddoc.banner');
 
 
+
+
+
+
+
     // About Doctorwal------------------------------------------------------------------------------------------------------------------------------------->
     Route::get('/superadmin/super-aboutus', [SuperAboutusController::class, 'index']);
     Route::post('/superadmin/super-aboutus', [SuperAboutusController::class, 'store'])->name('superadmin.super-aboutus.store');
     Route::put('/superadmin/super-aboutus/update/{id}', [SuperAboutusController::class, 'update'])->name('superadmin.super-aboutus.update');
     Route::delete('/superadmin/super-aboutus/delete/{id}', [SuperAboutusController::class, 'delete'])->name('superadmin.super-aboutus.delete');
+
+
+    // Blogs Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-blogs', [SuperBlogController::class, 'index']);
+    Route::post('/superadmin/super-blogs', [SuperBlogController::class, 'store'])->name('superadmin.super-blog.store');
+    Route::put('/superadmin/super-blogs/update/{id}', [SuperBlogController::class, 'update'])->name('superadmin.super-blog.update');
+    Route::delete('/superadmin/super-blogs/delete/{id}', [SuperBlogController::class, 'delete'])->name('superadmin.super-blog.delete');
+
+
+    // Coupons Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-add-coupons', [SuperCouponController::class, 'index']);
+    Route::post('/superadmin/super-add-coupons', [SuperCouponController::class, 'store'])->name('superadmin.super-coupon.store');
+    Route::get('/superadmin/super-show-coupons', [SuperCouponController::class, 'show']);
+    Route::put('/superadmin/super-show-coupons/update/{id}', [SuperCouponController::class, 'update'])->name('superadmin.super-coupon.update');
+    Route::put('/superadmin/super-show-coupons/status/{id}', [SuperCouponController::class, 'updateStatus'])->name('superadmin.super-coupon.update.status');
+    Route::delete('/superadmin/super-show-coupons/delete/{id}', [SuperCouponController::class, 'delete'])->name('superadmin.super-coupon.delete');
 
 
 

@@ -378,27 +378,28 @@
                                         </thead>
 
                                         <tbody>
+                                            @foreach ($blogs as $blog)
                                             <tr>
-                                                <td><a href="" data-target="#myEditModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myEditModal{{ $blog->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-pen-to-square text-success"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myDeleteModal{{ $blog->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
 
-                                                <td><img src="../img/a1.jpg" alt=""
+                                                <td><img src="{{ asset('storage/' . $blog->blg_image) }}" alt=""
                                                         style="width: 150px; height: 80px; border-radius: 10px;">
                                                 </td>
 
-                                                <td>fggfgfg</td>
+                                                <td><b style="text-transform: capitalize">{{$blog->blg_title}}</b></td>
 
 
 
-                                                <td><a href="" data-target="#myDescModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myDescModal{{ $blog->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
@@ -406,6 +407,7 @@
 
 
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -445,24 +447,25 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Add Blog Details</h5>
                             </div>
 
-                            <form class="modal-body">
+                            <form class="modal-body" action="{{route('superadmin.super-blog.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
 
 
                                 <div class="form-group">
-                                    <label for="about_image"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_image"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Image <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="blg_image" id="about_image">
+                                    <input type="file" class="form-control" name="blg_image" id="blg_image">
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="ab_title"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_title"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Title <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="blg_title" id="ab_title">
+                                    <input type="text" class="form-control" name="blg_title" id="blg_title">
                                 </div>
 
 
@@ -472,11 +475,11 @@
 
 
                                 <div class="form-group">
-                                    <label for="ab_desc"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_desc"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Description <span class="text-danger">*</span></label>
-                                    <textarea name="ab_desc" id="blg_desc" class="form-control" rows="5"></textarea>
+                                    <textarea name="blg_desc" id="blg_desc" class="form-control" rows="5"></textarea>
                                 </div>
 
 
@@ -491,7 +494,8 @@
 
 
                 <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
+                @foreach ($blogs as $blog)
+                <div class="modal fade" id="myEditModal{{ $blog->id }}" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -502,26 +506,27 @@
                                 <h5 class="modal-title" id="myAddModalLabel">Edit Blog Details</h5>
                             </div>
 
-                            <img src="../img/a1.jpg" alt="" style="height: inherit; width: inherit;">
+                            <img src="{{ asset('storage/' . $blog->blg_image) }}" alt="" style="height: inherit; width: inherit;">
 
-                            <form class="modal-body">
-
+                            <form class="modal-body" action="{{ route('superadmin.super-blog.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
                                 <div class="form-group">
-                                    <label for="about_image"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_image"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Image <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" name="blg_image" id="about_image">
+                                    <input type="file" class="form-control" name="blg_image" id="blg_image">
                                 </div>
 
 
                                 <div class="form-group">
-                                    <label for="ab_title"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_title"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Title <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="blg_title" id="ab_title">
+                                    <input type="text" class="form-control" name="blg_title" id="blg_title" value="{{ $blog->blg_title }}">
                                 </div>
 
 
@@ -531,11 +536,11 @@
 
 
                                 <div class="form-group">
-                                    <label for="ab_desc"><i class="fa fa-stethoscope text-success"
+                                    <label for="blg_desc"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Add
                                         Description <span class="text-danger">*</span></label>
-                                    <textarea name="ab_desc" id="blg_desc" class="form-control" rows="5"></textarea>
+                                    <textarea name="blg_desc" id="blg_desc" class="form-control" rows="7">{{ $blog->blg_desc }}</textarea>
                                 </div>
 
 
@@ -547,16 +552,20 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach ($blogs as $blog)
+                <div class="modal fade" id="myDeleteModal{{ $blog->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form class="modal-body" action="{{ route('superadmin.super-blog.delete', $blog->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -568,7 +577,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -576,12 +585,14 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
 
                 <!-- Description Modal -->
-                <div class="modal fade" id="myDescModal" tabindex="-1" role="dialog"
+                @foreach ($blogs as $blog)
+                <div class="modal fade" id="myDescModal{{ $blog->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -594,10 +605,7 @@
 
                             <form action="" class="modal-body">
 
-                                <p class="mt-2 text-start">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Illum rerum similique deleniti dolores magni. Repellendus magni voluptatum earum
-                                    ducimus? Praesentium laboriosam a cum voluptates. Quisquam, incidunt magnam sit
-                                    nulla id doloribus ut quis cupiditate cumque, obcaecati corrupti amet dicta libero!
+                                <p class="mt-2 text-start" style="font-size: 1.2rem;"><b class="text-primary">Blog Description: </b>{{ $blog->blg_desc }}
                                 </p>
 
 
@@ -606,6 +614,7 @@
 
                     </div>
                 </div>
+                @endforeach
 
 
 
