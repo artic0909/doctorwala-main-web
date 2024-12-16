@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>All Subscription Details</title>
+    <title>Super | All Subscription Details</title>
 
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{asset('../partner-assets')}}">
