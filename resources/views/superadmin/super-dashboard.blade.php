@@ -564,7 +564,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="" class="card card_green"
+                                    <a href="/superadmin/super-add-partners" class="card card_green"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -579,7 +579,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-get-subscription.html" class="card card_blue"
+                                    <a href="/superadmin/super-add-coupons" class="card card_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -593,7 +593,7 @@
                                 </div>
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-opd-show.html" class="card card_orange"
+                                    <a href="/superadmin/super-add-subscriptions" class="card card_orange"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -607,7 +607,7 @@
                                 </div>
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_red"
+                                    <a href="/superadmin/super-all-tickets" class="card card_red"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -621,7 +621,7 @@
                                 </div>
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_dim_blue"
+                                    <a href="/superadmin/super-all-doctors" class="card card_dim_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -637,7 +637,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_purple"
+                                    <a href="/superadmin/super-all-pathology" class="card card_purple"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -651,7 +651,7 @@
                                 </div>
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_dim_blue"
+                                    <a href="/superadmin/super-all-opd" class="card card_dim_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -668,7 +668,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_dark_blue"
+                                    <a href="" class="card card_dark_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">
@@ -683,7 +683,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="partner-pathology-show.html" class="card card_ash_tyran"
+                                    <a href="/superadmin/super-blogs" class="card card_ash_tyran"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">

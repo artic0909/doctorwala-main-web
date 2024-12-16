@@ -359,24 +359,13 @@
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 mt-5">
 
                                     <div class="row">
                                         <div class="col-3">
                                             <h3 class="font-weight-bold">All Subscription Details</h3>
                                         </div>
 
-                                        <div class="col-9 d-flex justify-content-end align-items-center">
-                                            <nav aria-label="Page navigation">
-                                                <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                                                </ul>
-                                            </nav>
-                                        </div>
                                     </div>
 
 
@@ -385,6 +374,7 @@
                                         <thead>
                                             <tr>
                                                 <th>SL.</th>
+                                                <th>Image</th>
                                                 <th>Subscription Text</th>
                                                 <th>Amount</th>
                                                 <th>Opening Date</th>
@@ -396,44 +386,48 @@
                                         </thead>
 
                                         <tbody>
-
-
+                                            @foreach($subscriptions as $sub)
                                             <tr>
+                                                <td><b>{{$loop->iteration}}</b></td>
 
-                                                <td>1</td>
-                                                <td>Yearly Subscription</td>
-                                                <td>₹ 1000</td>
-                                                <td>30-11-2024</td>
-                                                <td>30-11-2025</td>
+                                                <td><img src="{{ asset('storage/' . $sub->subs_image) }}" alt=""
+                                                        style="width: 150px; height: 80px; border-radius: 0px;"></td>
+
+                                                <td><b>{{$sub->subs_title}}</b></td>
+                                                <td><b>₹ {{$sub->subs_amount}}</b></td>
+                                                <td><b class="text-primary">{{$sub->subs_open_date}}</b></td>
+                                                <td><b class="text-danger">{{$sub->subs_close_date}}</b></td>
 
 
 
-                                                <td><a href="" data-target="#myFeaturesModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myFeaturesModal{{$sub->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
-                                                <td><a href="" data-target="#myActiveInactiveModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-toggle-off text-success"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                <td>
+                                                    @if($sub->status == 'Active' || $sub->status == 'active')
+                                                    <a href="" data-target="#myActiveInactiveModal{{$sub->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-on text-success" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @else
+                                                    <a href="" data-target="#myActiveInactiveModal{{$sub->id}}" data-toggle="modal" class="ed-btn">
+                                                        <i class="fa-solid fa-toggle-off text-danger" style="font-size: 1.1rem;"></i>
+                                                    </a>
+                                                    @endif
+                                                </td>
 
 
 
                                                 <td>
-                                                    <a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                    <a href="" data-target="#myDeleteModal{{$sub->id}}" data-toggle="modal"
                                                         class="ed-btn ml-3">
                                                         <i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1rem;"></i>
                                                     </a>
                                                 </td>
-
-
-
-
-
-
-
-
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -455,12 +449,16 @@
 
 
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach($subscriptions as $sub)
+                <div class="modal fade" id="myDeleteModal{{$sub->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form class="modal-body" action="{{ route('superadmin.super-subs.delete', $sub->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+                                
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -472,7 +470,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -480,6 +478,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
@@ -487,24 +486,28 @@
 
 
                 <!-- My Active Inactive  Modal -->
-                <div class="modal fade" id="myActiveInactiveModal" tabindex="-1" role="dialog"
+                @foreach($subscriptions as $sub)
+                <div class="modal fade" id="myActiveInactiveModal{{$sub->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myActiveInactiveModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
 
 
-                            <form class="modal-body">
-
+                            <form class="modal-body" action="{{route('superadmin.super-subs.update.status', $sub->id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
 
                                 <div class="form-group">
                                     <label for="other_banner"><i class="fa fa-stethoscope text-success"
                                             aria-hidden="true"></i>
                                         Set Status <span class="text-danger">*</span></label>
-                                    <select name="" id="" class="form-control">
-                                        <option value="" selected>Inactive</option>
-                                        <option value="">Active</option>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="" selected>{{$sub->status}}</option>
+                                        <option value="">---Select Status---</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
 
@@ -516,12 +519,14 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 
 
                 <!-- Features Modal -->
-                <div class="modal fade" id="myFeaturesModal" tabindex="-1" role="dialog"
+                @foreach($subscriptions as $sub)
+                <div class="modal fade" id="myFeaturesModal{{$sub->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myFeaturesModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -539,59 +544,32 @@
 
                             <div class="modal-body">
 
-                                <p class="m-0" style="font-weight: 700; font-size: 1.2rem;">Subscription Text</p>
+                                <p class="m-0" style="font-weight: 700; font-size: 1.2rem;">Features</p>
                                 <ul style="list-style-type: none;" class="mt-3">
+                                    @if($sub->features)
+                                    @foreach(json_decode($sub->features, true) as $feature)
                                     <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                                        <p class="m-0 mt-2" style="font-weight: 700; font-size: 1.02rem;">
+                                            <i class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
+                                            {{ $feature }}
+                                        </p>
                                     </li>
+                                    @endforeach
+                                    @else
                                     <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+                                        <p class="m-0" style="font-weight: 700; font-size: 1.02rem;">
+                                            <i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>&nbsp;
+                                            No features available.
+                                        </p>
                                     </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
-                                    <li>
-                                        <p class="m-0" style="font-weight: 700;"><i
-                                                class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
-                                            Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-                                    </li>
+                                    @endif
                                 </ul>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 

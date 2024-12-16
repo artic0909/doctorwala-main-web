@@ -30,7 +30,10 @@ class PartnerInquiryController extends Controller
         }
 
 
-        $inquiries = PartnerInquiryModel::where('currently_loggedin_partner_id', Auth::id())->get();
+        $inquiries = PartnerInquiryModel::where('currently_loggedin_partner_id', $partnerId)
+        ->orderBy('id', 'desc')
+        ->get();
+        
         return view('partnerpanel.partner-show-ticket', compact('opdBanner', 'pathologyBanner','doctorBanner', 'inquiries', 'registrationTypes'));
     }
 
@@ -75,6 +78,7 @@ class PartnerInquiryController extends Controller
 
         PartnerInquiryModel::create([
             'currently_loggedin_partner_id' => $partner->id,
+            'partner_clinic_name' => $partner->partner_clinic_name,
             'partner_contact_person_name' => $partner->partner_contact_person_name,
             'partner_mobile_number' => $partner->partner_mobile_number,
             'partner_email' => $partner->partner_email,

@@ -359,26 +359,36 @@
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
-                                <div class="col-12">
+                                <div class="col-12 mt-5">
 
                                     <h3 class="font-weight-bold">Add Subscription</h3>
 
 
 
-                                    <form class="prof-view">
-
+                                    <form class="prof-view" action="{{route('superadmin.super-subs.store')}}" method="post" enctype="multipart/form-data">
+                                        @csrf
 
                                         <div class="from-view row  mt-3">
 
 
 
 
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                            <div class="col-4 form-group">
+                                                <label for="subs_image" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-gifts text-primary" aria-hidden="true"></i>
+                                                    Subscription Image
+                                                    <span class="text-danger">*</span></label>
+                                                <input type="file" class="form-control" id="subs_image" name="subs_image"
+                                                    style="height: 55px;">
+                                            </div>
+
+
+                                            <div class="col-4 form-group">
+                                                <label for="subs_title" style="font-weight: 700;"><i
                                                         class="fa-solid fa-gifts text-primary" aria-hidden="true"></i>
                                                     Subscription Text
                                                     <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="text" class="form-control" id="subs_title" name="subs_title"
                                                     style="height: 55px;">
                                             </div>
 
@@ -388,11 +398,11 @@
 
 
 
-                                            <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                            <div class="col-4 form-group">
+                                                <label for="subs_amount" style="font-weight: 700;"><i
                                                         class="fa fa-indian-rupee text-primary" aria-hidden="true"></i>
                                                     Subscription Amount <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="name" name="name"
+                                                <input type="number" class="form-control" id="subs_amount" name="subs_amount"
                                                     style="height: 55px;">
                                             </div>
 
@@ -400,22 +410,22 @@
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="opening_date" style="font-weight: 700;"><i
                                                         class="fa-solid fa-calendar-days text-primary"></i>
                                                     Opening Date <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="name" name="name"
+                                                <input type="date" class="form-control" id="opening_date" name="opening_date"
                                                     style="height: 55px;">
                                             </div>
 
 
 
                                             <div class="col-6 form-group">
-                                                <label for="name" style="font-weight: 700;"><i
+                                                <label for="closing_date" style="font-weight: 700;"><i
                                                         class="fa fa-calendar-xmark text-primary"
                                                         aria-hidden="true"></i> Closing
                                                     Date
                                                     <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="name" name="name"
+                                                <input type="date" class="form-control" id="closing_date" name="closing_date"
                                                     style="height: 55px;">
                                             </div>
 
@@ -425,12 +435,12 @@
                                             <div id="add-same-section" class="row col-12">
 
                                                 <div class="col-3 form-group">
-                                                    <label for="name" style="font-weight: 700;"><i
+                                                    <label for="features" style="font-weight: 700;"><i
                                                             class="fa-solid fa-circle-check text-primary"></i>
                                                         Features <span class="text-danger">*</span></label>
 
                                                     <div class="d-flex align-items-center">
-                                                        <input type="text" class="form-control" style="height: 55px;">
+                                                        <input type="text" class="form-control" name="features[]" id="features" style="height: 55px;">
 
                                                         <button type="button" id="add-section-button"
                                                             class="btn btn-primary rounded col-3 ml-3"

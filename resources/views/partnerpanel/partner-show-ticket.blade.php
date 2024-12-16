@@ -138,8 +138,8 @@
 
 
 
-                                        <!-- partner-profile-banner -->
-                                        <li class="nav-item">
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
                             aria-controls="ui-basicuy">
                             <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
@@ -381,10 +381,11 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Delete</th>
                                                 <th scope="col">Ticket ID</th>
+                                                <th scope="col">Date & Time</th>
                                                 <th scope="col">My Problem</th>
                                                 <th scope="col">Reply</th>
+                                                <!-- <th scope="col">Delete</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -393,22 +394,37 @@
                                                 <th scope="row">{{ $loop->iteration }}</th>
 
 
-                                                <td><a href="" data-target="#myDeleteModal{{ $ticket->id }}" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.4rem;"></i></a></td>
+
 
 
 
                                                 <td style="font-size: 1.2rem;">
                                                     <p class="m-0"><b>{{$ticket->ticket_id}}</b></p>
                                                 </td>
+
+
+                                                <td style="font-size: 1.2rem;">
+                                                    <p class="m-0"><b>Raised on : {{\Carbon\Carbon::parse($ticket->created_at)->format('jS M Y - h:i A') }}</b></p>
+                                                    @if (!empty($ticket->partner_problem_reply))
+                                                    <p class="m-0"><b class="text-success">Replied on: {{ \Carbon\Carbon::parse($ticket->updated_at)->format('jS M Y - h:i A') }}</b></p>
+                                                    @else
+                                                    <p class="m-0"><b class="text-danger">Not Replied Yet</b></p>
+                                                    @endif
+                                                </td>
+
                                                 <td><a href="" data-target="#myTicketViewModal{{ $ticket->id }}" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-triangle-exclamation text-warning"
+                                                        class="ed-btn"><i class="fa-solid fa-triangle-exclamation text-dark"
                                                             style="font-size: 1.4rem;"></i></a></td>
 
                                                 <td><a href="" data-target="#myReplyViewModal{{ $ticket->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-reply text-success"
                                                             style="font-size: 1.4rem;"></i></a></td>
+
+
+
+                                                <!-- <td><a href="" data-target="#myDeleteModal{{ $ticket->id }}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
+                                                            style="font-size: 1.4rem;"></i></a></td> -->
 
 
 

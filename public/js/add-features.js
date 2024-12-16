@@ -10,21 +10,22 @@ document
       "form-group",
       "d-flex",
       "align-items-center",
-      "mt-2"
     );
 
     // Create the new input
     const newInput = document.createElement("input");
     newInput.type = "text";
+    newInput.name = "features[]"; // Set the name attribute to "features[]"
     newInput.classList.add("form-control");
     newInput.style.height = "55px";
+    newInput.style.marginTop = "0.5rem";
     newInput.placeholder = "Enter a feature";
 
     // Create a remove button
     const removeButton = document.createElement("button");
     removeButton.type = "button";
     removeButton.textContent = "REMOVE";
-    removeButton.classList.add("btn", "btn-danger", "rounded", "ml-3");
+    removeButton.classList.add("btn", "btn-danger", "rounded", "ml-3",); // Updated for Bootstrap 5 compatibility
     removeButton.style.height = "55px";
     removeButton.style.fontWeight = "700";
 

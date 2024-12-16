@@ -27,6 +27,13 @@
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        .disabled-link-btn {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+    </style>
 
 
 </head>
@@ -51,8 +58,12 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
+                <form action="{{ route('superadmin.super-all-tickets') }}" method="GET" class="w-100">
+                    <div class="input-group w-100">
+                        <input type="text" id="search" name="search" class="form-control mx-4 w-100" placeholder="Search Tickets"
+                            value="{{ old('search', $searchQuery) }}">
+                    </div>
+                </form>
 
                 <ul class="navbar-nav navbar-nav-right">
 
@@ -358,51 +369,115 @@
                     <div class="row">
                         <div class="col-md-12 grid-margin">
                             <div class="row">
-                                <div class="col-12">
-                                    <h3 class="font-weight-bold">Partners Inquiries</h3>
+                                <div class="col-12 mt-5">
+
+
+                                    <div class="row">
+
+
+                                        <div class="col-3">
+                                            <h3 class="font-weight-bold">Partners Inquiries</h3>
+                                        </div>
 
 
 
+                                        <div class="col-9 d-flex justify-content-end align-items-center">
+                                            <nav aria-label="Page navigation">
+                                                <ul class="pagination">
+                                                    {{-- Previous Page Link --}}
+                                                    @if ($tickets->onFirstPage())
+                                                    <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $tickets->previousPageUrl() }}">Prev</a></li>
+                                                    @endif
+
+                                                    {{-- Pagination Elements --}}
+                                                    @foreach ($tickets->links()->elements[0] as $page => $url)
+                                                    @if ($page == $tickets->currentPage())
+                                                    <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                                    @endif
+                                                    @endforeach
+
+                                                    {{-- Next Page Link --}}
+                                                    @if ($tickets->hasMorePages())
+                                                    <li class="page-item"><a class="page-link" href="{{ $tickets->nextPageUrl() }}">Next</a></li>
+                                                    @else
+                                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                                    @endif
+                                                </ul>
+                                            </nav>
+                                        </div>
+                                    </div>
 
 
                                     <table class="table table-stripped table-bordered mt-4">
                                         <thead>
                                             <tr>
+                                                <th>Ticket ID</th>
+                                                <th>Date & Time</th>
                                                 <th>Clinic Name</th>
                                                 <th>Contact Person</th>
-                                                <th>Mobile|Email</th>
-                                                <th>State|City</th>
+                                                <th>Contact Details</th>
+                                                <th>Address Details</th>
                                                 <th>Inquiry</th>
-                                                <th>Delete</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
+                                            @foreach ($tickets as $ticket)
                                             <tr>
 
-                                                <td>Life Line</td>
-
-                                                <td>Saklin Mustak</td>
+                                                <td><b class="badge badge-primary">{{ $ticket->ticket_id }}</b></td>
                                                 <td>
-                                                    <p class="m-0">+91 90909899</p>
-                                                    <p class="m-0">sm@gmail.com</p>
+                                                    <p class="m-0"><b>Raised on: {{ \Carbon\Carbon::parse($ticket->created_at)->format('jS M Y - h:i A') }}</b></p>
+
+                                                    @if (!empty($ticket->partner_problem_reply))
+                                                    <p class="m-0"><b class="text-success">Replied on: {{ \Carbon\Carbon::parse($ticket->updated_at)->format('jS M Y - h:i A') }}</b></p>
+                                                    @else
+                                                    <p class="m-0"><b class="text-danger">Not Replied Yet</b></p>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                @if (!empty($ticket->partner_problem_reply))
+                                                    <b class="badge badge-success" style="text-transform: capitalize;">{{ $ticket->partner_clinic_name }}</b>
+                                                @else
+                                                    <b class="badge badge-danger" style="text-transform: capitalize;">{{ $ticket->partner_clinic_name }}</b>
+                                                @endif
+                                                </td>
+
+                                                <td><b style="text-transform: capitalize;">{{ $ticket->partner_contact_person_name }}</b></td>
+                                                <td>
+                                                    <p class="m-0"><b>Mobile: {{ $ticket->partner_mobile_number }}</b></p>
+                                                    <p class="m-0"><b>Email: {{ $ticket->partner_email }}</b></p>
                                                 </td>
 
                                                 <td>
-                                                    <p class="m-0">West Bengal</p>
-                                                    <p class="m-0">Ranihati</p>
+                                                    <p class="m-0"><b>State: {{ $ticket->partner_state }}</b></p>
+                                                    <p class="m-0"><b>City: {{ $ticket->partner_city }}</b></p>
                                                 </td>
 
 
-                                                <td><a href="" data-target="#myDescModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                <td>
+                                                    @if (!empty($ticket->partner_problem_reply))
+                                                    <a href="" data-target="#myDescModal{{ $ticket->id }}" data-toggle="modal"
+                                                        class="ed-btn disabled-link-btn"><i class="fa-solid fa-file-medical text-primaryy"
+                                                            style="font-size: 1.1rem;"></i></a>
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.1rem;"></i></a></td>
+                                                    @else
+
+                                                    <a href="" data-target="#myDescModal{{ $ticket->id }}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-file-medical text-danger"
+                                                            style="font-size: 1.1rem;"></i></a>
+                                                    @endif
+
+                                                </td>
+
+
 
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -427,38 +502,14 @@
 
 
 
-                <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
-                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
 
-                            <form action="" class="modal-body">
-                                <div class="form-group d-flex flex-column align-items-center">
-                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
-
-                                    <h3 class="mt-3">Are You Sure ?</h3>
-
-                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
-                                        cannot be undone.</p>
-
-                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
-                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
-                                            data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
 
 
 
 
                 <!-- Inquiry Modal -->
-                <div class="modal fade" id="myDescModal" tabindex="-1" role="dialog"
+                @foreach ($tickets as $ticket)
+                <div class="modal fade" id="myDescModal{{ $ticket->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -469,24 +520,24 @@
                                         aria-hidden="true">&times;</span></button>
                             </div>
 
-                            <form action="" class="modal-body">
+                            <form class="modal-body" action="{{ route('superadmin.super-ticket-reply', $ticket->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
 
-                                <p style="font-weight: 700;">Clinic Name - Contact person Name</p>
+                                <p style="font-weight: 700; text-transform: capitalize; font-size: 1.02rem;">{{ $ticket->partner_clinic_name }} - {{$ticket->partner_contact_person_name}}</p>
 
-                                <p class="mt-2 text-start" style="text-align: justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Illum rerum similique deleniti dolores magni. Repellendus magni voluptatum earum
-                                    ducimus? Praesentium laboriosam a cum voluptates. Quisquam, incidunt magnam sit
-                                    nulla id doloribus ut quis cupiditate cumque, obcaecati corrupti amet dicta libero!
+                                <p class="mt-2 text-start text-danger" style="text-align: justify; font-size: 1.02rem;">
+                                    <span class="text-dark" style="font-weight: 700;">Problem:</span> <span>{{ $ticket->partner_problem }}</span>
                                 </p>
 
 
                                 <div class="gorm-group">
-                                    <label for="reply" style="font-weight: 700;">Reply <span class="text-danger">*</span></label>
-                                    <textarea name="" id="" class="form-control" rows="9"></textarea>
+                                    <label for="partner_problem_reply" style="font-weight: 700;">Reply <span class="text-danger">*</span></label>
+                                    <textarea name="partner_problem_reply" id="partner_problem_reply" class="form-control" rows="12"></textarea>
                                 </div>
 
 
-                                <a href="" type="submit" class="btn btn-primary rounded mt-4 w-100" style="font-weight: 700;">Send Reply</a>
+                                <button type="submit" class="btn btn-primary rounded mt-4 w-100" style="font-weight: 700;">Send Reply</button>
 
                             </form>
                         </div>
@@ -494,6 +545,7 @@
 
                     </div>
                 </div>
+                @endforeach
 
 
 

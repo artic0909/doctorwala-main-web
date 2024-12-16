@@ -19,6 +19,8 @@ use App\Http\Controllers\Superadmin\SuperCouponController;
 use App\Http\Controllers\Superadmin\SuperHomeBannerController;
 use App\Http\Controllers\Superadmin\SuperOtherBannerController;
 use App\Http\Controllers\Superadmin\SuperPartnerHandleController;
+use App\Http\Controllers\Superadmin\SuperSubscriptionController;
+use App\Http\Controllers\Superadmin\SuperTicketController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:web')->group(function () {
@@ -317,6 +319,25 @@ Route::middleware('auth:web')->group(function () {
     Route::put('/superadmin/super-show-coupons/status/{id}', [SuperCouponController::class, 'updateStatus'])->name('superadmin.super-coupon.update.status');
     Route::delete('/superadmin/super-show-coupons/delete/{id}', [SuperCouponController::class, 'delete'])->name('superadmin.super-coupon.delete');
 
+
+
+    // Subscription Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-add-subscriptions', [SuperSubscriptionController::class, 'index']);
+    Route::post('/superadmin/super-add-subscriptions', [SuperSubscriptionController::class, 'store'])->name('superadmin.super-subs.store');
+    Route::get('/superadmin/super-show-subscription', [SuperSubscriptionController::class, 'show']);
+    Route::put('/superadmin/super-show-subscription/update/{id}', [SuperSubscriptionController::class, 'update'])->name('superadmin.super-subs.update');
+    Route::put('/superadmin/super-show-subscription/status/{id}', [SuperSubscriptionController::class, 'updateStatus'])->name('superadmin.super-subs.update.status');
+    Route::delete('/superadmin/super-show-subscription/delete/{id}', [SuperSubscriptionController::class, 'delete'])->name('superadmin.super-subs.delete');
+
+
+
+    // Tickets Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-all-tickets', [SuperTicketController::class, 'index'])->name('superadmin.super-all-tickets');
+    Route::put('/superadmin/super-all-tickets/reply/{id}', [SuperTicketController::class, 'addReply'])->name('superadmin.super-ticket-reply');
+    Route::delete('/superadmin/super-all-tickets/delete/{id}', [SuperTicketController::class, 'delete'])->name('superadmin.super-ticket.delete');
+    
+    Route::get('/superadmin/super-ticket-replies', [SuperTicketController::class, 'showAllReplayed'])->name('superadmin.super-ticket-replies');
+    Route::delete('/superadmin/super-ticket-replies/delete/{id}', [SuperTicketController::class, 'delete'])->name('superadmin.super-reply.delete');
 
 
 

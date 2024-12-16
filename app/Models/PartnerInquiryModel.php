@@ -13,6 +13,7 @@ class PartnerInquiryModel extends Model
 
     protected $fillable = [
         'currently_loggedin_partner_id',
+        'partner_clinic_name',
         'partner_contact_person_name',
         'partner_mobile_number',
         'partner_email',
