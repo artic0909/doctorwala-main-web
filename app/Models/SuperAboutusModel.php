@@ -16,5 +16,7 @@ class SuperAboutusModel extends Model
         'ab_desc',
         'ab_mission',
         'ab_vision',
+        'number',
+        'email',
     ];
 }

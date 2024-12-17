@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Home Page | Doctorwala</title>
+    <title>Doctorwala Info</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -64,18 +64,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -199,7 +200,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
+
                     <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
                         @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
@@ -256,14 +257,13 @@
 
 
 
-                    <!-- password update form -->
                     <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
                         @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
 
-                            <!-- dummy start -->
+
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
@@ -271,7 +271,7 @@
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
-                            <!-- dummy end -->
+
 
 
                             <div class="col-md-12">
@@ -426,34 +426,37 @@
     <!-- Carousel Start -->
     <div class="container-fluid p-0">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="w-100" src="{{asset('img/carousel-1.jpg')}}" alt="Image">
+
+
+                @foreach($homeBanners as $key => $banner)
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                    <img class="w-100" src="{{ asset('storage/' . $banner->banner_image) }}" alt="Image">
                     <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                         <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
-                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental
-                                Treatment</h1>
-                            <a href="opd.html" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">OPD
-                                Details</a>
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">{{ $banner->title }}</h5>
+                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">{{$banner->desc}}</h1>
+
+                            @guest
+                            <a href="/privacy-policy" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">Privacy Policy</a>
+                            <a href="/contact" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                            @endguest
+
+                            @auth
+                            <a href="/dw/privacy-policy" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">Privacy Policy</a>
+                            <a href="/dw/contact" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
+                            @endauth
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="{{asset('img/carousel-2.jpg')}}" alt="Image">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
-                            <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental
-                                Treatment</h1>
-                            <a href="pathology.html"
-                                class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">Pathology</a>
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
+
             </div>
+
+
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -523,20 +526,17 @@
 
 
     <!-- About Start -->
+    @foreach($aboutDetails as $aboutDetail)
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-7">
                     <div class="section-title mb-4">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Jio Ji Bharka</h5>
-                        <h1 class="display-5 mb-0">One of The Local Search Engine for Medical Services</h1>
+                        <h1 class="display-5 mb-0">{{$aboutDetail->ab_title}}</h1>
                     </div>
-                    <h4 class="text-body fst-italic mb-4">Welcome to DoctorWala.info, your trusted source for finding
-                        the right doctors, pathologists, and OPDs in your local area.</h4>
-                    <p class="mb-4">DoctorWala.info is a leading local search engine dedicated to helping individuals in
-                        India find the right doctors, pathologists, and OPDs in their local areas. Our platform is
-                        designed to simplify the process of locating and connecting with healthcare professionals,
-                        ensuring that you receive the best possible care.</p>
+                    <h4 class="text-body fst-italic mb-4">{{$aboutDetail->ab_b_txt}}</h4>
+                    <p class="mb-4">{{$aboutDetail->ab_desc}}</p>
                     <div class="row g-3">
                         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
                             <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Find Best Doctors</h5>
@@ -569,6 +569,7 @@
             </div>
         </div>
     </div>
+    @endforeach
     <!-- About End -->
 
 
@@ -609,81 +610,21 @@
                 <div class="col-12">
                     <div class="scrolling-wrapper d-flex">
                         <!-- Card 1 -->
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
+                        @foreach($opds as $opd)
+                        <div class="card mx-2" style="max-width: 300px;">
+                            @if($opd->banner && $opd->banner->opdbanner)
+                            <img src="{{ asset('storage/' . $opd->banner->opdbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h3 class="card-title">Title 1</h3>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$opd->clinic_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$opd->clinic_city}}, {{$opd->clinic_landmark}}, {{$opd->clinic_pincode}}</p>
                                 </a>
                             </div>
                         </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/lifeline.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <!-- Card 2 -->
-                        <!-- Add more cards as needed -->
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -779,7 +720,11 @@
                             <p class="text-white mb-3" style="font-weight: 700;">Our search engine features a wide range
                                 of healthcare providers, in- cluding doctors from various specialties such as
                                 cardiology, ortho- pedics, dermatology, gynecology, pediatrics, and more.</p>
-                            <h2 class="text-white mb-0">+012 345 6789</h2>
+
+                            @foreach($aboutDetails as $aboutDetail)
+                            <h2 class="text-white mb-0"><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></h2>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -821,6 +766,7 @@
                 <div class="col-12">
                     <div class="scrolling-wrapper2 d-flex">
                         <!-- Card 1 -->
+                        
                         <div class="card mx-2" style="min-width: 300px;">
                             <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
                             <div class="card-body">
@@ -831,92 +777,6 @@
                             </div>
                         </div>
 
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Add more cards as needed -->
                     </div>
                 </div>
             </div>

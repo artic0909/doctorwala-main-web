@@ -398,6 +398,8 @@
                                                 <td>
                                                     <p class="m-0"><b>Title: </b><b class="text-primary">{{$about->ab_title}}</b></p>
                                                     <p class="m-0"><b>Bold Text: </b><b class="text-danger">{{$about->ab_b_txt}}</b></p>
+                                                    <p class="m-0"><b>Contact Number: </b><b class="text-success">{{$about->number}}</b></p>
+                                                    <p class="m-0"><b>Email Address: </b><b class="text-success">{{$about->email}}</b></p>
 
                                                     <div class="d-flex mt-3" style="gap: 25px;">
 
@@ -506,6 +508,25 @@
                                 </div>
 
 
+                                <div class="form-group">
+                                    <label for="number"><i class="fa fa-stethoscope text-success"
+                                            aria-hidden="true"></i>
+                                        Add
+                                        Number <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="number" id="number">
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="email"><i class="fa fa-stethoscope text-success"
+                                            aria-hidden="true"></i>
+                                        Add
+                                        Email ID <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email">
+                                </div>
+
+
 
 
 
@@ -595,6 +616,25 @@
                                         Add
                                         Bold Text <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="ab_b_txt" id="ab_b_txt" value="{{$about->ab_b_txt}}">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="number"><i class="fa fa-stethoscope text-success"
+                                            aria-hidden="true"></i>
+                                        Add
+                                        Number <span class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" name="number" id="number" value="{{$about->number}}">
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label for="email"><i class="fa fa-stethoscope text-success"
+                                            aria-hidden="true"></i>
+                                        Add
+                                        Email ID <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="email" value="{{$about->email}}">
                                 </div>
 
 

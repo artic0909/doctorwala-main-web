@@ -397,6 +397,14 @@
                                             </div>
 
                                             <div class="col-4 form-group">
+                                                <label for="clinic_contact_person_name" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-building text-primary"></i>
+                                                    Clinic Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="clinic_contact_person_name" name="clinic_contact_person_name"
+                                                    value="{{ $opd->clinic_name ?? '' }}" style="height: 55px;">
+                                            </div>
+
+                                            <div class="col-4 form-group">
                                                 <label for="clinic_gstin" style="font-weight: 700;"><i
                                                         class="fa fa-hashtag text-primary" aria-hidden="true"></i> GSTIN
                                                 </label>

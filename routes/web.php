@@ -1,6 +1,8 @@
 <?php
 
 // use App\Http\Controllers\DwPartnerController;
+
+use App\Http\Controllers\Front\FrontHomePageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,12 +26,12 @@ require __DIR__ . '/user-auth.php';
 
 
 // ===========================================================================================================
-// ========================================== Front Routes Start =============================================
+// ========================================== Front Unrestricted Routes Start ================================
 // ===========================================================================================================
 
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 Route::get('/about', function () {
     return view('about');
@@ -50,6 +52,9 @@ Route::get('/privacy-policy', function () {
 Route::get('/coupons', function () {
     return view('coupon');
 });
+
+
+Route::get('/', [FrontHomePageController::class, 'index'])->name('homepage');
 // ===========================================================================================================
-// ========================================== Front Routes End ===============================================
+// ========================================== Front Unrestricted Routes End ==================================
 // ===========================================================================================================

@@ -87,6 +87,7 @@ class SuperAllOPDHandleController extends Controller
         $request->validate([
             'clinic_registration_type' => 'string',
             'clinic_contact_person_name' => 'string|max:255',
+            'clinic_name' => 'string',
             'clinic_gstin' => 'nullable|string',
             'clinic_mobile_number' => 'string|max:15',
             'clinic_email' => 'email|max:255',

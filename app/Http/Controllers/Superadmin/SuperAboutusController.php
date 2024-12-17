@@ -28,6 +28,8 @@ class SuperAboutusController extends Controller
             'ab_desc' => 'nullable|string',
             'ab_mission' => 'nullable|string',
             'ab_vision' => 'nullable|string',
+            'number' => 'nullable|string',
+            'email' => 'nullable|string',
         ]);
 
         $filePath = null;
@@ -49,6 +51,8 @@ class SuperAboutusController extends Controller
             'ab_desc' => $request->input('ab_desc'),
             'ab_mission' => $request->input('ab_mission'),
             'ab_vision' => $request->input('ab_vision'),
+            'number' => $request->input('number'),
+            'email' => $request->input('email'),
         ]);
 
         return back()->with('success', 'Added Successfully!');
@@ -65,6 +69,8 @@ class SuperAboutusController extends Controller
             'ab_desc' => 'nullable|string',
             'ab_mission' => 'nullable|string',
             'ab_vision' => 'nullable|string',
+            'number' => 'nullable|string',
+            'email' => 'nullable|string',
         ]);
 
         $aboutInfo = SuperAboutusModel::find($id);
@@ -88,6 +94,8 @@ class SuperAboutusController extends Controller
             $aboutInfo->ab_desc = $request->input('ab_desc');
             $aboutInfo->ab_mission = $request->input('ab_mission');
             $aboutInfo->ab_vision = $request->input('ab_vision');
+            $aboutInfo->number = $request->input('number');
+            $aboutInfo->email = $request->input('email');
             $aboutInfo->save();
 
             return back()->with('success', 'updated successfully!');

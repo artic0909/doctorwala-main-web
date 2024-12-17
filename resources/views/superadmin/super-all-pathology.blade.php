@@ -425,7 +425,7 @@
                                                 <td>29-11-2024</td>
 
                                                 <td><b>{{$path->partner_id}}</b></td>
-                                                <td style="text-transform: capitalize;"><b>{{$path->partner_clinic_name}}</b></td>
+                                                <td style="text-transform: capitalize;"><b>{{$path->clinic_name}}</b></td>
 
                                                 <td>
                                                     <p class="m-0" style="text-transform: capitalize;"><b class="text-dark">Name: </b><b class="text-primary">{{$path->clinic_contact_person_name}}</b></p>

@@ -424,7 +424,7 @@
                                                 <td>29-11-2024</td>
 
                                                 <td><b>{{$opd->partner_id}}</b></td>
-                                                <td style="text-transform: capitalize;"><b>{{$opd->partner_clinic_name}}</b></td>
+                                                <td style="text-transform: capitalize;"><b>{{$opd->clinic_name}}</b></td>
 
                                                 <td>
                                                     <p class="m-0" style="text-transform: capitalize;"><b>Name: </b><b class="text-primary">{{$opd->clinic_contact_person_name}}</b></p>

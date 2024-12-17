@@ -15,4 +15,10 @@ class PartnerOPDBannerModel extends Model
         'currently_loggedin_partner_id',
         'opdbanner',
     ];
+
+
+    public function opdContactt()
+    {
+        return $this->belongsTo(PartnerOPDContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

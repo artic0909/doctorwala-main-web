@@ -139,6 +139,7 @@ class SuperPartnerHandleController extends Controller
                     'currently_loggedin_partner_id' => $partner->id,
                     'clinic_registration_type' => 'OPD',
                     'clinic_contact_person_name' => 'Doctorwala Name',
+                    'clinic_name' => 'Doctorwala Clinic',
                     'clinic_gstin' => 'Doctorwala GSTIN',
                     'clinic_mobile_number' => '1234567890',
                     'clinic_email' => 'doctorwala@example.com',
@@ -156,6 +157,7 @@ class SuperPartnerHandleController extends Controller
                     'currently_loggedin_partner_id' => $partner->id,
                     'clinic_registration_type' => 'Pathology',
                     'clinic_contact_person_name' => 'Doctorwala Name',
+                    'clinic_name' => 'Doctorwala Clinic',
                     'clinic_gstin' => 'Doctorwala GSTIN',
                     'clinic_mobile_number' => '1234567890',
                     'clinic_email' => 'doctorwala@example.com',
@@ -174,6 +176,7 @@ class SuperPartnerHandleController extends Controller
         // Update partner details
         $partner->partner_clinic_name = $validated['partner_clinic_name'];
         $partner->partner_contact_person_name = $validated['partner_contact_person_name'];
+        $partner->clinic_name = $validated['clinic_name'];
         $partner->partner_mobile_number = $validated['partner_mobile_number'];
         $partner->partner_email = $validated['partner_email'];
         $partner->partner_state = $validated['partner_state'];

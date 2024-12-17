@@ -57,4 +57,15 @@ class DwPartnerModel extends Authenticatable
     {
         return $this->hasOne(PartnerPathologyContactModel::class, 'partner_id');
     }
+
+    public function opdbanner()
+    {
+        return $this->hasOne(PartnerOPDBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
+
+
+    public function opdContactt()
+    {
+        return $this->hasOne(PartnerOPDContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

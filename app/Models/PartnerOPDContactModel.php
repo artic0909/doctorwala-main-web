@@ -13,6 +13,7 @@ class PartnerOPDContactModel extends Model
         'currently_loggedin_partner_id',
         'clinic_registration_type',
         'clinic_contact_person_name',
+        'clinic_name',
         'clinic_gstin',
         'clinic_mobile_number',
         'clinic_email',
@@ -23,4 +24,10 @@ class PartnerOPDContactModel extends Model
         'clinic_google_map_link',
         'clinic_address',
     ];
+
+
+    public function banner()
+    {
+        return $this->hasOne(PartnerOPDBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }
