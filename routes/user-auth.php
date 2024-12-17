@@ -2,6 +2,11 @@
 
 
 // use App\Http\Controllers\DwPartnerController;
+use App\Http\Controllers\Front\FrontAboutPageController;
+use App\Http\Controllers\Front\FrontBlogsPageController;
+use App\Http\Controllers\Front\FrontContactusPageController;
+use App\Http\Controllers\Front\FrontHomePageController;
+use App\Http\Controllers\Front\FrontPrivacyPolicyPageController;
 use App\Http\Controllers\DwUserController;
 use App\Http\Controllers\DwUserOTPController;
 use App\Http\Controllers\User\ProfileEditController;
@@ -37,13 +42,7 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     // ===========================================================================================================
     // ========================================== User Restricted Routes Start ===================================
     // ===========================================================================================================
-    Route::get('/dw', function () {
-        return view('index');
-    })->name('dw.index');
 
-    Route::get('/dw/about', function () {
-        return view('about');
-    })->name('dw.about');
 
 
     Route::get('/dw/opd', function () {
@@ -60,23 +59,18 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     })->name('dw.pathology');
 
 
-
-
     Route::get('/dw/coupons', function () {
         return view('coupon');
     })->name('dw.coupon');
 
-    Route::get('/dw/blog', function () {
-        return view('blog');
-    })->name('dw.blog');
 
-    Route::get('/dw/contact', function () {
-        return view('contact');
-    })->name('dw.contact');
 
-    Route::get('/dw/privacy-policy', function () {
-        return view('privacy-policy');
-    })->name('dw.privacy-policy');
+    Route::get('/dw', [FrontHomePageController::class, 'index'])->name('dw.index');
+    Route::get('/dw/about', [FrontAboutPageController::class, 'index'])->name('dw.about');
+    Route::get('/dw/blog', [FrontBlogsPageController::class, 'index'])->name('dw.blog');
+    Route::get('/dw/contact', [FrontContactusPageController::class, 'index'])->name('dw.contact');
+    Route::post('/dw/contact', [FrontContactusPageController::class, 'store'])->name('restricted-contact.store');
+    Route::get('/dw/privacy-policy', [FrontPrivacyPolicyPageController::class, 'index'])->name('dw.privacy-policy');
 
 
     // ===========================================================================================================

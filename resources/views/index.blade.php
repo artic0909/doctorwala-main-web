@@ -59,6 +59,7 @@
     <!-- Spinner End -->
 
 
+    @guest
     <!-- Topbar Start -->
     <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
         <div class="row gx-0">
@@ -82,6 +83,33 @@
         </div>
     </div>
     <!-- Topbar End -->
+    @endguest
+
+    @auth
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light ps-5 pe-0 d-none d-lg-block">
+        <div class="row gx-0">
+            <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center">
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
+                </div>
+            </div>
+            <div class="col-md-6 text-center text-lg-end">
+                <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
+                    <div class="me-3 pe-3 border-end py-2">
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
+                    </div>
+                    <div class="py-2">
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+     @endauth
 
 
 
@@ -563,7 +591,7 @@
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="{{asset('img/about1.png')}}" style="object-fit: cover;">
+                            src="{{ asset('storage/' . $aboutDetail->about_image) }}" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -766,16 +794,22 @@
                 <div class="col-12">
                     <div class="scrolling-wrapper2 d-flex">
                         <!-- Card 1 -->
-                        
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/newlife.png')}}" class="card-img-top" alt="Service">
+
+                        @foreach($paths as $path)
+                        <div class="card mx-2" style="max-width: 300px;">
+                            @if($path->banner && $path->banner->pathologybanner)
+                            <img src="{{ asset('storage/' . $path->banner->pathologybanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
                             <div class="card-body">
                                 <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$path->clinic_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$path->clinic_city}}, {{$path->clinic_landmark}}, {{$path->clinic_pincode}}</p>
                                 </a>
                             </div>
                         </div>
+                        @endforeach
 
                     </div>
                 </div>
@@ -872,89 +906,27 @@
             <div class="row gx-5 overflow-hidden position-relative">
                 <div class="col-12">
                     <div class="scrolling-wrapper3 d-flex">
+
+
                         <!-- Card 1 -->
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="max-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
                             <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
+                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
                                 </a>
                             </div>
                         </div>
+                        @endforeach
 
 
 
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-
-
-
-                        <div class="card mx-2" style="min-width: 300px;">
-                            <img src="{{asset('img/Global.png')}}" class="card-img-top" alt="Service">
-                            <div class="card-body">
-                                <a href="all-doctor-details.html" class="text-decoration-none my-dd">
-                                    <h5 class="card-title">Title 1</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700;">Location 1.</p>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Add more cards as needed -->
                     </div>
                 </div>
             </div>
@@ -1095,7 +1067,7 @@
 
                 <div class="text-center text-md-start">
                     <p class="mb-md-0">&copy; <a class="text-white border-bottom"
-                            href="doctorwala.info">DoctorWala.info</a>. All
+                            href="https://doctorwala.info">DoctorWala.info</a>. All
                         Rights Reserved.</p>
                 </div>
 

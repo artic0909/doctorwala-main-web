@@ -23,4 +23,10 @@ class PartnerPathologyContactModel extends Model
         'clinic_google_map_link',
         'clinic_address',
     ];
+
+
+    public function banner()
+    {
+        return $this->hasOne(PartnerPathologyBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

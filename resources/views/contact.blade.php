@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Contact Page | Doctorwala</title>
+    <title>Contact Us | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -64,18 +64,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -186,7 +187,7 @@
 
 
 
-
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -196,8 +197,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
-                    <form class="text-center">
+
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -206,26 +208,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -233,7 +217,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -244,8 +254,8 @@
 
 
 
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
@@ -254,7 +264,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
@@ -263,18 +273,9 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -282,11 +283,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -319,11 +321,7 @@
                     </div>
 
 
-                    <!-- <div class="col-md-12">
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
-                        </div>
-                    </div> -->
+
 
 
 
@@ -332,6 +330,7 @@
             </div>
         </div>
     </div>
+    @endauth
 
 
 
@@ -389,49 +388,84 @@
                             <i class="bi bi-geo-alt fs-1 text-primary me-3"></i>
                             <div class="text-start">
                                 <h5 class="mb-0">Our Office</h5>
-                                <span>711302 Ranihati, Howrah, West Bengal, India</span>
+                                <span><a href="https://maps.app.goo.gl/jctrujK2YmutCgiD6" style="color: gray;">Ranihati, Amta Road, Panchla, Howrah-711302</a></span>
                             </div>
                         </div>
+                        @foreach($aboutDetails as $aboutDetail)
                         <div class="d-flex align-items-center mb-2">
                             <i class="bi bi-envelope-open fs-1 text-primary me-3"></i>
                             <div class="text-start">
                                 <h5 class="mb-0">Email Us</h5>
-                                <span>info@example.com</span>
+                                <span><a href="mailto:{{$aboutDetail->email}}" style="color: gray;">{{$aboutDetail->email}}</a></span>
                             </div>
                         </div>
                         <div class="d-flex align-items-center">
                             <i class="bi bi-phone-vibrate fs-1 text-primary me-3"></i>
                             <div class="text-start">
                                 <h5 class="mb-0">Call Us</h5>
-                                <span>+012 345 6789</span>
+                                <span><a href="tel:{{$aboutDetail->number}}" style="color: gray;">{{$aboutDetail->number}}</a></span>
                             </div>
                         </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 wow slideInUp" data-wow-delay="0.3s">
-                    <form>
+                    @guest
+                    <form action="{{ route('contact.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
                         <div class="row g-3">
                             <div class="col-12">
                                 <input type="text" class="form-control border-0 bg-light px-4" placeholder="Your Name"
-                                    style="height: 55px;">
+                                    style="height: 55px;" name="name" id="name">
                             </div>
                             <div class="col-12">
                                 <input type="email" class="form-control border-0 bg-light px-4" placeholder="Your Email"
-                                    style="height: 55px;">
+                                    style="height: 55px;" name="email" id="email">
                             </div>
                             <div class="col-12">
                                 <input type="text" class="form-control border-0 bg-light px-4" placeholder="Subject"
-                                    style="height: 55px;">
+                                    style="height: 55px;" name="subject" id="subject">
                             </div>
                             <div class="col-12">
-                                <textarea class="form-control border-0 bg-light px-4 py-3" rows="5"
-                                    placeholder="Message"></textarea>
+                                <textarea class="form-control border-0 bg-light px-4 py-3" rows="6"
+                                    placeholder="Message" name="message" id="message"></textarea>
                             </div>
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
                             </div>
                         </div>
                     </form>
+                    @endguest
+
+                    @auth
+                    <form action="{{ route('restricted-contact.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="Your Name"
+                                    style="height: 55px;" name="name" id="name">
+                            </div>
+                            <div class="col-12">
+                                <input type="email" class="form-control border-0 bg-light px-4" placeholder="Your Email"
+                                    style="height: 55px;" name="email" id="email">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control border-0 bg-light px-4" placeholder="Subject"
+                                    style="height: 55px;" name="subject" id="subject">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control border-0 bg-light px-4 py-3" rows="6"
+                                    placeholder="Message" name="message" id="message"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                    @endauth
+
                 </div>
                 <div class="col-xl-4 col-lg-12 wow slideInUp" data-wow-delay="0.6s">
 
@@ -448,14 +482,70 @@
 
 
 
+    <!-- success modal start -->
+    <div class="modal fade" id="contactFormSubmitSuccessModal" tabindex="-1" aria-labelledby="contactFormSubmitSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h3>
+                    <h4 class="text-primary">Your Message Sent Successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- success modal end -->
+
+    <!-- Unsuccess modal start -->
+    <div class="modal fade" id="contactFormSubmitUnsuccessModal" tabindex="-1" aria-labelledby="contactFormSubmitUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Your Message Sent Unsuccessfully !!</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Unsuccess modal end -->
 
 
 
 
+    <!-- Include this script block below your modals -->
+    @if(session('success'))
+    <script>
+        // Automatically trigger the success modal
+        const successModal = new bootstrap.Modal(document.getElementById('contactFormSubmitSuccessModal'));
+        successModal.show();
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        // Automatically trigger the error modal
+        const errorModal = new bootstrap.Modal(document.getElementById('contactFormSubmitUnsuccessModal'));
+        errorModal.show();
+    </script>
+    @endif
 
 
-
-
+    @if(session('success') || session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalId = "{{ session('success') ? 'contactFormSubmitSuccessModal' : 'contactFormSubmitUnsuccessModal' }}";
+            const modal = new bootstrap.Modal(document.getElementById(modalId));
+            modal.show();
+        });
+    </script>
+    @endif
 
 
 
@@ -571,6 +661,7 @@
 
 
 
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -586,9 +677,6 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('../js/main.js')}}"></script>
-    <script src="{{asset('../js/cards-scroll.js')}}"></script>
-    <script src="{{asset('../js/captcha.js')}}"></script>
-    <script src="js/password-update-captcha.js"></script>
 </body>
 
 </html>

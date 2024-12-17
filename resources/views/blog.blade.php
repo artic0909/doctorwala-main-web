@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Blog Page | Doctorwala</title>
+    <title>Read Blogs | Doctorwala.info</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -65,18 +65,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -185,7 +186,7 @@
 
 
 
-
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -195,8 +196,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
-                    <form class="text-center">
+
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -205,26 +207,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -232,7 +216,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -243,8 +253,8 @@
 
 
 
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
@@ -253,7 +263,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
@@ -262,18 +272,9 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -281,11 +282,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -318,11 +320,7 @@
                     </div>
 
 
-                    <!-- <div class="col-md-12">
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
-                        </div>
-                    </div> -->
+
 
 
 
@@ -331,6 +329,7 @@
             </div>
         </div>
     </div>
+    @endauth
 
 
 
@@ -381,147 +380,29 @@
                     <div class="section-title bg-light rounded h-100 p-5">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Latest News</h5>
                         <h1 class="display-6 mb-4">Be update with the latest news, read our blogs</h1>
-                        <a href="contact.html" class="btn btn-primary py-3 px-5">Get in Touch</a>
+                        <a href="/contact" class="btn btn-primary py-3 px-5">Get in Touch</a>
                     </div>
                 </div>
 
-
+                @foreach($blogs as $blog)
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
+                            <img class="img-fluid rounded-top w-100" src="{{ asset('storage/' . $blog->blg_image) }}" alt="" style="aspect-ratio: 16/14;">
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <img src="{{asset('img/logo.png')}}" width="80" alt="">
                             </div>
                         </div>
                         <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
+                            <h4 class="mb-2">{{$blog->blg_title}}</h4>
+                            <p class="text-primary mb-0" style="text-align: justify; font-size: 0.9rem;">{{$blog->blg_desc}}</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
 
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/team-1.jpg')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2">Blog Title</h4>
-                            <p class="text-primary mb-0">Blog Content</p>
-                        </div>
-                    </div>
-                </div>
-
-                
             </div>
         </div>
     </div>

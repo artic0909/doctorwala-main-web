@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\PartnerDoctorContactModel;
+use App\Models\PartnerOPDContactModel;
+use App\Models\PartnerPathologyContactModel;
+use App\Models\SuperAboutusModel;
+use App\Models\SuperHomeBannerModel;
 
 class ProfileEditController extends Controller
 {
@@ -19,8 +24,15 @@ class ProfileEditController extends Controller
     public function userProfileEditWithCurrentUserDetails()
     {
 
+        $aboutDetails = SuperAboutusModel::get();
+        $homeBanners = SuperHomeBannerModel::get();
+    
+        $opds = PartnerOPDContactModel::with('banner')->get();
+        $paths = PartnerPathologyContactModel::with('banner')->get();
+        $docs = PartnerDoctorContactModel::with('banner')->get();
+
         $user = Auth::guard('dwuser')->user();
-        return view('index', compact('user'));
+        return view('index', compact('user', 'aboutDetails', 'homeBanners', 'opds', 'paths', 'docs'));
     }
 
 

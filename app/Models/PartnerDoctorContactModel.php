@@ -31,4 +31,10 @@ class PartnerDoctorContactModel extends Model
     protected $casts = [
         'visit_day_time' => 'array', //it contain fields like partner_doctor_visit_day, partner_doctor_visit_start_time, partner_doctor_visit_end_time
     ];
+
+
+    public function banner()
+    {
+        return $this->hasOne(PartnerDoctorBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

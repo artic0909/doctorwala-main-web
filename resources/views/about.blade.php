@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>About Page | Doctorwala</title>
+    <title>About Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -65,18 +65,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -184,6 +185,7 @@
 
 
 
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -193,8 +195,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
-                    <form class="text-center">
+
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -203,26 +206,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -230,7 +215,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -241,8 +252,8 @@
 
 
 
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
@@ -251,7 +262,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
@@ -260,18 +271,9 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -279,11 +281,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -316,11 +319,7 @@
                     </div>
 
 
-                    <!-- <div class="col-md-12">
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
-                        </div>
-                    </div> -->
+
 
 
 
@@ -329,6 +328,7 @@
             </div>
         </div>
     </div>
+    @endauth
 
 
 
@@ -374,29 +374,22 @@
 
 
     <!-- About Start -->
+    @foreach($aboutDetails as $aboutDetail)
     <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-7">
                     <div class="section-title mb-4">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Jio Ji Bharka</h5>
-                        <h1 class="display-5 mb-0">One of The Local Search Engine for Medical Services</h1>
+                        <h1 class="display-5 mb-0">{{$aboutDetail->ab_title}}</h1>
                     </div>
-                    <h4 class="text-body fst-italic mb-4">Welcome to DoctorWala.info, your trusted source for finding
-                        the right doctors, pathologists, and OPDs in your local area.</h4>
-                    <p class="mb-4">DoctorWala.info is a leading local search engine dedicated to helping individuals in
-                        India find the right doctors, pathologists, and OPDs in their local areas. Our platform is
-                        designed to simplify the process of locating and connecting with healthcare professionals,
-                        ensuring that you receive the best possible care.</p>
+                    <h4 class="text-body fst-italic mb-4">{{$aboutDetail->ab_b_txt}}</h4>
+                    <p class="mb-4">{{$aboutDetail->ab_desc}}</p>
 
 
-                    <p><Strong>Our Mission:</Strong> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro
-                        repellendus doloremque quis harum animi explicabo vel quam neque repellat fuga? Eveniet
-                        recusandae eaque maxime omnis ad possimus dicta distinctio pariatur?</p>
+                    <p><Strong class="text-danger">Our Mission:</Strong> {{$aboutDetail->ab_mission}}</p>
 
-                    <p><Strong>Our Vision:</Strong> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro
-                        repellendus doloremque quis harum animi explicabo vel quam neque repellat fuga? Eveniet
-                        recusandae eaque maxime omnis ad possimus dicta distinctio pariatur?</p>
+                    <p><Strong class="text-danger">Our Vision:</Strong> {{$aboutDetail->ab_vision}}</p>
 
 
 
@@ -452,12 +445,13 @@
                 <div class="col-lg-5" style="min-height: 500px;">
                     <div class="position-relative h-100">
                         <img class="position-absolute w-100 h-100 rounded wow zoomIn" data-wow-delay="0.9s"
-                            src="{{asset('img/about1.png')}}" style="object-fit: cover;">
+                            src="{{ asset('storage/' . $aboutDetail->about_image) }}" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
     <!-- About End -->
 
 
@@ -536,7 +530,12 @@
                             <p class="text-white mb-3" style="font-weight: 700;">Our search engine features a wide range
                                 of healthcare providers, in- cluding doctors from various specialties such as
                                 cardiology, ortho- pedics, dermatology, gynecology, pediatrics, and more.</p>
-                            <h2 class="text-white mb-0">+012 345 6789</h2>
+
+
+                            @foreach($aboutDetails as $aboutDetail)
+                            <h2 class="text-white mb-0"><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></h2>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
