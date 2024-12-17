@@ -346,6 +346,74 @@
 
 
 
+    <!-- profile update success modal start -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h2 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                    <h2 class="text-primary">Profile Updated Successfully</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update success modal end -->
+
+    <!-- profile update Unsuccess modal start -->
+    <div class="modal fade" id="profileUpdateUnsuccessModal" tabindex="-1" aria-labelledby="profileUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Profile Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update Unsuccess modal end -->
+
+
+    <!-- password update success modal start -->
+    <div class="modal fade" id="passwordUpdateSuccessModal" tabindex="-1" aria-labelledby="passwordUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h3>
+                    <h4 class="text-primary">Password Updated Successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update success modal end -->
+
+    <!-- password update Unsuccess modal start -->
+    <div class="modal fade" id="passwordUpdateUnsuccessModal" tabindex="-1" aria-labelledby="passwordUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Password Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update Unsuccess modal end -->
 
 
 
@@ -663,7 +731,37 @@
 
 
 
+    @if(session('password_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('passwordUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('password_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('passwordUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
 
+    @if(session('profile_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('profileUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('profile_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('profileUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
 
 
 

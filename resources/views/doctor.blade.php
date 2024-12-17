@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Doctor Page | Doctorwala</title>
+    <title>All Doctors | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -78,18 +78,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -200,6 +201,7 @@
 
 
 
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -209,8 +211,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
-                    <form class="text-center">
+
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -219,26 +222,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -246,7 +231,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -257,8 +268,8 @@
 
 
 
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
@@ -267,7 +278,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
@@ -276,18 +287,9 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -295,11 +297,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -332,11 +335,7 @@
                     </div>
 
 
-                    <!-- <div class="col-md-12">
-                        <div class="form-floating mb-3">
-                            <button type="submit" class="btn btn-danger py-3 col-md-12">Logout</button>
-                        </div>
-                    </div> -->
+
 
 
 
@@ -345,6 +344,7 @@
             </div>
         </div>
     </div>
+    @endauth
 
 
 
@@ -355,6 +355,74 @@
 
 
 
+    <!-- profile update success modal start -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h2 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                    <h2 class="text-primary">Profile Updated Successfully</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update success modal end -->
+
+    <!-- profile update Unsuccess modal start -->
+    <div class="modal fade" id="profileUpdateUnsuccessModal" tabindex="-1" aria-labelledby="profileUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Profile Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update Unsuccess modal end -->
+
+
+    <!-- password update success modal start -->
+    <div class="modal fade" id="passwordUpdateSuccessModal" tabindex="-1" aria-labelledby="passwordUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h3>
+                    <h4 class="text-primary">Password Updated Successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update success modal end -->
+
+    <!-- password update Unsuccess modal start -->
+    <div class="modal fade" id="passwordUpdateUnsuccessModal" tabindex="-1" aria-labelledby="passwordUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Password Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update Unsuccess modal end -->
 
 
 
@@ -464,16 +532,15 @@
         <div class="container">
             <div class="row g-5">
 
-
-
-
-
-
-
+                @foreach ($docs as $doc)
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img class="img-fluid rounded-top w-100" src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" alt="" style="border: 1px solid #ddd;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image">
+                            @endif
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
                                 <a class="btn btn-primary btn-square m-1" href="#"><i
@@ -488,13 +555,12 @@
                         </div>
                         <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
                             <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
+                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">{{$doc->partner_doctor_name}}</a></h4>
 
 
                             <p class="text-primary mb-2"><a href="all-doctor-details.html"
                                     style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
+                                    class="text-primary">{{$doc->partner_doctor_address}}</a></p>
 
 
 
@@ -506,207 +572,7 @@
 
                     </div>
                 </div>
-
-
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.5s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-twitter fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fa-solid fa-location-dot"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-instagram fw-normal"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
-
-
-                            <p class="text-primary mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
-
-
-
-                            <a href="all-doctor-details.html" class="btn btn-primary p-2 w-100"
-                                style="text-decoration: none;">OPEN NOW</a>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-twitter fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fa-solid fa-location-dot"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-instagram fw-normal"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
-
-
-                            <p class="text-primary mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
-
-
-
-                            <a href="all-doctor-details.html" class="btn btn-primary p-2 w-100"
-                                style="text-decoration: none;">OPEN NOW</a>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.1s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-twitter fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fa-solid fa-location-dot"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-instagram fw-normal"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
-
-
-                            <p class="text-primary mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
-
-
-
-                            <a href="all-doctor-details.html" class="btn btn-primary p-2 w-100"
-                                style="text-decoration: none;">OPEN NOW</a>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-twitter fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fa-solid fa-location-dot"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-instagram fw-normal"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
-
-
-                            <p class="text-primary mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
-
-
-
-                            <a href="all-doctor-details.html" class="btn btn-primary p-2 w-100"
-                                style="text-decoration: none;">OPEN NOW</a>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-
-                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.4s">
-                    <div class="team-item">
-                        <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="{{asset('img/newlife.png')}}" alt="">
-                            <div
-                                class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-twitter fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fa-solid fa-location-dot"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="#"><i
-                                        class="fab fa-instagram fw-normal"></i></a>
-                            </div>
-                        </div>
-                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;" class="text-dark">Global
-                                    health service</a></h4>
-
-
-                            <p class="text-primary mb-2"><a href="all-doctor-details.html"
-                                    style="text-decoration: none; text-transform: capitalize;"
-                                    class="text-primary">Ranihati , howrah, west bengal 711322</a></p>
-
-
-
-                            <a href="all-doctor-details.html" class="btn btn-primary p-2 w-100"
-                                style="text-decoration: none;">OPEN NOW</a>
-
-                        </div>
-
-
-                    </div>
-                </div>
-
-
+                @endforeach
 
 
             </div>
@@ -835,7 +701,37 @@
 
 
 
+    @if(session('password_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('passwordUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('password_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('passwordUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
 
+    @if(session('profile_update_status') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('profileUpdateSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('profile_update_status') == 'failure')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('profileUpdateUnsuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
 
 
 

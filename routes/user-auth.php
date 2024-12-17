@@ -10,6 +10,9 @@ use App\Http\Controllers\Front\FrontPrivacyPolicyPageController;
 use App\Http\Controllers\DwUserController;
 use App\Http\Controllers\DwUserOTPController;
 use App\Http\Controllers\User\ProfileEditController;
+use App\Http\Controllers\User\UserAllDoctorHandleController;
+use App\Http\Controllers\User\UserAllOPDHandleController;
+use App\Http\Controllers\User\UserAllPathologyHandleController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:dwuser')->group(function () {
@@ -44,21 +47,6 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     // ===========================================================================================================
 
 
-
-    Route::get('/dw/opd', function () {
-        return view('opd');
-    })->name('dw.opd');
-
-    Route::get('/dw/doctor', function () {
-        return view('doctor');
-    })->name('dw.doctor');
-
-
-    Route::get('/dw/pathology', function () {
-        return view('pathology');
-    })->name('dw.pathology');
-
-
     Route::get('/dw/coupons', function () {
         return view('coupon');
     })->name('dw.coupon');
@@ -71,6 +59,9 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     Route::get('/dw/contact', [FrontContactusPageController::class, 'index'])->name('dw.contact');
     Route::post('/dw/contact', [FrontContactusPageController::class, 'store'])->name('restricted-contact.store');
     Route::get('/dw/privacy-policy', [FrontPrivacyPolicyPageController::class, 'index'])->name('dw.privacy-policy');
+    Route::get('/dw/opd', [UserAllOPDHandleController::class, 'index'])->name('dw.opd');
+    Route::get('/dw/doctor', [UserAllDoctorHandleController::class, 'index'])->name('dw.doctor');
+    Route::get('/dw/pathology', [UserAllPathologyHandleController::class, 'index'])->name('dw.pathology');
 
 
     // ===========================================================================================================
