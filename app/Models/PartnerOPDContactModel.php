@@ -30,4 +30,10 @@ class PartnerOPDContactModel extends Model
     {
         return $this->hasOne(PartnerOPDBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
     }
+
+
+    public function doctors()
+    {
+        return $this->hasMany(PartnerAllOPDDoctorModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

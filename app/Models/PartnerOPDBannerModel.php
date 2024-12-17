@@ -17,7 +17,8 @@ class PartnerOPDBannerModel extends Model
     ];
 
 
-    public function opdContactt()
+
+    public function opdContact()
     {
         return $this->belongsTo(PartnerOPDContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
     }

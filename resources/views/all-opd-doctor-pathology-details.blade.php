@@ -3,13 +3,13 @@
 
 <head>
     <meta charset="utf-8">
-    <title>All Details Page | Doctorwala</title>
+    <title>Details | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -44,6 +44,14 @@
 
 
     <style>
+        .a-not {
+            color: #6b6a75;
+
+            &:hover {
+                color: red;
+            }
+        }
+
         .btn-primaryy {
             background: linear-gradient(135deg, #3bc7fe, #006eff);
             color: white;
@@ -105,18 +113,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -125,50 +134,94 @@
 
 
 
-
-
-
-
-
-
-
-
-
+    @guest
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link active">Home</a>
-                <a href="/about" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
+                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="/opd" class="dropdown-item">OPD Details</a>
-                        <a href="/doctor" class="dropdown-item">Doctor Details</a>
-                        <a href="/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupon" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="/blog" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/contact" class="nav-item nav-link ">Contact</a>
                 <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
+
+
             <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a>
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
+    @endguest
+
+
+    @auth
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
+        <a href="/dw" class="navbar-brand p-0">
+            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0">
+                <a href="/dw" class="nav-item nav-link">Home</a>
+                <a href="/dw/about" class="nav-item nav-link ">About</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Search</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                    </div>
+                </div>
+                <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
+
+                <a href="/dw/contact" class="nav-item nav-link">Contact</a>
+                <a href="/dw/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
+            </div>
+            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
+                    class="fa fa-search"></i></button> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a>
+
+        </div>
+    </nav>
+    <!-- Navbar End -->
+    @endauth
 
 
 
@@ -176,9 +229,7 @@
 
 
 
-
-
-
+    @auth
     <!-- User Profile & Password Edit Modal -->
     <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
         aria-hidden="true">
@@ -188,8 +239,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
 
-                    <!-- profile update form -->
-                    <form class="text-center">
+
+                    <form class="text-center" method="POST" action="{{ route('user.profile.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
                         <p class="mb-4">Update your profile details</p>
                         <div class="row">
@@ -198,26 +250,8 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
+                                        value="{{ $user->user_name }}">
                                     <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
                                 </div>
                             </div>
 
@@ -225,7 +259,33 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
+                                    <input type="email" class="form-control" id="user_email" name="user_email"
+                                        value="{{ $user->user_email }}">
+                                    <label for="user_email">Email</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
+                                        value="{{ $user->user_mobile }}">
+                                    <label for="user_mobile">Mobile</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="user_city" name="user_city"
+                                        value="{{ $user->user_city }}">
+                                    <label for="user_city">City</label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-floating mb-3">
+                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Update Profile</button>
                                 </div>
                             </div>
 
@@ -236,8 +296,8 @@
 
 
 
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
+                    <form class="text-center form password-update" method="POST" action="{{ route('user.password.update') }}">
+                        @csrf
                         <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
                         <p class="mb-4">Update your account password</p>
                         <div class="row">
@@ -246,7 +306,7 @@
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
+                                        value="*************">
                                     <label for="user_old_password">Existing Password</label>
                                 </div>
                             </div>
@@ -255,18 +315,9 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3"
-                                    style="background: url('img/captcha.jpg'); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="200" height="40"
-                                        style="cursor: pointer;"></canvas>
+                                    <input type="text" class="form-control" id="user_password"
+                                        name="user_password" placeholder="New Password">
+                                    <label for="user_password">New Password</label>
                                 </div>
                             </div>
 
@@ -274,11 +325,12 @@
 
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
+                                    <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+                                    <label for="user_password">Confirm Password</label>
                                 </div>
                             </div>
+
+
 
 
 
@@ -296,93 +348,106 @@
                     </form>
 
 
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <form method="POST" action="{{ route('user.logout') }}">
+                                @csrf
+                                <a class="btn btn-danger py-3 col-md-12" :href="route('user.logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    Logout
+                                </a>
+                            </form>
 
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-    <!-- Profile Update Alerts -->
-    <!-- <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
-        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
-            <path
-                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-        </symbol>
-        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
-            <path
-                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-        </symbol>
-        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
-            <path
-                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-        </symbol>
-    </svg>
-
-
-    <div class="alert alert-success d-flex align-items-center w-50" role="alert" id="profileUpdateSuccessAlert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:">
-            <use xlink:href="#check-circle-fill" />
-        </svg>
-        <div class="d-flex justify-content-between w-100">
-            <p style="margin:  0;">Your Profile is <b>Updated Successfully</b></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div>
-
-
-    <div class="alert alert-danger d-flex align-items-center w-50" role="alert" id="profileUpdateUnsuccessAlert">
-        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
-            <use xlink:href="#exclamation-triangle-fill" />
-        </svg>
-        <div class="d-flex justify-content-between w-100">
-            <p style="margin:  0;">Your Profile is <b>Not Updated</b></p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Full Screen Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
-                    <div class="input-group" style="max-width: 600px;">
-                        <input type="text" class="form-control bg-transparent border-primary p-3"
-                            placeholder="Type search keyword">
-                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+                        </div>
                     </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @endauth
+
+
+
+
+
+
+
+    <!-- profile update success modal start -->
+    <div class="modal fade" id="profileUpdateSuccessModal" tabindex="-1" aria-labelledby="profileUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h2 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                    <h2 class="text-primary">Profile Updated Successfully</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Full Screen Search End -->
+    <!-- profile update success modal end -->
+
+    <!-- profile update Unsuccess modal start -->
+    <div class="modal fade" id="profileUpdateUnsuccessModal" tabindex="-1" aria-labelledby="profileUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Profile Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile update Unsuccess modal end -->
 
 
+    <!-- password update success modal start -->
+    <div class="modal fade" id="passwordUpdateSuccessModal" tabindex="-1" aria-labelledby="passwordUpdateSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h3>
+                    <h4 class="text-primary">Password Updated Successfully</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update success modal end -->
 
+    <!-- password update Unsuccess modal start -->
+    <div class="modal fade" id="passwordUpdateUnsuccessModal" tabindex="-1" aria-labelledby="passwordUpdateUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Password Is Not Updated</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- password update Unsuccess modal end -->
 
 
 
@@ -393,10 +458,10 @@
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
         <div class="row py-3">
             <div class="col-12 text-center">
-                <h1 class="display-3 text-white animated zoomIn">Clinic Name</h1>
-                <a href="/" class="h4 text-white" style="text-decoration: underline;">Home</a>
+                <h1 class="display-3 text-white animated zoomIn">{{$opd->clinic_name}}</h1>
+                <a href="/dw" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
-                <a href="" class="h4 text-white">Details</a>
+                <a href="#" class="h4 text-white">Details</a>
             </div>
         </div>
     </div>
@@ -421,10 +486,14 @@
                 <div class="col-lg-4">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            <img class="img-fluid rounded-top w-100" src="img/lifeline.png" alt="">
+                            @if($opd->banner && $opd->banner->opdbanner)
+                            <img class="img-fluid rounded-top w-100" src="{{ asset('storage/' . $opd->banner->opdbanner) }}" alt="">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image">
+                            @endif
                             <div
                                 class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
-                                <img src="img/logo.png" width="80" alt="">
+                                <img src="{{asset('img/logo.png')}}" width="80" alt="">
                             </div>
                         </div>
                         <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
@@ -436,41 +505,40 @@
                 <div class="col-lg-8">
                     <div class="section-title bg-light rounded h-100 p-5">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">jio ji bharka</h5>
-                        <h2 class="display-6 mb-4">OPD Title</h2>
+                        <h2 class="display-6 mb-4">{{$opd->clinic_name}}</h2>
 
 
                         <div class="d-details">
                             <p class="location_d d-texts">
-                                <strong><i class="fa fa-map-marker-alt me-2"></i>Address: Ranihati, Kolkata,
-                                    700126</strong>
+                                <strong><i class="fa fa-map-marker-alt me-2"></i>Address: {{$opd->clinic_address}}</strong>
                             </p>
 
                             <p class="landmark_d d-texts">
-                                <strong><i class="fa fa-map-marker-alt me-2"></i>Landmark: Ranihati</strong>
+                                <strong><i class="fa fa-map-marker-alt me-2"></i>Landmark: {{$opd->clinic_landmark}}</strong>
                             </p>
 
                             <p class="contact_d d-texts">
-                                <strong><i class="fa fa-phone me-2"></i>Phone: +91 123 456 789</strong>
+                                <strong><i class="fa fa-phone me-2"></i>Phone: +91-<a href="mailto:{{$opd->clinic_mobile_number}}" class="a-not">{{$opd->clinic_mobile_number}}</a></strong>
                             </p>
 
                             <p class="email_d d-texts">
-                                <strong><i class="fa fa-envelope me-2"></i>Email: doctorwala@gmail.com</strong>
+                                <strong><i class="fa fa-envelope me-2"></i>Email: <a href="mailto:{{$opd->clinic_email}}" class="a-not">{{$opd->clinic_email}}</a></strong>
                             </p>
 
 
                             <p class="contact_person_d d-texts">
-                                <strong><i class="fa fa-user me-2"></i>Contact Person: Saklin Mustak</strong>
+                                <strong><i class="fa fa-user me-2"></i>Contact Person: {{$opd->clinic_contact_person_name}}</strong>
                             </p>
 
 
                             <p class="ratings d-flex d-texts gap-3 mt-3 align-items-center flex-wrap"
                                 style="list-style-type: none;">
                                 <span><strong><i class="fa-solid fa-star me-2"></i>Rating :</strong></span>
-                                <a href="" class="rating-a"><img src="img/1.png" width="35" alt=""></a>
-                                <a href="" class="rating-a"><img src="img/2.png" width="35" alt=""></a>
-                                <a href="" class="rating-a"><img src="img/3.png" width="35" alt=""></a>
-                                <a href="" class="rating-a"><img src="img/5.png" width="35" alt=""></a>
-                                <a href="" class="rating-a"><img src="img/4.png" width="35" alt=""></a>
+                                <a href="" class="rating-a"><img src="{{asset('img/1.png')}}" width="35" alt=""></a>
+                                <a href="" class="rating-a"><img src="{{asset('img/2.png')}}" width="35" alt=""></a>
+                                <a href="" class="rating-a"><img src="{{asset('img/3.png')}}" width="35" alt=""></a>
+                                <a href="" class="rating-a"><img src="{{asset('img/5.png')}}" width="35" alt=""></a>
+                                <a href="" class="rating-a"><img src="{{asset('img/4.png')}}" width="35" alt=""></a>
                             </p>
 
                         </div>
@@ -486,7 +554,7 @@
                                 class="btn btn-dark btn-darkk py-md-3 px-md-5 me-3 mb-2 animated slideInLeft">Send
                                 Inquiry</a>
 
-                            <a href="" class="btn btn-secondary py-md-3 px-md-5 me-3 mb-2 animated slideInRight">See
+                            <a href="{{$opd->clinic_google_map_link}}" class="btn btn-secondary py-md-3 px-md-5 me-3 mb-2 animated slideInRight">See
                                 Location</a>
 
                             <a href="" data-bs-toggle="modal" data-bs-target="#myFeedBackModal"
@@ -588,7 +656,7 @@
 
                             <div class="pricing pricing-palden">
 
-
+                                @foreach($doctors as $doctor)
                                 <div class="pricing-item features-item ja-animate mx-4"
                                     data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
                                     <div class="pricing-deco">
@@ -614,241 +682,21 @@
                                             <img src="img/doctor.png" width="80" alt=""
                                                 style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
                                         </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
+                                        <h3 class="pricing-title">{{$doctor->doctor_name}}</h3>
                                     </div>
                                     <p>
                                     <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
+                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Designation : {{$doctor->doctor_designation}}</strong></li>
+                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Specialist : {{$doctor->doctor_specialist}}</strong></li>
+                                        <li class="list-group-item"><strong>Fees : ₹ {{$doctor->doctor_fees}}</strong></li>
                                     </ul>
                                     </p>
                                     <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal{{$doctor->id}}"
                                             class="btn btn-primaryy w-100">View Details</a>
                                     </div>
                                 </div>
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Dr. Doctor Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong>Designation : MBBS</strong></li>
-                                        <li class="list-group-item"><strong>Specialist : Phychologist</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ 900</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-
-
+                                @endforeach
 
                             </div>
 
@@ -1401,18 +1249,18 @@
 
 
     <!-- opd view modal -->
-    <div class="modal fade" id="myOPDViewModal" tabindex="-1" aria-labelledby="myOPDViewModalLabel" aria-hidden="true">
+    @foreach($doctors as $doctor)
+    <div class="modal fade" id="myOPDViewModal{{$doctor->id}}" tabindex="-1" aria-labelledby="myOPDViewModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title text-primary" id="exampleModalLabel"><img src="img/doctor.png" width="40"
-                            alt=""> Dr.
-                        Doctor Name</h2>
+                            alt="" style="text-transform: capitalize;"> {{$doctor->doctor_name}}</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="color:#051225;">
-                    <p class="sp"><strong>Specialization: </strong>GASTROLENTEROLOGY</p>
-                    <p class="fees"><strong>Fees: </strong>₹ 900</p>
+                    <p class="sp" style="text-transform: capitalize;"><strong>Specialization: </strong>{{$doctor->doctor_specialist}}</p>
+                    <p class="fees"><strong>Fees: </strong>₹ {{$doctor->doctor_fees}}</p>
 
 
                     <div class="time">
@@ -1422,21 +1270,42 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Day</th>
                                     <th scope="col">Time</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                @if(!empty($doctor->visit_day_time) && is_array($doctor->visit_day_time))
+                                @foreach($doctor->visit_day_time as $visit)
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Monday</td>
-                                    <td>10:00 AM - 11:00 AM</td>
+                                    <td>{{ $visit['day'] }}</td>
+                                    <td>
+                                        @if(!empty($visit['start_time']) && !empty($visit['end_time']))
+                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} - {{ \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') }}
+                                        @else
+                                        No time available
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if($doctor->status == 'Available')
+                                        <span class="badge bg-success">{{ $doctor->status }}</span>
+                                        @elseif($doctor->status == 'Unavailable')
+                                        <span class="badge bg-danger">{{ $doctor->status }}</span>
+                                        @else
+                                        <span class="badge bg-secondary">{{ $doctor->status }}</span> <!-- Default for other statuses -->
+                                        @endif
+                                    </td>
+
                                 </tr>
 
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Wednesday</td>
-                                    <td>11:00 AM - 01:00 PM</td>
+                                @endforeach
+                                @else
+                                <tr class="text-muted">
+                                    <td colspan="3">No data found</td>
                                 </tr>
+                                @endif
+
 
                             </tbody>
                         </table>
@@ -1452,6 +1321,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 
 
 

@@ -23,4 +23,11 @@ class PartnerAllOPDDoctorModel extends Model
     protected $casts = [
         'visit_day_time' => 'array', //it contain fields like doctor_visit_day, doctor_visit_start_time, doctor_visit_end_time
     ];
+
+
+    public function opdContact()
+    {
+        return $this->belongsTo(PartnerOPDContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
+    
 }

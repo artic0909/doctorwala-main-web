@@ -64,6 +64,13 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     Route::get('/dw/pathology', [UserAllPathologyHandleController::class, 'index'])->name('dw.pathology');
 
 
+    // single opd ------------------------------------------------->
+    Route::get('/dw/opd/{id}', [UserAllOPDHandleController::class, 'singleOPDView'])
+        ->name('dw.opd.single')
+        ->where('id', '[0-9]+'); // Ensure ID is a numeric value
+
+
+
     // ===========================================================================================================
     // ========================================== User Restricted Routes End =====================================
     // ===========================================================================================================

@@ -560,7 +560,7 @@
 
 
 
-                            <a href="all-opd-doctor-pathology-details.html" class="btn btn-primary p-2 w-100"
+                            <a href="{{url('/dw/opd/'.$opd->id)}}" class="btn btn-primary p-2 w-100"
                                 style="text-decoration: none;">OPEN NOW</a>
 
                         </div>
