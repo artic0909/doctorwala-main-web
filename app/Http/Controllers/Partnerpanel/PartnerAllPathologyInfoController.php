@@ -24,7 +24,12 @@ class PartnerAllPathologyInfoController extends Controller
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
         $partner = Auth::guard('partner')->user();
-        $registrationTypes = json_decode($partner->registration_type, true);
+        $registrationTypes = $partner->registration_type;
+
+        if (is_string($registrationTypes)) {
+            $registrationTypes = json_decode($registrationTypes, true);
+        }
+
 
         $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
         $contactDetails = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->first();

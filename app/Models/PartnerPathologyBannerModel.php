@@ -15,4 +15,9 @@ class PartnerPathologyBannerModel extends Model
         'currently_loggedin_partner_id',
         'pathologybanner',
     ];
+
+    public function pathContact()
+    {
+        return $this->belongsTo(PartnerPathologyContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

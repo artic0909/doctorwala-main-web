@@ -679,7 +679,7 @@
 
 
                                         <div class="pricing-price">
-                                            <img src="img/doctor.png" width="80" alt=""
+                                            <img src="{{asset('img/doctor.png')}}" width="80" alt=""
                                                 style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
                                         </div>
                                         <h3 class="pricing-title">{{$doctor->doctor_name}}</h3>
@@ -736,8 +736,7 @@
 
                             <div class="pricing pricing-palden">
 
-
-
+                                @foreach($tests as $test)
                                 <div class="pricing-item features-item ja-animate mx-4"
                                     data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
                                     <div class="pricing-deco">
@@ -760,247 +759,25 @@
 
 
                                         <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
+                                            <img src="{{asset('img/path.png')}}" width="80" alt=""
                                                 style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
                                         </div>
-                                        <h3 class="pricing-title">Test Name</h3>
+                                        <h3 class="pricing-title">{{$test->test_name}}</h3>
                                     </div>
                                     <p>
                                     <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
                                         <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
-                                            class="btn btn-primaryy w-100">View Days</a>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Test Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
+                                                Type : {{$test->test_type}}</strong></li>
                                         <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
+                                                Price : ₹ {{$test->test_price}}</strong></li>
                                     </ul>
                                     </p>
                                     <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal{{$test->id}}"
                                             class="btn btn-primaryy w-100">View Days</a>
                                     </div>
                                 </div>
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Test Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
-                                            class="btn btn-primaryy w-100">View Days</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Test Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
-                                            class="btn btn-primaryy w-100">View Days</a>
-                                    </div>
-                                </div>
-
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Test Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
-                                            class="btn btn-primaryy w-100">View Days</a>
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 297px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="img/path.png" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">Test Name</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : Blood Test</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Clinic
-                                                Name : Clinic XYZ</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myPathologyViewModal"
-                                            class="btn btn-primaryy w-100">View Days</a>
-                                    </div>
-                                </div>
-
+                                @endforeach
 
 
                             </div>
@@ -1254,7 +1031,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary" id="exampleModalLabel"><img src="img/doctor.png" width="40"
+                    <h2 class="modal-title text-primary" id="exampleModalLabel"><img src="{{asset('img/doctor.png')}}" width="40"
                             alt="" style="text-transform: capitalize;"> {{$doctor->doctor_name}}</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -1326,20 +1103,21 @@
 
 
     <!-- pathology view modal -->
-    <div class="modal fade" id="myPathologyViewModal" tabindex="-1" aria-labelledby="myPathologyViewModalLabel"
+    @foreach($tests as $test)
+    <div class="modal fade" id="myPathologyViewModal{{$test->id}}" tabindex="-1" aria-labelledby="myPathologyViewModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary" id="exampleModalLabel"><img src="img/path.png" width="40"
-                            alt=""> Test Name
+                    <h2 class="modal-title text-primary" id="exampleModalLabel"><img src="{{asset('img/path.png')}}" width="40"
+                            alt="" style="text-transform: capitalize;"> {{$test->test_name}}
                     </h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="color: #051225;">
 
-                    <p class="sp" style="margin: 0;"><strong>Clinic Name: </strong>Clinic XYZ</p>
-                    <p class="sp mt-2" style="margin: 0;"><strong>Test Type: </strong>Blood Test</p>
+                    <p class="sp" style="margin: 0;"><strong>Test Price: </strong>₹ {{$test->test_price}}</p>
+                    <p class="sp mt-2" style="margin: 0;"><strong>Test Type: </strong>{{$test->test_type}}</p>
 
 
                     <div class="time mt-2">
@@ -1354,19 +1132,37 @@
                             </thead>
                             <tbody>
 
+                                @if(!empty($test->test_day_time) && is_array($test->test_day_time))
+                                @foreach($test->test_day_time as $visit)
                                 <tr>
                                     <th scope="row">1</th>
-                                    <td>Monday</td>
-                                    <td>10:00 AM - 11:00 AM</td>
-                                    <td>₹ 1000</td>
+                                    <td>{{ $visit['day'] }}</td>
+                                    <td>
+                                        @if(!empty($visit['start_time']) && !empty($visit['end_time']))
+                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} - {{ \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') }}
+                                        @else
+                                        No time available
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        @if($test->status == 'Available')
+                                        <span class="badge bg-success">{{ $test->status }}</span>
+                                        @elseif($test->status == 'Unavailable')
+                                        <span class="badge bg-danger">{{ $test->status }}</span>
+                                        @else
+                                        <span class="badge bg-secondary">{{ $test->status }}</span> <!-- Default for other statuses -->
+                                        @endif
+                                    </td>
+
                                 </tr>
 
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Wednesday</td>
-                                    <td>11:00 AM - 01:00 PM</td>
-                                    <td>₹ 900</td>
+                                @endforeach
+                                @else
+                                <tr class="text-muted">
+                                    <td colspan="3">No data found</td>
                                 </tr>
+                                @endif
 
                             </tbody>
                         </table>
@@ -1382,6 +1178,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 
 
 

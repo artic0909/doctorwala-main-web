@@ -39,6 +39,7 @@ class PartnerPathologyContactController extends Controller
         $request->validate([
             'clinic_registration_type' => 'required|string',
             'clinic_contact_person_name' => 'required|string|max:255',
+            'clinic_name' => 'required|string',
             'clinic_gstin' => 'nullable|string',
             'clinic_mobile_number' => 'required|string|max:15',
             'clinic_email' => 'required|email|max:255',
@@ -57,6 +58,7 @@ class PartnerPathologyContactController extends Controller
             $contactDetails->update([
                 'clinic_registration_type' => $request->clinic_registration_type,
                 'clinic_contact_person_name' => $request->clinic_contact_person_name,
+                'clinic_name' => $request->clinic_name,
                 'clinic_gstin' => $request->clinic_gstin,
                 'clinic_mobile_number' => $request->clinic_mobile_number,
                 'clinic_email' => $request->clinic_email,
@@ -75,6 +77,7 @@ class PartnerPathologyContactController extends Controller
                 'currently_loggedin_partner_id' => $partnerId,
                 'clinic_registration_type' => $request->clinic_registration_type,
                 'clinic_contact_person_name' => $request->clinic_contact_person_name,
+                'clinic_name' => $request->clinic_name,
                 'clinic_gstin' => $request->clinic_gstin,
                 'clinic_mobile_number' => $request->clinic_mobile_number,
                 'clinic_email' => $request->clinic_email,

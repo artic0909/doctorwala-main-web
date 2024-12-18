@@ -138,8 +138,8 @@
 
 
 
-                                        <!-- partner-profile-banner -->
-                                        <li class="nav-item">
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
                             aria-controls="ui-basicuy">
                             <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
@@ -825,7 +825,121 @@
 
 
 
+        <!-- OPD Banner Upload Edit & Show Modal -->
+        <div class="modal fade" id="myOPDBanner" tabindex="-1" role="dialog" aria-labelledby="myOPDBannerLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
 
+                    <div class="modal-body">
+                        <h3 class="text-center text-primary" id="myOPDBannerLabel" style="font-weight: 700; font-size: 1.8rem;"><span class="text-danger">+</span> Upload OPD Banner <span class="text-danger">+</span></h3>
+
+                        <!-- Display Uploaded Image (Dynamically) -->
+
+                        <div class="img-b d-flex justify-content-center align-items-center mt-4">
+                            @if($opdBanner && isset($opdBanner->opdbanner))
+                            <!-- Show the uploaded OPD banner -->
+                            <img src="{{ asset('storage/' . $opdBanner->opdbanner) }}" alt="OPD Banner" class="img-fluid">
+                            @else
+                            <!-- Show placeholder if no OPD banner exists -->
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDVuaQbojYLTlYezNW7HPVIYO6QiLZsd8RFP86jMuySoBlJ369aVAK0Mtzo7La2hyVcxU&usqp=CAU" class="img-fluid" alt="Placeholder OPD Banner">
+                            @endif
+                        </div>
+
+
+                        <form action="{{ route('partner.opd.banner.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group mt-4">
+                                <label for="opdbanner" class="form-label" style="font-weight: 700;"><i class="fa fa-image text-danger" aria-hidden="true"></i> Upload OPD Banner <span class="text-danger">*</span></label>
+                                <input class="form-control" type="file" id="opdbanner" name="opdbanner">
+                            </div>
+                            <div class="modal-foote d-flex justify-content-between align-items-center" style="gap: 15px;">
+                                <button type="button" class="btn btn-danger rounded w-100" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary rounded w-100">Save Changes</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Pathology Banner Upload Edit & Show Modal -->
+        <div class="modal fade" id="myPathologyBanner" tabindex="-1" role="dialog" aria-labelledby="myPathologyBannerLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <h3 class="text-center text-primary" id="myPathologyBannerLabel" style="font-weight: 700; font-size: 1.8rem;"><span class="text-danger">+</span> Upload Pathology Banner <span class="text-danger">+</span></h3>
+
+                        <div class="img-b d-flex justify-content-center align-items-center mt-4">
+                            @if($pathologyBanner && isset($pathologyBanner->pathologybanner))
+                            <!-- Show the uploaded OPD banner -->
+                            <img src="{{ asset('storage/' . $pathologyBanner->pathologybanner) }}" alt="Pathology Banner" class="img-fluid">
+                            @else
+                            <!-- Show placeholder if no OPD banner exists -->
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDVuaQbojYLTlYezNW7HPVIYO6QiLZsd8RFP86jMuySoBlJ369aVAK0Mtzo7La2hyVcxU&usqp=CAU" class="img-fluid" alt="Placeholder OPD Banner">
+                            @endif
+                        </div>
+
+
+                        <form action="{{ route('partner.pathology.banner.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group mt-4">
+                                <label for="pathologybanner" class="form-label" style="font-weight: 700;"><i class="fa fa-image text-danger" aria-hidden="true"></i> Upload Pathology Banner <span class="text-danger">*</span></label>
+                                <input class="form-control" type="file" id="pathologybanner" name="pathologybanner">
+                            </div>
+                            <div class="modal-foote d-flex justify-content-between align-items-center" style="gap: 15px;">
+                                <button type="button" class="btn btn-danger rounded w-100" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary rounded w-100">Save Changes</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Doctor Banner Upload Edit & Show Modal -->
+        <div class="modal fade" id="myDoctorBanner" tabindex="-1" role="dialog" aria-labelledby="myDoctorBannerLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <h3 class="text-center text-primary" id="myDoctorBannerLabel" style="font-weight: 700; font-size: 1.8rem;"><span class="text-danger">+</span> Upload Docotor Banner <span class="text-danger">+</span></h3>
+
+                        <div class="img-b d-flex justify-content-center align-items-center mt-4">
+                            @if($doctorBanner && isset($doctorBanner->doctorbanner))
+                            <!-- Show the uploaded OPD banner -->
+                            <img src="{{ asset('storage/' . $doctorBanner->doctorbanner) }}" alt="Doctor Banner" class="img-fluid">
+                            @else
+                            <!-- Show placeholder if no OPD banner exists -->
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDVuaQbojYLTlYezNW7HPVIYO6QiLZsd8RFP86jMuySoBlJ369aVAK0Mtzo7La2hyVcxU&usqp=CAU" class="img-fluid" alt="Placeholder OPD Banner">
+                            @endif
+                        </div>
+
+
+                        <form action="{{ route('partner.doctor.banner.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group mt-4">
+                                <label for="doctorbanner" class="form-label" style="font-weight: 700;"><i class="fa fa-image text-danger" aria-hidden="true"></i> Upload Doctor Banner <span class="text-danger">*</span></label>
+                                <input class="form-control" type="file" id="doctorbanner" name="doctorbanner">
+                            </div>
+                            <div class="modal-foote d-flex justify-content-between align-items-center" style="gap: 15px;">
+                                <button type="button" class="btn btn-danger rounded w-100" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary rounded w-100">Save Changes</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
     </div>

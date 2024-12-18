@@ -13,6 +13,7 @@ class PartnerPathologyContactModel extends Model
         'currently_loggedin_partner_id',
         'clinic_registration_type',
         'clinic_contact_person_name',
+        'clinic_name',
         'clinic_gstin',
         'clinic_mobile_number',
         'clinic_email',
@@ -25,8 +26,17 @@ class PartnerPathologyContactModel extends Model
     ];
 
 
+
+
+
     public function banner()
     {
-        return $this->hasOne(PartnerPathologyBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+        return $this->hasOne(PartnerOPDBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
+
+
+    public function tests()
+    {
+        return $this->hasMany(PartnerAllPathologyTestModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
     }
 }

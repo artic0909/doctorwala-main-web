@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\PartnerAllOPDDoctorModel;
+use App\Models\PartnerAllPathologyTestModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\SuperAboutusModel;
 use Illuminate\Http\Request;
@@ -48,13 +49,19 @@ class UserAllOPDHandleController extends Controller
 
         
         $doctors = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->get();
+        $tests = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->get();
 
 
         foreach ($doctors as $doctor) {
             $doctor->visit_day_time = json_decode($doctor->visit_day_time, true);
         }
 
+
+        foreach ($tests as $test) {
+            $test->test_day_time = json_decode($test->test_day_time, true);
+        }
+
         
-        return view('all-opd-doctor-pathology-details', compact('aboutDetails', 'user', 'opd', 'doctors'));
+        return view('all-opd-doctor-pathology-details', compact('aboutDetails', 'user', 'opd', 'doctors', 'tests'));
     }
 }
