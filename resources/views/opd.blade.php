@@ -549,12 +549,12 @@
                             </div>
                         </div>
                         <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
-                            <h4 class="mb-2"><a href="all-opd-doctor-pathology-details.html"
+                            <h4 class="mb-2"><a href="{{url('/dw/opd/'.$opd->id)}}"
                                     style="text-decoration: none; text-transform: capitalize;"
                                     class="text-dark">{{$opd->clinic_name}}</a></h4>
 
 
-                            <p class="text-primary mb-2"><a href="all-opd-doctor-pathology-details.html"
+                            <p class="text-primary mb-2"><a href="{{url('/dw/opd/'.$opd->id)}}"
                                     style="text-decoration: none; text-transform: capitalize;"
                                     class="text-primary">{{$opd->clinic_address}}</a></p>
 

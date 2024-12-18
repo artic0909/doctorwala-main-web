@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Details | Doctorwala</title>
+    <title>Doctor Details | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -37,33 +37,12 @@
     <link href="{{asset('../css/style.css')}}" rel="stylesheet">
     <link href="{{asset('../css/cards-css.css')}}" rel="stylesheet">
     <link href="{{asset('../css/partner-btn.css')}}" rel="stylesheet">
-    <link href="{{asset('../css/all-opd-pathology-doctor-details.css')}}" rel="stylesheet">
     <link href="{{asset('../responsive/index_responsive.css')}}" rel="stylesheet">
     <link href="{{asset('../responsive/service_responsive.css')}}" rel="stylesheet">
     <link href="{{asset('../responsive/allopdpathdoc_responsive.css')}}" rel="stylesheet">
 
 
     <style>
-        .a-not {
-            color: #6b6a75;
-
-            &:hover {
-                color: red;
-            }
-        }
-
-        .btn-primaryy {
-            background: linear-gradient(135deg, #3bc7fe, #006eff);
-            color: white;
-            border: none;
-            transition: all 100ms ease-in;
-
-            &:hover {
-                color: white;
-                scale: 1.05;
-            }
-        }
-
         .rating-a {
             img {
                 transition: all 150ms ease-in-out;
@@ -77,10 +56,6 @@
 
         }
 
-        .txt-cap {
-            text-transform: capitalize !important;
-        }
-
 
         @media (max-width:496px) {
             .d-texts {
@@ -92,10 +67,16 @@
             }
         }
 
+        .txt-cap {
+            text-transform: capitalize !important;
+        }
+
         .rating-a.selected img {
             scale: 1.1;
         }
     </style>
+
+
 
 </head>
 
@@ -230,6 +211,10 @@
     </nav>
     <!-- Navbar End -->
     @endauth
+
+
+
+
 
 
 
@@ -461,15 +446,14 @@
 
 
 
-
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
         <div class="row py-3">
             <div class="col-12 text-center">
-                <h1 class="display-3 text-white animated zoomIn txt-cap">{{$opd->clinic_name}}</h1>
+                <h1 class="display-3 text-white animated zoomIn txt-cap">{{$doc->partner_doctor_name}}</h1>
                 <a href="/dw" class="h4 text-white" style="text-decoration: underline;">Home</a>
                 <i class="fa fa-plus text-dark px-2" style="font-size: 2rem; font-weight: 700;"></i>
-                <a href="#" class="h4 text-white">Details</a>
+                <a href="" class="h4 text-white">Details</a>
             </div>
         </div>
     </div>
@@ -494,8 +478,8 @@
                 <div class="col-lg-4">
                     <div class="team-item">
                         <div class="position-relative rounded-top" style="z-index: 1;">
-                            @if($opd->banner && $opd->banner->opdbanner)
-                            <img class="img-fluid rounded-top w-100" src="{{ asset('storage/' . $opd->banner->opdbanner) }}" alt="">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img class="img-fluid rounded-top w-100" src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" alt="">
                             @else
                             <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image">
                             @endif
@@ -513,33 +497,30 @@
                 <div class="col-lg-8">
                     <div class="section-title bg-light rounded h-100 p-5">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">jio ji bharka</h5>
-                        <h2 class="display-6 mb-4 txt-cap">{{$opd->clinic_name}}</h2>
+                        <h2 class="display-6 mb-4 txt-cap">{{$doc->partner_doctor_name}}</h2>
 
 
                         <div class="d-details">
                             <p class="location_d d-texts txt-cap">
-                                <strong><i class="fa fa-map-marker-alt me-2"></i>Address: {{$opd->clinic_address}}</strong>
+                                <strong><i class="fa fa-map-marker-alt me-2"></i>Address: {{$doc->partner_doctor_address}}</strong>
                             </p>
 
                             <p class="landmark_d d-texts txt-cap">
-                                <strong><i class="fa fa-map-pin me-2"></i>Landmark: {{$opd->clinic_landmark}}</strong>
+                                <strong><i class="fa fa-map-pin me-2"></i>Landmark: {{$doc->partner_doctor_landmark}}</strong>
                             </p>
 
                             <p class="contact_d d-texts">
-                                <strong><i class="fa fa-phone me-2"></i>Phone: +91-<a href="mailto:{{$opd->clinic_mobile_number}}" class="a-not">{{$opd->clinic_mobile_number}}</a></strong>
+                                <strong><i class="fa fa-phone me-2"></i>Phone: +91-{{$doc->partner_doctor_mobile}}</strong>
                             </p>
 
                             <p class="email_d d-texts">
-                                <strong><i class="fa fa-envelope me-2"></i>Email: <a href="mailto:{{$opd->clinic_email}}" class="a-not">{{$opd->clinic_email}}</a></strong>
+                                <strong><i class="fa fa-envelope me-2"></i>Email: {{$doc->partner_doctor_email}}</strong>
                             </p>
 
 
                             <p class="contact_person_d d-texts txt-cap">
-                                <strong><i class="fa fa-user me-2"></i>Contact Person: {{$opd->clinic_contact_person_name}}</strong>
+                                <strong><i class="fa fa-user me-2"></i>Doctor Name: {{$doc->partner_doctor_name}}</strong>
                             </p>
-
-
-
 
                         </div>
 
@@ -550,18 +531,20 @@
 
 
                         <div class="d-buttons mt-5">
-                            <a href="" data-bs-toggle="modal" data-bs-target="#myInquirySendModal{{$opd->id}}"
+                            <a href="" data-bs-toggle="modal" data-bs-target="#myInquirySendModal{{$doc->id}}"
                                 class="btn btn-dark btn-darkk py-md-3 px-md-5 me-3 mb-2 animated slideInLeft">Send
                                 Inquiry</a>
 
-                            <a href="{{$opd->clinic_google_map_link}}" target="_blank" class="btn btn-secondary py-md-3 px-md-5 me-3 mb-2 animated slideInRight">See
+                            <a href="{{$doc->partner_doctor_google_map_link}}" target="_blank" class="btn btn-secondary py-md-3 px-md-5 me-3 mb-2 animated slideInRight">See
                                 Location</a>
 
-                            <a href="" data-bs-toggle="modal" data-bs-target="#myFeedBackModal{{$opd->id}}"
-                                class="btn btn-primary py-md-3 px-md-5 mb-2 animated slideInRight">Feedback</a>
+                            <a href="" data-bs-toggle="modal" data-bs-target="#myDoctorViewModal{{$doc->id}}"
+                                class="btn btn-primary py-md-3 px-md-5 me-3 mb-2 animated slideInRight">Day & Time</a>
+
+
+                            <a href="" data-bs-toggle="modal" data-bs-target="#myFeedBackModal{{$doc->id}}"
+                                class="btn btn-secondary py-md-3 px-md-5 mb-2 animated slideInRight"><i class="fa fa-star" aria-hidden="true"></i></a>
                         </div>
-
-
 
 
                     </div>
@@ -587,188 +570,6 @@
     <div class="d_tab_bar">
         <div class="container">
             <div class="row">
-
-
-
-
-
-                <!-- Nav tabs -->
-                <div class="col-md-12 bg-primaryy p-3 mb-5 my-tab-lists">
-
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs nav-tabs-justified d-flex justify-content-between TABLIST row" id="myTab"
-                        role="tablist" style="border: none;">
-                        <li class="nav-item col-md-2 text-center">
-                            <a class="nav-link text-dark bg-white active" id="opd-tab" data-toggle="tab" href="#opd"
-                                role="tab" aria-controls="opd" aria-selected="true" style="font-weight: 900;">OPD</a>
-                        </li>
-
-
-
-
-                        <li class="nav-item col-md-2 text-center">
-                            <a class="nav-link text-dark bg-white" id="service-tab" data-toggle="tab" href="#service"
-                                role="tab" aria-controls="service" aria-selected="false"
-                                style="font-weight: 900;">Service
-                                Lists</a>
-                        </li>
-
-                        <li class="nav-item col-md-2 text-center">
-                            <a class="nav-link text-dark bg-white" id="photos-tab" data-toggle="tab" href="#photos"
-                                role="tab" aria-controls="photos" aria-selected="false"
-                                style="font-weight: 900;">Photos</a>
-                        </li>
-
-                        <li class="nav-item col-md-2 text-center">
-                            <a class="nav-link text-dark bg-white" id="about-tab" data-toggle="tab" href="#about"
-                                role="tab" aria-controls="about" aria-selected="false"
-                                style="font-weight: 900;">About</a>
-                        </li>
-                    </ul>
-
-                </div>
-
-
-
-
-
-
-                <!-- Tab panes for OPD -->
-                <div class="tab-content p-0" id="myTabContent">
-
-
-
-                    <!-- OPD Tab -->
-                    <div class="tab-pane fade show active" id="opd" role="tabpanel" aria-labelledby="opd-tab">
-
-
-
-
-                        <div class="section-title bg-light rounded h-100 p-5">
-                            <h5 class="position-relative d-inline-block text-primary text-uppercase">opd details</h5>
-
-
-
-                            <div class="pricing pricing-palden">
-
-                                @if($doctors->isEmpty())
-
-                                <div class="alert alert-primary w-100 mt-2 text-center mx-4">
-                                    No doctors found. Please try again later.
-                                </div>
-
-                                @else
-
-                                @foreach($doctors as $doctor)
-                                <div class="pricing-item features-item ja-animate mx-4"
-                                    data-animation="move-from-bottom" data-delay="item-0" style="min-height: 497px;">
-                                    <div class="pricing-deco">
-                                        <svg class="pricing-deco-img" enable-background="new 0 0 300 100" height="100px"
-                                            id="Layer_1" preserveAspectRatio="none" version="1.1" viewBox="0 0 300 100"
-                                            width="300px" x="0px" xml:space="preserve" y="0px">
-                                            <path class="deco-layer deco-layer--1"
-                                                d="M30.913,43.944c0,0,42.911-34.464,87.51-14.191c77.31,35.14,113.304-1.952,146.638-4.729c48.654-4.056,69.94,16.218,69.94,16.218v54.396H30.913V43.944z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--2"
-                                                d="M-35.667,44.628c0,0,42.91-34.463,87.51-14.191c77.31,35.141,113.304-1.952,146.639-4.729c48.653-4.055,69.939,16.218,69.939,16.218v54.396H-35.667V44.628z"
-                                                fill="#FFFFFF" opacity="0.6"></path>
-                                            <path class="deco-layer deco-layer--3"
-                                                d="M43.415,98.342c0,0,48.283-68.927,109.133-68.927c65.886,0,97.983,67.914,97.983,67.914v3.716H42.401L43.415,98.342z"
-                                                fill="#FFFFFF" opacity="0.7"></path>
-                                            <path class="deco-layer deco-layer--4"
-                                                d="M-34.667,62.998c0,0,56-45.667,120.316-27.839C167.484,57.842,197,41.332,232.286,30.428c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z"
-                                                fill="#FFFFFF"></path>
-                                        </svg>
-
-
-                                        <div class="pricing-price">
-                                            <img src="{{asset('img/doctor.png')}}" width="80" alt=""
-                                                style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
-                                        </div>
-                                        <h3 class="pricing-title">{{$doctor->doctor_name}}</h3>
-                                    </div>
-                                    <p>
-                                    <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Designation : {{$doctor->doctor_designation}}</strong></li>
-                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Specialist : {{$doctor->doctor_specialist}}</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ {{$doctor->doctor_fees}}</strong></li>
-                                    </ul>
-                                    </p>
-                                    <div class="p-4">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#myOPDViewModal{{$doctor->id}}"
-                                            class="btn btn-primaryy w-100">View Details</a>
-                                    </div>
-                                </div>
-                                @endforeach
-                                @endif
-                            </div>
-
-
-                        </div>
-
-                    </div>
-
-
-
-                </div>
-
-
-
-
-
-                <!-- Tab panes for Service Lists -->
-                <div class="tab-content p-0 mt-4" id="myTabContent">
-
-
-
-                    <!-- Service Tab -->
-                    <div class="tab-pane fade show active" id="service" role="tabpanel" aria-labelledby="service-tab">
-
-
-
-
-                        <div class="section-title bg-light rounded h-100 p-5">
-                            <h5 class="position-relative d-inline-block text-dark text-uppercase">Service Lists
-                            </h5>
-
-
-
-                            <ul class="service-lists" style="list-style: number;">
-
-
-                                @if($services->isEmpty())
-                                <div class="alert alert-primary w-100 mt-2 text-center mx-4">
-                                    No Service Lists found. Please try again later.
-                                </div>
-                                @else
-                                @foreach($services as $service)
-                                @if(!empty($service->service_lists) && is_array($service->service_lists))
-                                @foreach($service->service_lists as $list)
-                                <li>
-                                    <p class="fs-8 fw-bold"><i class="fa fa-stethoscope"></i>
-                                        <span class="text-primary text-capitalize">{{ $list }}</span>
-                                    </p>
-                                </li>
-                                @endforeach
-                                @else
-                                <li>
-                                    <p class="fs-8 fw-bold text-muted">No services available for this entry.</p>
-                                </li>
-                                @endif
-                                @endforeach
-                                @endif
-
-
-
-                            </ul>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-
 
 
 
@@ -848,6 +649,60 @@
                     </div>
                 </div>
 
+
+
+                <!-- Tab panes for Service Lists -->
+                <div class="tab-content p-0 mt-4" id="myTabContent">
+
+
+
+                    <!-- Service Tab -->
+                    <div class="tab-pane fade show active" id="service" role="tabpanel" aria-labelledby="service-tab">
+
+
+
+
+                        <div class="section-title bg-light rounded h-100 p-5">
+                            <h5 class="position-relative d-inline-block text-dark text-uppercase">Service Lists
+                            </h5>
+
+
+
+                            <ul class="service-lists" style="list-style: number;">
+
+
+                                @if($services->isEmpty())
+                                <div class="alert alert-primary w-100 mt-2 text-center mx-4">
+                                    No Service Lists found. Please try again later.
+                                </div>
+                                @else
+                                @foreach($services as $service)
+                                @if(!empty($service->service_lists) && is_array($service->service_lists))
+                                @foreach($service->service_lists as $list)
+                                <li>
+                                    <p class="fs-8 fw-bold"><i class="fa fa-stethoscope"></i>
+                                        <span class="text-primary text-capitalize">{{ $list }}</span>
+                                    </p>
+                                </li>
+                                @endforeach
+                                @else
+                                <li>
+                                    <p class="fs-8 fw-bold text-muted">No services available for this entry.</p>
+                                </li>
+                                @endif
+                                @endforeach
+                                @endif
+
+
+
+                            </ul>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
 
 
 
@@ -946,19 +801,20 @@
 
 
 
-    <!-- opd view modal -->
-    @foreach($doctors as $doctor)
-    <div class="modal fade" id="myOPDViewModal{{$doctor->id}}" tabindex="-1" aria-labelledby="myOPDViewModalLabel" aria-hidden="true">
+    <!-- doctor view modal -->
+    <div class="modal fade" id="myDoctorViewModal{{$doc->id}}" tabindex="-1" aria-labelledby="myDoctorViewModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title text-primary txt-cap" id="exampleModalLabel"><img src="{{asset('img/doctor.png')}}" width="40"
-                            alt=""> {{$doctor->doctor_name}}</h2>
+                    <h2 class="modal-title text-primary txt-cap" id="exampleModalLabel"><img src="{{ asset('img/doctor.png') }}" width="40"
+                            alt=""> {{$doc->partner_doctor_name}}</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="color:#051225;">
-                    <p class="sp" style="text-transform: capitalize;"><strong>Specialization: </strong>{{$doctor->doctor_specialist}}</p>
-                    <p class="fees"><strong>Fees: </strong>₹ {{$doctor->doctor_fees}}</p>
+                <div class="modal-body">
+                    <p class="sp"><strong>Designation: </strong>{{$doc->partner_doctor_designation}}</p>
+                    <p class="sp"><strong>Specialization: </strong>{{$doc->partner_doctor_specialist}}</p>
+                    <p class="fees"><strong>Fees: </strong>₹ {{$doc->partner_doctor_fees}}</p>
 
 
                     <div class="time">
@@ -972,11 +828,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($doctor->visit_day_time) && is_array($doctor->visit_day_time))
-                                @foreach($doctor->visit_day_time as $visit)
+                                @if(!empty($doc->visit_day_time) && is_array($doc->visit_day_time))
+                                @foreach($doc->visit_day_time as $index => $visit)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>{{ $visit['day'] }}</td>
+                                    <!-- Row number -->
+                                    <th scope="row">{{ $index + 1 }}</th>
+
+                                    <!-- Day -->
+                                    <td>{{ $visit['day'] ?? 'N/A' }}</td>
+
+                                    <!-- Start and End Time -->
                                     <td>
                                         @if(!empty($visit['start_time']) && !empty($visit['end_time']))
                                         {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} - {{ \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') }}
@@ -985,33 +846,33 @@
                                         @endif
                                     </td>
 
+                                    <!-- Status -->
                                     <td>
-                                        @if($doctor->status == 'Available')
-                                        <span class="badge bg-success">{{ $doctor->status }}</span>
-                                        @elseif($doctor->status == 'Unavailable')
-                                        <span class="badge bg-danger">{{ $doctor->status }}</span>
+                                        @if($doc->status == 'Available')
+                                        <span class="badge bg-success">{{ $doc->status }}</span>
+                                        @elseif($doc->status == 'Unavailable')
+                                        <span class="badge bg-danger">{{ $doc->status }}</span>
                                         @else
-                                        <span class="badge bg-secondary">{{ $doctor->status }}</span> <!-- Default for other statuses -->
+                                        <span class="badge bg-secondary">{{ $doc->status }}</span> <!-- Default for other statuses -->
                                         @endif
                                     </td>
-
                                 </tr>
-
                                 @endforeach
                                 @else
+                                <!-- No data found -->
                                 <tr class="text-muted">
-                                    <td colspan="3">No data found</td>
+                                    <td colspan="4">No data found</td>
                                 </tr>
                                 @endif
-
-
                             </tbody>
+
+
                         </table>
                     </div>
 
 
 
-                    <button type="button" class="btn btn-primaryy w-100" data-bs-dismiss="modal">Close It</button>
+                    <button type="button" class="btn btn-primary w-100" data-bs-dismiss="modal">CLOSE IT</button>
 
 
 
@@ -1019,15 +880,11 @@
             </div>
         </div>
     </div>
-    @endforeach
-
-
-
 
 
 
     <!-- inquiry send modal -->
-    <div class="modal fade" id="myInquirySendModal{{$opd->id}}" tabindex="-1" aria-labelledby="myInquirySendModalLabel"
+    <div class="modal fade" id="myInquirySendModal{{$doc->id}}" tabindex="-1" aria-labelledby="myInquirySendModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1038,7 +895,7 @@
 
                     <h3 class="text-center mb-2 text-primary">Fill this form and get best deals from Doctorwala </h3>
 
-                    <form action="{{route('dw.opd.inquiry.store')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('dw.doctor.inquiry.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row g-3">
@@ -1048,14 +905,14 @@
                                 <label for="currently_loggedin_partner_id" class="form-label fw-bold"><span class="text-danger"><i
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Partner ID</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="currently_loggedin_partner_id"
-                                    name="currently_loggedin_partner_id" value="{{ $opd->currently_loggedin_partner_id}}" style="height: 55px;" readonly>
+                                    name="currently_loggedin_partner_id" value="{{ $doc->currently_loggedin_partner_id}}" style="height: 55px;" readonly>
                             </div>
 
                             <div class="col-12" style="display: none;">
                                 <label for="clinic_type" class="form-label fw-bold"><span class="text-danger"><i
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Clinic Type</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="clinic_type"
-                                    name="clinic_type" value="OPD" style="height: 55px;" readonly>
+                                    name="clinic_type" value="Doctor" style="height: 55px;" readonly>
                             </div>
 
 
@@ -1064,7 +921,7 @@
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Inquiry
                                     About</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="clinic_name"
-                                    name="clinic_name" value="{{ $opd->clinic_name}}" style="height: 55px;" readonly>
+                                    name="clinic_name" value="{{ $doc->partner_doctor_name}}" style="height: 55px;" readonly>
                             </div>
 
 
@@ -1175,7 +1032,7 @@
 
 
     <!-- feedback send modal -->
-    <div class="modal fade" id="myFeedBackModal{{ $opd->id }}" tabindex="-1" aria-labelledby="myFeedBackModalLabel"
+    <div class="modal fade" id="myFeedBackModal{{ $doc->id }}" tabindex="-1" aria-labelledby="myFeedBackModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -1186,7 +1043,7 @@
 
                     <h3 class="text-center mb-2 text-primary">Give Your Valuable Feedback </h3>
 
-                    <form class="mt-3" action="{{ route('dw.opd.rating.save') }}" method="POST" enctype="multipart/form-data">
+                    <form class="mt-3" action="{{ route('dw.doctor.rating.save') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <p class="ratings d-flex  gap-3 mt-3 align-items-center flex-wrap" style="list-style-type: none;">
@@ -1208,14 +1065,14 @@
                                 <label for="currently_loggedin_partner_id" class="form-label fw-bold"><span class="text-danger"><i
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Partner ID</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="currently_loggedin_partner_id"
-                                    name="currently_loggedin_partner_id" value="{{ $opd->currently_loggedin_partner_id}}" style="height: 55px;" readonly>
+                                    name="currently_loggedin_partner_id" value="{{ $doc->currently_loggedin_partner_id}}" style="height: 55px;" readonly>
                             </div>
 
                             <div class="col-12" style="display: none;">
                                 <label for="clinic_type" class="form-label fw-bold"><span class="text-danger"><i
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Clinic Type</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="clinic_type"
-                                    name="clinic_type" value="OPD" style="height: 55px;" readonly>
+                                    name="clinic_type" value="Doctor" style="height: 55px;" readonly>
                             </div>
 
 
@@ -1224,7 +1081,7 @@
                                             class="fa fa-stethoscope" aria-hidden="true"></i></span> Inquiry
                                     About</label>
                                 <input type="text" class="form-control border-0 bg-light px-4" id="clinic_name"
-                                    name="clinic_name" value="{{ $opd->clinic_name}}" style="height: 55px;" readonly>
+                                    name="clinic_name" value="{{ $doc->partner_doctor_name}}" style="height: 55px;" readonly>
                             </div>
 
                             <div class="col-6">
@@ -1340,6 +1197,8 @@
 
 
 
+
+
     <!-- marquee text start -->
     <marquee id="marqueeText"
         style="background: #051225; color: white; padding: 10px; position: fixed; bottom: 0; width: 100%; z-index: 1000;">
@@ -1418,6 +1277,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1431,9 +1303,7 @@
     <script src="{{asset('../lib/twentytwenty/jquery.event.move.js')}}"></script>
     <script src="{{asset('../lib/twentytwenty/jquery.twentytwenty.js')}}"></script>
 
-
     <script src="{{asset('../js/main.js')}}"></script>
-
 
 
     <script>

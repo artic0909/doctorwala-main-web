@@ -15,4 +15,9 @@ class PartnerDoctorBannerModel extends Model
         'currently_loggedin_partner_id',
         'docotorbanner',
     ];
+
+    public function docContact()
+    {
+        return $this->belongsTo(PartnerDoctorContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

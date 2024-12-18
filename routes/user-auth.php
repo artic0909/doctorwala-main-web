@@ -78,8 +78,18 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
         ->name('dw.pathology.single')
         ->where('id', '[0-9]+');
 
-    Route::post('/dw/pathology/inquiry', [UserAllOPDHandleController::class, 'patientInquiry'])->name('dw.pathology.inquiry.store');
+    Route::post('/dw/pathology/inquiry', [UserAllPathologyHandleController::class, 'patientInquiry'])->name('dw.pathology.inquiry.store');
     Route::post('/dw/pathology/rating', [UserAllPathologyHandleController::class, 'saveRating'])->name('dw.pathology.rating.save');
+
+
+
+    // single doctor ------------------------------------------------->
+    Route::get('/dw/doctor/{id}', [UserAllDoctorHandleController::class, 'singleDocView'])
+        ->name('dw.doctor.single')
+        ->where('id', '[0-9]+');
+
+    Route::post('/dw/doctor/inquiry', [UserAllDoctorHandleController::class, 'patientInquiry'])->name('dw.doctor.inquiry.store');
+    Route::post('/dw/doctor/rating', [UserAllDoctorHandleController::class, 'saveRating'])->name('dw.doctor.rating.save');
 
 
 
