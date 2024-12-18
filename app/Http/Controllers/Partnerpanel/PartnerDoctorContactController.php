@@ -20,23 +20,36 @@ class PartnerDoctorContactController extends Controller
     public function index()
     {
         $partnerId = Auth::guard('partner')->id();
+
+        
         $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-
+    
+      
         $partner = Auth::guard('partner')->user();
+    
+
         $registrationTypes = $partner->registration_type;
-
         if (is_string($registrationTypes)) {
-            $registrationTypes = json_decode($registrationTypes, true);
+            $registrationTypes = json_decode($registrationTypes, true) ?: []; 
         }
-
-
-        $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
+    
+     
         $contactDetails = PartnerDoctorContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
-
-        return view('partnerpanel.partner-doctors', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes' ,'registrationTypess'));
+        $contactCount = PartnerDoctorContactModel::where('currently_loggedin_partner_id', $partnerId)->count();
+    
+   
+        return view('partnerpanel.partner-doctors', [
+            'opdBanner' => $opdBanner,
+            'pathologyBanner' => $pathologyBanner,
+            'doctorBanner' => $doctorBanner,
+            'contactDetails' => $contactDetails ?? null,
+            'registrationTypes' => $registrationTypes,
+            'contactCount' => $contactCount,
+        ]);
     }
+    
 
     /**
      * Store or update the doctor's contact details.

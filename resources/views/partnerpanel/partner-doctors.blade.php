@@ -705,16 +705,19 @@
 
 
                                             <div class="d-flex justify-content-center w-100">
-                                                <button type="submit" class="btn btn-success rounded mr-3" style="font-weight: 700;">Upload
-                                                    Contact Person</button>
-
-                                                <!-- Edit Button (only visible if data was successfully added) -->
-                                                @if(session('data_added'))
+                                                @if($contactCount === 1)
+                                                <!-- Show Edit Button if only one record exists -->
                                                 <a href="" data-target="#myEditModal" data-toggle="modal" class="text-danger ed-btn" style="font-weight: 700;">
-                                                    <i class="fa fa-pen-to-square" aria-hidden="true"></i>
+                                                    <i class="fa fa-pen-to-square" aria-hidden="true"></i> Edit Details
                                                 </a>
+                                                @else
+                                                <!-- Show Upload Button -->
+                                                <button type="submit" class="btn btn-success rounded mr-3" style="font-weight: 700;">
+                                                    Upload Contact Person
+                                                </button>
                                                 @endif
                                             </div>
+
 
 
 
@@ -906,7 +909,7 @@
                                         <label class="col-12" style="font-weight: 700;">Visit Schedule</label>
                                         <div id="visit-schedule-wrapper">
                                             @php
-                                            $visitSchedule = old('partner_doctor_visit_day', is_array($contactDetails->visit_day_time) ? $contactDetails->visit_day_time : []);
+                                            $visitSchedule = old('partner_doctor_visit_day', $contactDetails ? ($contactDetails->visit_day_time ?? []) : []);
                                             @endphp
 
                                             @foreach($visitSchedule as $index => $visit)

@@ -464,7 +464,7 @@
                                                 <td>
 
                                                     <div class="actions d-flex flex-wrap">
-                                                        <a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                        <a href="" data-target="#myDeleteModal{{$doc->id}}" data-toggle="modal"
                                                             class="ed-btn ml-3">
                                                             <i class="fa-solid fa-trash-can text-danger"
                                                                 style="font-size: 1rem;"></i>
