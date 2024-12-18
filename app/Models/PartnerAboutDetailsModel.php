@@ -17,4 +17,25 @@ class PartnerAboutDetailsModel extends Model
         'mission_details',
         'vision_details',
     ];
+
+
+
+
+
+    public function opdContact()
+    {
+        return $this->belongsTo(PartnerOPDContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
+
+
+    public function pathContact()
+    {
+        return $this->belongsTo(PartnerPathologyContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
+
+
+    public function docContact()
+    {
+        return $this->belongsTo(PartnerDoctorContactModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+    }
 }

@@ -192,4 +192,6 @@ class PartnerAllOPDInfoController extends Controller
 
         return redirect()->back()->with('success', 'OPD Doctor details deleted successfully!');
     }
+
+
 }

@@ -122,15 +122,48 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+
+
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
+                            aria-controls="ui-basicuy">
+                            <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
+                                class="menu-title">Profile Banner</span><i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basicuy">
+
+                            <ul class="nav flex-column sub-menu">
+
+                                @if(in_array('OPD', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myOPDBanner">OPD Banner</a></li>
+                                @endif
+
+                                @if(in_array('Pathology', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myPathologyBanner">Pathology Banner</a></li>
+                                @endif
+
+
+                                @if(in_array('Doctor', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myDoctorBanner">Doctor Banner</a></li>
+                                @endif
+
+                            </ul>
+                        </div>
+                    </li>
+
 
 
 
@@ -169,7 +202,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -187,12 +220,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -212,11 +245,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -235,7 +268,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -347,143 +380,48 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Delete</th>
-                                                <th scope="col">Mobile</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Inquiry</th>
+                                                <th scope="col">User Name</th>
+                                                <th scope="col">User Inquiries</th>
+                                                <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @if($patientInquiries->isEmpty())
                                             <tr>
                                                 <th scope="row">1</th>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><a href="tel:" class="ed-btn"><i
-                                                            class="fa fa-phone" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><a href="mailto:" class="ed-btn"><i
-                                                            class="fa fa-envelope text-success" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><b>Saklin Mustak</b></td>
-
-
-                                                <td style="font-size: 1rem;"><b>Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Beatae, sit?</b></td>
+                                                <td colspan="6" class="text-center">No inquiries found.</td>
                                             </tr>
+                                            @else
 
-
-
-
-
-
+                                            @foreach($patientInquiries as $pi)
                                             <tr>
-                                                <th scope="row">2</th>
+                                                <th scope="row">{{ $loop->iteration }}</th>
+
+                                                <td style="font-size: 1rem;"><b>{{$pi->user_name}}</b></td>
+
+                                                <td style="font-size: 1rem;"><b>{{$pi->user_inquiry}}</b></td>
 
 
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.2rem;"></i></a></td>
+                                                <td class="d-flex align-items-center" style="gap: 10px;">
 
-
-
-                                                <td style="font-size: 1rem;"><a href="tel:" class="ed-btn"><i
-                                                            class="fa fa-phone" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><a href="mailto:" class="ed-btn"><i
+                                                    <a href="mailto:{{ $pi->user_email }}" class="ed-btn"><i
                                                             class="fa fa-envelope text-success" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
+                                                            style="font-size: 1.2rem;"></i></a>
 
 
-
-                                                <td style="font-size: 1rem;"><b>Saklin Mustak</b></td>
-
-
-                                                <td style="font-size: 1rem;"><b>Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Beatae, sit?</b></td>
-                                            </tr>
-
-
-
-
-
-
-                                            <tr>
-                                                <th scope="row">3</th>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><a href="tel:" class="ed-btn"><i
+                                                    <a href="tel:{{ $pi->user_mobile }}" class="ed-btn"><i
                                                             class="fa fa-phone" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
+                                                            style="font-size: 1.2rem;"></i></a>
 
 
-
-                                                <td style="font-size: 1rem;"><a href="mailto:" class="ed-btn"><i
-                                                            class="fa fa-envelope text-success" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><b>Saklin Mustak</b></td>
-
-
-                                                <td style="font-size: 1rem;"><b>Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Beatae, sit?</b></td>
-                                            </tr>
-
-
-
-
-
-                                            <tr>
-                                                <th scope="row">4</th>
-
-
-                                                <td><a href="" data-target="#myDeleteModal" data-toggle="modal"
+                                                    <a href="" data-target="#myDeleteModal{{ $pi->id }}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
-                                                            style="font-size: 1.2rem;"></i></a></td>
+                                                            style="font-size: 1.2rem;"></i></a>
 
-
-
-                                                <td style="font-size: 1rem;"><a href="tel:" class="ed-btn"><i
-                                                            class="fa fa-phone" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><a href="mailto:" class="ed-btn"><i
-                                                            class="fa fa-envelope text-success" aria-hidden="true"
-                                                            style="font-size: 1.2rem;"></i></a></td>
-
-
-
-                                                <td style="font-size: 1rem;"><b>Saklin Mustak</b></td>
-
-
-                                                <td style="font-size: 1rem;"><b>Lorem ipsum dolor sit amet consectetur
-                                                        adipisicing elit. Beatae, sit?</b></td>
+                                                </td>
                                             </tr>
+                                            @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
 
@@ -516,57 +454,17 @@
 
 
 
-
-                <!-- Add Modal -->
-                <div class="modal fade" id="myAddModal" tabindex="-1" role="dialog" aria-labelledby="myAddModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Add
-                                        Service <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="">
-                                </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Edit Modal -->
-                <div class="modal fade" id="myEditModal" tabindex="-1" role="dialog" aria-labelledby="myEditModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-
-                            <form class="modal-body">
-                                <div class="form-group">
-                                    <label for=""><i class="fa fa-ambulance text-success" aria-hidden="true"></i> Edit
-                                        Service <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="" id="" value="">
-                                </div>
-
-                                <button type="submit" class="btn btn-success rounded w-100">Submit</button>
-                            </form>
-
-                        </div>
-                    </div>
-                </div>
-
-
-
                 <!-- Delete Modal -->
-                <div class="modal fade" id="myDeleteModal" tabindex="-1" role="dialog"
+                @foreach($patientInquiries as $pi)
+                <div class="modal fade" id="myDeleteModal{{ $pi->id }}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
-                            <form action="" class="modal-body">
+                            <form action="{{ route('partner.patient.inquiry.delete', $pi->id) }}" method="POST" class="modal-body" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -578,7 +476,7 @@
                                     <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
                                         <button type="button" class="btn btn-primary rounded w-50 mr-3"
                                             data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-danger rounded w-50">Confirm</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
                                     </div>
                                 </div>
                             </form>
@@ -586,6 +484,7 @@
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 

@@ -31,7 +31,7 @@ class PartnerPathologyContactModel extends Model
 
     public function banner()
     {
-        return $this->hasOne(PartnerOPDBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
+        return $this->hasOne(PartnerPathologyBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');
     }
 
 

@@ -67,7 +67,22 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     // single opd ------------------------------------------------->
     Route::get('/dw/opd/{id}', [UserAllOPDHandleController::class, 'singleOPDView'])
         ->name('dw.opd.single')
-        ->where('id', '[0-9]+'); // Ensure ID is a numeric value
+        ->where('id', '[0-9]+');
+
+    Route::post('/dw/opd/inquiry', [UserAllOPDHandleController::class, 'patientInquiry'])->name('dw.opd.inquiry.store');
+    Route::post('/dw/opd/rating', [UserAllOPDHandleController::class, 'saveRating'])->name('dw.opd.rating.save');
+
+
+    // single pathology ------------------------------------------------->
+    Route::get('/dw/pathology/{id}', [UserAllPathologyHandleController::class, 'singlePathView'])
+        ->name('dw.pathology.single')
+        ->where('id', '[0-9]+');
+
+    Route::post('/dw/pathology/inquiry', [UserAllOPDHandleController::class, 'patientInquiry'])->name('dw.pathology.inquiry.store');
+    Route::post('/dw/pathology/rating', [UserAllPathologyHandleController::class, 'saveRating'])->name('dw.pathology.rating.save');
+
+
+
 
 
 

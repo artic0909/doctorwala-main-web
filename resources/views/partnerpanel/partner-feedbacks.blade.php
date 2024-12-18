@@ -123,15 +123,48 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-profile">Partner
                                         Profile</a></li>
-
+                                @if(in_array('OPD', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link" href="/partnerpanel/partner-opd-contact">OPD
                                         Contact</a></li>
+                                @endif
 
+                                @if(in_array('Pathology', $registrationTypes))
                                 <li class="nav-item"> <a class="nav-link"
                                         href="/partnerpanel/partner-pathology-contact">Pathology Contact</a></li>
+                                @endif
                             </ul>
                         </div>
                     </li>
+
+
+                    <!-- partner-profile-banner -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basicuy" aria-expanded="false"
+                            aria-controls="ui-basicuy">
+                            <i class="fa fa-panorama" aria-hidden="true"></i>&nbsp; <span
+                                class="menu-title">Profile Banner</span><i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="ui-basicuy">
+
+                            <ul class="nav flex-column sub-menu">
+
+                                @if(in_array('OPD', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myOPDBanner">OPD Banner</a></li>
+                                @endif
+
+                                @if(in_array('Pathology', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myPathologyBanner">Pathology Banner</a></li>
+                                @endif
+
+
+                                @if(in_array('Doctor', $registrationTypes))
+                                <li class="nav-item"> <a class="nav-link" href="#" data-toggle="modal" data-target="#myDoctorBanner">Doctor Banner</a></li>
+                                @endif
+
+                            </ul>
+                        </div>
+                    </li>
+
 
 
 
@@ -170,7 +203,7 @@
 
 
 
-
+                    @if(in_array('OPD', $registrationTypes))
                     <!-- OPD -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic12" aria-expanded="false"
@@ -188,12 +221,12 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
 
-
-
+                    @if(in_array('Pathology', $registrationTypes))
                     <!-- Pathology -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic123" aria-expanded="false"
@@ -213,11 +246,11 @@
                             </ul>
                         </div>
                     </li>
+                    @endif
 
 
 
-
-
+                    @if(in_array('Doctor', $registrationTypes))
                     <!-- Doctors -->
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic1234" aria-expanded="false"
@@ -236,7 +269,7 @@
                             </ul>
                         </div>
                     </li>
-
+                    @endif
 
 
 
@@ -325,7 +358,7 @@
 
 
                     <div class="row">
-                        <div class="col-md-4 grid-margin">
+                        <div class="col-md-12 grid-margin">
 
 
                             <div class="row">
@@ -339,30 +372,36 @@
 
 
                             <div class="row m-auto">
-                                <div class="col-4 mt-4">
+                                <div class="col-12 mt-4">
 
 
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
+                                                <th scope="col">User Name</th>
+                                                <th scope="col">User Email</th>
+                                                <th scope="col">User Ratings</th>
                                                 <th scope="col">User Feedbacks</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($patientFeedbacks as $pf)
                                             <tr>
-                                                <th scope="row">1</th>
+                                                <th scope="row">{{$loop->iteration}}</th>
+
+                                                <td><b>{{$pf->user_name}}</b></td>
+                                                <td><b>{{$pf->user_email}}</b></td>
+                                                <td><b class="badge badge-success">{{$pf->rating}}/5</b></td>
 
                                                 <td>
-                                                    <a href="" data-target="#myFeedbackShowModal" data-toggle="modal"
+                                                    <a href="" data-target="#myFeedbackShowModal{{$pf->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-heart text-danger"
                                                             style="font-size: 1.1rem;"></i></a>
                                                 </td>
-                                                </td>
-
-
 
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -389,7 +428,8 @@
 
 
                 <!-- FeedBack Modal -->
-                <div class="modal fade" id="myFeedbackShowModal" tabindex="-1" role="dialog" aria-labelledby="myFeedbackShowModalLabel"
+                @foreach($patientFeedbacks as $pf)
+                <div class="modal fade" id="myFeedbackShowModal{{$pf->id}}" tabindex="-1" role="dialog" aria-labelledby="myFeedbackShowModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -404,12 +444,13 @@
                             </div>
 
                             <div class="modal-body">
-                                <p style="text-align: justify; font-weight: 700;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam amet doloremque id quas provident minima beatae suscipit! Molestias quibusdam a impedit? Amet sapiente veniam illum fugit nihil expedita minus asperiores. Sunt ut quo, quod fuga ullam quia saepe rerum! Quasi dolorem deserunt ullam quos eaque dolores blanditiis! Repudiandae, rem sit?</p>
+                                <p style="text-align: justify; font-weight: 700; font-size: 1.2rem; text-align: justify;">{{$pf->feedback}}</p>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                @endforeach
 
 
 

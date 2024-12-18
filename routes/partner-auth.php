@@ -11,6 +11,8 @@ use App\Http\Controllers\Partnerpanel\PartnerGalleryController;
 use App\Http\Controllers\Partnerpanel\PartnerInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerOPDContactController;
 use App\Http\Controllers\Partnerpanel\PartnerPathologyContactController;
+use App\Http\Controllers\Partnerpanel\PartnerPatientFeedbackController;
+use App\Http\Controllers\Partnerpanel\PartnerPatientInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerProfileBannerController;
 use App\Http\Controllers\Partnerpanel\PartnerServiceListController;
 use App\Http\Controllers\Partnerpanel\ProfileEditController;
@@ -212,6 +214,13 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
 
+    // Routes for Patient Inquiry
+    Route::get('/partnerpanel/partner-inquiry-from-patients', [PartnerPatientInquiryController::class, 'create'])->name('partner.patient.inquiry.index');
+    Route::delete('/partnerpanel/partner-inquiry-from-patients/delete/{id}', [PartnerPatientInquiryController::class, 'delete'])->name('partner.patient.inquiry.delete');
+
+
+    // Routes for Patient Feedback
+    Route::get('/partnerpanel/partner-feedbacks', [PartnerPatientFeedbackController::class, 'index'])->name('partner.patient.feddback.index');
 
 
 
