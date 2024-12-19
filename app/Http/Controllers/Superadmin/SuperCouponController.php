@@ -79,7 +79,53 @@ class SuperCouponController extends Controller
         return redirect('/superadmin/super-show-coupons')->with('success', 'Coupon added successfully!');
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'status' => 'required|string',
+        ]);
 
+        
+        $couponInfo = SuperCouponModel::findOrFail($id);
+        $couponInfo->status = $request->input('status');
+        $couponInfo->save();
+
+       
+        if ($request->input('status') === 'Inactive') {
+           
+            $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
+
+            foreach ($couponHolders as $holder) {
+               
+                DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Inactive']);
+
+                
+                PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Inactive']);
+                PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Inactive']);
+                PartnerDoctorContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Inactive']);
+            }
+        } elseif ($request->input('status') === 'Active') {
+            $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
+
+            foreach ($couponHolders as $holder) {
+               
+                DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Active']);
+
+                
+                PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Active']);
+                PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Active']);
+                PartnerDoctorContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
+                    ->update(['status' => 'Active']);
+            }
+        }
+
+        return back()->with('success', 'Updated successfully!');
+    }
 
 
     public function update(Request $request, $id)
@@ -126,53 +172,7 @@ class SuperCouponController extends Controller
 
 
 
-    public function updateStatus(Request $request, $id) // make it in automation 
-    {
-        $validated = $request->validate([
-            'status' => 'required|string',
-        ]);
 
-        // Find the coupon in the SuperCouponModel
-        $couponInfo = SuperCouponModel::findOrFail($id);
-        $couponInfo->status = $request->input('status');
-        $couponInfo->save();
-
-        // If the coupon status is set to Inactive
-        if ($request->input('status') === 'Inactive') {
-            // Find all CouponHolderModel entries associated with this coupon code
-            $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
-
-            foreach ($couponHolders as $holder) {
-                // Update the DwPartnerModel status to Inactive
-                DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Inactive']);
-
-                // Update related models
-                PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Inactive']);
-                PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Inactive']);
-                PartnerDoctorContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Inactive']);
-            }
-        }elseif($request->input('status') === 'Active'){
-            $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
-
-            foreach ($couponHolders as $holder) {
-                // Update the DwPartnerModel status to Active
-                DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Active']);
-
-                // Update related models
-                PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Active']);
-                PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Active']);
-                PartnerDoctorContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
-                    ->update(['status' => 'Active']);
-            }
-        }
-
-        return back()->with('success', 'Updated successfully!');
-    }
 
 
 
