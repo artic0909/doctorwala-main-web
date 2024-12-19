@@ -2,6 +2,7 @@
 
 // use App\Http\Controllers\DwPartnerController;
 
+use App\Http\Controllers\DwPartnerController;
 use App\Http\Controllers\Front\FrontAboutPageController;
 use App\Http\Controllers\Front\FrontBlogsPageController;
 use App\Http\Controllers\Front\FrontContactusPageController;
@@ -47,3 +48,6 @@ Route::get('/privacy-policy', [FrontPrivacyPolicyPageController::class, 'index']
 // ===========================================================================================================
 // ========================================== Front Unrestricted Routes End ==================================
 // ===========================================================================================================
+
+
+

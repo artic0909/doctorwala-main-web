@@ -11,9 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('partner_o_p_d_contact_models', function (Blueprint $table) {
-            $table->string('status')->default('Inactive');
-        });
+        Schema::dropIfExists('partner_o_p_d_contact_models');
     }
 
     /**
@@ -21,8 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('partner_o_p_d_contact_models', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+        //
     }
 };

@@ -23,7 +23,14 @@ class PartnerOPDContactModel extends Model
         'clinic_city',
         'clinic_google_map_link',
         'clinic_address',
+        'status',
     ];
+
+
+    public function partner()
+    {
+        return $this->belongsTo(DwPartnerModel::class, 'currently_loggedin_partner_id');
+    }
 
 
     public function banner()

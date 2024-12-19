@@ -409,9 +409,10 @@
                                             <div class="col-6 form-group">
                                                 <label for="coupon_start_date" style="font-weight: 700;"><i
                                                         class="fa-solid fa-calendar-days text-primary"></i>
-                                                    Opening Date <span class="text-danger">*</span></label>
+                                                    Opening Date</label>
                                                 <input type="date" class="form-control" id="coupon_start_date" name="coupon_start_date"
                                                     style="height: 55px;">
+                                                    <small class="mt-2 text-danger">If not provided then the opening date will be current date</small>
                                             </div>
 
 

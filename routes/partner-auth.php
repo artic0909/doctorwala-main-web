@@ -23,6 +23,7 @@ Route::middleware('guest:partner')->group(function () {
     Route::get('/partner-register', [DwPartnerController::class, 'viewPartnerRegForm']);
     Route::get('/partner-login', [DwPartnerController::class, 'partnerLoginFormView']);
 
+
     Route::post('/partner-register', [DwPartnerController::class, 'partnerRegForm'])->name('partnerRegForm');
     Route::post('/partner-login', [DwPartnerController::class, 'partnerLogin'])->name('partnerpanel.partner-login');
 
@@ -53,7 +54,10 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
     Route::get('/partnerpanel/partner-dashboard', [DwPartnerController::class, 'partnerdashboardview'])->name('partnerpanel.partner-dashboard');
 
-    Route::get('/partnerpanel/partner-profile', function () {
+    Route::get('/partnerpanel/partner-coupon', [DwPartnerController::class, 'partnerCouponCodeAddView'])->name('partnerpanel.partner-coupon');
+    Route::get('/partnerpanel/partner-subscription', [DwPartnerController::class, 'partnerSubscriptionAddView'])->name('partnerpanel.partner-subscription');
+
+    Route::get('/partnerpanel/partnerpanel/partner-profile', function () {
         return view('partnerpanel.partner-profile');
     })->name('partnerpanel.partner-profile');
 
@@ -221,6 +225,11 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
     // Routes for Patient Feedback
     Route::get('/partnerpanel/partner-feedbacks', [PartnerPatientFeedbackController::class, 'index'])->name('partner.patient.feddback.index');
+
+
+    // Coupon Code Get Route
+    Route::post('/partnerpanel/get-coupon-details', [DwPartnerController::class, 'getCouponDetails'])->name('get.coupon.details');
+    Route::post('/partnerpanel/add-coupon-details', [DwPartnerController::class, 'partnerCouponCodeAdd'])->name('partner.coupon.code.add');
 
 
 

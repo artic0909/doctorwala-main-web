@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 // use App\Http\Controllers\Auth;
+
+use App\Models\CouponHolderModel;
 use App\Models\DwPartnerModel;
 use App\Models\PartnerDoctorBannerModel;
 use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerPathologyBannerModel;
+use App\Models\SuperCouponModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
 
@@ -18,11 +21,8 @@ class DwPartnerController extends Controller
 
 
 
-
-
     public function viewPartnerRegForm()
     {
-        // return view('partner-register');
 
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
@@ -38,12 +38,81 @@ class DwPartnerController extends Controller
 
     public function partnerLoginFormView()
     {
-        // return view('partner-login');
 
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
 
         return view('partner-login', compact('captcha'));
+    }
+
+
+
+
+
+
+
+    public function partnerCouponCodeAddView()
+    {
+        $partnerID = Auth::guard('partner')->user();
+        return view('payments', compact('partnerID'));
+    }
+
+
+
+    public function getCouponDetails(Request $request)
+    {
+        $couponCode = $request->input('coupon_code');
+
+
+        $coupon = SuperCouponModel::where('coupon_code', $couponCode)->first();
+
+        if ($coupon) {
+            return response()->json([
+                'success' => true,
+                'data' => $coupon,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Coupon not found.',
+        ]);
+    }
+
+
+
+    public function partnerCouponCodeAdd(Request $request)
+    {
+        $validated = $request->validate([
+            'currently_loggedin_partner_id' => 'required|string',
+            'coupon_code' => 'required|string',
+            'coupon_amount' => 'required|string',
+            'coupon_start_date' => 'required|string',
+            'coupon_end_date' => 'required|string',
+        ]);
+
+        CouponHolderModel::create([
+            'currently_loggedin_partner_id' => $request->input('currently_loggedin_partner_id'),
+            'coupon_code' => $request->input('coupon_code'),
+            'coupon_amount' => $request->input('coupon_amount'),
+            'coupon_start_date' => $request->input('coupon_start_date'),
+            'coupon_end_date' => $request->input('coupon_end_date'),
+        ]);
+
+        // After successfully added then the DwPartnerModel's status will be change to Active
+        // Change the status of the partner in DwPartnerModel to Active
+        DwPartnerModel::where('id', $request->input('currently_loggedin_partner_id'))
+            ->update(['status' => 'Active']);
+
+        return redirect()->route('partnerpanel.partner-dashboard')->with('success', 'Coupon added successfully!');
+    }
+
+
+
+    public function partnerSubscriptionAddView()
+    {
+
+        return view('subscription');
     }
 
 
@@ -77,7 +146,7 @@ class DwPartnerController extends Controller
         $clinicName = $partner->partner_clinic_name;
         $partnerName = $partner->partner_contact_person_name;
 
-        return view('partnerpanel.partner-dashboard', compact('opdBanner', 'pathologyBanner','doctorBanner', 'registrationTypes', 'partnerName', 'clinicName'));
+        return view('partnerpanel.partner-dashboard', compact('opdBanner', 'pathologyBanner', 'doctorBanner', 'registrationTypes', 'partnerName', 'clinicName'));
     }
 
 
@@ -127,7 +196,15 @@ class DwPartnerController extends Controller
 
         $dwuser->save();
 
-        return redirect()->route('partnerpanel.partner-login')->with('success', 'Registration successful! Please log in.');
+        // Start session by authenticating the newly registered partner
+        if (Auth::guard('partner')->loginUsingId($dwuser->id)) {
+            $request->session()->regenerate(); // Regenerate session for security
+            return redirect()->route('partnerpanel.partner-coupon')
+                ->with('success', 'Registration successful! Welcome to your dashboard.');
+        }
+
+
+        return redirect()->back()->with('Unsuccess', 'Registration unsuccessful! Please register again.');
     }
 
 
@@ -139,7 +216,7 @@ class DwPartnerController extends Controller
 
     private function generateCaptcha()
     {
-        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789';
         $captcha = '';
         for ($i = 0; $i < 6; $i++) {
             $captcha .= $chars[random_int(0, strlen($chars) - 1)];
@@ -157,34 +234,34 @@ class DwPartnerController extends Controller
 
     public function partnerLogin(Request $request)
     {
-        // Validate the login credentials
+
         $validated = $request->validate([
             'partner_email' => 'required|email',
             'partner_password' => 'required',
         ]);
 
 
-        // Check if captcha matches the one in session
+
         if ($request->captcha !== session('captcha_text')) {
             return back()->withErrors(['captcha' => 'Captcha is incorrect.'])->withInput();
         }
 
-        // Prepare credentials array
+
         $credentials = [
             'partner_email' => $request->partner_email,
-            'password' => $request->partner_password, // Must use 'password' key for Auth
+            'password' => $request->partner_password,
         ];
 
-        // Attempt login using the partner guard
+
         if (Auth::guard('partner')->attempt($credentials)) {
-            // Login successful
+
             $request->session()->regenerate();
             return redirect()->route('partnerpanel.partner-dashboard');
         }
 
 
 
-        // Login failed
+
         return back()->withErrors([
             'partner_email' => 'Invalid credentials. Please try again.',
         ]);

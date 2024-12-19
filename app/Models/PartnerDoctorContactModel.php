@@ -33,6 +33,12 @@ class PartnerDoctorContactModel extends Model
     ];
 
 
+
+    public function partner()
+    {
+        return $this->belongsTo(DwPartnerModel::class, 'currently_loggedin_partner_id');
+    }
+
     public function banner()
     {
         return $this->hasOne(PartnerDoctorBannerModel::class, 'currently_loggedin_partner_id', 'currently_loggedin_partner_id');

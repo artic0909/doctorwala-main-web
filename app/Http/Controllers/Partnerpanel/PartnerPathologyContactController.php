@@ -29,12 +29,13 @@ class PartnerPathologyContactController extends Controller
 
         $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-pathology-contact', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes'));
+        return view('partnerpanel.partner-pathology-contact', compact('opdBanner', 'pathologyBanner', 'doctorBanner', 'contactDetails', 'registrationTypes'));
     }
 
     public function store(Request $request)
     {
         $partnerId = Auth::guard('partner')->id();
+        $partnerStatus = Auth::guard('partner')->user()->status;
 
         $request->validate([
             'clinic_registration_type' => 'required|string',
@@ -51,10 +52,12 @@ class PartnerPathologyContactController extends Controller
             'clinic_address' => 'required|string',
         ]);
 
-        $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
+        $contactDetails = PartnerPathologyContactModel::where('currently_loggedin_partner_id', $partnerId)
+            ->where('status', $partnerStatus)
+            ->first();
 
         if ($contactDetails) {
-            // Update the existing record
+           
             $contactDetails->update([
                 'clinic_registration_type' => $request->clinic_registration_type,
                 'clinic_contact_person_name' => $request->clinic_contact_person_name,
@@ -68,11 +71,12 @@ class PartnerPathologyContactController extends Controller
                 'clinic_city' => $request->clinic_city,
                 'clinic_google_map_link' => $request->clinic_google_map_link,
                 'clinic_address' => $request->clinic_address,
+                'status' => $partnerStatus,
             ]);
 
             return redirect()->route('partner.pathology.contact.create')->with('success', 'Contact details updated successfully.');
         } else {
-            // Create a new record
+            
             PartnerPathologyContactModel::create([
                 'currently_loggedin_partner_id' => $partnerId,
                 'clinic_registration_type' => $request->clinic_registration_type,
@@ -87,6 +91,7 @@ class PartnerPathologyContactController extends Controller
                 'clinic_city' => $request->clinic_city,
                 'clinic_google_map_link' => $request->clinic_google_map_link,
                 'clinic_address' => $request->clinic_address,
+                'status' => $partnerStatus,
             ]);
 
             return redirect()->route('partner.pathology.contact.create')->with('success', 'Contact details saved successfully.');

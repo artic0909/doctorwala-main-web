@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
+use App\Models\DwPartnerModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerDoctorBannerModel;
 use App\Models\PartnerOPDBannerModel;
@@ -29,12 +30,18 @@ class PartnerOPDContactController extends Controller
 
         $contactDetails = PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-opd-contact', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes'));
+        return view('partnerpanel.partner-opd-contact', compact('opdBanner', 'pathologyBanner', 'doctorBanner', 'contactDetails', 'registrationTypes'));
     }
+
+
+
+
 
     public function store(Request $request)
     {
+     
         $partnerId = Auth::guard('partner')->id();
+        $partnerStatus = Auth::guard('partner')->user()->status;
 
         $request->validate([
             'clinic_registration_type' => 'required|string',
@@ -51,10 +58,13 @@ class PartnerOPDContactController extends Controller
             'clinic_address' => 'required|string',
         ]);
 
-        $contactDetails = PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)->first();
+     
+        $contactDetails = PartnerOPDContactModel::where('currently_loggedin_partner_id', $partnerId)
+            ->where('status', $partnerStatus)
+            ->first();
 
         if ($contactDetails) {
-            // Update the existing record
+
             $contactDetails->update([
                 'clinic_registration_type' => $request->clinic_registration_type,
                 'clinic_contact_person_name' => $request->clinic_contact_person_name,
@@ -68,11 +78,12 @@ class PartnerOPDContactController extends Controller
                 'clinic_city' => $request->clinic_city,
                 'clinic_google_map_link' => $request->clinic_google_map_link,
                 'clinic_address' => $request->clinic_address,
+                'status' => $partnerStatus,
             ]);
 
             return redirect()->route('partner.opd.contact.create')->with('success', 'Contact details updated successfully.');
         } else {
-            // Create a new record
+            
             PartnerOPDContactModel::create([
                 'currently_loggedin_partner_id' => $partnerId,
                 'clinic_registration_type' => $request->clinic_registration_type,
@@ -87,6 +98,7 @@ class PartnerOPDContactController extends Controller
                 'clinic_city' => $request->clinic_city,
                 'clinic_google_map_link' => $request->clinic_google_map_link,
                 'clinic_address' => $request->clinic_address,
+                'status' => $partnerStatus,
             ]);
 
             return redirect()->route('partner.opd.contact.create')->with('success', 'Contact details saved successfully.');

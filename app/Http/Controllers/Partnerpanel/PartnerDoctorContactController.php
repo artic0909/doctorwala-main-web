@@ -57,8 +57,8 @@ class PartnerDoctorContactController extends Controller
     public function store(Request $request)
     {
         $partnerId = Auth::guard('partner')->id();
-
-        // Validate input data
+        $partnerStatus = Auth::guard('partner')->user()->status;
+        
         $validatedData = $request->validate([
             'clinic_registration_type' => 'required|string',
             'partner_doctor_name' => 'required|string',
@@ -78,7 +78,7 @@ class PartnerDoctorContactController extends Controller
             'partner_doctor_visit_end_time.*' => 'required|date_format:H:i|after:partner_doctor_visit_start_time.*',
         ]);
 
-        // Process visit days and times
+        
         $visitDayTime = [];
         foreach ($request->partner_doctor_visit_day as $index => $day) {
             $visitDayTime[] = [
@@ -90,8 +90,8 @@ class PartnerDoctorContactController extends Controller
 
         $validatedData['visit_day_time'] = $visitDayTime;
         $validatedData['currently_loggedin_partner_id'] = $partnerId;
-
-        // Check if contact details already exist, update if so; otherwise, create
+        $validatedData['status'] = $partnerStatus;
+        
         PartnerDoctorContactModel::updateOrCreate(
             ['currently_loggedin_partner_id' => $partnerId],
             $validatedData

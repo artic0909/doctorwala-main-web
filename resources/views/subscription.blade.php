@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,19 +25,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="{{asset('../lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('../lib/twentytwenty/twentytwenty.css')}}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('../css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
+    <link href="{{asset('../css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/cards-css.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/partner-btn.css')}}" rel="stylesheet">
+    <link href="{{asset('../responsive/index_responsive.css')}}" rel="stylesheet">
 
 
 </head>
@@ -97,205 +97,45 @@
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Services</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="opd.html" class="dropdown-item">OPD Details</a>
-                        <a href="doctor.html" class="dropdown-item">Doctor Details</a>
-                        <a href="pathology.html" class="dropdown-item">Pathology Details</a>
-                        <a href="coupon.html" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
+                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="authentication.html" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i class="fa fa-user" aria-hidden="true"></i></a> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
 
 
-
-
-
-
-
-
-
-
-    <!-- User Profile & Password Edit Modal -->
-    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body position-relative">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-
-                    <!-- profile update form -->
-                    <form class="text-center">
-                        <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
-                        <p class="mb-4">Update your profile details</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
-                                    <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
-                        <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
-                        <p class="mb-4">Update your account password</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
-                                    <label for="user_old_password">Existing Password</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="150" height="40"></canvas>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Save Changes</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Full Screen Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
-                    <div class="input-group" style="max-width: 600px;">
-                        <input type="text" class="form-control bg-transparent border-primary p-3"
-                            placeholder="Type search keyword">
-                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Full Screen Search End -->
 
 
 
@@ -339,7 +179,7 @@
                     <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
                         <div class="price-item pb-4">
                             <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="img/price-1.jpg" alt="">
+                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
                                 <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
                                     style="z-index: 2;">
                                     <h2 class="text-primary m-0">₹35</h2>
@@ -360,7 +200,7 @@
                         </div>
                         <div class="price-item pb-4">
                             <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="img/price-2.jpg" alt="">
+                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
                                 <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
                                     style="z-index: 2;">
                                     <h2 class="text-primary m-0">₹149</h2>
@@ -381,7 +221,7 @@
                         </div>
                         <div class="price-item pb-4">
                             <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="img/price-3.jpg" alt="">
+                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
                                 <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
                                     style="z-index: 2;">
                                     <h2 class="text-primary m-0">₹1000</h2>
@@ -466,7 +306,14 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @guest
+                    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span class="showing-text"> Partner Register</span>
+                    </a>
+                    @endguest
+                    @auth
+                    @endauth
                 </div>
 
 
@@ -510,20 +357,17 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="{{asset('../lib/wow/wow.min.js')}}"></script>
+    <script src="{{asset('../lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('../lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{asset('../lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.event.move.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.twentytwenty.js')}}"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/captcha.js"></script>
+    <script src="{{asset('../js/main.js')}}"></script>
 </body>
 
 </html>

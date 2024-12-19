@@ -9,7 +9,7 @@
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="img/fav5.png" rel="icon">
+    <link href="{{asset('fav5.png')}}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -25,19 +25,19 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
-    <link href="lib/twentytwenty/twentytwenty.css" rel="stylesheet" />
+    <link href="{{asset('../lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/animate/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('../lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('../lib/twentytwenty/twentytwenty.css')}}" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('../css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/cards-css.css" rel="stylesheet">
-    <link href="css/partner-btn.css" rel="stylesheet">
-    <link href="responsive/index_responsive.css" rel="stylesheet">
+    <link href="{{asset('../css/style.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/cards-css.css')}}" rel="stylesheet">
+    <link href="{{asset('../css/partner-btn.css')}}" rel="stylesheet">
+    <link href="{{asset('../responsive/index_responsive.css')}}" rel="stylesheet">
 
 
 </head>
@@ -93,37 +93,45 @@
 
 
 
+
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
             <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="img/logo3.png" width="300" alt="DoctorWala">
+            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link ">Home</a>
+                <a href="/about" class="nav-item nav-link ">About</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
                     <div class="dropdown-menu m-0">
-                        <a href="opd.html" class="dropdown-item">OPD Details</a>
-                        <a href="doctor.html" class="dropdown-item">Doctor Details</a>
-                        <a href="pathology.html" class="dropdown-item">Pathology Details</a>
-                        <a href="coupon.html" class="dropdown-item">Coupon Details </a>
+                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
+                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
+                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
+                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
                     </div>
                 </div>
-                <a href="blog.html" class="nav-item nav-link">Blogs</a>
+                <a href="/blog" class="nav-item nav-link ">Blogs</a>
 
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
-                <a href="privacy-policy.html" class="nav-item nav-link">Privacy Policy</a>
+                <a href="/contact" class="nav-item nav-link">Contact</a>
+                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
             </div>
             <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
                     class="fa fa-search"></i></button> -->
-            <a href="authentication.html" class="btn btn-primary py-2 px-4 ms-3">Login</a>
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i class="fa fa-user" aria-hidden="true"></i></a> -->
+
+
+            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
+
+
+
+            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
+                    class="fa fa-user" aria-hidden="true"></i></a> -->
+
         </div>
     </nav>
     <!-- Navbar End -->
@@ -132,131 +140,6 @@
 
 
 
-
-
-
-
-    <!-- User Profile & Password Edit Modal -->
-    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body position-relative">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-
-                    <!-- profile update form -->
-                    <form class="text-center">
-                        <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
-                        <p class="mb-4">Update your profile details</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
-                                    <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
-                        <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
-                        <p class="mb-4">Update your account password</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
-                                    <label for="user_old_password">Existing Password</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="150" height="40"></canvas>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Save Changes</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
 
 
 
@@ -312,55 +195,60 @@
                 <div class="col-lg-6">
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
-                        <h1 class="text-white mb-4">Make Payment</h1>
-                        <form>
+                        <h1 class="text-white mb-4">Make Payments</h1>
+                        
+                        <form action="{{route('partner.coupon.code.add')}}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="row g-3">
 
 
 
                                 <div class="col-12">
                                     <p for="subciption_amount" class="form-label text-white fw-bolder fs-5"
-                                        style="text-align: left;">Subcribtion Amount * </p>
-                                    <input type="number" class="form-control bg-light border-0" value="1000"
-                                        style="height: 55px;" name="subciption_amount" id="subciption_amount">
+                                        style="text-align: left;">Subscribe Now</p>
+                                    <a href="/partnerpanel/partner-subscription" class="btn btn-dark w-100 py-3">Go With Subscription</a>
                                 </div>
 
 
-
-
                                 <div class="col-12">
-                                    <p for="coupon_code" class="form-label text-white fw-bolder fs-5"
-                                        style="text-align: left;">Coupon Code (if any)</p>
+                                    <p for="currently_loggedin_partner_id" class="form-label text-white fw-bolder fs-5"
+                                        style="text-align: left;">Partner ID*</p>
                                     <input type="text" class="form-control bg-light border-0"
-                                        placeholder="Enter Coupon Code" style="height: 55px;" name="coupon_code"
-                                        id="coupon_code">
-                                </div>
-
-
-
-
-
-                                <div class="col-12">
-                                    <p for="coupon_code_rs" class="form-label text-white fw-bolder fs-5"
-                                        style="text-align: left;">Coupon Code Amount</p>
-                                    <input type="text" class="form-control bg-light border-0" value="1000"
-                                        style="height: 55px;" name="coupon_code_rs" id="coupon_code_rs">
-                                </div>
-
-
-
-
-                                <div class="col-12">
-                                    <p for="final_rs" class="form-label text-white fw-bolder fs-5"
-                                        style="text-align: left;">Final Amount *</p>
-                                    <input type="text" class="form-control bg-light border-0" value="1000"
-                                        style="height: 55px;" name="final_rs" id="final_rs">
+                                        value="{{$partnerID->id}}" style="height: 55px;" name="currently_loggedin_partner_id"
+                                        id="currently_loggedin_partner_id">
                                 </div>
 
 
 
                                 <div class="col-12">
-                                    <button class="btn btn-dark w-100 py-3" type="submit">CONTINUE</button>
+                                    <p for="coupon_code" class="form-label text-white fw-bolder fs-5" style="text-align: left;">Coupon Code (if any)*</p>
+                                    <input type="text" class="form-control bg-light border-0" placeholder="Enter Coupon Code"
+                                        style="height: 55px;" name="coupon_code" id="coupon_code">
+
+                                    <div class="btnns d-flex justify-content-end mt-2">
+                                        <button type="button" class="btn btn-dark">Add</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <p for="coupon_amount" class="form-label text-white fw-bolder fs-5" style="text-align: left;">Coupon Code Amount*</p>
+                                    <input type="text" class="form-control bg-light border-0" value="" style="height: 55px;" name="coupon_amount" id="coupon_amount" readonly>
+                                </div>
+
+                                <div class="col-12">
+                                    <p for="coupon_start_date" class="form-label text-white fw-bolder fs-5" style="text-align: left;">Start Date*</p>
+                                    <input type="text" class="form-control bg-light border-0" value="" style="height: 55px;" name="coupon_start_date" id="coupon_start_date" readonly>
+                                </div>
+
+                                <div class="col-12">
+                                    <p for="coupon_end_date" class="form-label text-white fw-bolder fs-5" style="text-align: left;">End Date*</p>
+                                    <input type="text" class="form-control bg-light border-0" value="" style="height: 55px;" name="coupon_end_date" id="coupon_end_date" readonly>
+                                </div>
+
+
+
+                                <div class="col-12">
+                                    <button class="btn btn-dark w-100 py-3" type="submit">Cotinue With Code</button>
                                     <!-- it goto partner login page -->
                                 </div>
 
@@ -512,7 +400,14 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @guest
+                    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        <span class="showing-text"> Partner Register</span>
+                    </a>
+                    @endguest
+                    @auth
+                    @endauth
                 </div>
 
 
@@ -556,20 +451,56 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="lib/twentytwenty/jquery.event.move.js"></script>
-    <script src="lib/twentytwenty/jquery.twentytwenty.js"></script>
+    <script src="{{asset('../lib/wow/wow.min.js')}}"></script>
+    <script src="{{asset('../lib/easing/easing.min.js')}}"></script>
+    <script src="{{asset('../lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{asset('../lib/owlcarousel/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/moment-timezone.min.js')}}"></script>
+    <script src="{{asset('../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.event.move.js')}}"></script>
+    <script src="{{asset('../lib/twentytwenty/jquery.twentytwenty.js')}}"></script>
 
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    <script src="js/cards-scroll.js"></script>
-    <script src="js/captcha.js"></script>
+    <script src="{{asset('../js/main.js')}}"></script>
+
+
+
+    <script>
+        document.getElementById('coupon_code').addEventListener('change', function() {
+            const couponCode = this.value;
+
+            if (couponCode) {
+                fetch('{{ route("get.coupon.details") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({
+                            coupon_code: couponCode
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            const coupon = data.data;
+                            document.getElementById('coupon_amount').value = coupon.coupon_amount;
+                            document.getElementById('coupon_start_date').value = coupon.coupon_start_date;
+                            document.getElementById('coupon_end_date').value = coupon.coupon_end_date;
+                        } else {
+                            alert(data.message);
+                            document.getElementById('coupon_amount').value = '';
+                            document.getElementById('coupon_start_date').value = '';
+                            document.getElementById('coupon_end_date').value = '';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching coupon details:', error);
+                    });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
