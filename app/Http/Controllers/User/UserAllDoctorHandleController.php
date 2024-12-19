@@ -23,7 +23,9 @@ class UserAllDoctorHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
-        $docs = PartnerDoctorContactModel::with('banner')->get();
+        $docs = PartnerDoctorContactModel::with('banner')
+            ->where('status', 'active')
+            ->paginate(6);
 
         return view('doctor', compact('aboutDetails', 'user', 'docs'));
     }

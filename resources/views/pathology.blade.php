@@ -585,7 +585,46 @@
 
 
 
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{-- Previous Page Link --}}
+                @if ($paths->onFirstPage())
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Prev</a>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $paths->previousPageUrl() }}" tabindex="-1">Prev</a>
+                </li>
+                @endif
 
+                {{-- Pagination Elements --}}
+                @foreach ($paths->links()->elements[0] as $page => $url)
+                @if ($page == $paths->currentPage())
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ $page }} <span class="sr-only">(current)</span></a>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                </li>
+                @endif
+                @endforeach
+
+                {{-- Next Page Link --}}
+                @if ($paths->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $paths->nextPageUrl() }}">Next</a>
+                </li>
+                @else
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
 
 
 

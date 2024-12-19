@@ -578,12 +578,54 @@
             </div>
         </div>
     </div>
-    <!-- Pathology Cards End -->
+    <!-- Doctors Cards End -->
 
 
 
 
 
+
+
+    <div class="d-flex justify-content-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{-- Previous Page Link --}}
+                @if ($docs->onFirstPage())
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Prev</a>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $docs->previousPageUrl() }}" tabindex="-1">Prev</a>
+                </li>
+                @endif
+
+                {{-- Pagination Elements --}}
+                @foreach ($docs->links()->elements[0] as $page => $url)
+                @if ($page == $docs->currentPage())
+                <li class="page-item active">
+                    <a class="page-link" href="#">{{ $page }} <span class="sr-only">(current)</span></a>
+                </li>
+                @else
+                <li class="page-item">
+                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                </li>
+                @endif
+                @endforeach
+
+                {{-- Next Page Link --}}
+                @if ($docs->hasMorePages())
+                <li class="page-item">
+                    <a class="page-link" href="{{ $docs->nextPageUrl() }}">Next</a>
+                </li>
+                @else
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+                @endif
+            </ul>
+        </nav>
+    </div>
 
 
 

@@ -25,7 +25,9 @@ class UserAllPathologyHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
-        $paths = PartnerPathologyContactModel::with('banner')->get();
+        $paths = PartnerPathologyContactModel::with('banner')
+            ->where('status', 'active')
+            ->paginate(6);
 
         return view('pathology', compact('aboutDetails', 'user', 'paths'));
     }

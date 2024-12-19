@@ -24,7 +24,9 @@ class UserAllOPDHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
-        $opds = PartnerOPDContactModel::with('banner')->get();
+        $opds = PartnerOPDContactModel::with('banner')
+            ->where('status', 'active')
+            ->paginate(6);
 
         return view('opd', compact('aboutDetails', 'user', 'opds'));
     }
@@ -45,9 +47,6 @@ class UserAllOPDHandleController extends Controller
         if (!$opd) {
             return redirect()->back()->with('error', 'OPD record not found');
         }
-
-
-        // now take all details from PartnerAllOPDDoctorModel's table where PartnerOPDContactModel's currently_loggedin_partner_id same as PartnerAllOPDDoctorModel's currently_loggedin_partner_id data
 
         $partnerId = $opd->currently_loggedin_partner_id;
 
