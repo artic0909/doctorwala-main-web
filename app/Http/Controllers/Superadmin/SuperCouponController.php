@@ -126,7 +126,7 @@ class SuperCouponController extends Controller
 
 
 
-    public function updateStatus(Request $request, $id)
+    public function updateStatus(Request $request, $id) // make it in automation 
     {
         $validated = $request->validate([
             'status' => 'required|string',
