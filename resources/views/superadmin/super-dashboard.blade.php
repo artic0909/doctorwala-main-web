@@ -775,7 +775,7 @@
 
 
                                 <div class="col-md-4 mb-4 stretch-card transparent">
-                                    <a href="/superadmin/super-aboutus" class="card card_blue"
+                                    <a href="/superadmin/super-all-feedback" class="card card_blue"
                                         style="cursor: pointer; text-decoration: none;">
                                         <div class="card-body">
                                             <div class="prof d-flex align-items-center">

@@ -484,19 +484,17 @@
                         <div class="d-flex justify-content-between text-white mb-3">
                             <input type="text" class="form-control border-0" placeholder="Search for Doctor/Path/OPD">
                         </div>
-                        <a class="btn btn-light" href="">Search Now</a>
+                        <a class="btn btn-light" href=""><i class="fa fa-search" aria-hidden="true"></i> Search Now</a>
                     </div>
                 </div>
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
                     <div class="bg-dark2 d-flex flex-column p-5 searchBanner searchBanner2" style="height: 230px;">
                         <h3 class="text-white mb-3">Search For OPD</h3>
                         <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
-                            <option selected>Select</option>
-                            <option value="1">OPD 1</option>
-                            <option value="2">OPD 2</option>
-                            <option value="3">OPD 3</option>
+                            <option selected>Select Specialist</option>
+
                         </select>
-                        <a class="btn btn-light" href="">Search OPD</a>
+                        <a class="btn btn-light" href=""><i class="fa fa-user-doctor" aria-hidden="true"></i> Search OPD</a>
                     </div>
                 </div>
 
@@ -505,12 +503,9 @@
                     <div class="bg-primary d-flex flex-column p-5 searchBanner searchBanner3" style="height: 230px;">
                         <h3 class="text-white mb-3">Search For Pathology</h3>
                         <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
-                            <option selected>Select</option>
-                            <option value="1">Pathology 1</option>
-                            <option value="2">Pathology 2</option>
-                            <option value="3">Pathology 3</option>
+                            <option selected>Select Type</option>
                         </select>
-                        <a class="btn btn-light" href="">Search Pathology</a>
+                        <a class="btn btn-light" href=""><i class="fa fa-syringe" aria-hidden="true"></i> Search Pathology</a>
                     </div>
                 </div>
 
@@ -615,18 +610,21 @@
                     <div class="scrolling-wrapper d-flex">
                         <!-- Card 1 -->
                         @foreach($opds as $opd)
-                        <div class="card mx-2" style="max-width: 300px;">
+                        <div class="card mx-2" style="min-width: 300px;">
                             @if($opd->banner && $opd->banner->opdbanner)
                             <img src="{{ asset('storage/' . $opd->banner->opdbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @else
                             <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @endif
+
                             <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                <a href="{{url('/dw/opd/'.$opd->id)}}" class="text-decoration-none my-dd">
                                     <h5 class="card-title" style="text-transform: capitalize;">{{$opd->clinic_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$opd->clinic_city}}, {{$opd->clinic_landmark}}, {{$opd->clinic_pincode}}</p>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$opd->clinic_city}},{{$opd->clinic_pincode}}</p>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$opd->clinic_landmark}}</p>
                                 </a>
                             </div>
+
                         </div>
                         @endforeach
                     </div>
@@ -772,16 +770,17 @@
                         <!-- Card 1 -->
 
                         @foreach($paths as $path)
-                        <div class="card mx-2" style="max-width: 300px;">
+                        <div class="card mx-2" style="min-width: 300px;">
                             @if($path->banner && $path->banner->pathologybanner)
                             <img src="{{ asset('storage/' . $path->banner->pathologybanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @else
                             <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @endif
                             <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                <a href="{{url('/dw/pathology/'.$path->id)}}" class="text-decoration-none my-dd">
                                     <h5 class="card-title" style="text-transform: capitalize;">{{$path->clinic_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$path->clinic_city}}, {{$path->clinic_landmark}}, {{$path->clinic_pincode}}</p>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$path->clinic_city}},{{$path->clinic_pincode}}</p>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$path->clinic_landmark}}</p>
                                 </a>
                             </div>
                         </div>
@@ -862,6 +861,14 @@
 
 
 
+
+
+
+
+
+
+
+
     <!-- Doctors Cards Start -->
     <div class="container-fluid bg-primary bg-appointment my-5 wow fadeInUp p-3" data-wow-delay="0.1s">
         <div class="container">
@@ -886,14 +893,119 @@
 
                         <!-- Card 1 -->
                         @foreach($docs as $doc)
-                        <div class="card mx-2" style="max-width: 300px;">
+                        <div class="card mx-2" style="min-width: 300px;">
                             @if($doc->banner && $doc->banner->doctorbanner)
                             <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @else
                             <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
                             @endif
                             <div class="card-body">
-                                <a href="all-opd-doctor-pathology-details.html" class="text-decoration-none my-dd">
+                                <a href="{{url('/dw/doctor/'.$doc->id)}}" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}},{{$doc->partner_doctor_pincode}}</p>
+                                    <p class="card-text text-primary ppp m-0" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_landmark}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+                        <!-- Card 1 -->
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="min-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
+                            <div class="card-body">
+                                <a href="" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+                        <!-- Card 1 -->
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="min-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
+                            <div class="card-body">
+                                <a href="" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+
+                        <!-- Card 1 -->
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="min-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
+                            <div class="card-body">
+                                <a href="" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+
+                        <!-- Card 1 -->
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="min-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
+                            <div class="card-body">
+                                <a href="" class="text-decoration-none my-dd">
+                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
+                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+
+
+
+
+
+
+                        <!-- Card 1 -->
+                        @foreach($docs as $doc)
+                        <div class="card mx-2" style="min-width: 300px;">
+                            @if($doc->banner && $doc->banner->doctorbanner)
+                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @else
+                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
+                            @endif
+                            <div class="card-body">
+                                <a href="" class="text-decoration-none my-dd">
                                     <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
                                     <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
                                 </a>

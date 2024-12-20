@@ -361,29 +361,29 @@
 
                                     <div class="row">
                                         <div class="col-3">
-                                            <h3 class="font-weight-bold">All Pathology Inquiries</h3>
+                                            <h3 class="font-weight-bold">All User's Feedbacks</h3>
                                         </div>
 
                                         <div class="col-9 d-flex justify-content-end align-items-center">
                                             <nav aria-label="Page navigation">
                                                 <ul class="pagination">
                                                     {{-- Previous Page Link --}}
-                                                    @if ($inquiries->onFirstPage())
+                                                    @if ($feedbacks->onFirstPage())
                                                     <li class="page-item disabled"><span class="page-link">Prev</span></li>
                                                     @else
-                                                    <li class="page-item"><a class="page-link" href="{{ $inquiries->previousPageUrl() }}">Prev</a></li>
+                                                    <li class="page-item"><a class="page-link" href="{{ $feedbacks->previousPageUrl() }}">Prev</a></li>
                                                     @endif
 
                                                     {{-- Pagination Links --}}
-                                                    @foreach ($inquiries->getUrlRange(1, $inquiries->lastPage()) as $page => $url)
-                                                    <li class="page-item {{ $inquiries->currentPage() == $page ? 'active' : '' }}">
+                                                    @foreach ($feedbacks->getUrlRange(1, $feedbacks->lastPage()) as $page => $url)
+                                                    <li class="page-item {{ $feedbacks->currentPage() == $page ? 'active' : '' }}">
                                                         <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                                     </li>
                                                     @endforeach
 
                                                     {{-- Next Page Link --}}
-                                                    @if ($inquiries->hasMorePages())
-                                                    <li class="page-item"><a class="page-link" href="{{ $inquiries->nextPageUrl() }}">Next</a></li>
+                                                    @if ($feedbacks->hasMorePages())
+                                                    <li class="page-item"><a class="page-link" href="{{ $feedbacks->nextPageUrl() }}">Next</a></li>
                                                     @else
                                                     <li class="page-item disabled"><span class="page-link">Next</span></li>
                                                     @endif
@@ -393,38 +393,39 @@
                                     </div>
 
 
-
                                     <table class="table table-stripped table-bordered mt-4">
                                         <thead>
                                             <tr>
                                                 <th>SL.</th>
+                                                <th>Clinic Type</th>
                                                 <th>Clinic Name</th>
-                                                <th>Patient Name</th>
-                                                <th>Patient Mobile</th>
-                                                <th>Patient Email</th>
-                                                <th>Inquiries</th>
+                                                <th>User Name</th>
+                                                <th>User Email</th>
+                                                <th>Ratings</th>
+                                                <th>Feedbacks</th>
                                                 <th>Delete</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            @foreach($inquiries as $inquiry)
+                                            @foreach($feedbacks as $feedback)
                                             <tr>
 
                                                 <td><b>{{$loop->iteration}}</b></td>
-                                                <td><b class="badge badge-primary" style="text-transform: capitalize;">{{$inquiry->clinic_name}}</b></td>
-                                                <td><b  style="text-transform: capitalize;">{{$inquiry->user_name}}</b></td>
-                                                <td><b>{{$inquiry->user_mobile}}</b></td>
-                                                <td><b>{{$inquiry->user_email}}</b></td>
+                                                <td><b class="badge badge-success" style="text-transform: capitalize;">{{$feedback->clinic_type}}</b></td>
+                                                <td><b class="badge badge-primary" style="text-transform: capitalize;">{{$feedback->clinic_name}}</b></td>
+                                                <td><b style="text-transform: capitalize;">{{$feedback->user_name}}</b></td>
+                                                <td><b>{{$feedback->user_email}}</b></td>
+                                                <td><b class="badge badge-danger">{{$feedback->rating}}/5</b></td>
 
 
 
-                                                <td><a href="" data-target="#myInquiryModal{{$inquiry->id}}" data-toggle="modal"
-                                                        class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
+                                                <td><a href="" data-target="#myInquiryModal{{$feedback->id}}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-heart text-danger"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
 
-                                                <td><a href="" data-target="#myDeleteModal{{$inquiry->id}}" data-toggle="modal"
+                                                <td><a href="" data-target="#myDeleteModal{{$feedback->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
@@ -454,17 +455,17 @@
 
 
                 <!-- Inquiry Modal -->
-                @foreach($inquiries as $inquiry)
-                <div class="modal fade" id="myInquiryModal{{$inquiry->id}}" tabindex="-1" role="dialog"
+                @foreach($feedbacks as $feedback)
+                <div class="modal fade" id="myInquiryModal{{$feedback->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myInquiryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
 
 
                             <div class="modal-header">
-                                <p style="font-size: 1.3rem; font-weight: 700; text-transform: capitalize;" class="modal-title"
-                                    id="myInquiryModalLabel"><i class="fa fa-hospital text-primary"
-                                        aria-hidden="true"></i> {{$inquiry->clinic_name}} OPD Inquiries</p>
+                                <p style="font-size: 1.13rem; font-weight: 700; text-transform: capitalize;" class="modal-title"
+                                    id="myInquiryModalLabel"><i class="fa fa-heart text-danger"
+                                        aria-hidden="true"></i> {{$feedback->clinic_name}}'s Feedback</p>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
                             </div>
@@ -472,9 +473,9 @@
 
 
                             <div class="modal-body">
-                                <h4><b style="font-weight: 700; text-transform: capitalize;">Patient Name: {{$inquiry->user_name}}</b></h4>
+                                <h4><b style="font-weight: 700; text-transform: capitalize;">User Name: {{$feedback->user_name}}</b></h4>
 
-                                <h4><b>Inquiry: {{$inquiry->user_inquiry}}</b></h4>
+                                <h4><b>Feedback: {{$feedback->feedback}}</b></h4>
                             </div>
 
                         </div>
@@ -485,13 +486,13 @@
 
 
                 <!-- Delete Modal -->
-                @foreach ($inquiries as $inquiry)
-                <div class="modal fade" id="myDeleteModal{{$inquiry->id}}" tabindex="-1" role="dialog"
+                @foreach ($feedbacks as $feedback)
+                <div class="modal fade" id="myDeleteModal{{$feedback->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myDeleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
 
-                            <form class="modal-body" action="{{route('superadmin.super-path-inquiry.delete', $inquiry->id)}}" method="post" enctype="multipart/form-data">
+                            <form class="modal-body" action="{{route('superadmin.feedback.delete', $feedback->id)}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
 

@@ -10,9 +10,11 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Superadmin\SuperAboutusController;
+use App\Http\Controllers\Superadmin\SuperAllFeedbacksController;
 use App\Http\Controllers\Superadmin\SuperAllOnlyDoctorHandleController;
 use App\Http\Controllers\Superadmin\SuperAllOPDHandleController;
 use App\Http\Controllers\Superadmin\SuperAllPathologyHandleController;
+use App\Http\Controllers\Superadmin\SuperAllPatientInquiryController;
 use App\Http\Controllers\Superadmin\SuperAllUserController;
 use App\Http\Controllers\Superadmin\SuperBlogController;
 use App\Http\Controllers\Superadmin\SuperCouponController;
@@ -344,10 +346,22 @@ Route::middleware('auth:web')->group(function () {
     // User's Inquiries Routes---------------------------------------------------------------------------------------------------------------------------------------->
     Route::get('/superadmin/super-user-inquiry', [SuperUserInquiryController::class, 'index']);
     Route::delete('/superadmin/super-user-inquiry/delete/{id}', [SuperUserInquiryController::class, 'delete'])->name('superadmin.super-user-inquiry.delete');
-
-
-
-
+    
+    
+    // All Patient Inquiries Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-opd-inquiry', [SuperAllPatientInquiryController::class, 'indexOPD']);
+    Route::delete('/superadmin/super-opd-inquiry/delete/{id}', [SuperAllPatientInquiryController::class, 'opdDelete'])->name('superadmin.super-opd-inquiry.delete');
+    
+    Route::get('/superadmin/super-path-inquiry', [SuperAllPatientInquiryController::class, 'indexPath']);
+    Route::delete('/superadmin/super-path-inquiry/delete/{id}', [SuperAllPatientInquiryController::class, 'pathDelete'])->name('superadmin.super-path-inquiry.delete');
+    
+    Route::get('/superadmin/super-doc-inquiry', [SuperAllPatientInquiryController::class, 'indexDoc']);
+    Route::delete('/superadmin/super-doc-inquiry/delete/{id}', [SuperAllPatientInquiryController::class, 'docDelete'])->name('superadmin.super-doc-inquiry.delete');
+    
+    
+    // All Patient Feedback Routes---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/super-all-feedback', [SuperAllFeedbacksController::class, 'index']);
+    Route::delete('/superadmin/super-all-feedback/delete/{id}', [SuperAllFeedbacksController::class, 'delete'])->name('superadmin.feedback.delete');
 
 
 

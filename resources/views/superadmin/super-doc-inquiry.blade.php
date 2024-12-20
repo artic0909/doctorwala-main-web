@@ -51,9 +51,6 @@
                     <i class="fa-solid fa-bars"></i>
                 </button>
 
-                <input type="search" id="search" placeholder="Search Here ........" name="search"
-                    class="form-control mx-4 w-100">
-
                 <ul class="navbar-nav navbar-nav-right">
 
                     <li class="nav-item nav-profile dropdown">
@@ -369,11 +366,26 @@
                                         <div class="col-9 d-flex justify-content-end align-items-center">
                                             <nav aria-label="Page navigation">
                                                 <ul class="pagination">
-                                                    <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                                    {{-- Previous Page Link --}}
+                                                    @if ($inquiries->onFirstPage())
+                                                    <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                                    @else
+                                                    <li class="page-item"><a class="page-link" href="{{ $inquiries->previousPageUrl() }}">Prev</a></li>
+                                                    @endif
+
+                                                    {{-- Pagination Links --}}
+                                                    @foreach ($inquiries->getUrlRange(1, $inquiries->lastPage()) as $page => $url)
+                                                    <li class="page-item {{ $inquiries->currentPage() == $page ? 'active' : '' }}">
+                                                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                                                    </li>
+                                                    @endforeach
+
+                                                    {{-- Next Page Link --}}
+                                                    @if ($inquiries->hasMorePages())
+                                                    <li class="page-item"><a class="page-link" href="{{ $inquiries->nextPageUrl() }}">Next</a></li>
+                                                    @else
+                                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                                    @endif
                                                 </ul>
                                             </nav>
                                         </div>
@@ -385,32 +397,38 @@
                                         <thead>
                                             <tr>
                                                 <th>SL.</th>
-                                                <th>Clinic Name</th>
-                                                <th>Contact Person</th>
-                                                <th>Email ID</th>
-                                                <th>Address</th>
-                                                <th>Inquiry</th>
+                                                <th>Doctor Name</th>
+                                                <th>Patient Name</th>
+                                                <th>Patient Mobile</th>
+                                                <th>Patient Email</th>
+                                                <th>Inquiries</th>
+                                                <th>Delete</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-
-
+                                            @foreach($inquiries as $inquiry)
                                             <tr>
 
-                                                <td>1</td>
-                                                <td>Life Line</td>
-                                                <td>Saklin Mustak</td>
-                                                <td>sm@gmail.com</td>
-                                                <td>Howrah, Ranihati, 711302</td>
+                                                <td><b>{{$loop->iteration}}</b></td>
+                                                <td><b class="badge badge-primary" style="text-transform: capitalize;">{{$inquiry->clinic_name}}</b></td>
+                                                <td><b  style="text-transform: capitalize;">{{$inquiry->user_name}}</b></td>
+                                                <td><b>{{$inquiry->user_mobile}}</b></td>
+                                                <td><b>{{$inquiry->user_email}}</b></td>
 
 
 
-                                                <td><a href="" data-target="#myInquiryModal" data-toggle="modal"
+                                                <td><a href="" data-target="#myInquiryModal{{$inquiry->id}}" data-toggle="modal"
                                                         class="ed-btn"><i class="fa-solid fa-file-medical text-primaryy"
                                                             style="font-size: 1.1rem;"></i></a></td>
 
+
+                                                <td><a href="" data-target="#myDeleteModal{{$inquiry->id}}" data-toggle="modal"
+                                                        class="ed-btn"><i class="fa-solid fa-trash-can text-danger"
+                                                            style="font-size: 1.1rem;"></i></a></td>
+
                                             </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
 
@@ -435,16 +453,17 @@
 
 
                 <!-- Inquiry Modal -->
-                <div class="modal fade" id="myInquiryModal" tabindex="-1" role="dialog"
+                @foreach($inquiries as $inquiry)
+                <div class="modal fade" id="myInquiryModal{{$inquiry->id}}" tabindex="-1" role="dialog"
                     aria-labelledby="myInquiryModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
 
                             <div class="modal-header">
-                                <p style="font-size: 1.3rem; font-weight: 700;" class="modal-title"
-                                    id="myInquiryModalLabel"><i class="fa fa-hospital text-primary"
-                                        aria-hidden="true"></i> Clinic Name Doctor Inquiries</p>
+                                <p style="font-size: 1.3rem; font-weight: 700; text-transform: capitalize;" class="modal-title"
+                                    id="myInquiryModalLabel"><i class="fa fa-user-doctor text-primary"
+                                        aria-hidden="true"></i> {{$inquiry->clinic_name}} OPD Inquiries</p>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
                             </div>
@@ -452,34 +471,49 @@
 
 
                             <div class="modal-body">
+                                <h4><b style="font-weight: 700; text-transform: capitalize;">Patient Name: {{$inquiry->user_name}}</b></h4>
 
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>SL.</th>
-                                            <th>Patient Name</th>
-                                            <th>Patient Mobile</th>
-                                            <th>Patient Email</th>
-                                            <th>Inquiries</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>01712345678</td>
-                                            <td>john.doe@example.com</td>
-                                            <td>How much is the consultation fee?</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <h4><b>Inquiry: {{$inquiry->user_inquiry}}</b></h4>
                             </div>
 
                         </div>
                     </div>
                 </div>
+                @endforeach
 
+
+
+                <!-- Delete Modal -->
+                @foreach ($inquiries as $inquiry)
+                <div class="modal fade" id="myDeleteModal{{$inquiry->id}}" tabindex="-1" role="dialog"
+                    aria-labelledby="myDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <form class="modal-body" action="{{route('superadmin.super-opd-inquiry.delete', $inquiry->id)}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                @method('DELETE')
+
+                                <div class="form-group d-flex flex-column align-items-center">
+                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
+
+                                    <h3 class="mt-3">Are You Sure ?</h3>
+
+                                    <p class="mt-2 text-center">Do you really want to delete these record? This Process
+                                        cannot be undone.</p>
+
+                                    <div class="btnss d-flex justify-content-around align-items-center w-100 mt-3">
+                                        <button type="button" class="btn btn-primary rounded w-50 mr-3"
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger rounded w-50">Confirm</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                @endforeach
 
 
 

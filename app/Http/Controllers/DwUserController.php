@@ -29,7 +29,7 @@ class DwUserController extends Controller
 
     private function generateCaptcha()
     {
-        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $chars = 'ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
         $captcha = '';
         for ($i = 0; $i < 6; $i++) {
             $captcha .= $chars[random_int(0, strlen($chars) - 1)];
