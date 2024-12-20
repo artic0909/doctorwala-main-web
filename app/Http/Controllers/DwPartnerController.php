@@ -9,7 +9,9 @@ use App\Models\DwPartnerModel;
 use App\Models\PartnerDoctorBannerModel;
 use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerPathologyBannerModel;
+use App\Models\SuperAboutusModel;
 use App\Models\SuperCouponModel;
+use App\Models\SuperOtherBannerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
 
@@ -24,10 +26,14 @@ class DwPartnerController extends Controller
     public function viewPartnerRegForm()
     {
 
+
+        $aboutDetails = SuperAboutusModel::get();
+        $otherBanners = SuperOtherBannerModel::get();
+
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
 
-        return view('partner-register', compact('captcha'));
+        return view('partner-register', compact('captcha', 'aboutDetails', 'otherBanners'));
     }
 
 
@@ -39,10 +45,13 @@ class DwPartnerController extends Controller
     public function partnerLoginFormView()
     {
 
+        $aboutDetails = SuperAboutusModel::get();
+        $otherBanners = SuperOtherBannerModel::get();
+
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
 
-        return view('partner-login', compact('captcha'));
+        return view('partner-login', compact('captcha', 'aboutDetails', 'otherBanners'));
     }
 
 
@@ -53,8 +62,12 @@ class DwPartnerController extends Controller
 
     public function partnerCouponCodeAddView()
     {
+
+        $aboutDetails = SuperAboutusModel::get();
+        $otherBanners = SuperOtherBannerModel::get();
+
         $partnerID = Auth::guard('partner')->user();
-        return view('payments', compact('partnerID'));
+        return view('payments', compact('partnerID', 'aboutDetails', 'otherBanners'));
     }
 
 

@@ -374,7 +374,7 @@
                                                     Coupon Image
                                                     <span class="text-danger">*</span></label>
                                                 <input type="file" class="form-control" id="coupon_image" name="coupon_image"
-                                                    style="height: 55px;">
+                                                    style="height: 55px;" required>
                                             </div>
 
 
@@ -386,7 +386,7 @@
                                                     Coupon Code
                                                     <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" id="coupon_code" name="coupon_code" placeholder="Enter Coupon Code (e.g- 1, 2, 3)"
-                                                    style="height: 55px;">
+                                                    style="height: 55px;" required>
                                             </div>
 
 
@@ -400,7 +400,7 @@
                                                         class="fa fa-indian-rupee text-primary" aria-hidden="true"></i>
                                                     Amount <span class="text-danger">*</span></label>
                                                 <input type="number" class="form-control" id="coupon_amount" name="coupon_amount" placeholder="Enter Coupon Amount"
-                                                    style="height: 55px;">
+                                                    style="height: 55px;" required>
                                             </div>
 
 
@@ -412,7 +412,7 @@
                                                     Opening Date</label>
                                                 <input type="date" class="form-control" id="coupon_start_date" name="coupon_start_date"
                                                     style="height: 55px;">
-                                                    <small class="mt-2 text-danger">If not provided then the opening date will be current date</small>
+                                                <small class="mt-2 text-danger" style="font-weight: 700;">If not provided then the opening date will be current date</small>
                                             </div>
 
 
@@ -424,7 +424,7 @@
                                                     Date
                                                     <span class="text-danger">*</span></label>
                                                 <input type="date" class="form-control" id="coupon_end_date" name="coupon_end_date"
-                                                    style="height: 55px;">
+                                                    style="height: 55px;" required>
                                             </div>
 
 
@@ -460,10 +460,70 @@
 
 
 
+                <!-- profile update success modal start -->
+                <div class="modal fade" id="couponAddSuccessModal" tabindex="-1" aria-labelledby="couponAddSuccessModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                                <h2 class="modal-title" id="couponAddSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                                <h4 class="text-primary">Coupon Added Successfully</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn p-2 btn-primary w-100" data-dismiss="modal">CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- profile update success modal end -->
+
+                <!-- profile update Unsuccess modal start -->
+                <div class="modal fade" id="couponAddUnsuccessModal" tabindex="-1" aria-labelledby="couponAddUnsuccessModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                                <h3 class="modal-title" id="couponAddUnsuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                                <h4 class="text-danger">Coupon Is Not Added!</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn p-2 btn-primary w-100" data-dismiss="modal">CLOSE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- profile update Unsuccess modal end -->
 
 
 
 
+                <!-- Include this script block below your modals -->
+                @if(session('success'))
+                <script>
+                    // Automatically trigger the success modal
+                    const successModal = new bootstrap.Modal(document.getElementById('couponAddSuccessModal'));
+                    successModal.show();
+                </script>
+                @endif
+
+                @if(session('error'))
+                <script>
+                    // Automatically trigger the error modal
+                    const errorModal = new bootstrap.Modal(document.getElementById('couponAddUnsuccessModal'));
+                    errorModal.show();
+                </script>
+                @endif
+
+
+                @if(session('success') || session('error'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const modalId = "{{ session('success') ? 'couponAddSuccessModal' : 'couponAddUnsuccessModal' }}";
+                        const modal = new bootstrap.Modal(document.getElementById(modalId));
+                        modal.show();
+                    });
+                </script>
+                @endif
 
 
 
@@ -526,6 +586,7 @@
     <script src="{{asset('../partner-assets/js/dashboard.js')}}"></script>
     <script src="{{asset('../partner-assets/js/Chart.roundedBarCharts.js')}}"></script>
     <!-- End custom js for this page-->
+
 </body>
 
 </html>

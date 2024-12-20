@@ -64,18 +64,19 @@
         <div class="row gx-0">
             <div class="col-md-6 text-center text-lg-start mb-2 mb-lg-0">
                 <div class="d-inline-flex align-items-center">
-                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon - Tues : 6.00
-                        am - 10.00 pm, Sunday Closed </small>
+                    <small class="py-2"><i class="far fa-clock text-primary me-2"></i>Opening Hours: Mon To Sun : 24/7 Available</small>
                 </div>
             </div>
             <div class="col-md-6 text-center text-lg-end">
                 <div class="position-relative d-inline-flex align-items-center bg-primary text-white top-shape px-5">
+                    @foreach($aboutDetails as $aboutDetail)
                     <div class="me-3 pe-3 border-end py-2">
-                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i>info@example.com</p>
+                        <p class="m-0"><i class="fa fa-envelope-open me-2"></i><a href="mailto:{{$aboutDetail->email}}" class="text-white">{{$aboutDetail->email}}</a></p>
                     </div>
                     <div class="py-2">
-                        <p class="m-0"><i class="fa fa-phone me-2"></i>+012 345 6789</p>
+                        <p class="m-0"><i class="fa fa-phone me-2"></i><a href="tel:{{$aboutDetail->number}}" class="text-white">+91-{{$aboutDetail->number}}</a></p>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -83,58 +84,6 @@
     <!-- Topbar End -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="/" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link ">Home</a>
-                <a href="/about" class="nav-item nav-link ">About</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
-                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
-                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
-                    </div>
-                </div>
-                <a href="/blog" class="nav-item nav-link ">Blogs</a>
-
-                <a href="/contact" class="nav-item nav-link">Contact</a>
-                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
-            </div>
-            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                    class="fa fa-search"></i></button> -->
-
-
-            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
-
-
-
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a> -->
-
-        </div>
-    </nav>
-    <!-- Navbar End -->
 
 
 
@@ -196,7 +145,7 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn"
                         data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Make Payments</h1>
-                        
+
                         <form action="{{route('partner.coupon.code.add')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row g-3">
@@ -248,8 +197,7 @@
 
 
                                 <div class="col-12">
-                                    <button class="btn btn-dark w-100 py-3" type="submit">Cotinue With Code</button>
-                                    <!-- it goto partner login page -->
+                                    <button id="submitBtn" class="btn btn-dark w-100 py-3" type="submit">Cotinue With Code</button>
                                 </div>
 
 
@@ -487,6 +435,21 @@
                             document.getElementById('coupon_amount').value = coupon.coupon_amount;
                             document.getElementById('coupon_start_date').value = coupon.coupon_start_date;
                             document.getElementById('coupon_end_date').value = coupon.coupon_end_date;
+
+                            // Get current date in YYYY-MM-DD format (ignores time)
+                            const currentDate = new Date().toISOString().split('T')[0];
+                            const couponEndDate = new Date(coupon.coupon_end_date).toISOString().split('T')[0];
+
+                            const submitButton = document.getElementById('submitBtn');
+
+                            // If the coupon's end date is today or in the future, enable the button
+                            if (couponEndDate > currentDate) {
+                                submitButton.disabled = false; // Enable button
+                                submitButton.textContent = 'Continue With Code';
+                            } else {
+                                submitButton.disabled = true; // Disable button
+                                submitButton.textContent = 'Coupon is expired';
+                            }
                         } else {
                             alert(data.message);
                             document.getElementById('coupon_amount').value = '';
@@ -500,6 +463,8 @@
             }
         });
     </script>
+
+
 
 </body>
 

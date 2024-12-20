@@ -32,51 +32,45 @@ class SuperCouponController extends Controller
     {
         $validated = $request->validate([
             'coupon_image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'coupon_code' => 'required|string',
+            'coupon_code' => 'required|string|unique:super_coupon_models,coupon_code',
             'coupon_amount' => 'required|string',
-            'coupon_start_date' => 'nullable|string', // Set automatically if not provided
-            'coupon_end_date' => 'nullable|string|date|after_or_equal:coupon_start_date', // Ensure end date is after start date
+            'coupon_start_date' => 'nullable|string',
+            'coupon_end_date' => 'nullable|string|date|after_or_equal:coupon_start_date',
         ]);
 
         $filePath = null;
 
-
-        if ($request->hasFile('coupon_image')) {
-            try {
+        try {
+            if ($request->hasFile('coupon_image')) {
                 $file = $request->file('coupon_image');
                 $fileName = time() . '_' . $file->getClientOriginalName();
                 $filePath = $file->storeAs('uploads/coupon-image', $fileName, 'public');
-            } catch (\Exception $e) {
-                return back()->withErrors(['coupon_image' => 'File upload failed. Please try again.']);
             }
+
+            $couponCode = $request->input('coupon_code');
+            if ($couponCode && !str_starts_with($couponCode, 'DWCPN')) {
+                $couponCode = 'DWCPN' . $couponCode;
+            }
+
+            $couponStartDate = $request->input('coupon_start_date') ?: now()->toDateString();
+            $status = 'Active';
+            if ($request->input('coupon_end_date') && now()->greaterThan($request->input('coupon_end_date'))) {
+                $status = 'Inactive';
+            }
+
+            SuperCouponModel::create([
+                'coupon_image' => $filePath,
+                'coupon_code' => $couponCode,
+                'coupon_amount' => $request->input('coupon_amount'),
+                'coupon_start_date' => $couponStartDate,
+                'coupon_end_date' => $request->input('coupon_end_date'),
+                'status' => $status,
+            ]);
+
+            return redirect()->back()->with('success', true);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', true);
         }
-
-
-        $couponCode = $request->input('coupon_code');
-        if ($couponCode && !str_starts_with($couponCode, 'DWCPN')) {
-            $couponCode = 'DWCPN' . $couponCode;
-        }
-
-
-        $couponStartDate = $request->input('coupon_start_date') ?: now()->toDateString();
-
-
-        $status = 'Active';
-        if ($request->input('coupon_end_date') && now()->greaterThan($request->input('coupon_end_date'))) {
-            $status = 'Inactive';
-        }
-
-
-        SuperCouponModel::create([
-            'coupon_image' => $filePath,
-            'coupon_code' => $couponCode,
-            'coupon_amount' => $request->input('coupon_amount'),
-            'coupon_start_date' => $couponStartDate,
-            'coupon_end_date' => $request->input('coupon_end_date'),
-            'status' => $status,
-        ]);
-
-        return redirect('/superadmin/super-show-coupons')->with('success', 'Coupon added successfully!');
     }
 
     public function updateStatus(Request $request, $id)
@@ -85,21 +79,21 @@ class SuperCouponController extends Controller
             'status' => 'required|string',
         ]);
 
-        
+
         $couponInfo = SuperCouponModel::findOrFail($id);
         $couponInfo->status = $request->input('status');
         $couponInfo->save();
 
-       
+
         if ($request->input('status') === 'Inactive') {
-           
+
             $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
 
             foreach ($couponHolders as $holder) {
-               
+
                 DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Inactive']);
 
-                
+
                 PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
                     ->update(['status' => 'Inactive']);
                 PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
@@ -111,10 +105,10 @@ class SuperCouponController extends Controller
             $couponHolders = CouponHolderModel::where('coupon_code', $couponInfo->coupon_code)->get();
 
             foreach ($couponHolders as $holder) {
-               
+
                 DwPartnerModel::where('id', $holder->currently_loggedin_partner_id)->update(['status' => 'Active']);
 
-                
+
                 PartnerOPDContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)
                     ->update(['status' => 'Active']);
                 PartnerPathologyContactModel::where('currently_loggedin_partner_id', $holder->currently_loggedin_partner_id)

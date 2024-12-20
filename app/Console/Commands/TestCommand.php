@@ -2,13 +2,10 @@
 
 namespace App\Console\Commands;
 
-
+use App\Http\Controllers\Superadmin\SuperCouponController;
 use App\Models\SuperCouponModel;
-use App\Models\CouponHolderModel;
-use App\Models\DwPartnerModel;
-use App\Models\PartnerOPDContactModel;
-use App\Models\PartnerPathologyContactModel;
-use App\Models\PartnerDoctorContactModel;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class TestCommand extends Command
@@ -25,34 +22,36 @@ class TestCommand extends Command
      *
      * @var string
      */
-    protected $description = 'is this working?';
+    protected $description = 'Coupon Status Update';
 
     /**
      * Execute the console command.
      */
+
+
     public function handle()
     {
-        $coupons = SuperCouponModel::orderBy('id', 'desc')->get();
-
-        $partnerId = DwPartnerModel::where('id', 24)->first()->id;
+        $controller = app(SuperCouponController::class);
+        $currentDate = Carbon::now()->toDateString();
+        $coupons = SuperCouponModel::all();
 
         foreach ($coupons as $coupon) {
-            $coupon->status = $coupon->status == 'Active' ? 'Inactive' : 'Active';
-            $coupon->save();
-
-            $couponHolders = CouponHolderModel::where('coupon_code', $coupon->coupon_code)
-                ->where('currently_loggedin_partner_id', $partnerId)
-                ->get();
-
-            foreach ($couponHolders as $holder) {
-                $partner = DwPartnerModel::find($holder->partner_id);
-                if ($partner) {
-                    $partner->status = $coupon->status;
-                    $partner->save();
+            
+            if ($coupon->coupon_end_date && $coupon->coupon_end_date <= $currentDate) {
+               
+                if ($coupon->status !== 'Inactive') {
+                    $request = new Request(['status' => 'Inactive']);
+                    $controller->updateStatus($request, $coupon->id);
+                    $this->info("Coupon ID {$coupon->id} has been set to Inactive due to end date.");
+                }
+            } else {
+                
+                if ($coupon->status !== 'Active') {
+                    $request = new Request(['status' => 'Active']);
+                    $controller->updateStatus($request, $coupon->id);
+                    $this->info("Coupon ID {$coupon->id} status set to Active.");
                 }
             }
-
-            $this->info('Coupon and related partner statuses updated successfully!');
         }
     }
 }
