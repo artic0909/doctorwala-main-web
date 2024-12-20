@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\PartnerAllOPDDoctorModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\PartnerDoctorContactModel;
+use App\Models\PartnerAllPathologyTestModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerPathologyContactModel;
 use App\Models\SuperAboutusModel;
@@ -24,6 +26,9 @@ class ProfileEditController extends Controller
     public function userProfileEditWithCurrentUserDetails()
     {
 
+        $specialists = PartnerAllOPDDoctorModel::get();
+        $types = PartnerAllPathologyTestModel::get();
+
         $aboutDetails = SuperAboutusModel::get();
         $homeBanners = SuperHomeBannerModel::get();
     
@@ -32,7 +37,7 @@ class ProfileEditController extends Controller
         $docs = PartnerDoctorContactModel::with('banner')->get();
 
         $user = Auth::guard('dwuser')->user();
-        return view('index', compact('user', 'aboutDetails', 'homeBanners', 'opds', 'paths', 'docs'));
+        return view('index', compact('user', 'aboutDetails', 'homeBanners', 'opds', 'paths', 'docs', 'specialists', 'types'));
     }
 
 

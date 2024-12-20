@@ -492,6 +492,9 @@
                         <h3 class="text-white mb-3">Search For OPD</h3>
                         <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
                             <option selected>Select Specialist</option>
+                            @foreach($specialists as $specialist)
+                            <option style="text-transform: capitalize;" value="{{$specialist->doctor_specialist}}">{{$specialist->doctor_specialist}}</option>
+                            @endforeach
 
                         </select>
                         <a class="btn btn-light" href=""><i class="fa fa-user-doctor" aria-hidden="true"></i> Search OPD</a>
@@ -504,6 +507,10 @@
                         <h3 class="text-white mb-3">Search For Pathology</h3>
                         <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
                             <option selected>Select Type</option>
+
+                            @foreach($types as $type)
+                            <option style="text-transform: capitalize;" value="{{$type->test_type}}">{{$type->test_type}}</option>
+                            @endforeach
                         </select>
                         <a class="btn btn-light" href=""><i class="fa fa-syringe" aria-hidden="true"></i> Search Pathology</a>
                     </div>

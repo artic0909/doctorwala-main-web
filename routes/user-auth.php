@@ -63,6 +63,10 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     Route::get('/dw/doctor', [UserAllDoctorHandleController::class, 'index'])->name('dw.doctor');
     Route::get('/dw/pathology', [UserAllPathologyHandleController::class, 'index'])->name('dw.pathology');
 
+    Route::get('/dw/opd/search-specialist', [FrontHomePageController::class, 'opdContactFetchBySearchDoctorSpaciality'])
+    ->name('opd.search.doctor.specialist');
+
+
 
     // single opd ------------------------------------------------->
     Route::get('/dw/opd/{id}', [UserAllOPDHandleController::class, 'singleOPDView'])
