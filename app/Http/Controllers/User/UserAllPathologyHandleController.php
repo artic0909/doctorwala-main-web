@@ -5,8 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\PartnerPathologyContactModel;
 use App\Models\PartnerAllPathologyTestModel;
-use App\Models\PartnerOPDContactModel;
-use App\Models\PartnerAllOPDDoctorModel;
 use App\Models\PartnerFeedback;
 use App\Models\PartnerGalleryModel;
 use App\Models\PartnerPatientInquiry;
@@ -25,12 +23,45 @@ class UserAllPathologyHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
+        $states = PartnerPathologyContactModel::distinct()->pluck('clinic_state')->toArray();
+
+        $cities = PartnerPathologyContactModel::distinct()->pluck('clinic_city')->toArray();
+
         $paths = PartnerPathologyContactModel::with('banner')
             ->where('status', 'active')
             ->paginate(6);
 
-        return view('pathology', compact('aboutDetails', 'user', 'paths'));
+        return view('pathology', compact('aboutDetails', 'user', 'paths', 'states', 'cities'));
     }
+
+
+
+
+    public function pathFilterSearch(Request $request)
+    {
+        $user = Auth::guard('dwuser')->user();
+        $aboutDetails = SuperAboutusModel::get();
+        $states = PartnerPathologyContactModel::distinct()->pluck('clinic_state')->toArray();
+        $cities = PartnerPathologyContactModel::distinct()->pluck('clinic_city')->toArray();
+
+        // Apply filters
+        $paths = PartnerPathologyContactModel::with('banner')
+            ->where('status', 'active')
+            ->when($request->state, function ($query) use ($request) {
+                return $query->where('clinic_state', $request->state);
+            })
+            ->when($request->city, function ($query) use ($request) {
+                return $query->where('clinic_city', $request->city);
+            })
+            ->paginate(6);
+
+        return view('pathology', compact('aboutDetails', 'user', 'paths', 'states', 'cities'));
+    }
+
+
+
+
+
 
 
 

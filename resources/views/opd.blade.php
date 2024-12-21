@@ -466,54 +466,48 @@
                     <div class="bg-primary my-search-bar2 d-flex flex-column p-5" style="height: 200px;">
                         <h3 class="text-white mb-3">SORT RESULTS BY</h3>
 
+                        <form action="{{ route('opd.filter.search') }}" method="GET">
+                            <div class="row g-3">
+                                <!-- State Dropdown -->
+                                <div class="col-md-4">
+                                    <select name="state" class="form-select my-select bg-light border-0 mb-3" style="height: 40px;">
+                                        <option selected>Select State</option>
+                                        @foreach($states as $state)
+                                        <option style="text-transform: capitalize;" value="{{ $state }}">{{ $state }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                        <div class="row g-3">
+                                <!-- City Dropdown -->
+                                <div class="col-md-4">
+                                    <select name="city" class="form-select my-select bg-light border-0 mb-3" style="height: 40px;">
+                                        <option selected>Select City</option>
+                                        @foreach($cities as $city)
+                                        <option style="text-transform: capitalize;" value="{{ $city }}">{{ $city }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-
-                            <div class="col-md-4">
-                                <select class="form-select my-select bg-light border-0 mb-3" style="height: 40px;">
-                                    <option selected>Select State</option>
-                                    <option value="">OPD 1</option>
-                                    <option value="">OPD 2</option>
-                                    <option value="">OPD 3</option>
-                                </select>
+                                <!-- Search Button -->
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-dark my-search-button">Search OPD</button>
+                                </div>
                             </div>
-
-
-
-
-
-                            <div class="col-md-4">
-                                <select class="form-select my-select bg-light border-0 mb-3" style="height: 40px;">
-                                    <option selected>Select City</option>
-                                    <option value="">OPD 1</option>
-                                    <option value="">OPD 2</option>
-                                    <option value="">OPD 3</option>
-                                </select>
-                            </div>
-
-
-
-
-
-
-                            <div class="col-md-4">
-                                <a class="btn btn-dark my-search-button" href="">Search OPD</a>
-                            </div>
-
-
-
-                        </div>
+                        </form>
                     </div>
-
-
-
-
-
-
                 </div>
+
+
+
+
+
+
+
             </div>
+
+
         </div>
+    </div>
     </div>
     <!-- Searchbar End -->
 

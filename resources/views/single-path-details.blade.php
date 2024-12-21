@@ -526,6 +526,10 @@
                                 <strong><i class="fa fa-map-pin me-2"></i>Landmark: {{$path->clinic_landmark}}</strong>
                             </p>
 
+                            <p class="landmark_d d-texts txt-cap">
+                                <strong><i class="fa fa-globe me-2"></i>State/City: {{$path->clinic_state}}-{{$path->clinic_city}}</strong>
+                            </p>
+
                             <p class="contact_d d-texts">
                                 <strong><i class="fa fa-phone me-2"></i>Phone: +91-<a href="mailto:{{$path->clinic_mobile_number}}" class="a-not">{{$path->clinic_mobile_number}}</a></strong>
                             </p>

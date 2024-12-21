@@ -23,12 +23,53 @@ class UserAllDoctorHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
+        $states = PartnerDoctorContactModel::distinct()->pluck('partner_doctor_state')->toArray();
+
+        $cities = PartnerDoctorContactModel::distinct()->pluck('partner_doctor_city')->toArray();
+
         $docs = PartnerDoctorContactModel::with('banner')
             ->where('status', 'active')
             ->paginate(6);
 
-        return view('doctor', compact('aboutDetails', 'user', 'docs'));
+        return view('doctor', compact('aboutDetails', 'user', 'docs', 'states', 'cities'));
     }
+
+
+
+
+
+
+
+
+    public function docFilterSearch(Request $request)
+    {
+        $user = Auth::guard('dwuser')->user();
+        $aboutDetails = SuperAboutusModel::get();
+        $states = PartnerDoctorContactModel::distinct()->pluck('partner_doctor_state')->toArray();
+        $cities = PartnerDoctorContactModel::distinct()->pluck('partner_doctor_city')->toArray();
+
+        // Apply filters
+        $docs = PartnerDoctorContactModel::with('banner')
+            ->where('status', 'active')
+            ->when($request->state, function ($query) use ($request) {
+                return $query->where('partner_doctor_state', $request->state);
+            })
+            ->when($request->city, function ($query) use ($request) {
+                return $query->where('partner_doctor_city', $request->city);
+            })
+            ->paginate(6);
+
+        return view('doctor', compact('aboutDetails', 'user', 'docs', 'states', 'cities'));
+    }
+
+
+
+
+
+
+
+
+
 
 
 

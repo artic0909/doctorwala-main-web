@@ -23,16 +23,16 @@ Route::middleware('guest:dwuser')->group(function () {
 
 
 
-    // Route for showing the email input form (user-otp)
+    // Route for showing the email input form (user-otp)---------------------------------------------------------------------------------------------------------------->
     Route::get('/user-otp', [DwUserOTPController::class, 'userLoginWithOTPView'])->name('user-otp.view');
 
-    // Route for showing the OTP verification form
+    // Route for showing the OTP verification form---------------------------------------------------------------------------------------------------------------->
     Route::get('/user-otp-verify', [DwUserOTPController::class, 'userLoginWithOTPVerifyView'])->name('user-otp.verify');
 
-    // Route to send OTP to the email
+    // Route to send OTP to the email---------------------------------------------------------------------------------------------------------------->
     Route::post('/user-send-otp', [DwUserOTPController::class, 'sendOTP'])->name('user.send.otp');
 
-    // Route to verify the OTP
+    // Route to verify the OTP---------------------------------------------------------------------------------------------------------------->
     Route::post('/user-verify-otp', [DwUserOTPController::class, 'verifyOTP'])->name('user.verify.otp');
 });
 
@@ -104,14 +104,23 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     // ========================================== User Restricted Routes End =====================================
     // ===========================================================================================================
 
+    // OPD Filter Search---------------------------------------------------------------------------------------------------------------->
+    Route::get('dw/opd/search', [UserAllOPDHandleController::class, 'opdFilterSearch'])->name('opd.filter.search');
+    
+    // OPD Filter Search---------------------------------------------------------------------------------------------------------------->
+    Route::get('dw/pathology/search', [UserAllPathologyHandleController::class, 'pathFilterSearch'])->name('path.filter.search');
 
-    // Route to show the profile edit page
+    // OPD Filter Search---------------------------------------------------------------------------------------------------------------->
+    Route::get('dw/doctor/search', [UserAllDoctorHandleController::class, 'docFilterSearch'])->name('doc.filter.search');
+
+
+    // Route to show the profile edit page---------------------------------------------------------------------------------------------------------------->
     Route::get('/dw', [ProfileEditController::class, 'userProfileEditWithCurrentUserDetails']);
 
-    // Route to update the profile details
+    // Route to update the profile details---------------------------------------------------------------------------------------------------------------->
     Route::post('/dw/user-profile-update', [ProfileEditController::class, 'updateProfile'])->name('user.profile.update');
 
-    // Route to update the password
+    // Route to update the password---------------------------------------------------------------------------------------------------------------->
     Route::post('/dw/user-password-update', [ProfileEditController::class, 'updatePassword'])->name('user.password.update');
 
 

@@ -24,12 +24,39 @@ class UserAllOPDHandleController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $user = Auth::guard('dwuser')->user();
 
+        $states = PartnerOPDContactModel::distinct()->pluck('clinic_state')->toArray();
+
+        $cities = PartnerOPDContactModel::distinct()->pluck('clinic_city')->toArray();
+
         $opds = PartnerOPDContactModel::with('banner')
             ->where('status', 'active')
             ->paginate(6);
 
-        return view('opd', compact('aboutDetails', 'user', 'opds'));
+        return view('opd', compact('aboutDetails', 'user', 'opds', 'states', 'cities'));
     }
+
+
+    public function opdFilterSearch(Request $request)
+    {
+        $user = Auth::guard('dwuser')->user();
+        $aboutDetails = SuperAboutusModel::get();
+        $states = PartnerOPDContactModel::distinct()->pluck('clinic_state')->toArray();
+        $cities = PartnerOPDContactModel::distinct()->pluck('clinic_city')->toArray();
+
+        // Apply filters
+        $opds = PartnerOPDContactModel::with('banner')
+            ->where('status', 'active')
+            ->when($request->state, function ($query) use ($request) {
+                return $query->where('clinic_state', $request->state);
+            })
+            ->when($request->city, function ($query) use ($request) {
+                return $query->where('clinic_city', $request->city);
+            })
+            ->paginate(6);
+
+        return view('opd', compact('aboutDetails', 'user', 'opds', 'states', 'cities'));
+    }
+
 
 
 

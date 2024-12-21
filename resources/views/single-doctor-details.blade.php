@@ -512,6 +512,10 @@
                                 <strong><i class="fa fa-map-pin me-2"></i>Landmark: {{$doc->partner_doctor_landmark}}</strong>
                             </p>
 
+                            <p class="landmark_d d-texts txt-cap">
+                                <strong><i class="fa fa-globe me-2"></i>State/City: {{$doc->partner_doctor_state}}-{{$doc->partner_doctor_city}}</strong>
+                            </p>
+
                             <p class="contact_d d-texts">
                                 <strong><i class="fa fa-phone me-2"></i>Phone: +91-{{$doc->partner_doctor_mobile}}</strong>
                             </p>
