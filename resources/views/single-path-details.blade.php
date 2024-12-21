@@ -1397,7 +1397,20 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @guest
+                    <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @endguest
+
+                    @auth
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <a class="btn btn-dark btn-lg rounded me-2" :href="route('user.logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+                    @endauth
                 </div>
 
 
@@ -1414,10 +1427,14 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
-    <a href="partner-register.html" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+    @guest
+    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
+    @endguest
+    @auth
+    @endauth
 
 
 
@@ -1455,24 +1472,23 @@
     <script src="{{asset('../js/main.js')}}"></script>
 
     <script>
-        
         document.querySelectorAll('.rating-a').forEach(function(ratingLink) {
             ratingLink.addEventListener('click', function() {
-                
+
                 const rating = this.getAttribute('data-rating');
 
-               
+
                 document.querySelectorAll('.rating-a').forEach(function(link) {
-                    link.classList.remove('selected'); 
+                    link.classList.remove('selected');
                 });
 
-               
+
                 this.classList.add('selected');
 
-                
+
                 document.getElementById('user-rating').textContent = rating;
 
-             
+
                 document.getElementById('rating').value = rating;
             });
         });

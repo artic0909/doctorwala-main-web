@@ -64,7 +64,7 @@ Route::middleware(['auth:dwuser', 'verified'])->group(function () {
     Route::get('/dw/pathology', [UserAllPathologyHandleController::class, 'index'])->name('dw.pathology');
 
     Route::get('/dw/opd/search-specialist', [FrontHomePageController::class, 'opdContactFetchBySearchDoctorSpaciality'])
-    ->name('opd.search.doctor.specialist');
+    ->name('opd.search.doctor.specialist1');
 
 
 

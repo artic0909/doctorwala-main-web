@@ -49,5 +49,7 @@ Route::get('/privacy-policy', [FrontPrivacyPolicyPageController::class, 'index']
 // ========================================== Front Unrestricted Routes End ==================================
 // ===========================================================================================================
 
+Route::get('/opd/search-specialist', [FrontHomePageController::class, 'opdContactFetchBySearchDoctorSpaciality'])
+    ->name('opd.search.doctor.specialist');
 
-
+Route::get('/global-search', [FrontHomePageController::class, 'globalSearch'])->name('global.search');

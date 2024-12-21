@@ -478,41 +478,56 @@
     <div class="container-fluid banner mb-5">
         <div class="container">
             <div class="row gx-2">
+
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
                     <div class="bg-primary d-flex flex-column p-5 searchBanner searchBanner1" style="height: 230px;">
                         <h3 class="text-white mb-3">Search For ALL</h3>
                         <div class="d-flex justify-content-between text-white mb-3">
-                            <input type="text" class="form-control border-0" placeholder="Search for Doctor/Path/OPD">
+                            <input type="text" id="globalSearchInput" class="form-control border-0" placeholder="Search for Doctor/Path/OPD">
                         </div>
-                        <a class="btn btn-light" href=""><i class="fa fa-search" aria-hidden="true"></i> Search Now</a>
+                        <button id="globalSearchButton" class="btn btn-light">
+                            <i class="fa fa-search" aria-hidden="true"></i> Search Now
+                        </button>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
                     <div class="bg-dark2 d-flex flex-column p-5 searchBanner searchBanner2" style="height: 230px;">
                         <h3 class="text-white mb-3">Search For OPD</h3>
-                        <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
+                        <select id="specialistDropdown" class="form-select bg-light border-0 mb-3" style="height: 40px;">
                             <option selected>Select Specialist</option>
                             @foreach($specialists as $specialist)
-                            <option style="text-transform: capitalize;" value="{{$specialist->doctor_specialist}}">{{$specialist->doctor_specialist}}</option>
+                            <option style="text-transform: capitalize;" value="{{ $specialist }}">
+                                {{ ucfirst($specialist) }}
+                            </option>
                             @endforeach
-
                         </select>
-                        <a class="btn btn-light" href=""><i class="fa fa-user-doctor" aria-hidden="true"></i> Search OPD</a>
+                        <button id="searchOpdButton" class="btn btn-light">
+                            <i class="fa fa-user-doctor" aria-hidden="true"></i> Search OPD
+                        </button>
                     </div>
                 </div>
+
+
+
 
 
                 <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
                     <div class="bg-primary d-flex flex-column p-5 searchBanner searchBanner3" style="height: 230px;">
                         <h3 class="text-white mb-3">Search For Pathology</h3>
-                        <select class="form-select bg-light border-0 mb-3" style="height: 40px;">
+                        <select id="pathologyDropdown" class="form-select bg-light border-0 mb-3" style="height: 40px;">
                             <option selected>Select Type</option>
-
                             @foreach($types as $type)
-                            <option style="text-transform: capitalize;" value="{{$type->test_type}}">{{$type->test_type}}</option>
+                            <option style="text-transform: capitalize;" value="{{ $type }}">
+                                {{ ucfirst($type) }}
+                            </option>
                             @endforeach
                         </select>
-                        <a class="btn btn-light" href=""><i class="fa fa-syringe" aria-hidden="true"></i> Search Pathology</a>
+                        <button id="searchPathologyButton" class="btn btn-light">
+                            <i class="fa fa-syringe" aria-hidden="true"></i> Search Pathology
+                        </button>
                     </div>
                 </div>
 
@@ -525,6 +540,19 @@
 
 
 
+
+    <div class="container">
+        <div id="opdPathBothResultsShowIFsearchOPDshowOPDIFSearchPathShowPath" class="row g-4 py-5">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div id="globalResultsContainer" class="row g-4 py-5">
+            <!-- Results will be displayed here -->
+        </div>
+    </div>
 
 
 
@@ -917,111 +945,6 @@
                         @endforeach
 
 
-
-
-                        <!-- Card 1 -->
-                        @foreach($docs as $doc)
-                        <div class="card mx-2" style="min-width: 300px;">
-                            @if($doc->banner && $doc->banner->doctorbanner)
-                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @else
-                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @endif
-                            <div class="card-body">
-                                <a href="" class="text-decoration-none my-dd">
-                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-
-
-                        <!-- Card 1 -->
-                        @foreach($docs as $doc)
-                        <div class="card mx-2" style="min-width: 300px;">
-                            @if($doc->banner && $doc->banner->doctorbanner)
-                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @else
-                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @endif
-                            <div class="card-body">
-                                <a href="" class="text-decoration-none my-dd">
-                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-
-
-
-                        <!-- Card 1 -->
-                        @foreach($docs as $doc)
-                        <div class="card mx-2" style="min-width: 300px;">
-                            @if($doc->banner && $doc->banner->doctorbanner)
-                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @else
-                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @endif
-                            <div class="card-body">
-                                <a href="" class="text-decoration-none my-dd">
-                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-
-
-
-                        <!-- Card 1 -->
-                        @foreach($docs as $doc)
-                        <div class="card mx-2" style="min-width: 300px;">
-                            @if($doc->banner && $doc->banner->doctorbanner)
-                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @else
-                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @endif
-                            <div class="card-body">
-                                <a href="" class="text-decoration-none my-dd">
-                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-
-
-
-
-                        <!-- Card 1 -->
-                        @foreach($docs as $doc)
-                        <div class="card mx-2" style="min-width: 300px;">
-                            @if($doc->banner && $doc->banner->doctorbanner)
-                            <img src="{{ asset('storage/' . $doc->banner->doctorbanner) }}" class="card-img-top" alt="Service" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @else
-                            <img src="https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=" class="card-img-top" alt="Default Image" style="object-fit: contain; height: 298px; width: 298px; background-color: white;">
-                            @endif
-                            <div class="card-body">
-                                <a href="" class="text-decoration-none my-dd">
-                                    <h5 class="card-title" style="text-transform: capitalize;">{{$doc->partner_doctor_name}}</h5>
-                                    <p class="card-text text-primary ppp" style="font-weight: 700; text-transform: capitalize;">{{$doc->partner_doctor_city}}, {{$doc->partner_doctor_landmark}}, {{$doc->partner_doctor_pincode}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        @endforeach
-
-
-
                     </div>
                 </div>
             </div>
@@ -1298,6 +1221,120 @@
     <!-- Template Javascript -->
     <script src="{{asset('../js/main.js')}}"></script>
     <script src="{{asset('../js/cards-scroll.js')}}"></script>
+    <script src="{{asset('../js/global-search.js')}}"></script>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const specialistDropdown = document.querySelector('#specialistDropdown');
+            const pathologyDropdown = document.querySelector('#pathologyDropdown');
+            const searchOpdButton = document.querySelector('#searchOpdButton');
+            const searchPathologyButton = document.querySelector('#searchPathologyButton');
+            const resultsContainer = document.querySelector('#opdPathBothResultsShowIFsearchOPDshowOPDIFSearchPathShowPath');
+
+            // Function to render results
+            const renderResults = (results, type) => {
+                results.forEach(item => {
+                    const imageUrl = item.banner && (type === 'OPD' ? item.banner.opdbanner : item.banner.pathologybanner) ?
+                        `/storage/${type === 'OPD' ? item.banner.opdbanner : item.banner.pathologybanner}` :
+                        'https://media.istockphoto.com/id/1222357475/vector/image-preview-icon-picture-placeholder-for-website-or-ui-ux-design-vector-illustration.jpg?s=612x612&w=0&k=20&c=KuCo-dRBYV7nz2gbk4J9w1WtTAgpTdznHu55W9FjimE=';
+
+                    const name = type === 'OPD' ? item.clinic_name : item.clinic_name;
+                    const address = type === 'OPD' ? item.clinic_address : item.clinic_address;
+                    const detailUrl = type === 'OPD' ? `/dw/opd/${item.id}` : `/dw/pathology/${item.id}`;
+
+                    resultsContainer.innerHTML += `
+                <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+                    <div class="team-item">
+                        <div class="position-relative rounded-top" style="z-index: 1;">
+                            <img class="img-fluid rounded-top w-100" src="${imageUrl}" alt="" style="border: 1px solid #ddd;">
+                            <div class="position-absolute top-100 start-50 translate-middle bg-light rounded p-2 d-flex">
+                                <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-twitter fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-facebook-f fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i class="fa-solid fa-location-dot"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="#"><i class="fab fa-instagram fw-normal"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-text position-relative bg-light text-start rounded-bottom p-4 pt-5">
+                            <h4 class="mb-2">
+                                <a href="${detailUrl}" style="text-decoration: none; text-transform: capitalize;" class="text-dark">
+                                    ${name}
+                                </a>
+                            </h4>
+                            <p class="text-primary mb-2">
+                                <a href="${detailUrl}" style="text-decoration: none; text-transform: capitalize;" class="text-primary">
+                                    ${address}
+                                </a>
+                            </p>
+                            <a href="${detailUrl}" class="btn btn-primary p-2 w-100" style="text-decoration: none;">OPEN NOW</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+                });
+            };
+
+            // Search OPD
+            searchOpdButton.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const selectedSpecialist = specialistDropdown.value;
+
+                if (selectedSpecialist && selectedSpecialist !== 'Select Specialist') {
+                    fetch(`{{ route('opd.search.doctor.specialist') }}?search=${selectedSpecialist}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const {
+                                opd_results
+                            } = data;
+
+                            resultsContainer.innerHTML = ''; // Clear previous results
+
+                            if (opd_results.length > 0) {
+                                renderResults(opd_results, 'OPD');
+                            } else {
+                                resultsContainer.innerHTML = '<p>No OPD results found for the selected specialist.</p>';
+                            }
+                        })
+                        .catch(error => console.error('Error fetching OPD contacts:', error));
+                } else {
+                    alert('Please select a valid specialist.');
+                }
+            });
+
+            // Search Pathology
+            searchPathologyButton.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const selectedType = pathologyDropdown.value;
+
+                if (selectedType && selectedType !== 'Select Type') {
+                    fetch(`{{ route('opd.search.doctor.specialist') }}?search=${selectedType}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const {
+                                pathology_results
+                            } = data;
+
+                            resultsContainer.innerHTML = ''; // Clear previous results
+
+                            if (pathology_results.length > 0) {
+                                renderResults(pathology_results, 'Pathology');
+                            } else {
+                                resultsContainer.innerHTML = '<p>No Pathology results found for the selected type.</p>';
+                            }
+                        })
+                        .catch(error => console.error('Error fetching Pathology contacts:', error));
+                } else {
+                    alert('Please select a valid type.');
+                }
+            });
+        });
+    </script>
+
+
+
+
 
 </body>
 

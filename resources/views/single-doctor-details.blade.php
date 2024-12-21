@@ -497,7 +497,10 @@
                 <div class="col-lg-8">
                     <div class="section-title bg-light rounded h-100 p-5">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">jio ji bharka</h5>
-                        <h2 class="display-6 mb-4 txt-cap">{{$doc->partner_doctor_name}}</h2>
+                        <h2 class="display-6 mb-4 txt-cap" style="font-size: 1.8rem;">
+                            <p class="m-0">{{$doc->partner_doctor_name}}</p>
+                            <p class="m-0">Specialist: {{$doc->partner_doctor_specialist}}</p>
+                        </h2>
 
 
                         <div class="d-details">
@@ -812,8 +815,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="sp"><strong>Designation: </strong>{{$doc->partner_doctor_designation}}</p>
-                    <p class="sp"><strong>Specialization: </strong>{{$doc->partner_doctor_specialist}}</p>
+                    <p class="sp txt-cap"><strong>Designation: </strong>{{$doc->partner_doctor_designation}}</p>
+                    <p class="sp txt-cap"><strong>Specialization: </strong>{{$doc->partner_doctor_specialist}}</p>
                     <p class="fees"><strong>Fees: </strong>₹ {{$doc->partner_doctor_fees}}</p>
 
 
@@ -1248,7 +1251,20 @@
 
 
                 <div class="login-partner">
-                    <a href="partner-login.html" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @guest
+                    <a href="/partner-login" class="btn btn-dark btn-lg rounded me-2">Login As Partner</a>
+                    @endguest
+
+                    @auth
+                    <form method="POST" action="{{ route('user.logout') }}">
+                        @csrf
+                        <a class="btn btn-dark btn-lg rounded me-2" :href="route('user.logout')"
+                            onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+                    @endauth
                 </div>
 
 
@@ -1265,10 +1281,14 @@
 
 
     <!-- PARTNER REGISTER BUTTON -->
-    <a href="partner-register.html" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
+    @guest
+    <a href="/partner-register" class="btn btn-lg btn-dark2 btn-lg-square rounded partner-login">
         <i class="fa fa-plus" aria-hidden="true"></i>
         <span class="showing-text"> Partner Register</span>
     </a>
+    @endguest
+    @auth
+    @endauth
 
 
 

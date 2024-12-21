@@ -26,8 +26,8 @@ class ProfileEditController extends Controller
     public function userProfileEditWithCurrentUserDetails()
     {
 
-        $specialists = PartnerAllOPDDoctorModel::get();
-        $types = PartnerAllPathologyTestModel::get();
+        $specialists = PartnerAllOPDDoctorModel::distinct()->pluck('doctor_specialist');
+        $types = PartnerAllPathologyTestModel::distinct()->pluck('test_type');
 
         $aboutDetails = SuperAboutusModel::get();
         $homeBanners = SuperHomeBannerModel::get();
