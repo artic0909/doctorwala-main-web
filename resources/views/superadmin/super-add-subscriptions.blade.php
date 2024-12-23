@@ -415,6 +415,8 @@
                                                     Opening Date <span class="text-danger">*</span></label>
                                                 <input type="date" class="form-control" id="opening_date" name="opening_date"
                                                     style="height: 55px;">
+
+                                                    <small class="text-danger font-weight-bold">If Opening Date is not set then it will be set to current date.</small>
                                             </div>
 
 
@@ -423,10 +425,17 @@
                                                 <label for="closing_date" style="font-weight: 700;"><i
                                                         class="fa fa-calendar-xmark text-primary"
                                                         aria-hidden="true"></i> Closing
-                                                    Date
+                                                    Time
                                                     <span class="text-danger">*</span></label>
-                                                <input type="date" class="form-control" id="closing_date" name="closing_date"
+                                                <select class="form-control" id="closing_date" name="closing_date"
                                                     style="height: 55px;">
+                                                    <option value="" selected>Select Closing Date</option>
+                                                    <option value="6 Months">6 Months</option>
+                                                    <option value="1 Year">1 Year</option>
+                                                    <option value="2 Years">2 Years</option>
+                                                    <option value="5 Years">5 Years</option>
+
+                                                </select>
                                             </div>
 
 

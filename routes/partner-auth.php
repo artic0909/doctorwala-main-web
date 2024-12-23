@@ -15,6 +15,7 @@ use App\Http\Controllers\Partnerpanel\PartnerPatientFeedbackController;
 use App\Http\Controllers\Partnerpanel\PartnerPatientInquiryController;
 use App\Http\Controllers\Partnerpanel\PartnerProfileBannerController;
 use App\Http\Controllers\Partnerpanel\PartnerServiceListController;
+use App\Http\Controllers\Partnerpanel\PartnerSubscriptionController;
 use App\Http\Controllers\Partnerpanel\ProfileEditController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,7 +56,30 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     Route::get('/partnerpanel/partner-dashboard', [DwPartnerController::class, 'partnerdashboardview'])->name('partnerpanel.partner-dashboard');
 
     Route::get('/partnerpanel/partner-coupon', [DwPartnerController::class, 'partnerCouponCodeAddView'])->name('partnerpanel.partner-coupon');
-    Route::get('/partnerpanel/partner-subscription', [DwPartnerController::class, 'partnerSubscriptionAddView'])->name('partnerpanel.partner-subscription');
+
+
+
+
+
+
+
+    // Payments GateWate--------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/partnerpanel/partner-subscription', [PartnerSubscriptionController::class, 'allSubscriptions'])->name('partnerpanel.partner-subscription');
+    Route::post('/partnerpanel/payu-payment', [PartnerSubscriptionController::class, 'initiateComingPayment'])->name('partnerpanel.payu.payment');
+    Route::post('/partnerpanel/payu-callback', [PartnerSubscriptionController::class, 'paymentCallback'])->name('partnerpanel.payu.callback');
+
+
+    
+    // Failed Payment Route
+    Route::get('/partnerpanel/failed', function () {
+        return view('subscription_failed');
+    })->name('partnerpanel.sub-fail');
+
+
+
+
+
+
 
     Route::get('/partnerpanel/partnerpanel/partner-profile', function () {
         return view('partnerpanel.partner-profile');

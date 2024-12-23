@@ -29,12 +29,13 @@ class SuperSubscriptionController extends Controller
             'subs_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'subs_title' => 'required|string',
             'subs_amount' => 'required|numeric',
-            'opening_date' => 'required|date',
-            'closing_date' => 'required|date',
+            'opening_date' => 'nullable|date', // Allow it to be nullable
+            'closing_date' => 'required',
             'features' => 'required|array',
             'features.*' => 'string',
         ]);
 
+        // Handle file upload
         $filePath = null;
 
         if ($request->hasFile('subs_image')) {
@@ -47,17 +48,21 @@ class SuperSubscriptionController extends Controller
             }
         }
 
+        // Default to the current date if no opening_date is provided
+        $openingDate = $request->input('opening_date') ?? now();
+
         SuperSubscriptionModel::create([
             'subs_image' => $filePath,
             'subs_title' => $request->input('subs_title'),
             'subs_amount' => $request->input('subs_amount'),
-            'subs_open_date' => $request->input('opening_date'),
+            'subs_open_date' => $openingDate,
             'subs_close_date' => $request->input('closing_date'),
-            'features' => json_encode($request->input('features')),
+            'features' => $request->input('features'), // Features are already an array
         ]);
 
         return redirect('/superadmin/super-show-subscription')->with('success', 'Added Successfully!');
     }
+
 
 
     public function updateStatus(Request $request, $id)

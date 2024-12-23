@@ -93,48 +93,6 @@
 
 
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
-        <a href="/" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
-            <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto py-0">
-                <a href="/" class="nav-item nav-link ">Home</a>
-                <a href="/about" class="nav-item nav-link ">About</a>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Search</a>
-                    <div class="dropdown-menu m-0">
-                        <a href="/dw/opd" class="dropdown-item">OPD Details</a>
-                        <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
-                        <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
-                    </div>
-                </div>
-                <a href="/blog" class="nav-item nav-link ">Blogs</a>
-
-                <a href="/contact" class="nav-item nav-link">Contact</a>
-                <a href="/privacy-policy" class="nav-item nav-link">Privacy Policy</a>
-            </div>
-            <!-- <button type="button" class="btn text-dark" data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                    class="fa fa-search"></i></button> -->
-
-
-            <!-- <a href="/dw/user-auth" class="btn btn-primary py-2 px-4 ms-3">Login</a> -->
-
-
-
-            <!-- <a href="" data-bs-toggle="modal" data-bs-target="#userProfileModal" class="btn btn-primary ms-3"><i
-                    class="fa fa-user" aria-hidden="true"></i></a> -->
-
-        </div>
-    </nav>
-    <!-- Navbar End -->
-
 
 
 
@@ -177,75 +135,74 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="owl-carousel price-carousel wow zoomIn" data-wow-delay="0.9s">
+
+
+                        @foreach($subs as $plan)
                         <div class="price-item pb-4">
                             <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
-                                <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
-                                    style="z-index: 2;">
-                                    <h2 class="text-primary m-0">₹35</h2>
+                                <img class="img-fluid rounded-top" src="{{ asset('storage/' . $plan->subs_image) }}" alt="">
+                                <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle" style="z-index: 2;">
+                                    <h2 class="text-primary m-0">₹{{ $plan->subs_amount }}</h2>
                                 </div>
                             </div>
                             <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                                <h4>Weekly Subscription</h4>
+                                <h4>{{ $plan->subs_title }}</h4>
                                 <hr class="text-primary w-50 mx-auto mt-0">
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 1</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 2</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-2"><span>Provide 3</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <a href="appointment.html"
-                                    class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">SUBSCRIBE</a>
-                            </div>
-                        </div>
-                        <div class="price-item pb-4">
-                            <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
-                                <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
-                                    style="z-index: 2;">
-                                    <h2 class="text-primary m-0">₹149</h2>
+
+                                @php
+                                $decodedFeatures = is_array($plan->features) ? $plan->features : json_decode($plan->features, true);
+                                @endphp
+
+                                @if(!empty($decodedFeatures) && is_array($decodedFeatures))
+                                @foreach($decodedFeatures as $feature)
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span style="text-transform: capitalize;">{{ $feature }}</span>
+                                    <i class="fa fa-check text-primary pt-1"></i>
                                 </div>
-                            </div>
-                            <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                                <h4>Monthly Subscription</h4>
-                                <hr class="text-primary w-50 mx-auto mt-0">
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 1</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 2</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-2"><span>Provide 3</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <a href="appointment.html"
-                                    class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">SUBSCRIBE</a>
-                            </div>
-                        </div>
-                        <div class="price-item pb-4">
-                            <div class="position-relative">
-                                <img class="img-fluid rounded-top" src="{{asset('img/price-1.jpg')}}" alt="">
-                                <div class="d-flex align-items-center justify-content-center bg-light rounded pt-2 px-3 position-absolute top-100 start-50 translate-middle"
-                                    style="z-index: 2;">
-                                    <h2 class="text-primary m-0">₹1000</h2>
-                                </div>
-                            </div>
-                            <div class="position-relative text-center bg-light border-bottom border-primary py-5 p-4">
-                                <h4>Yearly Subscription</h4>
-                                <hr class="text-primary w-50 mx-auto mt-0">
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 1</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-3"><span>Provide 2</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <div class="d-flex justify-content-between mb-2"><span>Provide 3</span><i
-                                        class="fa fa-check text-primary pt-1"></i></div>
-                                <a href="appointment.html"
-                                    class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">SUBSCRIBE</a>
+                                @endforeach
+                                @else
+                                <p class="text-muted">No features available</p>
+                                @endif
+
+                                <!-- PayU Payment Form -->
+                                <form action="{{route('partnerpanel.payu.payment')}}" method="POST">
+                                    @csrf
+                                    <input type="text" name="plan_id" value="{{ $plan->id }}">
+                                    <input type="text" name="subs_title" value="{{ $plan->subs_title }}">
+                                    <input type="text" name="subs_amount" value="{{ $plan->subs_amount }}">
+                                    <input type="text" name="partner_clinic_name" value="{{ $partner->partner_clinic_name }}">
+                                    <input type="text" name="partner_email" value="{{ $partner->partner_email }}">
+                                    <button type="submit" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">
+                                        SUBSCRIBE
+                                    </button>
+                                </form>
                             </div>
                         </div>
+                        @endforeach
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Subscription Plans End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

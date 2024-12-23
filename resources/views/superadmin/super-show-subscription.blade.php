@@ -458,7 +458,7 @@
                             <form class="modal-body" action="{{ route('superadmin.super-subs.delete', $sub->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('DELETE')
-                                
+
                                 <div class="form-group d-flex flex-column align-items-center">
                                     <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
 
@@ -546,8 +546,8 @@
 
                                 <p class="m-0" style="font-weight: 700; font-size: 1.2rem;">Features</p>
                                 <ul style="list-style-type: none;" class="mt-3">
-                                    @if($sub->features)
-                                    @foreach(json_decode($sub->features, true) as $feature)
+                                    @if(is_array($sub->features) || $sub->features instanceof \Traversable)
+                                    @foreach($sub->features as $feature)
                                     <li>
                                         <p class="m-0 mt-2" style="font-weight: 700; font-size: 1.02rem;">
                                             <i class="fa fa-check-circle text-primary" aria-hidden="true"></i>&nbsp;
@@ -557,12 +557,10 @@
                                     @endforeach
                                     @else
                                     <li>
-                                        <p class="m-0" style="font-weight: 700; font-size: 1.02rem;">
-                                            <i class="fa fa-exclamation-circle text-danger" aria-hidden="true"></i>&nbsp;
-                                            No features available.
-                                        </p>
+                                        <p class="m-0" style="font-weight: 700; font-size: 1.02rem;">No features available</p>
                                     </li>
                                     @endif
+
                                 </ul>
                             </div>
 

@@ -12,6 +12,7 @@ use App\Models\PartnerPathologyBannerModel;
 use App\Models\SuperAboutusModel;
 use App\Models\SuperCouponModel;
 use App\Models\SuperOtherBannerModel;
+use App\Models\SuperSubscriptionModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth as Auth;
 
@@ -119,23 +120,6 @@ class DwPartnerController extends Controller
 
         return redirect()->route('partnerpanel.partner-dashboard')->with('success', 'Coupon added successfully!');
     }
-
-
-
-    public function partnerSubscriptionAddView()
-    {
-
-        return view('subscription');
-    }
-
-
-
-
-
-
-
-
-
 
 
 
