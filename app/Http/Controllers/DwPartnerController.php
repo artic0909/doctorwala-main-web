@@ -186,22 +186,27 @@ class DwPartnerController extends Controller
         $partnerCount = DwPartnerModel::count();
         $partnerId = 'DWPTR' . ($partnerCount + 1);
 
-        $dwuser = new DwPartnerModel($validated);
-        $dwuser->partner_id = $partnerId;
-        $dwuser->partner_password = bcrypt($request->partner_password);
-        $dwuser->registration_type = json_encode($request->registration_type);
+        try {
+            // Create and save the partner
+            $dwuser = new DwPartnerModel($validated);
+            $dwuser->partner_id = $partnerId;
+            $dwuser->partner_password = bcrypt($request->partner_password);
+            $dwuser->registration_type = json_encode($request->registration_type);
+            $dwuser->save();
 
-        $dwuser->save();
+            // Authenticate and redirect
+            if (Auth::guard('partner')->loginUsingId($dwuser->id)) {
+                $request->session()->regenerate(); // Regenerate session for security
+                return redirect()->route('partnerpanel.partner-coupon')
+                    ->with('success', 'Registration successful! Welcome to your dashboard.');
+            }
+        } catch (\Exception $e) {
+            
 
-        // Start session by authenticating the newly registered partner
-        if (Auth::guard('partner')->loginUsingId($dwuser->id)) {
-            $request->session()->regenerate(); // Regenerate session for security
-            return redirect()->route('partnerpanel.partner-coupon')
-                ->with('success', 'Registration successful! Welcome to your dashboard.');
+            return back()->with('unsuccess', 'Registration unsuccessful! Please try again.')->withInput();
         }
 
-
-        return redirect()->back()->with('Unsuccess', 'Registration unsuccessful! Please register again.');
+        return back()->with('unsuccess', 'An unexpected error occurred. Please try again.'); 
     }
 
 

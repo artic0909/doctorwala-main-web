@@ -4,116 +4,102 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
-use Illuminate\Http\Request;
 use App\Models\SubscriptionHolder;
 use App\Models\SuperSubscriptionModel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class PartnerSubscriptionController extends Controller
 {
-
-    protected $guard = 'partner';
-
-
-
-
-
-
-    public function allSubscriptions()
-    {
-
-        $partner = Auth::guard('partner')->user();
-        $subs = SuperSubscriptionModel::get();
-
-        return view('subscription', compact('subs', 'partner'));
-    }
-
-
-
-
-
-
-
-
     protected $merchantKey = 'fMmB7HZo';
     protected $merchantSalt = 'yjrDz7IzD4';
 
-    public function initiateComingPayment(Request $request)
+    public function allSubscriptions()
+    {
+        $partner = Auth::guard('partner')->user();
+        $subs = SuperSubscriptionModel::all();
+        return view('partnerpanel.subscription', compact('subs', 'partner'));
+    }
+
+    public function payment(Request $request)
     {
         $merchantKey = 'fMmB7HZo';
         $merchantSalt = 'yjrDz7IzD4';
-        $partner = Auth::guard('partner')->user();
-        $amount = $request->subs_amount;
+        $payuUrl = 'https://secure.payu.in/_payment';
         $txnid = uniqid();
+        $amount = $request->subs_amount;
         $email = $request->partner_email;
         $productInfo = $request->subs_title;
         $firstname = $request->partner_clinic_name;
-        $successUrl = route('partnerpanel.payu.callback');
-        $failureUrl = route('partnerpanel.payu.callback');
 
-    
-        $hashString = $this->merchantKey . "|" . $txnid . "|" . $amount . "|" . $productInfo . "|" . $firstname . "|" . $email . "|||||||||||" . $this->merchantSalt;
+        Cache::put('partner_payment_' . $txnid, [
+            'partner_id' => Auth::guard('partner')->id(),
+            'subscription_data' => ['title' => $productInfo, 'amount' => $amount]
+        ], now()->addMinutes(30));
+
+        $hashString = $this->merchantKey . '|' . $txnid . '|' . $amount . '|' . $productInfo . '|' . $firstname . '|' . $email . '|||||||||||' . $this->merchantSalt;
         $hash = strtolower(hash('sha512', $hashString));
 
-        $payuUrl = 'https://secure.payu.in/_payment';
+        $successUrl = route('partnerpanel.payment.callback');
+        $failureUrl = route('partnerpanel.payment.callback');
 
-        return view('partnerpanel.payu_payment', compact('payuUrl', 'txnid', 'amount', 'productInfo', 'firstname', 'email', 'successUrl', 'failureUrl', 'hash', 'merchantKey', 'partner', 'merchantSalt'));
+        return view('partnerpanel.payu_payment', compact('txnid', 'amount', 'productInfo', 'firstname', 'email', 'successUrl', 'failureUrl', 'hash', 'payuUrl', 'merchantKey', 'merchantSalt', 'txnid'));
     }
-
 
     public function paymentCallback(Request $request)
     {
-        $postedHash = $request->input('hash');
-        $key = $request->input('key');
         $txnid = $request->input('txnid');
-        $amount = $request->input('amount');
-        $productInfo = $request->input('productinfo');
-        $firstname = $request->input('firstname');
-        $email = $request->input('email');
+        $postedHash = $request->input('hash');
         $status = $request->input('status');
+        $email = $request->input('email');
+        $firstname = $request->input('firstname');
+        $productInfo = $request->input('productinfo');
+        $amount = $request->input('amount');
 
-      
-        $hashString = $this->merchantSalt . '|' . $status . '|||||||||||' . $email . '|' . $firstname . '|' . $productInfo . '|' . $amount . '|' . $txnid . '|' . $key;
+        $cachedData = Cache::get('partner_payment_' . $txnid);
+
+        if (!$cachedData) {
+            Log::error('Invalid transaction ID or session expired.', ['txnid' => $txnid]);
+            return response()->json(['error' => 'Session expired. Please try again.'], 400);
+        }
+
+        $partnerId = $cachedData['partner_id'];
+        $subscriptionData = $cachedData['subscription_data'];
+
+        $hashString = $this->merchantSalt . '|' . $status . '|||||||||||' . $email . '|' . $firstname . '|' . $productInfo . '|' . $amount . '|' . $txnid . '|' . $this->merchantKey;
         $calculatedHash = strtolower(hash('sha512', $hashString));
 
-      
         if ($calculatedHash !== $postedHash) {
-            return redirect()->route('partnerpanel.sub-fail')->with('error', 'Payment verification failed.');
+            Log::error('Hash mismatch detected.', ['expected' => $calculatedHash, 'provided' => $postedHash]);
+            return response()->json(['error' => 'Payment verification failed.'], 400);
         }
 
         if ($status === 'success') {
-            $partner = Auth::guard('partner')->user();
-
-            if (!$partner) {
-                return redirect()->route('partnerpanel.sub-fail')->with('error', 'Payment verification failed.');
-            }
-
             $currentDate = now();
-            $subscriptionDurationMonths = 3; 
-            $closeDate = $currentDate->copy()->addMonths($subscriptionDurationMonths);
+            $closeDate = $currentDate->copy()->addMonths(3);
 
             SubscriptionHolder::create([
-                'currently_loggedin_partner_id' => $partner->id,
-                'subscription_title' => $productInfo,
-                'subscription_amount' => $amount,
+                'currently_loggedin_partner_id' => $partnerId,
+                'subscription_title' => $subscriptionData['title'],
+                'subscription_amount' => $subscriptionData['amount'],
                 'transaction_id' => $txnid,
                 'partner_clinic_name' => $firstname,
-                'partner_contact_person_name' => $partner->name,
-                'partner_mobile_number' => $partner->mobile_number,
+                'partner_contact_person_name' => Auth::guard('partner')->user()->name,
+                'partner_mobile_number' => Auth::guard('partner')->user()->mobile_number,
                 'partner_email' => $email,
                 'current_holding_date' => $currentDate,
                 'close_date' => $closeDate,
             ]);
 
-         
-            DwPartnerModel::where('id', $partner->id)->update(['status' => 'Active']);
+            DwPartnerModel::where('id', $partnerId)->update(['status' => 'Active']);
 
-           
-            Auth::guard('partner')->login($partner);
-
-            return redirect()->route('partnerpanel.partner-dashboard')->with('success', 'Subscription added successfully!');
-        } else {
-            return redirect()->route('partnerpanel.sub-fail')->with('error', 'Payment failed.');
+            Log::info('Payment processed successfully.', ['txnid' => $txnid]);
+            return response()->json(['success' => 'Payment processed successfully.'], 200);
         }
+
+        Log::warning('Payment failed.', ['txnid' => $txnid, 'status' => $status]);
+        return response()->json(['error' => 'Payment failed. Please try again.'], 400);
     }
 }

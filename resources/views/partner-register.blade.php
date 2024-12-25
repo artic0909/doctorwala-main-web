@@ -185,164 +185,6 @@
 
 
 
-
-
-
-
-    <!-- User Profile & Password Edit Modal -->
-    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body position-relative">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
-
-                    <!-- profile update form -->
-                    <form class="text-center">
-                        <h4 class="modal-title" id="userProfileModalLabel">User Profile</h4>
-                        <p class="mb-4">Update your profile details</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="user_name" name="user_name"
-                                        value="Saklin Mustak">
-                                    <label for="user_name">Name</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" id="user_email" name="user_email"
-                                        value="saklin@gmail.com">
-                                    <label for="user_email">Email</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-floating mb-3">
-                                    <input type="number" class="form-control" id="user_mobile" name="user_mobile"
-                                        value="9061234567">
-                                    <label for="user_mobile">Mobile</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <a href="" class="btn btn-primary py-3 col-md-12">Update Profile</a>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                    <!-- password update form -->
-                    <form class="text-center form password-update">
-                        <h4 class="modal-title" id="userProfileModalLabel">Security Privacy</h4>
-                        <p class="mb-4">Update your account password</p>
-                        <div class="row">
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_old_password"
-                                        name="user_old_password" placeholder="Existing Password">
-                                    <label for="user_old_password">Existing Password</label>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="password" class="form-control" id="user_new_password"
-                                        name="user_new_password" placeholder="New Password">
-                                    <label for="user_new_password">New Password</label>
-                                </div>
-                            </div>
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <canvas id="passwordUpdateCaptchaCanvas" width="150" height="40"></canvas>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="passwordUpdateCaptchaInput"
-                                        name="passwordUpdateCaptchaInput" placeholder="Captcha">
-                                    <label for="passwordUpdateCaptchaInput">Captcha</label>
-                                </div>
-                            </div>
-
-
-
-
-
-                            <div class="col-md-12">
-                                <div class="form-floating mb-3">
-                                    <button type="submit" class="btn btn-primary py-3 col-md-12">Save Changes</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </form>
-
-
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Full Screen Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content" style="background: rgba(9, 30, 62, .7);">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn bg-white btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center justify-content-center">
-                    <div class="input-group" style="max-width: 600px;">
-                        <input type="text" class="form-control bg-transparent border-primary p-3"
-                            placeholder="Type search keyword">
-                        <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Full Screen Search End -->
-
-
     <!-- Hero Start -->
     <div class="container-fluid bg-primary py-5 hero-header mb-5">
         <div class="row py-3">
@@ -592,7 +434,61 @@
 
 
 
+    <!-- profile registration success modal start -->
+    <div class="modal fade" id="profileRegistrationSuccessModal" tabindex="-1" aria-labelledby="profileRegistrationSuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h2 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> SUCCESS <span class="text-primary">+</span></h2>
+                    <h2 class="text-primary">Thank You For Register</h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile registration success modal end -->
 
+    <!-- profile registration Unsuccess modal start -->
+    <div class="modal fade" id="profileRegistrationUnsuccessModal" tabindex="-1" aria-labelledby="profileRegistrationUnsuccessModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body d-flex flex-column align-middle justify-center align-items-center">
+                    <h3 class="modal-title" id="profileUpdateSuccessModalLabel"><span class="text-primary">+</span> ERROR <span class="text-primary">+</span></h3>
+                    <h4 class="text-danger">Profile Is Not Registered</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn p-2 btn-primary w-100" data-bs-dismiss="modal">CLOSE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- profile registration Unsuccess modal end -->
+
+
+
+
+
+
+
+    @if(session('success') == 'success')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const successModal = new bootstrap.Modal(document.getElementById('profileRegistrationSuccessModal'));
+            successModal.show();
+        });
+    </script>
+    @elseif(session('unsuccess') == 'unsuccess')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const failureModal = new bootstrap.Modal(document.getElementById('profileRegistrationSuccessModal'));
+            failureModal.show();
+        });
+    </script>
+    @endif
 
 
 
@@ -800,10 +696,7 @@
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="../lib/twentytwenty/jquery.event.move.js"></script>
     <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
-
-    <!-- Template Javascript -->
     <script src="../js/main.js"></script>
-    <script src="../js/cards-scroll.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {

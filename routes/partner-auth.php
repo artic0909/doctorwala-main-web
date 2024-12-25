@@ -53,9 +53,7 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
     // ========================================== Parter Restricted Routes End ===================================
     // ===========================================================================================================
 
-    Route::get('/partnerpanel/partner-dashboard', [DwPartnerController::class, 'partnerdashboardview'])->name('partnerpanel.partner-dashboard');
 
-    Route::get('/partnerpanel/partner-coupon', [DwPartnerController::class, 'partnerCouponCodeAddView'])->name('partnerpanel.partner-coupon');
 
 
 
@@ -65,8 +63,17 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
     // Payments GateWate--------------------------------------------------------------------------------------------------------------------------->
     Route::get('/partnerpanel/partner-subscription', [PartnerSubscriptionController::class, 'allSubscriptions'])->name('partnerpanel.partner-subscription');
-    Route::post('/partnerpanel/payu-payment', [PartnerSubscriptionController::class, 'initiateComingPayment'])->name('partnerpanel.payu.payment');
-    Route::post('/partnerpanel/payu-callback', [PartnerSubscriptionController::class, 'paymentCallback'])->name('partnerpanel.payu.callback');
+    Route::post('/partnerpanel/payment/initiate', [PartnerSubscriptionController::class, 'payment'])->name('partnerpanel.payment.initiate');
+
+
+    Route::post('/partnerpanel/payment-callback', [PartnerSubscriptionController::class, 'paymentCallback'])->name('partnerpanel.payment.callback');
+
+
+    
+    Route::get('/partnerpanel/partner-dashboard', [DwPartnerController::class, 'partnerdashboardview'])->name('partnerpanel.partner-dashboard');
+
+    Route::get('/partnerpanel/partner-coupon', [DwPartnerController::class, 'partnerCouponCodeAddView'])->name('partnerpanel.partner-coupon');
+    
 
 
     

@@ -502,10 +502,7 @@
     <script src="../lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="../lib/twentytwenty/jquery.event.move.js"></script>
     <script src="../lib/twentytwenty/jquery.twentytwenty.js"></script>
-
-    <!-- Template Javascript -->
     <script src="../js/main.js"></script>
-    <script src="../js/cards-scroll.js"></script>
 
 
     <script>

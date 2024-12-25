@@ -165,17 +165,20 @@
                                 @endif
 
                                 <!-- PayU Payment Form -->
-                                <form action="{{route('partnerpanel.payu.payment')}}" method="POST">
+                                <form action="{{ route('partnerpanel.payment.initiate') }}" method="POST">
                                     @csrf
                                     <input type="text" name="plan_id" value="{{ $plan->id }}">
                                     <input type="text" name="subs_title" value="{{ $plan->subs_title }}">
                                     <input type="text" name="subs_amount" value="{{ $plan->subs_amount }}">
-                                    <input type="text" name="partner_clinic_name" value="{{ $partner->partner_clinic_name }}">
-                                    <input type="text" name="partner_email" value="{{ $partner->partner_email }}">
+                                    <input type="text" name="productinfo" value="{{ $plan->subs_title }}"> <!-- Product info -->
+                                    <input type="text" name="firstname" value="{{ $partner->partner_clinic_name }}"> <!-- First name -->
+                                    <input type="text" name="email" value="{{ $partner->partner_email }}"> <!-- Email -->
+                                    <input type="text" name="phone" value="{{ $partner->partner_mobile_number }}"> <!-- Phone number -->
                                     <button type="submit" class="btn btn-primary py-2 px-4 position-absolute top-100 start-50 translate-middle">
                                         SUBSCRIBE
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                         @endforeach
