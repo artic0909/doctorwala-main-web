@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwUserModel;
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuperAllUserController extends Controller
@@ -30,5 +32,10 @@ class SuperAllUserController extends Controller
         $userInfo->delete();
 
         return back()->with('success', 'deleted successfully!');
+    }
+
+
+    public function exportAsExel(Request $request){
+        return Excel::download(new UsersExport, 'user_details.xlsx');
     }
 }

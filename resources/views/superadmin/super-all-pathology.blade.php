@@ -365,6 +365,7 @@
                                     <div class="row">
                                         <div class="col-3">
                                             <h3 class="font-weight-bold">All Pathology Details</h3>
+                                            <a href="{{ route('superadmin.export.path') }}" style="text-decoration: underline;">Export</a> <!-- export as excel -->
                                         </div>
 
                                         <div class="col-9 d-flex justify-content-end align-items-center">

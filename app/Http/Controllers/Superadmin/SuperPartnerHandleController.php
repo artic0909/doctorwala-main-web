@@ -11,6 +11,8 @@ use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerPathologyBannerModel;
 use App\Models\PartnerPathologyContactModel;
+use App\Exports\Partners;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuperPartnerHandleController extends Controller
@@ -271,5 +273,10 @@ class SuperPartnerHandleController extends Controller
         $partnerInfo->delete();
 
         return back()->with('success', 'deleted successfully!');
+    }
+
+
+    public function exportAsExel(Request $request){
+        return Excel::download(new Partners, 'partner_details.xlsx');
     }
 }

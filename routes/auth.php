@@ -364,6 +364,14 @@ Route::middleware('auth:web')->group(function () {
     Route::delete('/superadmin/super-all-feedback/delete/{id}', [SuperAllFeedbacksController::class, 'delete'])->name('superadmin.feedback.delete');
 
 
+    // OPD & Path & Doc Contact Details Exports---------------------------------------------------------------------------------------------------------------------------------------->
+    Route::get('/superadmin/export-opd', [SuperAllOPDHandleController::class, 'exportAsExel'])->name('superadmin.export.opd');
+    Route::get('/superadmin/export-path', [SuperAllPathologyHandleController::class, 'exportAsExel'])->name('superadmin.export.path');
+    Route::get('/superadmin/export-doc', [SuperAllOnlyDoctorHandleController::class, 'exportAsExel'])->name('superadmin.export.doc');
+    Route::get('/superadmin/export-partner', [SuperPartnerHandleController::class, 'exportAsExel'])->name('superadmin.export.partner');
+    Route::get('/superadmin/export-user', [SuperAllUserController::class, 'exportAsExel'])->name('superadmin.export.user');
+
+
 
 
 

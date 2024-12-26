@@ -7,6 +7,8 @@ use App\Models\DwPartnerModel;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerAllOPDDoctorModel;
 use App\Models\PartnerOPDBannerModel;
+use App\Exports\OpdExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuperAllOPDHandleController extends Controller
@@ -295,5 +297,13 @@ class SuperAllOPDHandleController extends Controller
         }
 
         $opdBanner->save();
+    }
+
+
+
+
+
+    public function exportAsExel(Request $request){
+        return Excel::download(new OpdExport, 'opd_details.xlsx');
     }
 }

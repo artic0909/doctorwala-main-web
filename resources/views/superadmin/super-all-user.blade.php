@@ -366,6 +366,7 @@
                                     <div class="row">
                                         <div class="col-3">
                                             <h3 class="font-weight-bold">All Users</h3>
+                                            <a href="{{ route('superadmin.export.user') }}" style="text-decoration: underline;">Export</a> <!-- export as excel -->
                                         </div>
 
                                         <div class="col-9 d-flex justify-content-end align-items-center">

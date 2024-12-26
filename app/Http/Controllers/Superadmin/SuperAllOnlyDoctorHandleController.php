@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
 use App\Models\PartnerDoctorBannerModel;
 use App\Models\PartnerDoctorContactModel;
+use App\Exports\DocExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuperAllOnlyDoctorHandleController extends Controller
@@ -198,5 +200,12 @@ class SuperAllOnlyDoctorHandleController extends Controller
         }
 
         $pathBanner->save();
+    }
+
+
+
+
+    public function exportAsExel(Request $request){
+        return Excel::download(new DocExport, 'Doc_details.xlsx');
     }
 }

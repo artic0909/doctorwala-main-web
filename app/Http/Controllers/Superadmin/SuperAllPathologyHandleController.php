@@ -7,6 +7,8 @@ use App\Models\DwPartnerModel;
 use App\Models\PartnerAllPathologyTestModel;
 use App\Models\PartnerPathologyBannerModel;
 use App\Models\PartnerPathologyContactModel;
+use App\Exports\PathExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 
 class SuperAllPathologyHandleController extends Controller
@@ -288,5 +290,12 @@ class SuperAllPathologyHandleController extends Controller
         }
 
         $pathBanner->save();
+    }
+
+
+
+
+    public function exportAsExel(Request $request){
+        return Excel::download(new PathExport, 'path_details.xlsx');
     }
 }
