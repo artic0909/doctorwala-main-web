@@ -5,8 +5,26 @@
     <meta charset="utf-8">
     <title>All OPD | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+
+    @foreach ($opds as $opd)
+    <!-- SEO Meta Tags for OPD Page -->
+    <meta name="description" content="Find {{ ucfirst($opd->clinic_name) }} at {{ ucfirst($opd->clinic_address) }}. Book your consultation today at a trusted OPD. Doctorwala.info is your one-stop destination for finding the best OPDs in India.">
+    <meta name="keywords" content="{{ ucfirst($opd->clinic_name) }}, OPD, clinic, healthcare, {{ ucfirst($opd->clinic_address) }}, outpatient, {{ ucfirst($opd->clinic_registration_type) }}, {{ ucfirst($opd->clinic_clinic_contact_person_name) }}, {{ ucfirst($opd->clinic_mobile_number) }}, {{ ucfirst($opd->clinic_email) }}, {{ ucfirst($opd->clinic_landmark) }}, {{ ucfirst($opd->clinic_state) }}, {{ ucfirst($opd->clinic_pincode) }}, {{ ucfirst($opd->clinic_google_map_link) }}, {{ ucfirst($opd->clinic_) }}, {{ ucfirst($opd->clinic_address) }}, consultation, doctorwala.info, doctorwala">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="{{ ucfirst($opd->clinic_name) }} - Find OPDs | Doctorwala">
+    <meta property="og:description" content="Find {{ ucfirst($opd->clinic_name) }} at {{ ucfirst($opd->clinic_address) }}. Book your consultation today at a trusted OPD.">
+    <meta property="og:image" content="{{ asset('storage/' . ($opd->banner->opdbanner ?? 'default_image.jpg')) }}">
+    <meta property="og:url" content="{{ url('/dw/opd/' . $opd->id) }}">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:title" content="{{ ucfirst($opd->clinic_name) }} - Find OPDs | Doctorwala">
+    <meta name="twitter:description" content="Find {{ ucfirst($opd->clinic_name) }} at {{ ucfirst($opd->clinic_address) }}. Book your consultation today at a trusted OPD.">
+    <meta name="twitter:image" content="{{ asset('storage/' . ($opd->banner->opdbanner ?? 'default_image.jpg')) }}">
+    @endforeach
+
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

@@ -5,8 +5,24 @@
     <meta charset="utf-8">
     <title>Doctorwala Info</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Search for doctors, specialists, and pathology types. Find the best healthcare options tailored to your needs.">
+    <meta name="keywords" content="{{ implode(',', $specialists->toArray()) }}, {{ implode(',', $types->toArray()) }}, doctor, specialist, pathology">
+
+    <meta property="og:title" content="Search for Doctors, Specialists, and Pathology">
+    <meta property="og:description" content="Explore various healthcare options. Search for doctors, specialists, or pathology types on our platform.">
+    <meta property="og:url" content="{{ url('/') }}">
+
+    <meta name="twitter:title" content="Search for Doctors, Specialists, and Pathology">
+    <meta name="twitter:description" content="Explore various healthcare options. Search for doctors, specialists, or pathology types on our platform.">
+
+
+
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url('/') }}">
+
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

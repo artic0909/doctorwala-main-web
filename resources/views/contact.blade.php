@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Contact Us | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
+    <meta content="doctorwala.info, doctorwala, doctorwala.in, doctorwala.com, doctorwala.com.in, doctorwala.com.info, doctorwala.in.info, doctorwala.info.in, doctorwala.info.com, doctorwala.info.com.in, doctorwala.info.in.com, doctorwala.info.com.in.info, doctorwala.info.in.com.info, ranihati, howrah, 711302, panchla, statebank, medical, opd, pathology, doctors, partners, users, get in touch, contact us, inquiry, query, enquary, feedback, feedback form" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->

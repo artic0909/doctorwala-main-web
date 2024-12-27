@@ -3,10 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>All Doctors | Doctorwala</title>
+    <title>Find Doctors | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+
+    @foreach ($docs as $doc)
+    <meta name="description" content="Find {{ ucfirst($doc->partner_doctor_name) }} at {{ ucfirst($doc->partner_doctor_address) }}. Book your consultation with a trusted doctor today.">
+    <meta name="keywords" content="{{ ucfirst($doc->partner_doctor_name) }}, doctor, healthcare, specialist, {{ ucfirst($doc->partner_doctor_address) }}, {{ ucfirst($doc->partner_doctor_specialist) }},  {{ ucfirst($doc->partner_doctor_designation) }},  {{ ucfirst($doc->partner_doctor_fees) }},  {{ ucfirst($doc->partner_doctor_address) }},  {{ ucfirst($doc->partner_doctor_landmark) }},  {{ ucfirst($doc->partner_doctor_state) }},  {{ ucfirst($doc->partner_doctor_google_map_link) }}, consultation">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="{{ ucfirst($doc->partner_doctor_name) }} - Find Doctors | Doctorwala">
+    <meta property="og:description" content="Find {{ ucfirst($doc->partner_doctor_name) }} at {{ ucfirst($doc->partner_doctor_address) }}. Book your consultation with a trusted doctor today.">
+    <meta property="og:image" content="{{ asset('storage/' . $doc->banner->doctorbanner ?? 'default_image.jpg') }}">
+    <meta property="og:url" content="{{ url('/dw/doctor/' . $doc->id) }}">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:title" content="{{ ucfirst($doc->partner_doctor_name) }} - Find Doctors | Doctorwala">
+    <meta name="twitter:description" content="Find {{ ucfirst($doc->partner_doctor_name) }} at {{ ucfirst($doc->partner_doctor_address) }}. Book your consultation with a trusted doctor today.">
+    <meta name="twitter:image" content="{{ asset('storage/' . $doc->banner->doctorbanner ?? 'default_image.jpg') }}">
+    @endforeach
+
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

@@ -5,8 +5,24 @@
     <meta charset="utf-8">
     <title>All Pathology | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+    @foreach($paths as $path)
+    <meta name="description" content="Explore {{ ucfirst($path->clinic_name) }} located at {{ ucfirst($path->clinic_address) }}. Get reliable pathology tests and healthcare services. Book your appointment today. Doctorwala.info is your one-stop destination for finding the best pathology services in India.">
+    <meta name="keywords" content="{{ ucfirst($path->clinic_name) }}, OPD, clinic, healthcare, {{ ucfirst($path->clinic_address) }}, outpatient, {{ ucfirst($path->clinic_registration_type) }}, {{ ucfirst($path->clinic_clinic_contact_person_name) }}, {{ ucfirst($path->clinic_mobile_number) }}, {{ ucfirst($path->clinic_email) }}, {{ ucfirst($path->clinic_landmark) }}, {{ ucfirst($path->clinic_state) }}, {{ ucfirst($path->clinic_pincode) }}, {{ ucfirst($path->clinic_google_map_link) }}, {{ ucfirst($path->clinic_) }}, {{ ucfirst($path->clinic_address) }}, consultation, doctorwala.info, doctorwala">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="{{ ucfirst($path->clinic_name) }} - Pathology Services | Doctorwala">
+    <meta property="og:description" content="Explore {{ ucfirst($path->clinic_name) }} located at {{ ucfirst($path->clinic_address) }}. Get reliable pathology tests and healthcare services. Book your appointment today.">
+    <meta property="og:image" content="{{ asset('storage/' . ($path->banner->pathologybanner ?? 'default_image.jpg')) }}">
+    <meta property="og:url" content="{{ url('/dw/pathology/' . $path->id) }}">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:title" content="{{ ucfirst($path->clinic_name) }} - Pathology Services | Doctorwala">
+    <meta name="twitter:description" content="Explore {{ ucfirst($path->clinic_name) }} located at {{ ucfirst($path->clinic_address) }}. Get reliable pathology tests and healthcare services. Book your appointment today.">
+    <meta name="twitter:image" content="{{ asset('storage/' . ($path->banner->pathologybanner ?? 'default_image.jpg')) }}">
+    @endforeach
+
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">
