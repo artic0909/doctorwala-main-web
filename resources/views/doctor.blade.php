@@ -15,13 +15,11 @@
     <!-- Open Graph Tags -->
     <meta property="og:title" content="{{ ucfirst($doc->partner_doctor_name) }} - Find Doctors | Doctorwala">
     <meta property="og:description" content="Find {{ ucfirst($doc->partner_doctor_name) }} at {{ ucfirst($doc->partner_doctor_address) }}. Book your consultation with a trusted doctor today.">
-    <meta property="og:image" content="{{ asset('storage/' . $doc->banner->doctorbanner ?? 'default_image.jpg') }}">
     <meta property="og:url" content="{{ url('/dw/doctor/' . $doc->id) }}">
 
     <!-- Twitter Card Tags -->
     <meta name="twitter:title" content="{{ ucfirst($doc->partner_doctor_name) }} - Find Doctors | Doctorwala">
     <meta name="twitter:description" content="Find {{ ucfirst($doc->partner_doctor_name) }} at {{ ucfirst($doc->partner_doctor_address) }}. Book your consultation with a trusted doctor today.">
-    <meta name="twitter:image" content="{{ asset('storage/' . $doc->banner->doctorbanner ?? 'default_image.jpg') }}">
     @endforeach
 
 

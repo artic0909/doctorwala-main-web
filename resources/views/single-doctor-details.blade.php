@@ -3,10 +3,33 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Doctor Details | Doctorwala</title>
+    <!-- <title>Doctor Details | Doctorwala</title> -->
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+    <title>Dr. {{$doc->partner_doctor_name}} - {{$doc->partner_doctor_designation}} | Specialist in {{$doc->partner_doctor_specialist}}</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="Learn more about Dr. {{$doc->partner_doctor_name}}, a {{$doc->partner_doctor_designation}} specializing in {{$doc->partner_doctor_specialist}}. Consultation fees: ₹{{$doc->partner_doctor_fees}}. Check availability and schedule an appointment.">
+
+    <!-- Keywords -->
+    <meta name="keywords" content="Dr. {{$doc->partner_doctor_name}}, {{$doc->partner_doctor_specialist}}, {{$doc->partner_doctor_designation}}, Doctor Details, Appointment, Fees, Availability">
+
+    <!-- Author -->
+    <meta name="author" content="Your Clinic Name">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Dr. {{$doc->partner_doctor_name}} - {{$doc->partner_doctor_designation}}">
+    <meta property="og:description" content="Get detailed information about Dr. {{$doc->partner_doctor_name}}, a {{$doc->partner_doctor_designation}} specializing in {{$doc->partner_doctor_specialist}}. Book your appointment now.">
+    <meta property="og:image" content="{{ asset('img/doctor.png') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:type" content="profile">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Dr. {{$doc->partner_doctor_name}} - {{$doc->partner_doctor_designation}}">
+    <meta name="twitter:description" content="Learn about Dr. {{$doc->partner_doctor_name}}, a {{$doc->partner_doctor_specialist}}. Book your consultation today.">
+    <meta name="twitter:image" content="{{ asset('img/doctor.png') }}">
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

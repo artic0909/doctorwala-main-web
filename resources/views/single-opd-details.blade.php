@@ -5,8 +5,20 @@
     <meta charset="utf-8">
     <title>Details | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    
+    
+    @foreach($doctors as $doctor)
+        <meta name="doctor-{{$doctor->id}}-title" content="Find Top Doctor - {{$doctor->doctor_name}} | Specialization: {{$doctor->doctor_specialist}}">
+        <meta name="doctor-{{$doctor->id}}-description" content="Consult with {{$doctor->doctor_name}}, a {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}. Check availability and clinic hours.">
+        <meta name="doctor-{{$doctor->id}}-keywords" content="Doctor, {{$doctor->doctor_name}}, {{$doctor->doctor_specialist}}, Consultation, Fees, {{$doctor->clinic_city ?? 'Unknown City'}}, {{$doctor->clinic_state ?? 'Unknown State'}}">
+        <meta name="doctor-{{$doctor->id}}-author" content="{{$doctor->doctor_name}}">
+        
+        <!-- Open Graph Tags -->
+        <meta property="og:doctor-{{$doctor->id}}-title" content="{{$doctor->doctor_name}} - {{$doctor->doctor_specialist}}">
+        <meta property="og:doctor-{{$doctor->id}}-description" content="Consult {{$doctor->doctor_name}}, a specialist in {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}.">
+        <meta property="og:doctor-{{$doctor->id}}-image" content="{{ asset('img/doctor.png') }}">
+        <meta property="og:doctor-{{$doctor->id}}-url" content="{{ url()->current() }}/doctor/{{$doctor->id}}">
+    @endforeach
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

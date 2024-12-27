@@ -5,8 +5,20 @@
     <meta charset="utf-8">
     <title>Pathology Details | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+    @foreach($tests as $test)
+    <meta name="test-{{$test->id}}-title" content="Get Details of {{$test->test_name}} - Type: {{$test->test_type}} | Affordable Prices">
+    <meta name="test-{{$test->id}}-description" content="Check {{$test->test_name}} details, categorized under {{$test->test_type}}. Price: ₹{{$test->test_price}}. Available at convenient timings.">
+    <meta name="test-{{$test->id}}-keywords" content="Pathology Test, {{$test->test_name}}, {{$test->test_type}}, Lab Test, Price, Availability">
+    <meta name="test-{{$test->id}}-author" content="Pathology Lab">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:test-{{$test->id}}-title" content="{{$test->test_name}} - {{$test->test_type}}">
+    <meta property="og:test-{{$test->id}}-description" content="Avail {{$test->test_name}} at ₹{{$test->test_price}}. Check timings and availability.">
+    <meta property="og:test-{{$test->id}}-image" content="{{ asset('img/path.png') }}">
+    <meta property="og:test-{{$test->id}}-url" content="{{ url()->current() }}/test/{{$test->id}}">
+    @endforeach
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">
