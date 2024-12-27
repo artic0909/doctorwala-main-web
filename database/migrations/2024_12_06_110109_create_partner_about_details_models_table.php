@@ -15,6 +15,10 @@ return new class extends Migration
 
             $table->id();
             $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->text('about_details')->nullable();
             $table->text('mission_details')->nullable();
             $table->text('vision_details')->nullable();

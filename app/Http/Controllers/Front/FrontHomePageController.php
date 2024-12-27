@@ -7,6 +7,7 @@ use App\Models\PartnerAllOPDDoctorModel;
 use App\Models\PartnerAllPathologyTestModel;
 use Illuminate\Http\Request;
 use App\Models\PartnerDoctorContactModel;
+use App\Models\PartnerFeedback;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerPathologyContactModel;
 use App\Models\SuperAboutusModel;
@@ -29,9 +30,13 @@ class FrontHomePageController extends Controller
         $opds = PartnerOPDContactModel::with('banner')->get();
         $paths = PartnerPathologyContactModel::with('banner')->get();
         $docs = PartnerDoctorContactModel::with('banner')->get();
+
+        $testi = PartnerFeedback::get();
+
+
         $user = Auth::guard('dwuser')->user();
 
-        return view('index', compact('aboutDetails', 'homeBanners', 'opds', 'paths', 'docs', 'user', 'specialists', 'types'));
+        return view('index', compact('aboutDetails', 'homeBanners', 'opds', 'paths', 'docs', 'user', 'specialists', 'types', 'testi'));
     }
 
 

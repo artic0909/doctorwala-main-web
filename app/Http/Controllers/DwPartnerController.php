@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\CouponHolderModel;
 use App\Models\DwPartnerModel;
 use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerFeedback;
 use App\Models\PartnerOPDBannerModel;
 use App\Models\PartnerPathologyBannerModel;
 use App\Models\SuperAboutusModel;
@@ -31,10 +32,12 @@ class DwPartnerController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $otherBanners = SuperOtherBannerModel::get();
 
+        $testi = PartnerFeedback::get();
+
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
 
-        return view('partner-register', compact('captcha', 'aboutDetails', 'otherBanners'));
+        return view('partner-register', compact('captcha', 'aboutDetails', 'otherBanners', 'testi'));
     }
 
 
@@ -49,10 +52,12 @@ class DwPartnerController extends Controller
         $aboutDetails = SuperAboutusModel::get();
         $otherBanners = SuperOtherBannerModel::get();
 
+        $testi = PartnerFeedback::get();
+
         $captcha = $this->generateCaptcha();
         session(['captcha_text' => $captcha]);
 
-        return view('partner-login', compact('captcha', 'aboutDetails', 'otherBanners'));
+        return view('partner-login', compact('captcha', 'aboutDetails', 'otherBanners', 'testi'));
     }
 
 

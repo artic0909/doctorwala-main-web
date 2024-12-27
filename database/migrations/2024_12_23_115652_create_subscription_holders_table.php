@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('subscription_holders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('dw_partner_models')->onDelete('cascade');
+            $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_subs_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->string('subscription_title');
             $table->decimal('subscription_amount', 10, 2);
             $table->string('transaction_id')->unique();

@@ -380,8 +380,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">User Name</th>
-                                                <th scope="col">User Inquiries</th>
+                                                <th scope="col">Clinic Type</th>
+                                                <th scope="col">Patient Name</th>
+                                                <th scope="col">Patient Inquiries</th>
                                                 <th scope="col">Actions</th>
                                             </tr>
                                         </thead>
@@ -396,6 +397,8 @@
                                             @foreach($patientInquiries as $pi)
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
+
+                                                <td style="font-size: 1rem;"><b>{{$pi->clinic_type}}</b></td>
 
                                                 <td style="font-size: 1rem;"><b>{{$pi->user_name}}</b></td>
 

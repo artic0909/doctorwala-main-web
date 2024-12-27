@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DwPartnerModel;
+use App\Models\SuperAboutusModel;
+use App\Models\SuperOtherBannerModel;
+use App\Models\PartnerFeedback;
 use App\Mail\SendOTPPartner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -14,12 +17,21 @@ class DwPartnerOTPController extends Controller
     // Show OTP form
     public function partnerLoginWithOTPView()
     {
-        return view('partner-otp'); // Your Blade file for Enter email entry
+        $aboutDetails = SuperAboutusModel::get();
+        $otherBanners = SuperOtherBannerModel::get();
+
+        $testi = PartnerFeedback::get();
+
+        return view('partner-otp', compact('aboutDetails', 'otherBanners', 'testi'));
     }
 
     public function partnerLoginWithOTPVerifyView()
     {
-        return view('partner-otp-verify'); // Your Blade file for OTP entry
+        $aboutDetails = SuperAboutusModel::get();
+        $otherBanners = SuperOtherBannerModel::get();
+
+        $testi = PartnerFeedback::get();
+        return view('partner-otp-verify', compact('aboutDetails', 'otherBanners', 'testi'));
     }
 
 

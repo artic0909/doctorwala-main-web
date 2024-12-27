@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>About Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="doctorwala" name="keywords">
+    <meta content="DoctorWala.info is a leading local search engine dedicated to helping individuals in India find the right doctors, pathologists, and OPDs in their local areas. Our platform is designed to simplify the process of locating and connecting with healthcare professionals, ensuring that you receive the best possible care." name="description">
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

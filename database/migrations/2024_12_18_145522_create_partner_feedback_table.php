@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('partner_feedback', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('partners')->onDelete('cascade');
+            $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_feedbacks_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->string('clinic_type');
             $table->string('clinic_name');
             $table->string('user_name');

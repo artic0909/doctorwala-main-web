@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('coupon_holder_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('dw_partner_models')->onDelete('cascade');
+            $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_coupon_holder_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->string('coupon_code');
             $table->string('coupon_amount');
             $table->string('coupon_start_date');

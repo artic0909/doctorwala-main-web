@@ -5,8 +5,30 @@
     <meta charset="utf-8">
     <title>Read Blogs | Doctorwala.info</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+
+
+
+    @foreach($blogs as $blog)
+    <meta name="description" content="{{ $blog->blg_desc }}">
+
+    <!-- Assuming you have tags stored in an array for each blog post -->
+    <meta name="keywords" content="{{ isset($blog->tags) ? implode(',', $blog->tags) : '' }}">
+
+    <meta property="og:title" content="{{ $blog->blg_title }}">
+    <meta property="og:description" content="{{ $blog->blg_desc }}">
+    <meta property="og:image" content="{{ asset('storage/' . $blog->blg_image) }}">
+    <meta property="og:url" content="{{ route('blogpage', ['id' => $blog->id]) }}">
+
+    <meta name="twitter:title" content="{{ $blog->blg_title }}">
+    <meta name="twitter:description" content="{{ $blog->blg_desc }}">
+    <meta name="twitter:image" content="{{ asset('storage/' . $blog->blg_image) }}">
+    @endforeach
+
+
+
+
 
     <!-- Favicon -->
     <link href="fav5.png" rel="icon">

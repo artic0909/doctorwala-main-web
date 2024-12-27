@@ -515,46 +515,20 @@
                 <div class="col-lg-7">
                     <div class="owl-carousel testimonial-carousel rounded p-5 wow zoomIn" data-wow-delay="0.6s">
 
-
-
+                        @foreach($testi as $t)
                         <div class="testimonial-item text-center text-white">
-                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="img/testilogo.png" alt="">
+                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="{{asset('img/testilogo.png')}}" alt="">
 
                             <p class="testi-text"
                                 style="color: white; opacity: 1; font-weight: 700; font-size: 1.3rem;">
 
-                                <i class="fa-solid fa-2x fa-quote-left"></i>&nbsp;Dolores sed duo clita justo
-                                dolor et stet
-                                lorem kasd dolore lorem ipsum. At
-                                lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.&nbsp;
+                                <i class="fa-solid fa-2x fa-quote-left"></i>&nbsp;{{$t->feedback}}&nbsp;
                                 <i class="fa-solid fa-2x fa-quote-right"></i>
                             </p>
                             <hr class="mx-auto w-25">
-                            <h4 class="text-white mb-0 testi-text">Client Name</h4>
+                            <h4 class="text-white mb-0 testi-text">{{$t->user_name}}</h4>
                         </div>
-
-                        <div class="testimonial-item text-center text-white">
-                            <img class="img-fluid mx-auto rounded mb-4 testi-logo" src="img/testilogo.png" alt="">
-
-                            <p class="testi-text"
-                                style="color: white; opacity: 1; font-weight: 700; font-size: 1.3rem;">
-
-                                <i class="fa-solid fa-2x fa-quote-left"></i>&nbsp;Dolores sed duo clita justo
-                                dolor et stet
-                                lorem kasd dolore lorem ipsum. At
-                                lorem lorem magna ut et, nonumy labore diam erat. Erat dolor rebum sit ipsum.&nbsp;
-                                <i class="fa-solid fa-2x fa-quote-right"></i>
-                            </p>
-                            <hr class="mx-auto w-25">
-                            <h4 class="text-white mb-0 testi-text">Client Name</h4>
-                        </div>
-
-
-
-
-
-
-
+                        @endforeach
 
                     </div>
                 </div>
@@ -562,6 +536,7 @@
         </div>
     </div>
     <!-- Testimonial End -->
+
 
 
 

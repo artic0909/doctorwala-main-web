@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('partner_gallery_models', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('currently_loggedin_partner_id')->references('id')->on('partners')->onDelete('cascade');
+            $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_gallery_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->json('images'); // Stores multiple images as JSON array
             $table->timestamps();
         });

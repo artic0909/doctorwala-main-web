@@ -155,7 +155,8 @@
                                 <div class="col-12">
                                     <p for="subciption_amount" class="form-label text-white fw-bolder fs-5"
                                         style="text-align: left;">Subscribe Now</p>
-                                    <a href="/partnerpanel/partner-subscription" class="btn btn-dark w-100 py-3">Go With Subscription</a>
+                                    <!-- <a href="/partnerpanel/partner-subscription" class="btn btn-dark w-100 py-3">Go With Subscription</a> -->
+                                    <a href="" class="btn btn-dark w-100 py-3">Coming Soon</a>
                                 </div>
 
 

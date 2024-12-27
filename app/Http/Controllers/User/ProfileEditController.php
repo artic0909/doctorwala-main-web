@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\PartnerDoctorContactModel;
 use App\Models\PartnerAllPathologyTestModel;
+use App\Models\PartnerFeedback;
 use App\Models\PartnerOPDContactModel;
 use App\Models\PartnerPathologyContactModel;
 use App\Models\SuperAboutusModel;
@@ -36,8 +37,10 @@ class ProfileEditController extends Controller
         $paths = PartnerPathologyContactModel::with('banner')->get();
         $docs = PartnerDoctorContactModel::with('banner')->get();
 
+        $testi = PartnerFeedback::get();
+
         $user = Auth::guard('dwuser')->user();
-        return view('index', compact('user', 'aboutDetails', 'homeBanners', 'opds', 'paths', 'docs', 'specialists', 'types'));
+        return view('index', compact('user', 'aboutDetails', 'homeBanners', 'opds', 'paths', 'docs', 'specialists', 'types', 'testi'));
     }
 
 

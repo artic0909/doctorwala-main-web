@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('partner_doctor_banner_models', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_doc_banner_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->string('doctorbanner');
             $table->timestamps();
         });

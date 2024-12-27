@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('partner_inquiry_models', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('currently_loggedin_partner_id');
+            $table->foreign('currently_loggedin_partner_id', 'partner_inquiry_currently_loggedin_partner_id')
+                ->references('id')
+                ->on('dw_partner_models')
+                ->onDelete('cascade');
             $table->string('partner_contact_person_name');
             $table->string('partner_mobile_number');
             $table->string('partner_email');
