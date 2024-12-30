@@ -569,6 +569,7 @@
                                                                 Day <span class="text-danger">*</span></label>
                                                             <select name="test_day[]" id="test_day" class="form-control" style="height: 55px;">
                                                                 <option selected>Select Day</option>
+                                                                <option value="None">None</option>
                                                                 <option value="All Day">All Day</option>
                                                                 <option value="Monday">Monday</option>
                                                                 <option value="Tuesday">Tuesday</option>

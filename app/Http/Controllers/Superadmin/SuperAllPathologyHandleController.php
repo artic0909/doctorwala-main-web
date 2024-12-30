@@ -162,12 +162,12 @@ class SuperAllPathologyHandleController extends Controller
             'test_name' => 'required|string|max:255',
             'test_type' => 'nullable|string|max:255',
             'test_price' => 'required|numeric',
-            'test_day' => 'required|array',
-            'test_day.*' => 'required|string|max:255',
-            'test_start_time' => 'required|array',
-            'test_start_time.*' => 'required|date_format:H:i',
-            'test_end_time' => 'required|array',
-            'test_end_time.*' => 'required|date_format:H:i|after:test_start_time.*',
+            'test_day' => 'nullable|array',
+            'test_day.*' => 'nullable|string|max:255',
+            'test_start_time' => 'nullable|array',
+            'test_start_time.*' => 'nullable|date_format:H:i',
+            'test_end_time' => 'nullable|array',
+            'test_end_time.*' => 'nullable|date_format:H:i|after:test_start_time.*',
         ]);
 
         // Prepare day and time data

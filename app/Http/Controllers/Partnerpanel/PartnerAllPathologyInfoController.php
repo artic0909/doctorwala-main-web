@@ -54,12 +54,12 @@ class PartnerAllPathologyInfoController extends Controller
             'test_name' => 'required|string',
             'test_type' => 'required|string',
             'test_price' => 'required|numeric',
-            'test_day' => 'required|array',
-            'test_day.*' => 'required|string|max:255',
-            'test_start_time' => 'required|array',
-            'test_start_time.*' => 'required|date_format:H:i',
-            'test_end_time' => 'required|array',
-            'test_end_time.*' => 'required|date_format:H:i',
+            'test_day' => 'nullable|array',
+            'test_day.*' => 'nullable|string|max:255',
+            'test_start_time' => 'nullable|array',
+            'test_start_time.*' => 'nullable|date_format:H:i',
+            'test_end_time' => 'nullable|array',
+            'test_end_time.*' => 'nullable|date_format:H:i',
         ]);
 
         // Prepare visit day and time data
@@ -127,12 +127,12 @@ class PartnerAllPathologyInfoController extends Controller
             'test_name' => 'string|max:255',
             'test_type' => 'string|max:255',
             'test_price' => 'numeric',
-            'test_day' => 'array',
-            'test_day.*' => 'string|max:255',
-            'test_start_time' => 'array',
-            'test_start_time.*' => 'date_format:H:i',
-            'test_end_time' => 'array',
-            'test_end_time.*' => 'date_format:H:i',
+            'test_day' => 'nullable|array',
+            'test_day.*' => 'nullable|string|max:255',
+            'test_start_time' => 'nullable|array',
+            'test_start_time.*' => 'nullable|date_format:H:i',
+            'test_end_time' => 'nullable|array',
+            'test_end_time.*' => 'nullable|date_format:H:i',
             'status' => 'string|max:255',
         ]);
 

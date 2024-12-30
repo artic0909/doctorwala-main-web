@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <title>Details | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    
-    
+
+
     @foreach($doctors as $doctor)
-        <meta name="doctor-{{$doctor->id}}-title" content="Find Top Doctor - {{$doctor->doctor_name}} | Specialization: {{$doctor->doctor_specialist}}">
-        <meta name="doctor-{{$doctor->id}}-description" content="Consult with {{$doctor->doctor_name}}, a {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}. Check availability and clinic hours.">
-        <meta name="doctor-{{$doctor->id}}-keywords" content="Doctor, {{$doctor->doctor_name}}, {{$doctor->doctor_specialist}}, Consultation, Fees, {{$doctor->clinic_city ?? 'Unknown City'}}, {{$doctor->clinic_state ?? 'Unknown State'}}">
-        <meta name="doctor-{{$doctor->id}}-author" content="{{$doctor->doctor_name}}">
-        
-        <!-- Open Graph Tags -->
-        <meta property="og:doctor-{{$doctor->id}}-title" content="{{$doctor->doctor_name}} - {{$doctor->doctor_specialist}}">
-        <meta property="og:doctor-{{$doctor->id}}-description" content="Consult {{$doctor->doctor_name}}, a specialist in {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}.">
-        <meta property="og:doctor-{{$doctor->id}}-image" content="{{ asset('img/doctor.png') }}">
-        <meta property="og:doctor-{{$doctor->id}}-url" content="{{ url()->current() }}/doctor/{{$doctor->id}}">
+    <meta name="doctor-{{$doctor->id}}-title" content="Find Top Doctor - {{$doctor->doctor_name}} | Specialization: {{$doctor->doctor_specialist}}">
+    <meta name="doctor-{{$doctor->id}}-description" content="Consult with {{$doctor->doctor_name}}, a {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}. Check availability and clinic hours.">
+    <meta name="doctor-{{$doctor->id}}-keywords" content="Doctor, {{$doctor->doctor_name}}, {{$doctor->doctor_specialist}}, Consultation, Fees, {{$doctor->clinic_city ?? 'Unknown City'}}, {{$doctor->clinic_state ?? 'Unknown State'}}">
+    <meta name="doctor-{{$doctor->id}}-author" content="{{$doctor->doctor_name}}">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:doctor-{{$doctor->id}}-title" content="{{$doctor->doctor_name}} - {{$doctor->doctor_specialist}}">
+    <meta property="og:doctor-{{$doctor->id}}-description" content="Consult {{$doctor->doctor_name}}, a specialist in {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}.">
+    <meta property="og:doctor-{{$doctor->id}}-image" content="{{ asset('img/doctor.png') }}">
+    <meta property="og:doctor-{{$doctor->id}}-url" content="{{ url()->current() }}/doctor/{{$doctor->id}}">
     @endforeach
 
     <!-- Favicon -->
@@ -991,7 +991,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Day</th>
                                     <th scope="col">Time</th>
-                                    <th scope="col">Status</th> 
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1001,13 +1001,13 @@
                                     <th scope="row">1</th>
                                     <td>{{ $visit['day'] }}</td>
                                     <td>
-                                        @if(!empty($visit['start_time']) && !empty($visit['end_time']))
-                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} - {{ \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') }}
+                                        @if(!empty($visit['start_time']) || !empty($visit['end_time']))
+                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} -
+                                        {{ !empty($visit['end_time']) ? \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') : 'Not Set' }}
                                         @else
                                         No time available
                                         @endif
                                     </td>
-
                                     <td>
                                         @if($doctor->status == 'Available')
                                         <span class="badge bg-success">{{ $doctor->status }}</span>
@@ -1017,9 +1017,7 @@
                                         <span class="badge bg-secondary">{{ $doctor->status }}</span> <!-- Default for other statuses -->
                                         @endif
                                     </td>
-
                                 </tr>
-
                                 @endforeach
                                 @else
                                 <tr class="text-muted">

@@ -1000,15 +1000,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @if(!empty($test->test_day_time) && is_array($test->test_day_time))
                                 @foreach($test->test_day_time as $visit)
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>{{ $visit['day'] }}</td>
                                     <td>
-                                        @if(!empty($visit['start_time']) && !empty($visit['end_time']))
-                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} - {{ \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') }}
+                                        @if(!empty($visit['start_time']) || !empty($visit['end_time']))
+                                        {{ \Carbon\Carbon::parse($visit['start_time'])->format('h:i A') }} -
+                                        {{ !empty($visit['end_time']) ? \Carbon\Carbon::parse($visit['end_time'])->format('h:i A') : 'Not Set' }}
                                         @else
                                         No time available
                                         @endif
@@ -1023,15 +1023,14 @@
                                         <span class="badge bg-secondary">{{ $test->status }}</span> <!-- Default for other statuses -->
                                         @endif
                                     </td>
-
                                 </tr>
-
                                 @endforeach
                                 @else
                                 <tr class="text-muted">
                                     <td colspan="3">No data found</td>
                                 </tr>
                                 @endif
+
 
                             </tbody>
                         </table>
