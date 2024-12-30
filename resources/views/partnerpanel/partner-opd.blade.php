@@ -373,7 +373,8 @@
 
                             <div class="row">
                                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Add OPD Details !</h3>
+
+                                    <h3 class="font-weight-bold">Add OPD Details ! &nbsp;&nbsp; Total: <span class="text-danger">{{$allOPDs}}</span></h3>
                                     <h6 class="font-weight-normal mb-0"><span><i class="fa fa-stethoscope text-danger"
                                                 aria-hidden="true"></i></span>&nbsp;Upload details of all the doctors in
                                         your clinic for users to view.
@@ -394,16 +395,6 @@
 
                                         <div class="from-view row  mt-5">
 
-
-
-                                            <div class="col-3 form-group">
-                                                <label for="doctor_name" style="font-weight: 700;"><i
-                                                        class="fa-solid fa-user-doctor text-primary"></i>
-                                                    Doctor Name <span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" id="doctor_name" name="doctor_name"
-                                                    style="height: 55px;" placeholder="Enter Doctor Name *">
-                                            </div>
-
                                             <div class="col-3 form-group">
                                                 <label for="doctor_designation" style="font-weight: 700;"><i
                                                         class="fa fa-graduation-cap text-primary"
@@ -420,54 +411,27 @@
 
 
 
+                                            <div class="col-3 form-group">
+                                                <label for="doctor_name" style="font-weight: 700;"><i
+                                                        class="fa-solid fa-user-doctor text-primary"></i>
+                                                    Doctor Name <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="doctor_name" name="doctor_name"
+                                                    style="height: 55px;" placeholder="Enter Doctor Name *">
+                                            </div>
+
+
+
                                             <div class="col-4 form-group">
                                                 <label for="doctor_specialist" style="font-weight: 700;"><i
                                                         class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
                                                     Specialist <span class="text-danger">*</span></label>
-                                                <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
+                                                <input type="text" class="form-control" id="doctor_specialist" name="doctor_specialist" style="height: 55px;" placeholder="Enter Specialist *">
+                                                <!-- <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
                                                     <option selected>---Select Specialist---</option>
-                                                    <option value="Allergy Immunology">Allergy and Immunology</option>
-                                                    <option value="Anesthesiology">Anesthesiology</option>
-                                                    <option value="Cardiology">Cardiology</option>
-                                                    <option value="Dermatology">Dermatology</option>
-                                                    <option value="Emergency Medicine">Emergency Medicine</option>
-                                                    <option value="Endocrinology">Endocrinology</option>
-                                                    <option value="Family Medicine">Family Medicine</option>
-                                                    <option value="Gastroenterology">Gastroenterology</option>
-                                                    <option value="General Surgery">General Surgery</option>
-                                                    <option value="Genetics">Genetics</option>
-                                                    <option value="Geriatrics">Geriatrics</option>
-                                                    <option value="Hematology">Hematology</option>
-                                                    <option value="Infectious Disease">Infectious Disease</option>
-                                                    <option value="Internal Medicine">Internal Medicine</option>
-                                                    <option value="Nephrology">Nephrology</option>
-                                                    <option value="Neurology">Neurology</option>
-                                                    <option value="Neurosurgery">Neurosurgery</option>
-                                                    <option value="Nuclear Medicine">Nuclear Medicine</option>
-                                                    <option value="Obstetrics Gynecology">Obstetrics and Gynecology</option>
-                                                    <option value="Oncology">Oncology</option>
-                                                    <option value="Ophthalmology">Ophthalmology</option>
-                                                    <option value="Orthopedics">Orthopedics</option>
-                                                    <option value="Otolaryngology">Otolaryngology (ENT)</option>
-                                                    <option value="Pain Management">Pain Management</option>
-                                                    <option value="Palliative Care">Palliative Care</option>
-                                                    <option value="Pathology">Pathology</option>
-                                                    <option value="Pediatrics">Pediatrics</option>
-                                                    <option value="Pharmacology">Pharmacology</option>
-                                                    <option value="Physical Medicine Rehabilitation">Physical Medicine and Rehabilitation</option>
-                                                    <option value="Plastic Surgery">Plastic Surgery</option>
-                                                    <option value="Proctology">Proctology</option>
-                                                    <option value="Psychiatry">Psychiatry</option>
-                                                    <option value="Pulmonology">Pulmonology</option>
-                                                    <option value="Public Health">Public Health</option>
-                                                    <option value="Radiology">Radiology</option>
-                                                    <option value="Rheumatology">Rheumatology</option>
-                                                    <option value="Sports Medicine">Sports Medicine</option>
-                                                    <option value="Thoracic Surgery">Thoracic Surgery</option>
-                                                    <option value="Urology">Urology</option>
-                                                    <option value="Vascular Surgery">Vascular Surgery</option>
 
-                                                </select>
+
+
+                                                </select> -->
                                             </div>
 
 
@@ -484,6 +448,16 @@
 
 
 
+                                            <div class="col-12 form-group">
+                                                <label for="doctor_more" style="font-weight: 700;"><i
+                                                        class="fa fa-info-circle text-primary"
+                                                        aria-hidden="true"></i>
+                                                    More Details</label>
+                                                <textarea name="doctor_more" id="doctor_more" class="form-control"  rows="7" placeholder="Enter More Details About Doctor"></textarea>
+                                            </div>
+
+
+
 
 
                                             <!-- multiple -->
@@ -496,6 +470,7 @@
                                                         Day <span class="text-danger">*</span></label>
                                                     <select name="doctor_visit_day[]" id="doctor_visit_day" class="form-control" style="height: 55px;">
                                                         <option selected>---Select Day---</option>
+                                                        <option value="None">None</option>
                                                         <option value="All Day">All Day</option>
                                                         <option value="Monday">Monday</option>
                                                         <option value="Tuesday">Tuesday</option>
@@ -890,13 +865,13 @@
     <!-- If i choose All Day in then it not show btn-->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             const daySelect = document.getElementById('doctor_visit_day');
             const addButton = document.getElementById('add-section-button');
 
-          
+
             function handleDaySelection() {
-               
+
                 if (daySelect.value === "All Day") {
                     addButton.style.display = 'none';
                 } else {

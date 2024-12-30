@@ -708,6 +708,9 @@
                                         <li class="list-group-item"><strong style="text-transform: capitalize;">Designation : {{$doctor->doctor_designation}}</strong></li>
                                         <li class="list-group-item"><strong style="text-transform: capitalize;">Specialist : {{$doctor->doctor_specialist}}</strong></li>
                                         <li class="list-group-item"><strong>Fees : ₹ {{$doctor->doctor_fees}}</strong></li>
+                                        @if($doctor->doctor_more)
+                                        <li class="list-group-item"><strong>More : {{$doctor->doctor_more}}</strong></li>
+                                        @endif
                                     </ul>
                                     </p>
                                     <div class="p-4">
@@ -976,6 +979,10 @@
                     <p class="sp" style="text-transform: capitalize;"><strong>Specialization: </strong>{{$doctor->doctor_specialist}}</p>
                     <p class="fees"><strong>Fees: </strong>₹ {{$doctor->doctor_fees}}</p>
 
+                    @if($doctor->doctor_more)
+                    <p class="more"><strong>More: </strong>{{$doctor->doctor_more}}</p>
+                    @endif
+
 
                     <div class="time">
                         <table class="table">
@@ -984,7 +991,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Day</th>
                                     <th scope="col">Time</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Status</th> 
                                 </tr>
                             </thead>
                             <tbody>

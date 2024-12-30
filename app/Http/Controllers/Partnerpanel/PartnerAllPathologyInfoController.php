@@ -23,6 +23,8 @@ class PartnerAllPathologyInfoController extends Controller
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
+        $allpaths = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->count();
+
         $partner = Auth::guard('partner')->user();
         $registrationTypes = $partner->registration_type;
 
@@ -95,7 +97,7 @@ class PartnerAllPathologyInfoController extends Controller
         $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-        $storedData = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->get();
+        $storedData = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->paginate(6);
         foreach ($storedData as $data) {
             $data->test_day_time = json_decode($data->test_day_time, true);
         }

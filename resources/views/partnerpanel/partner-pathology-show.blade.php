@@ -364,14 +364,56 @@
 
 
                             <div class="row">
-                                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                                    <h3 class="font-weight-bold">Your Pathology Details !</h3>
+                                <div class="col-3">
+                                    <h3 class="font-weight-bold">Your Pathology Details ! &nbsp;&nbsp; Total: <span class="text-danger">{{$allpaths}}</span></h3>
                                     <h6 class="font-weight-normal mb-0"><span><i class="fa fa-stethoscope text-danger"
                                                 aria-hidden="true"></i></span>&nbsp;Here is the complete list of your
                                         pathology details.
                                     </h6>
                                 </div>
+
+                                <div class="col-9 d-flex justify-content-end align-items-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                            {{-- Previous Page Link --}}
+                                            @if ($storedData->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                            @else
+                                            <li class="page-item"><a class="page-link" href="{{ $storedData->previousPageUrl() }}">Prev</a></li>
+                                            @endif
+
+                                            {{-- Pagination Elements --}}
+                                            @foreach ($storedData->links()->elements[0] as $page => $url)
+                                            @if ($page == $storedData->currentPage())
+                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                            @endforeach
+
+                                            {{-- Next Page Link --}}
+                                            @if ($storedData->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $storedData->nextPageUrl() }}">Next</a></li>
+                                            @else
+                                            <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                            @endif
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                             <div class="row m-auto">
@@ -597,6 +639,7 @@
                                     <label for="test_day{{ $data->id }}_{{ $index }}"><i class="fa fa-stethoscope text-danger"></i> Day <span class="text-danger">*</span></label>
                                     <select class="form-control mb-2" name="test_day[]" id="test_day{{ $data->id }}_{{ $index }}">
                                         <option selected>{{ $test['day'] }}</option>
+                                        <option value="None">None</option>
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>
                                         <option value="Wednesday">Wednesday</option>

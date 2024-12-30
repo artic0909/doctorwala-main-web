@@ -167,12 +167,13 @@ class SuperAllOPDHandleController extends Controller
             'doctor_designation' => 'required|string|max:255',
             'doctor_specialist' => 'required|string|max:255',
             'doctor_fees' => 'required|numeric',
-            'doctor_visit_day' => 'required|array',
-            'doctor_visit_day.*' => 'required|string|max:255',
-            'doctor_visit_start_time' => 'required|array',
-            'doctor_visit_start_time.*' => 'required|date_format:H:i',
-            'doctor_visit_end_time' => 'required|array',
-            'doctor_visit_end_time.*' => 'required|date_format:H:i',
+            'doctor_more' => 'nullable|string',
+            'doctor_visit_day' => 'nullable|array',
+            'doctor_visit_day.*' => 'nullable|string|max:255',
+            'doctor_visit_start_time' => 'nullable|array',
+            'doctor_visit_start_time.*' => 'nullable|date_format:H:i',
+            'doctor_visit_end_time' => 'nullable|array',
+            'doctor_visit_end_time.*' => 'nullable|date_format:H:i',
         ]);
 
         // Prepare visit day and time data
@@ -192,6 +193,7 @@ class SuperAllOPDHandleController extends Controller
             'doctor_designation' => $request->doctor_designation,
             'doctor_specialist' => $request->doctor_specialist,
             'doctor_fees' => $request->doctor_fees,
+            'doctor_more' => $request->doctor_more,
             'visit_day_time' => json_encode($visitDayTime), // Ensure it's stored as JSON
         ];
 

@@ -23,6 +23,9 @@ class PartnerAllOPDInfoController extends Controller
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
+        // all opds counting
+        $allOPDs = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->count();
+
         $partner = Auth::guard('partner')->user();
         $registrationTypes = $partner->registration_type;
 
@@ -33,7 +36,7 @@ class PartnerAllOPDInfoController extends Controller
         $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
         $contactDetails = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-opd', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes', 'registrationTypess'));
+        return view('partnerpanel.partner-opd', compact('opdBanner', 'pathologyBanner','doctorBanner', 'contactDetails', 'registrationTypes', 'registrationTypess', 'allOPDs'));
     }
 
 
@@ -52,12 +55,13 @@ class PartnerAllOPDInfoController extends Controller
             'doctor_designation' => 'required|string|max:255',
             'doctor_specialist' => 'required|string|max:255',
             'doctor_fees' => 'required|numeric',
-            'doctor_visit_day' => 'required|array',
-            'doctor_visit_day.*' => 'required|string|max:255',
-            'doctor_visit_start_time' => 'required|array',
-            'doctor_visit_start_time.*' => 'required|date_format:H:i',
-            'doctor_visit_end_time' => 'required|array',
-            'doctor_visit_end_time.*' => 'required|date_format:H:i',
+            'doctor_more' => 'nullable|string',
+            'doctor_visit_day' => 'nullable|array',
+            'doctor_visit_day.*' => 'nullable|string|max:255',
+            'doctor_visit_start_time' => 'nullable|array',
+            'doctor_visit_start_time.*' => 'nullable|date_format:H:i',
+            'doctor_visit_end_time' => 'nullable|array',
+            'doctor_visit_end_time.*' => 'nullable|date_format:H:i',
         ]);
 
         // Prepare visit day and time data
@@ -77,6 +81,7 @@ class PartnerAllOPDInfoController extends Controller
             'doctor_designation' => $request->doctor_designation,
             'doctor_specialist' => $request->doctor_specialist,
             'doctor_fees' => $request->doctor_fees,
+            'doctor_more' => $request->doctor_more,
             'visit_day_time' => json_encode($visitDayTime), // Ensure it's stored as JSON
         ];
 
@@ -96,7 +101,7 @@ class PartnerAllOPDInfoController extends Controller
         $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
-        $storedData = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->get();
+        $storedData = PartnerAllOPDDoctorModel::where('currently_loggedin_partner_id', $partnerId)->paginate(6);
         foreach ($storedData as $data) {
             $data->visit_day_time = json_decode($data->visit_day_time, true);
         }
@@ -127,12 +132,13 @@ class PartnerAllOPDInfoController extends Controller
             'doctor_designation' => 'string|max:255',
             'doctor_specialist' => 'string|max:255',
             'doctor_fees' => 'numeric',
-            'doctor_visit_day' => 'array',
-            'doctor_visit_day.*' => 'string|max:255',
-            'doctor_visit_start_time' => 'array',
-            'doctor_visit_start_time.*' => 'date_format:H:i',
-            'doctor_visit_end_time' => 'array',
-            'doctor_visit_end_time.*' => 'date_format:H:i',
+            'doctor_more' => 'string',
+            'doctor_visit_day' => 'nullable|array',
+            'doctor_visit_day.*' => 'nullable|string|max:255',
+            'doctor_visit_start_time' => 'nullable|array',
+            'doctor_visit_start_time.*' => 'nullable|date_format:H:i',
+            'doctor_visit_end_time' => 'nullable|array',
+            'doctor_visit_end_time.*' => 'nullable|date_format:H:i',
             'status' => 'string|max:255',
         ]);
 
@@ -161,6 +167,7 @@ class PartnerAllOPDInfoController extends Controller
             'doctor_designation' => $request->doctor_designation,
             'doctor_specialist' => $request->doctor_specialist,
             'doctor_fees' => $request->doctor_fees,
+            'doctor_more' => $request->doctor_more,
             'status' => $request->status,
             'visit_day_time' => json_encode($visitDayTime), // Serialize to JSON
         ];

@@ -459,21 +459,21 @@
 
                                                     <div class="actions d-flex flex-wrap">
                                                         <a href="" data-target="#myDeleteModal{{$opd->id}}" data-toggle="modal"
-                                                            class="ed-btn ml-3">
+                                                            class="ed-btn ml-3 mb-2">
                                                             <i class="fa-solid fa-trash-can text-danger"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
 
                                                         <a href="/superadmin/super-edit-opd-details/{{$opd->id}}"
-                                                            class="ed-btn ml-3">
+                                                            class="ed-btn ml-3 mb-2">
                                                             <i class="fa-solid fa-pen-to-square text-primaryy"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>
 
 
                                                         <a href="/superadmin/super-addopd-doctor/{{$opd->pid}}"
-                                                            class="ed-btn ml-3">
+                                                            class="ed-btn ml-3 mb-2">
                                                             <i class="fa-solid fa-plus text-success"
                                                                 style="font-size: 1rem;"></i>
                                                         </a>

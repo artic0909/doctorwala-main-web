@@ -498,7 +498,7 @@
                                                     value="{{ $opd->clinic_city ?? '' }}" style="height: 55px;">
                                             </div>
 
-                                            <div class="col-12 form-group">
+                                            <div class="col-8 form-group">
                                                 <label for="clinic_google_map_link" style="font-weight: 700;"><i
                                                         class="fa-solid fa-map-location-dot text-primary"></i> Google Map
                                                 </label>

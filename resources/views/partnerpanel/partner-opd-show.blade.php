@@ -362,15 +362,58 @@
                         <div class="col-md-12 grid-margin">
 
 
+
                             <div class="row">
-                                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                                <div class="col-3">
                                     <h3 class="font-weight-bold">Your OPD Details !</h3>
                                     <h6 class="font-weight-normal mb-0"><span><i class="fa fa-stethoscope text-danger"
                                                 aria-hidden="true"></i></span>&nbsp;Here is the complete list of your
                                         OPD details.
                                     </h6>
                                 </div>
+
+                                <div class="col-9 d-flex justify-content-end align-items-center">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination">
+                                            {{-- Previous Page Link --}}
+                                            @if ($storedData->onFirstPage())
+                                            <li class="page-item disabled"><span class="page-link">Prev</span></li>
+                                            @else
+                                            <li class="page-item"><a class="page-link" href="{{ $storedData->previousPageUrl() }}">Prev</a></li>
+                                            @endif
+
+                                            {{-- Pagination Elements --}}
+                                            @foreach ($storedData->links()->elements[0] as $page => $url)
+                                            @if ($page == $storedData->currentPage())
+                                            <li class="page-item active"><span class="page-link">{{ $page }}</span></li>
+                                            @else
+                                            <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                                            @endif
+                                            @endforeach
+
+                                            {{-- Next Page Link --}}
+                                            @if ($storedData->hasMorePages())
+                                            <li class="page-item"><a class="page-link" href="{{ $storedData->nextPageUrl() }}">Next</a></li>
+                                            @else
+                                            <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                            @endif
+                                        </ul>
+                                    </nav>
+                                </div>
+
                             </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
                             <div class="row m-auto">
@@ -387,6 +430,7 @@
                                                 <th scope="col">Designation</th>
                                                 <th scope="col">Doctor Name</th>
                                                 <th scope="col">Specialization</th>
+                                                <th scope="col">More</th>
                                                 <th scope="col">Day & Time</th>
                                                 <th scope="col">Fees</th>
                                             </tr>
@@ -436,6 +480,11 @@
                                                 <!-- Doctor Specialist -->
                                                 <td style="font-size: 1.03rem;">
                                                     <p class="m-0"><b>{{ $data->doctor_specialist }}</b></p>
+                                                </td>
+
+                                                <!-- Doctor More -->
+                                                <td style="font-size: 1.03rem;">
+                                                    <p class="m-0"><b>{{ $data->doctor_more }}</b></p>
                                                 </td>
 
                                                 <!-- Doctor Visit Days and Times -->
@@ -539,57 +588,18 @@
 
                                 <div class="form-group">
                                     <label for="doctor_specialist"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Doctor Specialist <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="doctor_specialist" id="doctor_specialist">
-                                        <option selected>{{ $data->doctor_specialist }}</option>
-                                        <option>---Select Specialist---</option>
-                                        <option value="allergy_immunology">Allergy and Immunology</option>
-                                        <option value="anesthesiology">Anesthesiology</option>
-                                        <option value="cardiology">Cardiology</option>
-                                        <option value="dermatology">Dermatology</option>
-                                        <option value="endocrinology">Endocrinology</option>
-                                        <option value="emergency_medicine">Emergency Medicine</option>
-                                        <option value="family_medicine">Family Medicine</option>
-                                        <option value="gastroenterology">Gastroenterology</option>
-                                        <option value="general_surgery">General Surgery</option>
-                                        <option value="geriatrics">Geriatrics</option>
-                                        <option value="hematology">Hematology</option>
-                                        <option value="infectious_disease">Infectious Disease</option>
-                                        <option value="internal_medicine">Internal Medicine</option>
-                                        <option value="neurology">Neurology</option>
-                                        <option value="neurosurgery">Neurosurgery</option>
-                                        <option value="obstetrics_gynecology">Obstetrics and Gynecology
-                                        </option>
-                                        <option value="oncology">Oncology</option>
-                                        <option value="ophthalmology">Ophthalmology</option>
-                                        <option value="orthopedics">Orthopedics</option>
-                                        <option value="otolaryngology">Otolaryngology (ENT)</option>
-                                        <option value="pediatrics">Pediatrics</option>
-                                        <option value="plastic_surgery">Plastic Surgery</option>
-                                        <option value="psychiatry">Psychiatry</option>
-                                        <option value="pulmonology">Pulmonology</option>
-                                        <option value="radiology">Radiology</option>
-                                        <option value="rheumatology">Rheumatology</option>
-                                        <option value="sports_medicine">Sports Medicine</option>
-                                        <option value="urology">Urology</option>
-                                        <option value="vascular_surgery">Vascular Surgery</option>
-                                        <option value="nephrology">Nephrology</option>
-                                        <option value="pathology">Pathology</option>
-                                        <option value="palliative_care">Palliative Care</option>
-                                        <option value="physical_medicine_rehabilitation">Physical Medicine
-                                            and Rehabilitation</option>
-                                        <option value="proctology">Proctology</option>
-                                        <option value="thoracic_surgery">Thoracic Surgery</option>
-                                        <option value="genetics">Genetics</option>
-                                        <option value="nuclear_medicine">Nuclear Medicine</option>
-                                        <option value="pain_management">Pain Management</option>
-                                        <option value="public_health">Public Health</option>
-                                        <option value="pharmacology">Pharmacology</option>
-                                    </select>
+                                    
+                                    <input type="text" class="form-control" name="doctor_specialist" id="doctor_specialist" value="{{ $data->doctor_specialist }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="doctor_fees"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> Doctor Fees <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" name="doctor_fees" id="doctor_fees" value="{{ $data->doctor_fees }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="doctor_more"><i class="fa fa-stethoscope text-danger" aria-hidden="true"></i> More Details <span class="text-danger">*</span></label>
+                                    <textarea name="doctor_more" class="form-control" id="doctor_more" rows="3">{{ $data->doctor_more }}</textarea>
                                 </div>
 
                                 <label><i class="fa fa-calendar-days text-danger" aria-hidden="true"></i> Visiting Schedules</label>
@@ -601,6 +611,7 @@
                                     <select class="form-control mb-2" name="doctor_visit_day[]" id="doctor_visit_day_{{ $data->id }}_{{ $index }}">
                                         <option selected>{{ $visit['day'] }}</option>
                                         <option>---Select Day---</option>
+                                        <option value="None">None</option>
                                         <option value="All Day">All Day</option>
                                         <option value="Monday">Monday</option>
                                         <option value="Tuesday">Tuesday</option>

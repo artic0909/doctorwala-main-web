@@ -15,6 +15,7 @@ class PartnerAllOPDDoctorModel extends Model
         'doctor_designation',
         'doctor_specialist',
         'doctor_fees',
+        'doctor_more',
         'visit_day_time',
         'status',
     ];

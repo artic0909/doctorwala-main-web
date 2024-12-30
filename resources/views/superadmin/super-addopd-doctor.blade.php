@@ -479,68 +479,8 @@
                                                         <label for="doctor_specialist" style="font-weight: 700;"><i
                                                                 class="fa fa-stethoscope text-primary" aria-hidden="true"></i>
                                                             Specialist <span class="text-danger">*</span></label>
-                                                        <select name="doctor_specialist" id="doctor_specialist" class="form-control" style="height: 55px;">
-                                                            <option selected>---Select Specialist---</option>
-                                                            <option value="Addiction Medicine">Addiction Medicine</option>
-                                                            <option value="Allergy Immunology">Allergy and Immunology</option>
-                                                            <option value="Anesthesiology">Anesthesiology</option>
-                                                            <option value="Aviation Medicine">Aviation Medicine</option>
-                                                            <option value="Bariatric Medicine">Bariatric Medicine</option>
-                                                            <option value="Cardiology">Cardiology</option>
-                                                            <option value="Clinical Genetics">Clinical Genetics</option>
-                                                            <option value="Clinical Pharmacology">Clinical Pharmacology</option>
-                                                            <option value="Critical Care Medicine">Critical Care Medicine</option>
-                                                            <option value="Dermatology">Dermatology</option>
-                                                            <option value="Emergency Medicine">Emergency Medicine</option>
-                                                            <option value="Endocrinology">Endocrinology</option>
-                                                            <option value="Family Medicine">Family Medicine</option>
-                                                            <option value="Forensic Medicine">Forensic Medicine</option>
-                                                            <option value="Gastroenterology">Gastroenterology</option>
-                                                            <option value="General Practice">General Practice</option>
-                                                            <option value="General Surgery">General Surgery</option>
-                                                            <option value="Genetics">Genetics</option>
-                                                            <option value="Geriatrics">Geriatrics</option>
-                                                            <option value="Hematology">Hematology</option>
-                                                            <option value="Hepatology">Hepatology</option>
-                                                            <option value="Infectious Disease">Infectious Disease</option>
-                                                            <option value="Internal Medicine">Internal Medicine</option>
-                                                            <option value="Lifestyle Medicine">Lifestyle Medicine</option>
-                                                            <option value="Medical Oncology">Medical Oncology</option>
-                                                            <option value="Neonatology">Neonatology</option>
-                                                            <option value="Nephrology">Nephrology</option>
-                                                            <option value="Neurology">Neurology</option>
-                                                            <option value="Neurosurgery">Neurosurgery</option>
-                                                            <option value="Nuclear Medicine">Nuclear Medicine</option>
-                                                            <option value="Obstetrics Gynecology">Obstetrics and Gynecology</option>
-                                                            <option value="Occupational Medicine">Occupational Medicine</option>
-                                                            <option value="Oncology">Oncology</option>
-                                                            <option value="Ophthalmology">Ophthalmology</option>
-                                                            <option value="Orthopedics">Orthopedics</option>
-                                                            <option value="Otolaryngology">Otolaryngology (ENT)</option>
-                                                            <option value="Pain Management">Pain Management</option>
-                                                            <option value="Palliative Care">Palliative Care</option>
-                                                            <option value="Pathology">Pathology</option>
-                                                            <option value="Pediatrics">Pediatrics</option>
-                                                            <option value="Pharmacology">Pharmacology</option>
-                                                            <option value="Physical Medicine Rehabilitation">Physical Medicine and Rehabilitation</option>
-                                                            <option value="Plastic Surgery">Plastic Surgery</option>
-                                                            <option value="Proctology">Proctology</option>
-                                                            <option value="Psychiatry">Psychiatry</option>
-                                                            <option value="Pulmonology">Pulmonology</option>
-                                                            <option value="Public Health">Public Health</option>
-                                                            <option value="Radiology">Radiology</option>
-                                                            <option value="Reproductive Endocrinology">Reproductive Endocrinology</option>
-                                                            <option value="Rheumatology">Rheumatology</option>
-                                                            <option value="Sleep Medicine">Sleep Medicine</option>
-                                                            <option value="Sports Medicine">Sports Medicine</option>
-                                                            <option value="Thoracic Surgery">Thoracic Surgery</option>
-                                                            <option value="Toxicology">Toxicology</option>
-                                                            <option value="Transplant Surgery">Transplant Surgery</option>
-                                                            <option value="Travel Medicine">Travel Medicine</option>
-                                                            <option value="Urology">Urology</option>
-                                                            <option value="Vascular Surgery">Vascular Surgery</option>
 
-                                                        </select>
+                                                        <input type="text" class="form-control" id="doctor_specialist" name="doctor_specialist" style="height: 55px;" placeholder="Enter Speciality">
                                                     </div>
 
 
@@ -554,6 +494,16 @@
                                                         <input type="number" class="form-control" id="doctor_fees" name="doctor_fees"
                                                             style="height: 55px;" placeholder="Enter Doctor Fees *">
                                                     </div>
+
+
+                                                    <div class="col-12 form-group">
+                                                        <label for="doctor_more" style="font-weight: 700;"><i
+                                                                class="fa fa-info-circle text-primary"
+                                                                aria-hidden="true"></i> More Details
+                                                            </label>
+                                                        <textarea class="form-control" name="doctor_more" id="doctor_more" placeholder="Enter More Details About Doctor" rows="5"></textarea>
+                                                    </div>
+
 
 
 
@@ -651,6 +601,7 @@
                                                             <th scope="col">Designation</th>
                                                             <th scope="col">Specialist</th>
                                                             <th scope="col">Fees</th>
+                                                            <th scope="col">Details</th>
                                                             <th scope="col">Day | Time</th>
                                                             <th scope="col">Actions</th>
                                                         </tr>
@@ -663,6 +614,7 @@
                                                             <td>{{ $opdDoctor->doctor_designation }}</td>
                                                             <td>{{ $opdDoctor->doctor_specialist }}</td>
                                                             <td>₹ {{ $opdDoctor->doctor_fees }}</td>
+                                                            <td>{{ $opdDoctor->doctor_more }}</td>
                                                             <td>
                                                                 @if(!empty($opdDoctor->visit_day_time) && is_array($opdDoctor->visit_day_time))
                                                                 @foreach($opdDoctor->visit_day_time as $visit)
