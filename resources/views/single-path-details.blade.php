@@ -159,7 +159,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            
             <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -175,7 +175,7 @@
                         <a href="/dw/opd" class="dropdown-item">OPD Details</a>
                         <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
                         <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
+                        <!-- <a href="/coupons" class="dropdown-item">Coupon Details </a> -->
                     </div>
                 </div>
                 <a href="/blog" class="nav-item nav-link ">Blogs</a>
@@ -204,7 +204,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/dw" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
+            
             <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -220,7 +220,7 @@
                         <a href="/dw/opd" class="dropdown-item">OPD Details</a>
                         <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
                         <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                        <!-- <a href="/dw/coupons" class="dropdown-item">Coupon Details </a> -->
                     </div>
                 </div>
                 <a href="/dw/blog" class="nav-item nav-link">Blogs</a>

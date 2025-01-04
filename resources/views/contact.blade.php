@@ -5,8 +5,19 @@
     <meta charset="utf-8">
     <title>Contact Us | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="doctorwala.info, doctorwala, doctorwala.in, doctorwala.com, doctorwala.com.in, doctorwala.com.info, doctorwala.in.info, doctorwala.info.in, doctorwala.info.com, doctorwala.info.com.in, doctorwala.info.in.com, doctorwala.info.com.in.info, doctorwala.info.in.com.info, ranihati, howrah, 711302, panchla, statebank, medical, opd, pathology, doctors, partners, users, get in touch, contact us, inquiry, query, enquary, feedback, feedback form" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+
+    @foreach($aboutDetails as $aboutDetail)
+    <meta name="description" content="{{ $aboutDetail->ab_b_txt }}">
+    <meta name="keywords" content="about us, doctorwala.info, doctorwala, doctorwala.in, doctorwala.com, doctorwala.com.in, doctorwala.com.info, doctorwala.in.info, doctorwala.info.in, doctorwala.info.com, doctorwala.info.com.in, doctorwala.info.in.com, doctorwala.info.com.in.info, doctorwala.info.in.com.info, ranihati, howrah, 711302, panchla, statebank, medical, opd, pathology, doctors, partners, users, get in touch, contact us, inquiry, query, enquary, feedback, feedback form">
+    <meta property="og:title" content="About Doctorwala">
+    <meta property="og:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta property="og:url" content="{{ url('/about') }}">
+    <meta name="twitter:title" content="About Doctorwala">
+    <meta name="twitter:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta name="twitter:email" content="{{ $aboutDetail->email }}">
+    <meta name="twitter:phone" content="{{ $aboutDetail->number }}">
+    @endforeach
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">
@@ -93,7 +104,6 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
             <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -109,7 +119,7 @@
                         <a href="/dw/opd" class="dropdown-item">OPD Details</a>
                         <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
                         <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/coupons" class="dropdown-item">Coupon Details </a>
+                        <!-- <a href="/coupons" class="dropdown-item">Coupon Details </a> -->
                     </div>
                 </div>
                 <a href="/blog" class="nav-item nav-link ">Blogs</a>
@@ -138,7 +148,6 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
         <a href="/dw" class="navbar-brand p-0">
-            <!-- <h1 class="m-0 text-primary"><i class="fa fa-tooth me-2"></i>DentCare</h1> -->
             <img class="m-0 nav-bar-logo" src="{{asset('img/logo3.png')}}" width="300" alt="DoctorWala">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -154,7 +163,7 @@
                         <a href="/dw/opd" class="dropdown-item">OPD Details</a>
                         <a href="/dw/doctor" class="dropdown-item">Doctor Details</a>
                         <a href="/dw/pathology" class="dropdown-item">Pathology Details</a>
-                        <a href="/dw/coupons" class="dropdown-item">Coupon Details </a>
+                        <!-- <a href="/dw/coupons" class="dropdown-item">Coupon Details </a> -->
                     </div>
                 </div>
                 <a href="/dw/blog" class="nav-item nav-link">Blogs</a>
