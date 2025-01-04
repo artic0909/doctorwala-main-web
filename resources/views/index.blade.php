@@ -6,6 +6,15 @@
     <title>Doctorwala Info</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
+
+
+
+
+
+
+
+
+    
     <!-- SEO Meta Tags -->
     <meta name="description" content="Search for doctors, specialists, and pathology types. Find the best healthcare options tailored to your needs.">
     <meta name="keywords" content="{{ implode(',', $specialists->toArray()) }}, {{ implode(',', $types->toArray()) }}, doctor, specialist, pathology, doctorwala.info">
@@ -16,6 +25,15 @@
 
     <meta name="twitter:title" content="Search for Doctors, Specialists, and Pathology">
     <meta name="twitter:description" content="Explore various healthcare options. Search for doctors, specialists, or pathology types on our platform.">
+
+
+
+
+
+
+
+
+
 
     <!-- SEO Meta Tags for about us -->
     @foreach($aboutDetails as $aboutDetail)
@@ -29,6 +47,71 @@
     <meta name="twitter:email" content="{{ $aboutDetail->email }}">
     <meta name="twitter:phone" content="{{ $aboutDetail->number }}">
     @endforeach
+
+
+
+
+
+
+
+
+    <!-- SEO Meta Tags for all OPD -->
+    @foreach($opds as $opd)
+    <meta name="description" content="{{$opd->clinic_city}}, {{$opd->clinic_landmark}} - Doctorwala">
+    <meta name="keywords" content="{{$opd->clinic_name}}, {{$opd->clinic_city}}, {{$opd->clinic_pincode}}, {{$opd->clinic_landmark}}, doctorwala, doctorwala.info, doctorwala.in, doctorwala.com, doctorwala">
+    <meta property="og:title" content="{{$opd->clinic_name}} - Doctorwala">
+    <meta property="og:description" content="{{$opd->clinic_city}}, {{$opd->clinic_landmark}} - Doctorwala">
+    <meta property="og:url" content="{{url('/dw/opd/'.$opd->id)}}">
+    <meta name="twitter:title" content="{{$opd->clinic_name}} - Doctorwala">
+    <meta name="twitter:description" content="{{$opd->clinic_city}},{{$opd->clinic_pincode}} - Doctorwala">
+    @endforeach
+
+
+
+
+
+
+
+
+
+
+    <!-- SEO Meta Tags for all Pathology -->
+    @foreach($paths as $path)
+    <meta name="description" content="{{$path->clinic_city}}, {{$path->clinic_landmark}} - Doctorwala">
+    <meta name="keywords" content="{{$path->clinic_name}}, {{$path->clinic_city}}, {{$path->clinic_pincode}}, {{$path->clinic_landmark}}, doctorwala, doctorwala.info, doctorwala.in, doctorwala.com, doctorwala">
+    <meta property="og:title" content="{{$path->clinic_name}} - Doctorwala">
+    <meta property="og:description" content="{{$path->clinic_city}}, {{$path->clinic_landmark}} - Doctorwala">
+    <meta property="og:url" content="{{url('/dw/path/'.$path->id)}}">
+    <meta name="twitter:title" content="{{$path->clinic_name}} - Doctorwala">
+    <meta name="twitter:description" content="{{$path->clinic_city}},{{$path->clinic_pincode}} - Doctorwala">
+    @endforeach
+
+
+
+
+
+
+
+
+
+
+    <!-- SEO Meta Tags for all Doctor -->
+    @foreach($docs as $doc)
+    <meta name="description" content="{{$doc->partner_doctor_city}},{{$doc->partner_doctor_pincode}}, {{$doc->partner_doctor_landmark}} - Doctorwala">
+    <meta name="keywords" content="{{$doc->partner_doctor_name}}, {{$doc->partner_doctor_city}},{{$doc->partner_doctor_pincode}}, {{$doc->partner_doctor_landmark}}, doctorwala, doctorwala.info, doctorwala.in, doctorwala.com, doctorwala">
+    <meta property="og:title" content="{{$doc->partner_doctor_name}} - Doctorwala">
+    <meta property="og:description" content="{{$doc->partner_doctor_city}},{{$doc->partner_doctor_pincode}}, {{$doc->partner_doctor_landmark}} - Doctorwala">
+    <meta property="og:url" content="{{url('/dw/doctor/'.$doc->id)}}">
+    <meta name="twitter:title" content="{{$doc->partner_doctor_name}} - Doctorwala">
+    <meta name="twitter:description" content="{{$doc->partner_doctor_city}},{{$doc->partner_doctor_pincode}} - Doctorwala">
+    @endforeach
+
+
+
+
+
+
+
 
 
 
