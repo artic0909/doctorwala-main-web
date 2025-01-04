@@ -708,10 +708,8 @@
                                     </div>
                                     <p>
                                     <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Type : {{$test->test_type}}</strong></li>
-                                        <li class="list-group-item" style="text-transform: capitalize;"><strong>Test
-                                                Price : ₹ {{$test->test_price}}</strong></li>
+                                        <li class="list-group-item" style="text-transform: capitalize;"><strong class="d-flex align-items-center gap-2"><img src="{{asset('img/test-type.png')}}" alt="" width="26"> {{$test->test_type}}</strong></li>
+                                        <li class="list-group-item" style="text-transform: capitalize;"><strong class="d-flex align-items-center gap-2"><img src="{{asset('img/pay.png')}}" alt="" width="26"> ₹ {{$test->test_price}}</strong></li>
                                     </ul>
                                     </p>
                                     <div class="p-4">

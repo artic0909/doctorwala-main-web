@@ -838,13 +838,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title text-primary txt-cap" id="exampleModalLabel"><img src="{{ asset('img/doctor.png') }}" width="40"
-                            alt=""> {{$doc->partner_doctor_name}}</h2>
+                            alt=""> {{$doc->partner_doctor_designation}} {{$doc->partner_doctor_name}}</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="sp txt-cap"><strong>Designation: </strong>{{$doc->partner_doctor_designation}}</p>
-                    <p class="sp txt-cap"><strong>Specialization: </strong>{{$doc->partner_doctor_specialist}}</p>
-                    <p class="fees"><strong>Fees: </strong>₹ {{$doc->partner_doctor_fees}}</p>
+                    <p class="sp txt-cap"><strong class="d-flex align-items-center gap-2"><img src="{{asset('img/surgeon.png')}}" alt="" width="27"> Specialization: {{$doc->partner_doctor_specialist}}</strong></p>
+                    <p class="fees"><strong class="d-flex align-items-center gap-2"><img src="{{asset('img/pay.png')}}" alt="" width="27"> Fees: ₹ {{$doc->partner_doctor_fees}}</strong></p>
 
 
                     <div class="time">

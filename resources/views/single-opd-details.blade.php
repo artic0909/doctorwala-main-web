@@ -701,15 +701,15 @@
                                             <img src="{{asset('img/doctor.png')}}" width="80" alt=""
                                                 style="filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.411));">
                                         </div>
-                                        <h3 class="pricing-title">{{$doctor->doctor_name}}</h3>
+                                        <h3 class="pricing-title">{{$doctor->doctor_designation}}. {{$doctor->doctor_name}}</h3>
                                     </div>
                                     <p>
                                     <ul class="list-group list-group-flush text-start" style="margin-top: -60px;">
-                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Designation : {{$doctor->doctor_designation}}</strong></li>
-                                        <li class="list-group-item"><strong style="text-transform: capitalize;">Specialist : {{$doctor->doctor_specialist}}</strong></li>
-                                        <li class="list-group-item"><strong>Fees : ₹ {{$doctor->doctor_fees}}</strong></li>
+                                        <!-- <li class="list-group-item"><strong style="text-transform: capitalize;">Designation : {{$doctor->doctor_designation}}</strong></li> -->
+                                        <li class="list-group-item"><strong style="text-transform: capitalize;" class="d-flex align-items-center gap-2"><img src="{{asset('img/surgeon.png')}}" alt="" width="26">  {{$doctor->doctor_specialist}}</strong></li>
+                                        <li class="list-group-item"><strong class="d-flex align-items-center gap-2"><img src="{{asset('img/pay.png')}}" alt="" width="26"> ₹ {{$doctor->doctor_fees}}</strong></li>
                                         @if($doctor->doctor_more)
-                                        <li class="list-group-item"><strong>More : {{$doctor->doctor_more}}</strong></li>
+                                        <li class="list-group-item"><strong class="d-flex align-items-start gap-2"><img src="{{asset('img/ad.png')}}" alt="" width="26"> {{$doctor->doctor_more}}</strong></li>
                                         @endif
                                     </ul>
                                     </p>
@@ -875,7 +875,7 @@
 
 
 
-                    <!-- Pathology Tab -->
+                    <!-- About Tab -->
                     <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
 
 
@@ -972,7 +972,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h2 class="modal-title text-primary txt-cap" id="exampleModalLabel"><img src="{{asset('img/doctor.png')}}" width="40"
-                            alt=""> {{$doctor->doctor_name}}</h2>
+                            alt=""> {{$doctor->doctor_designation}}. {{$doctor->doctor_name}}</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" style="color:#051225;">
@@ -980,7 +980,7 @@
                     <p class="fees"><strong>Fees: </strong>₹ {{$doctor->doctor_fees}}</p>
 
                     @if($doctor->doctor_more)
-                    <p class="more"><strong>More: </strong>{{$doctor->doctor_more}}</p>
+                    <p class="more"><strong>About: </strong>{{$doctor->doctor_more}}</p>
                     @endif
 
 
