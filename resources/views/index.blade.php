@@ -8,7 +8,7 @@
 
     <!-- SEO Meta Tags -->
     <meta name="description" content="Search for doctors, specialists, and pathology types. Find the best healthcare options tailored to your needs.">
-    <meta name="keywords" content="{{ implode(',', $specialists->toArray()) }}, {{ implode(',', $types->toArray()) }}, doctor, specialist, pathology">
+    <meta name="keywords" content="{{ implode(',', $specialists->toArray()) }}, {{ implode(',', $types->toArray()) }}, doctor, specialist, pathology, doctorwala.info">
 
     <meta property="og:title" content="Search for Doctors, Specialists, and Pathology">
     <meta property="og:description" content="Explore various healthcare options. Search for doctors, specialists, or pathology types on our platform.">
@@ -16,6 +16,20 @@
 
     <meta name="twitter:title" content="Search for Doctors, Specialists, and Pathology">
     <meta name="twitter:description" content="Explore various healthcare options. Search for doctors, specialists, or pathology types on our platform.">
+
+    <!-- SEO Meta Tags for about us -->
+    @foreach($aboutDetails as $aboutDetail)
+    <meta name="description" content="{{ $aboutDetail->ab_b_txt }}">
+    <meta name="keywords" content="about us, doctorwala, mission, healthcare options, doctorwala.info, doctorwala.in, doctorwala.com, doctorwala">
+    <meta property="og:title" content="About Doctorwala">
+    <meta property="og:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta property="og:url" content="{{ url('/about') }}">
+    <meta name="twitter:title" content="About Doctorwala">
+    <meta name="twitter:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta name="twitter:email" content="{{ $aboutDetail->email }}">
+    <meta name="twitter:phone" content="{{ $aboutDetail->number }}">
+    @endforeach
+
 
 
 

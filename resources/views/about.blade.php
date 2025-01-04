@@ -5,8 +5,18 @@
     <meta charset="utf-8">
     <title>About Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="doctorwala" name="keywords">
-    <meta content="DoctorWala.info is a leading local search engine dedicated to helping individuals in India find the right doctors, pathologists, and OPDs in their local areas. Our platform is designed to simplify the process of locating and connecting with healthcare professionals, ensuring that you receive the best possible care." name="description">
+
+    @foreach($aboutDetails as $aboutDetail)
+    <meta name="description" content="{{ $aboutDetail->ab_b_txt }}">
+    <meta name="keywords" content="about us, doctorwala, mission, healthcare options, doctorwala.info, doctorwala.in, doctorwala.com, doctorwala">
+    <meta property="og:title" content="About Doctorwala">
+    <meta property="og:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta property="og:url" content="{{ url('/about') }}">
+    <meta name="twitter:title" content="About Doctorwala">
+    <meta name="twitter:description" content="{{ $aboutDetail->ab_desc }}">
+    <meta name="twitter:email" content="{{ $aboutDetail->email }}">
+    <meta name="twitter:phone" content="{{ $aboutDetail->number }}">
+    @endforeach
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">
@@ -784,9 +794,6 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('../js/main.js')}}"></script>
-    <script src="{{asset('../js/cards-scroll.js')}}"></script>
-    <script src="{{asset('../js/captcha.js')}}"></script>
-    <script src="js/password-update-captcha.js"></script>
 </body>
 
 </html>
