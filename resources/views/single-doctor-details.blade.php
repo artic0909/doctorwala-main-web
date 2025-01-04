@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 
-    <title>Dr. {{$doc->partner_doctor_name}} - {{$doc->partner_doctor_designation}} | Specialist in {{$doc->partner_doctor_specialist}}</title>
+    <title>Dr. {{$doc->partner_doctor_name}} - {{$doc->partner_doctor_designation}} | Specialist in {{$doc->partner_doctor_specialist}} | Doctorwala</title>
 
     <!-- Meta Description -->
     <meta name="description" content="Learn more about Dr. {{$doc->partner_doctor_name}}, a {{$doc->partner_doctor_designation}} specializing in {{$doc->partner_doctor_specialist}}. Consultation fees: ₹{{$doc->partner_doctor_fees}}. Check availability and schedule an appointment.">

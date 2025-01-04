@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Pathology Details | Doctorwala</title>
+    <title>{{$path->clinic_name}} | {{$path->clinic_contact_person_name}} | {{$path->clinic_address}} | Doctorwla</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 

@@ -3,10 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Payment Page | Doctorwala</title>
+    <title>Payment | Doctorwala</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+
+    <!-- SEO Meta Tags for Payment Page/ Coupons Page/ Subscriptions -->
+    <meta name="description" content="Payment | Doctorwala">
+    <meta name="keywords" content="Payment, Doctorwala, Coupons, Subscriptions, Subscribe, Subscription, Coupon, Coupons, Coupons Page, Subscription Page, Subscribe Page, doctorwala.info, doctorwala, doctorwala.com">
+    <meta name="author" content="Doctorwala">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="yandex-verification" content="yandex-verification-code">
+    <meta name="copyright" content="Doctorwala">
+    <meta name="distribution" content="Global">
+
 
     <!-- Favicon -->
     <link href="{{asset('fav5.png')}}" rel="icon">

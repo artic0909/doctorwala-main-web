@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Details | Doctorwala</title>
+    <title>{{$opd->clinic_name}} | {{$opd->clinic_contact_person_name}} | {{$opd->clinic_address}} | Doctorwla</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 
     @foreach($doctors as $doctor)
     <meta name="doctor-{{$doctor->id}}-title" content="Find Top Doctor - {{$doctor->doctor_name}} | Specialization: {{$doctor->doctor_specialist}}">
     <meta name="doctor-{{$doctor->id}}-description" content="Consult with {{$doctor->doctor_name}}, a {{$doctor->doctor_specialist}}. Fees: ₹{{$doctor->doctor_fees}}. Check availability and clinic hours.">
-    <meta name="doctor-{{$doctor->id}}-keywords" content="Doctor, {{$doctor->doctor_name}}, {{$doctor->doctor_specialist}}, Consultation, Fees, {{$doctor->clinic_city ?? 'Unknown City'}}, {{$doctor->clinic_state ?? 'Unknown State'}}">
+    <meta name="doctor-{{$doctor->id}}-keywords" content="Doctor, doctorwala, doctorwala.info, {{$doctor->doctor_name}}, {{$doctor->doctor_specialist}}, Consultation, Fees, {{$doctor->clinic_city ?? 'Unknown City'}}, {{$doctor->clinic_state ?? 'Unknown State'}}">
     <meta name="doctor-{{$doctor->id}}-author" content="{{$doctor->doctor_name}}">
 
     <!-- Open Graph Tags -->
