@@ -605,8 +605,7 @@
                 <div class="text sign-up">
                     <h2>
                         Join us!
-                        <br>
-                        Easily connect with healthcare professionals on our platform.
+                        
                     </h2>
 
                 </div>

@@ -11,9 +11,11 @@ use App\Http\Controllers\Front\FrontPrivacyPolicyPageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/welcome', function () {
-//     return view('welcome');
-// });
+// Error page if any page not found
+Route::fallback(function () {
+    return response()->view('error', [], 404);
+});
+
 
 
 
