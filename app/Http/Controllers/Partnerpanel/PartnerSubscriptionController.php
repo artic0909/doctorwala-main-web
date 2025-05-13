@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Partnerpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\DwPartnerModel;
+use App\Models\PartnerDoctorBannerModel;
+use App\Models\PartnerOPDBannerModel;
+use App\Models\PartnerPathologyBannerModel;
 use App\Models\SubscriptionHolder;
 use App\Models\SuperSubscriptionModel;
 use Illuminate\Http\Request;
@@ -20,7 +23,10 @@ class PartnerSubscriptionController extends Controller
     {
         $partner = Auth::guard('partner')->user();
         $subs = SuperSubscriptionModel::all();
-        return view('partnerpanel.subscription', compact('subs', 'partner'));
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        return view('partnerpanel.partner-get-subscription', compact('subs', 'partner', 'opdBanner', 'pathologyBanner', 'doctorBanner'));
     }
 
     public function payment(Request $request)
@@ -101,5 +107,16 @@ class PartnerSubscriptionController extends Controller
 
         Log::warning('Payment failed.', ['txnid' => $txnid, 'status' => $status]);
         return response()->json(['error' => 'Payment failed. Please try again.'], 400);
+    }
+
+
+        public function showInvoice()
+    {
+        $partner = Auth::guard('partner')->user();
+        $subs = SuperSubscriptionModel::all();
+        $opdBanner = PartnerOPDBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partner)->first();
+        return view('partnerpanel.partner-show-invoice', compact('subs', 'partner', 'opdBanner', 'pathologyBanner', 'doctorBanner'));
     }
 }

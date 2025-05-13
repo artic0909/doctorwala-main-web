@@ -62,7 +62,8 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
 
 
     // Payments GateWate--------------------------------------------------------------------------------------------------------------------------->
-    Route::get('/partnerpanel/partner-subscription', [PartnerSubscriptionController::class, 'allSubscriptions'])->name('partnerpanel.partner-subscription');
+    Route::get('/partnerpanel/partner-show-invoice', [PartnerSubscriptionController::class, 'showInvoice'])->name('partnerpanel.partner-invoice');
+    Route::get('/partnerpanel/partner-get-subscription', [PartnerSubscriptionController::class, 'allSubscriptions'])->name('partnerpanel.partner-subscription');
     Route::post('/partnerpanel/payment/initiate', [PartnerSubscriptionController::class, 'payment'])->name('partnerpanel.payment.initiate');
 
 
@@ -136,13 +137,13 @@ Route::middleware(['auth:partner', 'verified'])->group(function () {
         return view('partnerpanel.partner-inquiry-from-patients');
     })->name('partnerpanel.partner-inquiry-from-patients');
 
-    Route::get('/partnerpanel/partner-get-subscription', function () {
-        return view('partnerpanel.partner-get-subscription');
-    })->name('partnerpanel.partner-get-subscription');
+    // Route::get('/partnerpanel/partner-get-subscription', function () {
+    //     return view('partnerpanel.partner-get-subscription');
+    // })->name('partnerpanel.partner-get-subscription');
 
-    Route::get('/partnerpanel/partner-show-invoice', function () {
-        return view('partnerpanel.partner-show-invoice');
-    })->name('partnerpanel.partner-show-invoice');
+    // Route::get('/partnerpanel/partner-show-invoice', function () {
+    //     return view('partnerpanel.partner-show-invoice');
+    // })->name('partnerpanel.partner-show-invoice');
 
     Route::get('/partnerpanel/partner-get-ticket', function () {
         return view('partnerpanel.partner-get-ticket');
