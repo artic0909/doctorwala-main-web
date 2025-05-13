@@ -33,7 +33,7 @@ class ApiAllPathologyController extends Controller
                 'pathologyContact' => $contact,
                 'tests' => $tests,
                 'services' => PartnerServiceListModel::where('currently_loggedin_partner_id', $partnerId)->get(),
-                'photos' => PartnerGalleryModel::where('currently_loggedin_partner_id', $partnerId)->get(),
+                'images' => PartnerGalleryModel::where('currently_loggedin_partner_id', $partnerId)->get(),
                 'aboutClinics' => PartnerAboutDetailsModel::where('currently_loggedin_partner_id', $partnerId)->get(),
                 'testsDetailsData' => PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->get(),
                 

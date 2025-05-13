@@ -36,7 +36,7 @@ class PartnerAllPathologyInfoController extends Controller
         $registrationTypess = $partner->registration_type; // Automatically casted as an array if set in the model
         $contactDetails = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->first();
 
-        return view('partnerpanel.partner-pathology', compact('contactDetails', 'registrationTypes', 'registrationTypess', 'opdBanner', 'pathologyBanner', 'doctorBanner'));
+        return view('partnerpanel.partner-pathology', compact('contactDetails', 'registrationTypes', 'registrationTypess', 'opdBanner', 'pathologyBanner', 'doctorBanner', 'allpaths'));
     }
 
 
@@ -98,6 +98,7 @@ class PartnerAllPathologyInfoController extends Controller
         $pathologyBanner = PartnerPathologyBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $doctorBanner = PartnerDoctorBannerModel::where('currently_loggedin_partner_id', $partnerId)->first();
         $storedData = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->paginate(6);
+        $allpaths = PartnerAllPathologyTestModel::where('currently_loggedin_partner_id', $partnerId)->count();
         foreach ($storedData as $data) {
             $data->test_day_time = json_decode($data->test_day_time, true);
         }
@@ -110,7 +111,7 @@ class PartnerAllPathologyInfoController extends Controller
         }
 
 
-        return view('partnerpanel.partner-pathology-show', compact('opdBanner', 'pathologyBanner','doctorBanner', 'storedData', 'registrationTypes'));
+        return view('partnerpanel.partner-pathology-show', compact('opdBanner', 'pathologyBanner','doctorBanner', 'storedData', 'registrationTypes', 'allpaths'));
     }
 
 
