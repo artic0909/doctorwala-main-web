@@ -12,11 +12,10 @@ class ApiAllDoctorController extends Controller
     {
         $allDoctorContacts = PartnerDoctorContactModel::with('banner')->get();
 
-        // Fix banner URL for doctors
-        $allDoctorContacts->map(function ($contact) {
-            if ($contact->banner && $contact->banner->docotorbanner) {
-                // Ensure the full URL is set for the banner
-                $contact->banner->docotorbanner = url('storage/' . $contact->banner->docotorbanner);
+        $allDoctorContacts = $allDoctorContacts->map(function ($contact) {
+            if ($contact->banner && $contact->banner->doctorbanner) {
+                // Fix path with full URL using asset or url()
+                $contact->banner->doctorbanner = asset('storage/' . $contact->banner->doctorbanner);
             }
             return $contact;
         });
