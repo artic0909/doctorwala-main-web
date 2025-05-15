@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiBlogController;
 use App\Http\Controllers\Api\ApiAllPathologyController;
 use App\Http\Controllers\Api\ApiCouponsController;
+use Illuminate\Http\Request;
+
 
 // create api routes here for flutter app ------------------------------->
 

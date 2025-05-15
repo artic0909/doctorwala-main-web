@@ -10,12 +10,16 @@ use Illuminate\Notifications\Notifiable;
 class DwUserModel extends Authenticatable
 {
     use Notifiable;
-    public $fillable = [
+    
+    protected $table = 'dw_user_models';
+
+    protected $fillable = [
         'user_name',
         'user_mobile',
         'user_city',
         'user_email',
         'user_password',
+        'api_token',
     ];
 
     protected $hidden = [

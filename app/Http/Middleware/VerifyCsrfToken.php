@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'partnerpanel/payment-callback', // Add your PayU callback URL here
+        'partnerpanel/payment-callback',
+         'api/*',
     ];
 }
