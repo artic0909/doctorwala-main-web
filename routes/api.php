@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiBlogController;
 use App\Http\Controllers\Api\ApiAllPathologyController;
 use App\Http\Controllers\Api\ApiCouponsController;
+use App\Http\Controllers\Api\ApiUserLoginController;
+use App\Http\Controllers\Api\ApiUserProfileEditController;
+use App\Http\Controllers\Api\ApiUserRegisterController;
 use Illuminate\Http\Request;
 
 
@@ -22,3 +25,7 @@ Route::get('/api/all-pathology-contacts', [ApiAllPathologyController::class, 'al
 Route::get('/api/all-opd-contacts', [ApiAllOPDController::class, 'allOpdData']);
 Route::get('/api/all-doctors-contacts', [ApiAllDoctorController::class, 'allDoctorData']);
 Route::get('/api/all-coupons', [ApiCouponsController::class, 'index']);
+
+
+
+
