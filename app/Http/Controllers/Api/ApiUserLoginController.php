@@ -58,9 +58,9 @@ class ApiUserLoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('dwuser')->logout(); // logs out the dwuser session
-        $request->session()->invalidate(); // invalidate session
-        $request->session()->regenerateToken(); // regenerate CSRF token
+        Auth::guard('dwuser')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return response()->json([
             'status' => true,

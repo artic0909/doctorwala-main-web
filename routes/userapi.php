@@ -13,5 +13,5 @@ Route::post('/dw-user-login', [ApiUserLoginController::class, 'login']);
 Route::post('/dw-user-logout', [ApiUserLoginController::class, 'logout']);
 
 
-Route::post('/update-profile', [ApiUserProfileEditController::class, 'updateProfile']);
+Route::put('/update-profile', [ApiUserProfileEditController::class, 'updateProfile']);
 
