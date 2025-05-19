@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Api\ApiPartnerPatientInquiryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -14,4 +14,8 @@ Route::post('/dw-user-logout', [ApiUserLoginController::class, 'logout']);
 
 
 Route::put('/update-profile', [ApiUserProfileEditController::class, 'updateProfile']);
+Route::post('/get-profile', [ApiUserProfileEditController::class, 'getProfile']);
+Route::put('/update-password', [ApiUserProfileEditController::class, 'updatePassword']);
+Route::post('/patient-inquiry', [ApiPartnerPatientInquiryController::class, 'store']);
+
 
