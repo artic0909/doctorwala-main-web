@@ -555,12 +555,12 @@
                             <h1 class="display-1 text-white mb-md-4 animated zoomIn">{{$banner->desc}}</h1>
 
                             @guest
-                            <a href="/privacy-policy" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">Privacy Policy</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.doctorwala.myhealth" target="_blank" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft"><i class="fab fa-google-play me-2"></i>Download</a>
                             <a href="/contact" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
                             @endguest
 
                             @auth
-                            <a href="/dw/privacy-policy" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft">Privacy Policy</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.doctorwala.myhealth" target="_blank" class="btn btn-dark py-md-3 px-md-5 me-3 animated slideInLeft"><i class="fab fa-google-play me-2"></i>Download</a>
                             <a href="/dw/contact" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
                             @endauth
                         </div>
@@ -959,12 +959,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9 wow zoomIn" data-wow-delay="0.6s">
                     <div class="offer-text text-center rounded p-5">
-                        <h1 class="display-5 text-white off-texts">Partner with Doctorwala.info to Expand Your OPD &
-                            Pathology
-                            Services Nationwide</h1>
+                        <h1 class="display-5 text-white off-texts">Partner with Doctorwala.info to expand your services nationwide</h1>
                         <div class="d-flex g-3 flex-wrap justify-content-center ">
                             <a href="/partner-register" class="btn btn-dark py-3 px-5 me-3 mb-2">Join As Partner</a>
-                            <a href="/contact" class="btn btn-light py-3 px-5 mb-2">Contact Us</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.doctorwala.myhealth" target="_blank" class="btn btn-light py-3 px-5 mb-2"><i class="fab fa-google-play me-2" style="font-size: 1.2rem;"></i>User Download</a>
                         </div>
                     </div>
                 </div>
@@ -981,10 +979,10 @@
             <div class="row justify-content-center">
                 <div class="col-lg-9 wow zoomIn" data-wow-delay="0.6s">
                     <div class="offer-text text-center rounded p-5">
-                        <h1 class="display-5 text-white off-texts">Learn About Our Privacy Policy or Contact Us for Inquiries</h1>
+                        <h1 class="display-5 text-white off-texts">Learn About Our Privacy Policy or Download Our App</h1>
                         <div class="d-flex g-3 flex-wrap justify-content-center ">
                             <a href="/dw/privacy-policy" class="btn btn-dark py-3 px-5 me-3 mb-2">Privacy Policy</a>
-                            <a href="/dw/contact" class="btn btn-light py-3 px-5 mb-2">Inquiry Now</a>
+                            <a href="https://play.google.com/store/apps/details?id=com.doctorwala.myhealth" target="_blank" class="btn btn-light py-3 px-5 mb-2"><i class="fab fa-google-play me-2" style="font-size: 1.2rem;"></i>Download</a>
                         </div>
                     </div>
                 </div>
