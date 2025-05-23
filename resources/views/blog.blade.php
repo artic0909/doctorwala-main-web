@@ -467,7 +467,12 @@
                     <div class="section-title bg-light rounded h-100 p-5">
                         <h5 class="position-relative d-inline-block text-primary text-uppercase">Latest News</h5>
                         <h1 class="display-6 mb-4">Be update with the latest news, read our blogs</h1>
+                        @guest
                         <a href="/contact" class="btn btn-primary py-3 px-5">Get in Touch</a>
+                        @endguest
+                        @auth
+                        <a href="/dw/contact" class="btn btn-primary py-3 px-5">Get in Touch</a>
+                        @endauth
                     </div>
                 </div>
 
