@@ -13,9 +13,9 @@ class ApiUserLoginController extends Controller
 {
     public function login(Request $request)
     {
-        // Validate input
+        // Validate required fields
         $validator = Validator::make($request->all(), [
-            'user_email' => 'required|email',
+            'user_identifier' => 'required|string',
             'user_password' => 'required|string',
         ]);
 
@@ -26,8 +26,12 @@ class ApiUserLoginController extends Controller
             ], 422);
         }
 
+        // Identify if it's an email or phone
+        $identifier = $request->user_identifier;
+        $fieldType = filter_var($identifier, FILTER_VALIDATE_EMAIL) ? 'user_email' : 'user_mobile';
+
         // Find user
-        $user = DwUserModel::where('user_email', $request->user_email)->first();
+        $user = DwUserModel::where($fieldType, $identifier)->first();
 
         if (!$user || !Hash::check($request->user_password, $user->user_password)) {
             return response()->json([
@@ -36,7 +40,7 @@ class ApiUserLoginController extends Controller
             ], 401);
         }
 
-        // Login the user (session-based)
+        // Login the user (if using session-based or token auth)
         Auth::guard('dwuser')->login($user);
 
         return response()->json([
@@ -51,6 +55,7 @@ class ApiUserLoginController extends Controller
             ]
         ]);
     }
+
 
 
 
